@@ -1,0 +1,73 @@
+/* Responsive products desktop */
+@media screen and (min-width: 767px) {
+  .product-category {
+
+    .product {
+      display: flex;
+      border-bottom: 2px solid #e9e9e9;
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+
+      &-image {
+        flex: 0 0 30%;
+
+        & > div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        &__image-cover {
+          max-width: 80%;
+        }
+      }
+
+      &-info {
+        &__title {
+          font-size: 1.6em;
+          font-weight: bold;
+          color: $mainBlue;
+        }
+
+        &__description {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          line-height: 1.7em;
+          font-size: 0.9em;
+        }
+
+        &__details {
+          display: flex;
+          justify-content: space-between;
+
+          &-pricing {
+            &__weekly {
+              margin-top: 0.7em;
+              margin-bottom: 0.5em;
+              span {
+                font-size: 3em;
+                font-weight: 700;
+                line-height: 0.8em;
+                color: $mainBlue;
+              }
+            }
+
+            &__daily {
+              span {
+                font-size: 1.4em;
+                font-weight: 700;
+                color: $mainBlue;
+              }
+            }
+
+            &__price-info {
+              color: $mainBlue;
+              font-size: 0.8em;
+              font-style: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+}

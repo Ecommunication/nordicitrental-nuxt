@@ -49,18 +49,32 @@
                 products: []
             }
         },
+        head() {
+            return {
+                title: this.category.metaTitle,
+                meta: [
+                    {
+                        name: 'title',
+                        content: 'This is some title'
+                    },
+                    {
+                        name: 'description',
+                        content: this.category.metaDescription
+                    }
+                ]
+            }
+        },
         async fetch() {
-
-            console.log($nuxt.$route.path);
-
             const fetchCategory = await fetch(
-                process.env.apiUrl + '/product-categories?Slug=ipads-og-tablets'
+                process.env.apiUrl + '/product-categories?Slug=' + this.$route.params.category
             ).then(res => res.json());
 
             const category = fetchCategory[0];
 
             this.category.cover.text = category.TextCover;
-            this.category.cover.image = 'http://localhost:1337' + category.ImageCover.url;
+            this.category.cover.image = process.env.apiUrl + category.ImageCover.url;
+            this.category.metaTitle = category.MetaTitle;
+            this.category.metaDescription = category.MetaDescription;
             this.products = category.products;
         }
     }

@@ -1,0 +1,44 @@
+@media screen and (min-width: 767px) {
+  .product {
+    display: flex;
+
+    &-gallery {
+      flex: 0 0 40%;
+
+      &__main-image {
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+
+    &-meta {
+      &__specs {
+      }
+      &__prices {
+        &-weekly {
+          span {
+            font-size: 2.2em;
+            font-weight: 700;
+            line-height: 0.8em;
+            color: $mainBlue;
+          }
+        }
+
+        &-daily {
+          span {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: $mainBlue;
+          }
+        }
+
+        &-price-info {
+          color: $mainBlue;
+          font-size: 13px !important;
+          font-style: normal;
+        }
+      }
+    }
+  }
+}

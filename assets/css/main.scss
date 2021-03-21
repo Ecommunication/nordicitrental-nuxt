@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+
+@import "components/variables";
+@import "components/grid";
+@import "components/helpers";
+@import "components/buttons";
+@import "components/responsive";
+@import "components/slider/cover-slider";
+@import "components/category";
+@import "components/product";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.main-header {
+  margin-bottom: 10px;
+
+  &__navigation {
+    &-cart {
+      background-color: $mainBlue;
+      padding: 10px 20px;
+      color: #fff;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      i {
+        margin-right: 20px;
+      }
+    }
+
+    &-cta {
+      padding: 1.0em 0 1.0em;
+      font-size: 1.1em;
+      font-weight: 100;
+    }
+
+    /*
+      Navigation
+    */
+    .main-navigation {
+      list-style: none;
+      display: flex;
+
+      li {
+        &:not(:last-child) {
+          a {
+            padding-right: 2.0em;
+          }
+        }
+      }
+
+      a {
+        color: $mainBlue;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.0em;
+        display: block;
+      }
+    }
+  }
+}
