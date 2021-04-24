@@ -13,11 +13,18 @@
     "core-js": "^3.8.3",
     "jquery": "^3.6.0",
     "nuxt": "^2.14.12",
-    "slick-slider": "^1.8.2"
+    "slick-slider": "^1.8.2",
+    "v-calendar": "^2.3.0",
+    "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
+    "@nuxtjs/tailwindcss": "^4.0.3",
+    "@tailwindcss/postcss7-compat": "^2.1.0",
+    "autoprefixer": "^9.8.6",
     "fibers": "^5.0.0",
+    "postcss": "^7.0.35",
     "sass": "^1.32.8",
-    "sass-loader": "^10.1.1"
+    "sass-loader": "^10.1.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.0"
   }
 }

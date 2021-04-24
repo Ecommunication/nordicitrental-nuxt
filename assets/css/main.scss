@@ -2,12 +2,24 @@
 
 @import "components/variables";
 @import "components/grid";
-@import "components/helpers";
-@import "components/buttons";
+
+/* Helpers */
+@import "components/Helpers/inputs";
+@import "components/helpers/flex";
+@import "components/helpers/general";
+@import "components/helpers/margins";
+@import "components/helpers/typo";
+@import "components/helpers/widths";
+
+/* Pages */
+@import "components/pages/index";
+@import "components/shop/category";
+@import "components/shop/product";
+
+/* Utils */
 @import "components/responsive";
 @import "components/slider/cover-slider";
-@import "components/category";
-@import "components/product";
+
 
 * {
   margin: 0;
@@ -17,6 +29,8 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+  font-size: 1.0em;
+  line-height: 1.5em;
 }
 
 .main-header {
@@ -64,5 +78,14 @@ body {
         display: block;
       }
     }
+  }
+}
+
+footer {
+  ul {
+    list-style: none;
+  }
+  a {
+    color: #fff;
   }
 }

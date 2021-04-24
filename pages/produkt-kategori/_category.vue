@@ -16,11 +16,11 @@
                     <section class="product-info__details">
                         <div class="product-info__details-pricing">
                             <div class="product-info__details-pricing__weekly">
-                                <span class="block">{{ product.DailyPrice }}</span>
+                                <span class="block">{{ product.WeekPrice | formatPrice }}</span>
                                 <i class="product-info__details-pricing__price-info">Pris for første uges leje</i>
                             </div>
                             <div class="product-info__details-pricing__daily">
-                                <span>{{ product.DailyPrice }}</span>
+                                <span>{{ product.DailyPriceAfterWeek | formatPrice }}</span>
                                 <i class="product-info__details-pricing__price-info">Pris efter første uges leje, pr. dag.</i>
                             </div>
                         </div>

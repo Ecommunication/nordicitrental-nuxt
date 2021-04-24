@@ -17,22 +17,21 @@ export default {
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: [
         '~/node_modules/@fortawesome/fontawesome-free/css/all.min.css',
-        '~/assets/css/main.css',
         '~/assets/css/main.scss'
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-
-        // {src: '~/node_modules/jquery/dist/jquery.min.js', mode: 'client'},
-        // {src: '~/node_modules/slick-carousel/slick/slick.min.js', mode: 'client'}
+        '~/plugins/globals.js',
+        '~/plugins/filters/prices.js'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: [],
+    buildModules: [
+    ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [],
@@ -42,8 +41,7 @@ export default {
     },
 
     env: {
-        apiUrl: process.env.API_URL,
-        remoteImg: process.env.API_URL
+        apiUrl: process.env.API_URL
     },
 
 

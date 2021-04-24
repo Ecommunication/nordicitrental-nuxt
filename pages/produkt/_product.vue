@@ -16,14 +16,14 @@
                 <div class="product-meta__prices">
                     <div class="product-meta__prices-weekly">
                         <span>
-                            {{ product.data.DailyPrice }}
-                            <i class="product-meta__prices-price-info">Pris for første uges leje</i>
+                            {{ product.pricing.weekly | formatPrice }}
+                            <i class="product-meta__prices-price-info">(Pris for første uges leje)</i>
                         </span>
                     </div>
                     <div class="product-meta__prices-daily">
                         <span>
-                            {{ product.data.DailyPriceAfterWeek }}
-                            <i class="product-meta__prices-price-info">Pris efter første uges leje, pr. dag.</i>
+                            {{ product.pricing.daily | formatPrice }}
+                            <i class="product-meta__prices-price-info">(Pris efter første uges leje, pr. dag.)</i>
                         </span>
                     </div>
                 </div>
@@ -32,8 +32,20 @@
                 </div>
                 <div class="product-meta__buy-section">
                     <div class="product-meta__buy-section__addons"></div>
-                    <div class="product-meta__buy-section__period"></div>
-                    <div class="product-meta__buy-section__prices"></div>
+                    <div class="product-meta__buy-section__period">
+                        <span class="block mb-1">Vælg lejeperiode:</span>
+                        <div class="input-group mb-1">
+<!--                            <input type="text" class="input-form input-text" name="rental-from" placeholder="Vælg ønsket start-dato" />-->
+                        </div>
+                        <div class="input-group mb-1">
+<!--                            <input type="text" class="input-form input-text" name="rental-to" placeholder="Vælg ønsket slut-dato" />-->
+                        </div>
+                    </div>
+                    <div class="product-meta__buy-section__prices mt-2">
+                        <div class="buy-section__total-price">
+                            <span v-model="product.pricing.total" />
+                        </div>
+                    </div>
                     <div class="product-meta__buy-section__cart-section"></div>
                 </div>
             </div>
@@ -53,7 +65,12 @@
                         main: null,
                         thumbnails: null
                     },
-                    data: null
+                    data: null,
+                    pricing: {
+                        total: null,
+                        daily: null,
+                        week: null
+                    }
                 },
             }
         },
@@ -79,8 +96,6 @@
 
             product = product[0];
 
-            console.log(product)
-
             this.product.data = product;
             this.product.imageCover = process.env.apiUrl + product.ImageCover.url;
 
@@ -88,7 +103,10 @@
             this.product.textCover = product.TextCover;
             this.product.metaDescription = product.MetaDescription;
 
-            this.product.gallery.main = process.env.apiUrl + product.MainImage.url
+            this.product.gallery.main = process.env.apiUrl + product.MainImage.url;
+
+            this.product.pricing.weekly = product.WeekPrice;
+            this.product.pricing.daily = product.DailyPriceAfterWeek;
         }
     }
 </script>

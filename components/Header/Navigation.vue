@@ -1,6 +1,6 @@
 <template>
-    <nav class="flex">
-        <ul class="mt-auto main-navigation">
+    <nav>
+        <ul class="main-navigation">
             <li>
                 <nuxt-link to="/produkt-kategori/ipads-og-tablets">Produkter</nuxt-link>
             </li>

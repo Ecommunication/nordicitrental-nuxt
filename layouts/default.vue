@@ -23,6 +23,7 @@
     <main>
       <nuxt />
     </main>
+    <FooterMain :footer="footerData" />
   </div>
 </template>
 <script>
@@ -31,6 +32,7 @@
       return {
         siteLogo: null,
         sitePhone: null,
+        footerData: null,
       }
     },
     async fetch() {
@@ -40,6 +42,12 @@
 
       this.siteLogo = 'http://localhost:1337' + meta.Logo.url;
       this.sitePhone = meta.Telephone;
+      this.footerData = {
+        widget1: meta.FooterWidget1,
+        widget2: meta.FooterWidget2,
+        widget3: meta.FooterWidget3,
+        images: meta.FooterImagesBottom,
+      };
     }
   }
 </script>
