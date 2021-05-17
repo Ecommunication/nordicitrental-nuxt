@@ -12,25 +12,35 @@
     </p>
 
     <div v-else-if="data">
+      <!-- Todo: create row/col grid structure for responsive feature. Currently not provided both in here and the home page components -->
       <div class="index-letter-box wrap-grid grid-cols-2">
-        <div
+        <TextCard
           v-if="data.LeftTextCol1"
-          v-html="data.LeftTextCol1"
-          class="outline pl-32 pr-32 pt-20 pb-10 bg-gray-dark"
+          :contentHtml="data.LeftTextCol1"
+          backgroundClass="bg-gray-dark"
+          padding="55px"
         />
-        <div class="grid grid-rows-2 outline">
-          <!--  <div
-            v-if="data.RightImageCol1"
-            class="outline outline-image-box"
-            :style="
-              'background-image: url(http://localhost:1337' +
-                data.RightImageCol1.url +
-                ')'
-            "
-          /> -->
-          <BackgroundImg
-            :minHeight="500"
-            :src="apiUrl + data.RightImageCol1.url"
+        <BackgroundImg
+          v-if="data.RightImageCol1"
+          :minHeight="500"
+          :src="apiUrl + data.RightImageCol1.url"
+        />
+      </div>
+
+      <div class="section">
+        <TextCard v-if="data.MidTextCol2" :contentHtml="data.MidTextCol2" />
+      </div>
+
+      <div class="section bg-blue">
+        <RefCompanyLogoBar :companies="data.MidColReference3" />
+      </div>
+
+      <div class="section bg-gray-dark wrap-grid wrap-2">
+        <div v-for="quote in data.MidColReference4" :key="quote.id" >
+          <RefCompanyQuote
+            :logo="quote.MidColReference4Logo"
+            :author="quote.MidColReference4Author"
+            :text="quote.MidColReference4Text"
           />
         </div>
       </div>
@@ -39,10 +49,16 @@
 </template>
 
 <script>
+import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
+import RefCompanyLogoBar from "@/components/AboutUs/RefCompanyLogoBar";
+import RefCompanyQuote from "@/components/AboutUs/RefCompanyQuote";
 export default {
   components: {
-    BackgroundImg
+    TextCard,
+    BackgroundImg,
+    RefCompanyLogoBar,
+    RefCompanyQuote
   },
   data() {
     return {
@@ -51,11 +67,12 @@ export default {
       apiUrl: process.env.apiUrl
     };
   },
-  async fetch() { // Todo: this may be changed with asyncData (by using $axios) for preventing entering route before fetching all data.
+  async fetch() {
+    // Todo: this may be changed with asyncData (by using $axios) for preventing entering route before fetching all data.
     const path = "/om-os";
     try {
       this.data = await fetch(this.apiUrl + path).then(r => r.json());
-      console.log(this.data);
+      console.log(this.data.MidColReference4);
     } catch (e) {
       this.errorAfterFetch = e;
       console.log(e);
@@ -63,3 +80,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.section {
+  padding: 42px 230px;
+}
+</style>

@@ -28,9 +28,10 @@
 }
 
 body {
+  color: $textMain;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.0em;
-  line-height: 1.5em;
+  font-size: 20px;
+  line-height: normal;
 }
 
 .main-header {
