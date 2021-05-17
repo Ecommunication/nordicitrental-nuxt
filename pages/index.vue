@@ -104,6 +104,7 @@
             try {
                 const response = await fetch(process.env.apiUrl + '/forside');
                 this.indexData = await response.json()
+                console.log(this.indexData)
             } catch (e) {
                 console.log(e)
             }
