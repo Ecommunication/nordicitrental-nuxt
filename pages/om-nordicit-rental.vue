@@ -17,12 +17,10 @@
         :minHeight="420"
         :src="apiUrl + data.ImageCover.url"
         style="display: flex; align-items: center;"
-
       >
-        <template v-slot:body >
-            <h1 class="titleWhite" style="font-size: 50px; font-weight: 700; padding: 20px; font-family: sans-serif;">{{data.TextCover}}</h1>
+        <template v-slot:body>
+          <h1 class="slider-title title-white">{{ data.TextCover }}</h1>
         </template>
-
       </BackgroundImg>
 
       <!-- Todo: create row/col grid structure for responsive feature. Currently not provided both in here and the home page components -->

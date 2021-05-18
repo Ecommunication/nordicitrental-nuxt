@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
 
 @import "components/variables";
 @import "components/grid";
@@ -10,6 +10,7 @@
 @import "components/helpers/margins";
 @import "components/helpers/typo";
 @import "components/helpers/widths";
+@import "components/helpers//button";
 
 /* Pages */
 @import "components/pages/index";
@@ -20,7 +21,6 @@
 @import "components/responsive";
 @import "components/slider/cover-slider";
 
-
 * {
   margin: 0;
   padding: 0;
@@ -29,7 +29,7 @@
 
 body {
   color: $textMain;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 20px;
   line-height: normal;
 }
@@ -51,7 +51,7 @@ body {
     }
 
     &-cta {
-      padding: 1.0em 0 1.0em;
+      padding: 1em 0 1em;
       font-size: 1.1em;
       font-weight: 100;
     }
@@ -66,7 +66,7 @@ body {
       li {
         &:not(:last-child) {
           a {
-            padding-right: 2.0em;
+            padding-right: 2em;
           }
         }
       }
@@ -75,7 +75,7 @@ body {
         color: $mainBlue;
         text-decoration: none;
         font-weight: bold;
-        font-size: 1.0em;
+        font-size: 1em;
         display: block;
       }
     }
@@ -91,13 +91,14 @@ footer {
   }
 }
 
-
-.titleWhite {
-  color: #fff!important;
-  padding: 14px;
-  background: rgba(9,45,79,.8);
+.title-white {
+  color: $white;
+  background: rgba(9, 45, 79, 0.8);
   border-radius: 3px;
-  display: inline-block;
-  padding: 10px;
-  margin: 0;
+}
+
+.slider-title {
+  font-size: 50px;
+  padding: 20px;
+  font-family: sans-serif;
 }
