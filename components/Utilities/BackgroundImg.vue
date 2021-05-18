@@ -2,7 +2,9 @@
   <div
     class="background-image"
     :style="`min-height: ${minHeight}px; background-image: url(${src})`"
-  ></div>
+  >
+    <slot name="body"></slot>
+  </div>
 </template>
 
 <script>

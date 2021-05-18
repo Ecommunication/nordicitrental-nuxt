@@ -12,6 +12,19 @@
     </p>
 
     <div v-else-if="data">
+      <BackgroundImg
+        v-if="data.ImageCover"
+        :minHeight="420"
+        :src="apiUrl + data.ImageCover.url"
+        style="display: flex; align-items: center;"
+
+      >
+        <template v-slot:body >
+            <h1 class="titleWhite" style="font-size: 50px; font-weight: 700; padding: 20px; font-family: sans-serif;">{{data.TextCover}}</h1>
+        </template>
+
+      </BackgroundImg>
+
       <!-- Todo: create row/col grid structure for responsive feature. Currently not provided both in here and the home page components -->
       <div class="index-letter-box wrap-grid grid-cols-2">
         <TextCard
@@ -36,12 +49,29 @@
       </div>
 
       <div class="section bg-gray-dark wrap-grid wrap-2">
-        <div v-for="quote in data.MidColReference4" :key="quote.id" >
+        <div v-for="quote in data.MidColReference4" :key="quote.id">
           <RefCompanyQuote
             :logo="quote.MidColReference4Logo"
             :author="quote.MidColReference4Author"
             :text="quote.MidColReference4Text"
           />
+        </div>
+      </div>
+
+      <div class="section employee-table">
+        <h3>{{ data.EmployeeHeader }}</h3>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+          <div
+            v-for="employee in [
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees
+            ]"
+            :key="employee.id"
+          >
+            <Employee :employee="employee" />
+          </div>
         </div>
       </div>
     </div>
@@ -53,12 +83,14 @@ import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 import RefCompanyLogoBar from "@/components/AboutUs/RefCompanyLogoBar";
 import RefCompanyQuote from "@/components/AboutUs/RefCompanyQuote";
+import Employee from "@/components/AboutUs/Employee";
 export default {
   components: {
     TextCard,
     BackgroundImg,
     RefCompanyLogoBar,
-    RefCompanyQuote
+    RefCompanyQuote,
+    Employee
   },
   data() {
     return {
@@ -72,7 +104,7 @@ export default {
     const path = "/om-os";
     try {
       this.data = await fetch(this.apiUrl + path).then(r => r.json());
-      console.log(this.data.MidColReference4);
+      console.log(this.data.ImageCover);
     } catch (e) {
       this.errorAfterFetch = e;
       console.log(e);
@@ -84,5 +116,12 @@ export default {
 <style lang="scss" scoped>
 .section {
   padding: 42px 230px;
+}
+.employee-table {
+  h3 {
+    margin: 40px 0;
+    font-size: 40px;
+    color: #092d4f;
+  }
 }
 </style>
