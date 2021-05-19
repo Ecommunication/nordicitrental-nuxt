@@ -1,27 +1,57 @@
 <template>
   <div>
-    Google map
+    <div id="map" ref="googleMap"></div>
   </div>
 </template>
 
 <script>
-const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+import { Loader as GoogleMapsApiLoader } from "@googlemaps/js-api-loader";
 export default {
-  head() {
-    return {
-      script: [
-        {
-          src: `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`
-        }
-      ]
-    };
-  },
-  methods: {},
-  mounted() {
-
+  props: {
+    mapConfig: Object,
+    coords: Object,
+    title: String
   },
   data() {
-    return {};
+    return {
+      google: null,
+      map: null
+    };
+  },
+  async mounted() {
+    const { googleApiKey } = process.env;
+
+    const mapContainer = this.$refs.googleMap;
+    const loader = new GoogleMapsApiLoader({
+      apiKey: googleApiKey,
+      version: "weekly",
+      libraries: ["places"]
+    });
+
+    await loader.load();
+    this.google = google;
+    this.map = new google.maps.Map(mapContainer, this.mapConfig);
+
+     this.setMarker(this.setCoords(this.coords), this.title);
+  },
+  methods: {
+    setCoords({ lat, lng }) {
+      return new this.google.maps.LatLng(lat, lng);
+    },
+    setMarker(coords, title) {
+      const marker = new this.google.maps.Marker({
+        position: coords,
+        title
+      });
+      marker.setMap(this.map);
+    }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+#map {
+  height: 500px;
+  overflow: initial;
+}
+</style>
