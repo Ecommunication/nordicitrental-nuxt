@@ -1,0 +1,32 @@
+.button {
+  padding: 10px 30px;
+  cursor: pointer;
+  float: left;
+  clear: both;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  border: 1px solid #ffffff;
+}
+.btn-primary {
+  background: #092d4f;
+  color: #ffffff;
+}
+/* .btn-primary:hover {
+  background: #ffffff;
+  color: #092d4f;
+} */
+.btn-dark {
+  background: #ffffff;
+  color: #092d4f;
+}
+.btn-dark:hover {
+  background: #092d4f;
+  color: #ffffff;
+}
+.btn-large {
+  font-size: 0.9em;
+  width: 250px;
+  height: 80px;
+  text-align: center;
+  line-height: 55px;
+}

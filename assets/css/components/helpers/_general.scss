@@ -32,7 +32,7 @@
 }
 
 .bg-white {
-  background-color: #ffffff;
+  background-color: $white;
 }
 
 .bg-gray-light {
@@ -42,10 +42,21 @@
 .bg-gray-dark {
   background-color: #f1f1f1;
 }
+.bg-gray-darkest {
+  background-color: #e7e7e7;
+}
 
 .bg-blue {
   background-color: $mainBlue;
-  color: #fff;
+  color: $white;
+}
+
+.text-white {
+  color: $white;
+}
+
+.text-blue {
+  color: $mainBlue;
 }
 
 /* Borders */
