@@ -28,7 +28,7 @@
       <div class="add-to-cart ml-3 button btn-primary">TILFØJ TIL KURV</div>
     </div>
 
-    <div class="mt-10">{{ time }} | {{ noOfDays }}</div>
+    <!-- <div class="mt-10">{{ time }} | {{ noOfDays }}</div> -->
   </div>
 </template>
 

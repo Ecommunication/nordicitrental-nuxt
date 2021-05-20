@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="product-meta__description">
-          <div v-html="product.data.DescriptionShort"></div>
+          <div style="font-size: 0.8em; line-height: 25px;" v-html="product.data.DescriptionShort"></div>
         </div>
         <div class="product-meta__buy-section">
           <div class="product-meta__buy-section__addons"></div>
@@ -51,15 +51,31 @@
         </div>
       </div>
     </div>
+    <div class="product grid-small margin-center mt-10">
+      <Tabs :description="descriptionTab" :features="featuresTab" />
+    </div>
   </div>
 </template>
 <script>
 import AddToCart from "@/components/Product/AddToCart";
+import Tabs from "@/components/Product/Tabs";
 
 export default {
-  components: { AddToCart },
+  components: { AddToCart, Tabs },
   data() {
     return {
+      descriptionTab: {
+        title: "Lej en iPad Air med 4G mulighed",
+        desc: `Den stilfulde iPad Air Wi-Fi + 4G/LTE, er en af de nyere Apple iPads i vores sortiment. Air modellen er ultratynd og let med et holdbart aluminiumskabinet, effektiv ydelse, Wi-Fi og LTE-teknologi – kombinationen af bedre mobilitet og mere produktivitet. Når du lejer en iPad Air modtager du den med et beskyttelses cover. Denne iPad er markant lettere end forgængeren (iPad 4). Den er også tyndere, og med en markant hurtigere processor.
+Ved leje af iPad Air er det muligt at tilkøbe 4G datakort. Læs mere om køb af 4G datakort her.
+Ved udlejning af iPads er du sikret et stilfuld og professionelt produkt.
+Når du lejer en iPad hos Nordic IT Rental, leveres den altid med seneste IOS og opladet.
+Vi kan installere de lejede iPads præcis som du ønsker det, og med de App´s du ønsker.
+Alle iPads leveres i et pænt og praktisk silikonecover der beskytter iPaden mod slag og skader.
+Det er også muligt at få skræddersyet surveys eller andre brugerflader på en lejede iPad.
+Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for at høre mere om leje af iPads.`
+      },
+      featuresTab: {},
       product: {
         imageCover: null,
         textCover: null,
@@ -111,7 +127,7 @@ export default {
 
     this.product.pricing.weekly = product.WeekPrice;
     this.product.pricing.daily = product.DailyPriceAfterWeek;
-    console.log(this.product.pricing);
+    console.log(this.product.pricing, []);
   }
 };
 </script>
