@@ -101,9 +101,33 @@
       </div>
 
       <div>
-        <ContactUsForm :title="data.ContactHeader" />
+        <ContactUsForm
+          :title="data.ContactHeader"
+          formTitle="Send os en besked, så kontakter vi dig i dag."
+        >
+          <template v-slot:left-col>
+            <div class="text-left employee">
+              <h3 class="text-blue">Kontakt</h3>
+              <p class="mt-10">
+                <img
+                  src="https://nordicitrental.dk//wp-content/uploads/2017/12/employee_mic-135x135.png"
+                  alt="Kontakt"
+                />
+              </p>
+              <p style="font-size: 16px;">
+                Michael Vedel<br />
+                Salg – kunder
+              </p>
+              <p class="mt-5" style="font-size: 16px;">
+                Tlf. 71998904<br />
+                <a href="mailto:salg@nordicitrental.dk"
+                  >salg@nordicitrental.dk</a
+                >
+              </p>
+            </div>
+          </template>
+        </ContactUsForm>
       </div>
-
     </div>
   </div>
 </template>
@@ -113,7 +137,6 @@ import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 import Button from "@/components/Utilities/Button";
 import ContactUsForm from "@/components/Formular/Contact";
-
 
 export default {
   components: {

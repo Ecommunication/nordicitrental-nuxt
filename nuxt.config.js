@@ -41,7 +41,8 @@ export default {
     },
 
     env: {
-        apiUrl: process.env.API_URL
+        apiUrl: process.env.API_URL,
+        googleApiKey: process.env.GOOGLE_MAPS_API_KEY
     },
 
 
