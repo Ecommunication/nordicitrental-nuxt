@@ -6,15 +6,32 @@
     Vi kunne desværre ikke indlæse siden i øjeblikket. Prøv igen senere.
   </p>
   <div v-else>
-    <CoverImage
-      :textCover="product.data.TextCover"
-      :imageCover="product.imageCover"
-    />
+    <BackgroundImg
+      v-if="product.imageCover"
+      :minHeight="460"
+      :src="product.imageCover"
+      style="display: flex; align-items: center;"
+    >
+      <template v-slot:body>
+        <h1 class="slider-title title-white" style="margin: auto;">
+          {{ product.data.TextCover }}
+        </h1>
+      </template>
+    </BackgroundImg>
 
-    <div class="product grid-small margin-center">
-      <div class="product-gallery">
-        <div class="product-gallery__main-image">
+    <div class="mt-14 product grid-small margin-center">
+      <div class="product-gallery" style="max-width: 500px; margin-right: 50px ">
+        <div class="product-gallery__main-image" >
           <img class="img-responsive" :src="product.gallery.main" alt="" />
+        </div>
+        <div class="product-galery-other-images">
+          <div
+            class="product-galery-other-img-container"
+            v-for="(image, index) in product.gallery.thumbnails"
+            :key="index"
+          >
+            <img :src="image" />
+          </div>
         </div>
       </div>
       <div class="product-meta">
@@ -39,7 +56,10 @@
           </div>
         </div>
         <div class="product-meta__description">
-          <div style="font-size: 0.8em; line-height: 25px;" v-html="product.data.DescriptionShort"></div>
+          <div
+            style="font-size: 0.8em; line-height: 25px;"
+            v-html="product.data.DescriptionShort"
+          ></div>
         </div>
         <div class="product-meta__buy-section">
           <div class="product-meta__buy-section__addons"></div>
@@ -55,17 +75,24 @@
     <div class="product grid-small margin-center mt-10">
       <Tabs :description="descriptionTab" :features="featuresTab" />
     </div>
+
+    <div class="product grid-small margin-center mt-10">
+      <Suggestions :products="products" />
+    </div>
   </div>
 </template>
 <script>
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
 import IconBar from "@/components/Product/IconBar";
+import Suggestions from "@/components/Product/Suggestions";
+import BackgroundImg from "@/components/Utilities/BackgroundImg";
 
 export default {
-  components: { AddToCart, Tabs, IconBar },
+  components: { BackgroundImg, AddToCart, Tabs, IconBar, Suggestions },
   data() {
     return {
+      apiUrl: process.env.apiUrl,
       descriptionTab: {
         title: "Lej en iPad Air med 4G mulighed",
         desc: `Den stilfulde iPad Air Wi-Fi + 4G/LTE, er en af de nyere Apple iPads i vores sortiment. Air modellen er ultratynd og let med et holdbart aluminiumskabinet, effektiv ydelse, Wi-Fi og LTE-teknologi – kombinationen af bedre mobilitet og mere produktivitet. Når du lejer en iPad Air modtager du den med et beskyttelses cover. Denne iPad er markant lettere end forgængeren (iPad 4). Den er også tyndere, og med en markant hurtigere processor.
@@ -77,8 +104,20 @@ Alle iPads leveres i et pænt og praktisk silikonecover der beskytter iPaden mod
 Det er også muligt at få skræddersyet surveys eller andre brugerflader på en lejede iPad.
 Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for at høre mere om leje af iPads.`
       },
-      iconBar: [
-        {}
+      iconBar: [{}],
+      products: [
+        {
+          id: 1,
+          img:
+            "https://nordicitrental.dk/wp-content/uploads/2015/05/ipadstander-220x220.jpg",
+          title: "iPad gulvstander – sort"
+        },
+        {
+          id: 2,
+          img:
+            "https://nordicitrental.dk/wp-content/uploads/2014/10/simcard-220x165.gif",
+          title: "Data simkort med 3G/4G til iPad"
+        }
       ],
       featuresTab: {},
       product: {
@@ -88,7 +127,7 @@ Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for 
         metaDescription: null,
         gallery: {
           main: null,
-          thumbnails: null
+          thumbnails: []
         },
         data: null,
         pricing: {
@@ -119,7 +158,6 @@ Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for 
     ).then(res => res.json());
 
     const product = products[0];
-    console.log(product);
 
     this.product.data = product;
     this.product.imageCover = process.env.apiUrl + product.ImageCover.url;
@@ -129,9 +167,32 @@ Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for 
     this.product.metaDescription = product.MetaDescription;
 
     this.product.gallery.main = process.env.apiUrl + product.MainImage.url;
+    product.ProductGallery.forEach(image => {
+      this.product.gallery.thumbnails.push(process.env.apiUrl + image.url);
+    });
 
     this.product.pricing.weekly = product.WeekPrice;
     this.product.pricing.daily = product.DailyPriceAfterWeek;
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.product-galery-other-images {
+  display: flex;
+  flex-wrap: wrap;
+  .product-galery-other-img-container {
+    width: 90px;
+    height: 90px;
+    margin: 15px;
+    border: 1px solid rgba(0,0,0,.05);
+    cursor: pointer;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-position: center center;
+    }
+  }
+}
+</style>

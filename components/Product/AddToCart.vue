@@ -1,6 +1,7 @@
 <template>
   <div>
     <p class="title">Vælg lejeperiode:</p>
+    <client-only>
     <div class="date-picker-container">
       <div>
         <div class="date-picker-label">Start</div>
@@ -20,11 +21,11 @@
           v-model="end"
           valueType="date"
           format="DD/M/YYYY"
-          :default-value="new Date()"
           :disabled-date="disableBeforeStartDatePlusAWeek"
         ></date-picker>
       </div>
     </div>
+    </client-only>
 
     <div class="price">
       {{ price | formatPrice }}
@@ -103,7 +104,6 @@ export default {
     disableBeforeStartDatePlusAWeek(date) {
       const startDate = new Date(this.start);
       const nextWeekDate = this.shiftDateXDays(startDate, 7);
-      console.log({ startDate, nextWeekDate });
       return date < nextWeekDate;
     },
     calculatePrice(dailyPrice, weeklyPrice, days) {
