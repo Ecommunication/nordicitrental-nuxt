@@ -2,13 +2,28 @@
   <div>
     <p class="title">Vælg lejeperiode:</p>
     <div class="date-picker-container">
-      <date-picker
-        class="date-picker"
-        v-model="time"
-        range
-        valueType="date"
-        format="DD/M/YYYY"
-      ></date-picker>
+      <div>
+        <div class="date-picker-label">Start</div>
+        <date-picker
+          class="date-picker"
+          v-model="start"
+          valueType="date"
+          format="DD/M/YYYY"
+          :disabled-date="disableBeforeToday"
+        ></date-picker>
+      </div>
+
+      <div>
+        <div class="date-picker-label">End</div>
+        <date-picker
+          class="date-picker"
+          v-model="end"
+          valueType="date"
+          format="DD/M/YYYY"
+          :default-value="new Date()"
+          :disabled-date="disableBeforeStartDatePlusAWeek"
+        ></date-picker>
+      </div>
     </div>
 
     <div class="price">
@@ -29,7 +44,6 @@
         v-model="amount"
       />
       <div
-
         class="add-to-cart ml-3 button btn-primary"
         :class="canBePlaced ? '' : 'btn-disabled'"
       >
@@ -54,9 +68,8 @@ export default {
   },
   computed: {
     noOfDays() {
-      return this.time && this.time.length
-        ? this.dayDifference(this.time[0], this.time[1]) + 1
-        : 0;
+      const dayDifference = this.dayDifference(this.start, this.end) + 1;
+      return dayDifference > 0 ? dayDifference : 0;
     },
     price() {
       const unitPrice = this.calculatePrice(
@@ -72,11 +85,27 @@ export default {
   },
   data() {
     return {
-      time: null,
+      start: new Date(new Date().toDateString()),
+      end: this.shiftDateXDays(new Date(), 7),
       amount: 1
     };
   },
   methods: {
+    // days can be -x, +x
+    shiftDateXDays(date, days) {
+      const DAY = 1 * 24 * 60 * 60 * 1000;
+      return new Date(new Date(date.getTime() + days * DAY).toDateString());
+    },
+    disableBeforeToday(date) {
+      const today = new Date(new Date().toDateString());
+      return date < today;
+    },
+    disableBeforeStartDatePlusAWeek(date) {
+      const startDate = new Date(this.start);
+      const nextWeekDate = this.shiftDateXDays(startDate, 7);
+      console.log({ startDate, nextWeekDate });
+      return date < nextWeekDate;
+    },
     calculatePrice(dailyPrice, weeklyPrice, days) {
       if (!days) return weeklyPrice; // todo: ask the business logic for this case
       const NO_OF_DAYS_IN_WEEK = 8;
@@ -106,7 +135,10 @@ export default {
   margin-bottom: 16px;
 }
 .date-picker-container {
-  text-align: left;
+  display: flex;
+  .date-picker-label {
+    font-size: 0.8em;
+  }
   .date-picker {
     width: 75%;
   }
@@ -144,6 +176,4 @@ export default {
     border-radius: 5px;
   }
 }
-
-
 </style>
