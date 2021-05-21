@@ -16,8 +16,11 @@
     </div>
 
     <div class="days">Total lejeperiode: {{ noOfDays }} dage</div>
+    <div class="alert" v-show="!canBePlaced">
+      Lejeperioden skal bestå af min. 8 dage
+    </div>
 
-    <div class="actions mt-10">
+    <div class="actions mt-8">
       <input
         class="amount-picker"
         type="number"
@@ -25,7 +28,13 @@
         min="1"
         v-model="amount"
       />
-      <div class="add-to-cart ml-3 button btn-primary">TILFØJ TIL KURV</div>
+      <div
+
+        class="add-to-cart ml-3 button btn-primary"
+        :class="canBePlaced ? '' : 'btn-disabled'"
+      >
+        TILFØJ TIL KURV
+      </div>
     </div>
 
     <!-- <div class="mt-10">{{ time }} | {{ noOfDays }}</div> -->
@@ -46,7 +55,7 @@ export default {
   computed: {
     noOfDays() {
       return this.time && this.time.length
-        ? this.dayDifference(this.time[0], this.time[1])
+        ? this.dayDifference(this.time[0], this.time[1]) + 1
         : 0;
     },
     price() {
@@ -55,7 +64,10 @@ export default {
         this.weeklyPrice,
         this.noOfDays
       );
-      return unitPrice * this.amount
+      return unitPrice * this.amount;
+    },
+    canBePlaced() {
+      return this.noOfDays > 7;
     }
   },
   data() {
@@ -67,7 +79,7 @@ export default {
   methods: {
     calculatePrice(dailyPrice, weeklyPrice, days) {
       if (!days) return weeklyPrice; // todo: ask the business logic for this case
-      const NO_OF_DAYS_IN_WEEK = 7;
+      const NO_OF_DAYS_IN_WEEK = 8;
       const price =
         days <= NO_OF_DAYS_IN_WEEK
           ? parseFloat(weeklyPrice)
@@ -109,6 +121,11 @@ export default {
   font-size: 16px;
 }
 
+.alert {
+  font-size: 16px;
+  color: red;
+}
+
 .actions {
   display: flex;
   input[type="number"]::-webkit-inner-spin-button {
@@ -127,4 +144,6 @@ export default {
     border-radius: 5px;
   }
 }
+
+
 </style>

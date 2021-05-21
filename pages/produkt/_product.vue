@@ -18,6 +18,7 @@
         </div>
       </div>
       <div class="product-meta">
+        <IconBar class="mb-14" />
         <div class="product-meta__specs"></div>
         <div class="product-meta__prices">
           <div class="product-meta__prices-weekly">
@@ -59,9 +60,10 @@
 <script>
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
+import IconBar from "@/components/Product/IconBar";
 
 export default {
-  components: { AddToCart, Tabs },
+  components: { AddToCart, Tabs, IconBar },
   data() {
     return {
       descriptionTab: {
@@ -75,6 +77,9 @@ Alle iPads leveres i et pænt og praktisk silikonecover der beskytter iPaden mod
 Det er også muligt at få skræddersyet surveys eller andre brugerflader på en lejede iPad.
 Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for at høre mere om leje af iPads.`
       },
+      iconBar: [
+        {}
+      ],
       featuresTab: {},
       product: {
         imageCover: null,
@@ -127,7 +132,6 @@ Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for 
 
     this.product.pricing.weekly = product.WeekPrice;
     this.product.pricing.daily = product.DailyPriceAfterWeek;
-    console.log(this.product.pricing, []);
   }
 };
 </script>
