@@ -5,23 +5,23 @@
   clear: both;
   font-size: 0.8em;
   text-transform: uppercase;
-  border: 1px solid #ffffff;
+  border: 1px solid $white;
 }
 .btn-primary {
-  background: #092d4f;
-  color: #ffffff;
+  background: $mainBlue;
+  color: $white;
 }
 /* .btn-primary:hover {
-  background: #ffffff;
-  color: #092d4f;
+  background: $white;
+  color: $mainBlue;
 } */
 .btn-dark {
-  background: #ffffff;
-  color: #092d4f;
+  background: $white;
+  color: $mainBlue;
 }
 .btn-dark:hover {
-  background: #092d4f;
-  color: #ffffff;
+  background: $mainBlue;
+  color: $white;
 }
 .btn-large {
   font-size: 0.9em;
@@ -29,4 +29,14 @@
   height: 80px;
   text-align: center;
   line-height: 55px;
+}
+
+.button:not(.btn-disabled):active {
+  background:  rgba($mainBlue, .8);
+}
+
+.btn-disabled {
+  border: 1px solid #999999;
+  background-color: #dddddd;
+  color: #666666;
 }

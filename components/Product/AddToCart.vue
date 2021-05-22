@@ -1,23 +1,42 @@
 <template>
   <div>
     <p class="title">Vælg lejeperiode:</p>
+    <client-only>
     <div class="date-picker-container">
-      <date-picker
-        class="date-picker"
-        v-model="time"
-        range
-        valueType="date"
-        format="DD/M/YYYY"
-      ></date-picker>
+      <div>
+        <div class="date-picker-label">Start</div>
+        <date-picker
+          class="date-picker"
+          v-model="start"
+          valueType="date"
+          format="DD/M/YYYY"
+          :disabled-date="disableBeforeToday"
+        ></date-picker>
+      </div>
+
+      <div>
+        <div class="date-picker-label">End</div>
+        <date-picker
+          class="date-picker"
+          v-model="end"
+          valueType="date"
+          format="DD/M/YYYY"
+          :disabled-date="disableBeforeStartDatePlusAWeek"
+        ></date-picker>
+      </div>
     </div>
+    </client-only>
 
     <div class="price">
       {{ price | formatPrice }}
     </div>
 
     <div class="days">Total lejeperiode: {{ noOfDays }} dage</div>
+    <div class="alert" v-show="!canBePlaced">
+      Lejeperioden skal bestå af min. 8 dage
+    </div>
 
-    <div class="actions mt-10">
+    <div class="actions mt-8">
       <input
         class="amount-picker"
         type="number"
@@ -25,7 +44,12 @@
         min="1"
         v-model="amount"
       />
-      <div class="add-to-cart ml-3 button btn-primary">TILFØJ TIL KURV</div>
+      <div
+        class="add-to-cart ml-3 button btn-primary"
+        :class="canBePlaced ? '' : 'btn-disabled'"
+      >
+        TILFØJ TIL KURV
+      </div>
     </div>
 
     <!-- <div class="mt-10">{{ time }} | {{ noOfDays }}</div> -->
@@ -45,9 +69,8 @@ export default {
   },
   computed: {
     noOfDays() {
-      return this.time && this.time.length
-        ? this.dayDifference(this.time[0], this.time[1])
-        : 0;
+      const dayDifference = this.dayDifference(this.start, this.end) + 1;
+      return dayDifference > 0 ? dayDifference : 0;
     },
     price() {
       const unitPrice = this.calculatePrice(
@@ -55,19 +78,37 @@ export default {
         this.weeklyPrice,
         this.noOfDays
       );
-      return unitPrice * this.amount
+      return unitPrice * this.amount;
+    },
+    canBePlaced() {
+      return this.noOfDays > 7;
     }
   },
   data() {
     return {
-      time: null,
+      start: new Date(new Date().toDateString()),
+      end: this.shiftDateXDays(new Date(), 7),
       amount: 1
     };
   },
   methods: {
+    // days can be -x, +x
+    shiftDateXDays(date, days) {
+      const DAY = 1 * 24 * 60 * 60 * 1000;
+      return new Date(new Date(date.getTime() + days * DAY).toDateString());
+    },
+    disableBeforeToday(date) {
+      const today = new Date(new Date().toDateString());
+      return date < today;
+    },
+    disableBeforeStartDatePlusAWeek(date) {
+      const startDate = new Date(this.start);
+      const nextWeekDate = this.shiftDateXDays(startDate, 7);
+      return date < nextWeekDate;
+    },
     calculatePrice(dailyPrice, weeklyPrice, days) {
       if (!days) return weeklyPrice; // todo: ask the business logic for this case
-      const NO_OF_DAYS_IN_WEEK = 7;
+      const NO_OF_DAYS_IN_WEEK = 8;
       const price =
         days <= NO_OF_DAYS_IN_WEEK
           ? parseFloat(weeklyPrice)
@@ -94,7 +135,10 @@ export default {
   margin-bottom: 16px;
 }
 .date-picker-container {
-  text-align: left;
+  display: flex;
+  .date-picker-label {
+    font-size: 0.8em;
+  }
   .date-picker {
     width: 75%;
   }
@@ -107,6 +151,11 @@ export default {
 }
 .days {
   font-size: 16px;
+}
+
+.alert {
+  font-size: 16px;
+  color: red;
 }
 
 .actions {
