@@ -11,12 +11,9 @@
         </div>
       </div>
     </div>
-    <div class="tab-body" >
+    <div class="tab-body">
       <div v-if="selected === 0">
-        <DescriptionTab
-          :title="description.title"
-          :desc="description.desc"
-        />
+        <DescriptionTab :description="description" />
       </div>
       <div v-else-if="selected === 1">
         <FeaturesTab />
@@ -31,7 +28,7 @@ import FeaturesTab from "@/components/Product/Tabs/Features";
 export default {
   components: { DescriptionTab, FeaturesTab },
   props: {
-    description: { type: Object, required: true },
+    description: { type: String, required: true },
     features: { type: Object, required: true }
   },
   data() {

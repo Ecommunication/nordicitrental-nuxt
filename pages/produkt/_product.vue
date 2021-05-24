@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="product-meta">
-        <IconBar class="mb-14" />
+        <IconBar class="mb-14" :icons="product.icons" />
         <div class="product-meta__specs"></div>
         <div class="product-meta__prices">
           <div class="product-meta__prices-weekly">
@@ -58,7 +58,7 @@
         <div class="product-meta__description">
           <div
             style="font-size: 0.8em; line-height: 25px;"
-            v-html="product.data.DescriptionShort"
+            v-html="product.descriptions.short"
           ></div>
         </div>
         <div class="product-meta__buy-section">
@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="product grid-small margin-center mt-10">
-      <Tabs :description="descriptionTab" :features="featuresTab" />
+      <Tabs :description="product.descriptions.long" :features="featuresTab" />
     </div>
 
     <div class="product grid-small margin-center mt-10">
@@ -93,18 +93,6 @@ export default {
   data() {
     return {
       apiUrl: process.env.apiUrl,
-      descriptionTab: {
-        title: "Lej en iPad Air med 4G mulighed",
-        desc: `Den stilfulde iPad Air Wi-Fi + 4G/LTE, er en af de nyere Apple iPads i vores sortiment. Air modellen er ultratynd og let med et holdbart aluminiumskabinet, effektiv ydelse, Wi-Fi og LTE-teknologi – kombinationen af bedre mobilitet og mere produktivitet. Når du lejer en iPad Air modtager du den med et beskyttelses cover. Denne iPad er markant lettere end forgængeren (iPad 4). Den er også tyndere, og med en markant hurtigere processor.
-Ved leje af iPad Air er det muligt at tilkøbe 4G datakort. Læs mere om køb af 4G datakort her.
-Ved udlejning af iPads er du sikret et stilfuld og professionelt produkt.
-Når du lejer en iPad hos Nordic IT Rental, leveres den altid med seneste IOS og opladet.
-Vi kan installere de lejede iPads præcis som du ønsker det, og med de App´s du ønsker.
-Alle iPads leveres i et pænt og praktisk silikonecover der beskytter iPaden mod slag og skader.
-Det er også muligt at få skræddersyet surveys eller andre brugerflader på en lejede iPad.
-Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for at høre mere om leje af iPads.`
-      },
-      iconBar: [{}],
       products: [
         {
           id: 1,
@@ -116,7 +104,7 @@ Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for 
           id: 2,
           img:
             "https://nordicitrental.dk/wp-content/uploads/2014/10/simcard-220x165.gif",
-          title: "Data simkort med 3G/4G til iPad"
+          title: "Data simkort med 3G/4G til iPad",
         }
       ],
       featuresTab: {},
@@ -173,6 +161,15 @@ Du er altid velkommen til at kontakte vores salgsafdeling på tlf. 71998904 for 
 
     this.product.pricing.weekly = product.WeekPrice;
     this.product.pricing.daily = product.DailyPriceAfterWeek;
+
+    this.product.descriptions = {
+      short: product.DescriptionShort,
+      long: product.DescriptionLong
+    }
+
+    this.product.icons = product.ProductSpecifications;
+
+    console.log(this.product, {});
   }
 };
 </script>

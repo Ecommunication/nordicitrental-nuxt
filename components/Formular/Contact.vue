@@ -97,20 +97,4 @@ export default {
   .right-col {
   }
 }
-
-input,
-textarea {
-  border-radius: 3px;
-  border: 1px solid #e6e6e6;
-  padding: 10px;
-  width: 100%;
-}
-.input-container {
-  margin-bottom: 8px;
-  padding: 0 20px;
-}
-.label {
-  font-size: 16px;
-  font-family: "Open Sans";
-}
 </style>
