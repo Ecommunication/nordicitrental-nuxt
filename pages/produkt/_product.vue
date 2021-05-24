@@ -7,21 +7,24 @@
   </p>
   <div v-else>
     <BackgroundImg
-      v-if="product.imageCover"
+      v-if="product.cover.image"
       :minHeight="460"
-      :src="product.imageCover"
+      :src="product.cover.image"
       style="display: flex; align-items: center;"
     >
       <template v-slot:body>
         <h1 class="slider-title title-white" style="margin: auto;">
-          {{ product.data.TextCover }}
+          {{ product.cover.text }}
         </h1>
       </template>
     </BackgroundImg>
 
     <div class="mt-14 product grid-small margin-center">
-      <div class="product-gallery" style="max-width: 500px; margin-right: 50px ">
-        <div class="product-gallery__main-image" >
+      <div
+        class="product-gallery"
+        style="max-width: 500px; margin-right: 50px "
+      >
+        <div class="product-gallery__main-image">
           <img class="img-responsive" :src="product.gallery.main" alt="" />
         </div>
         <div class="product-galery-other-images">
@@ -65,6 +68,7 @@
           <div class="product-meta__buy-section__addons"></div>
           <div class="product-meta__buy-section__period">
             <AddToCart
+              :product="product"
               :dailyPrice="product.pricing.daily"
               :weeklyPrice="product.pricing.weekly"
             />
@@ -104,38 +108,24 @@ export default {
           id: 2,
           img:
             "https://nordicitrental.dk/wp-content/uploads/2014/10/simcard-220x165.gif",
-          title: "Data simkort med 3G/4G til iPad",
+          title: "Data simkort med 3G/4G til iPad"
         }
       ],
       featuresTab: {},
-      product: {
-        imageCover: null,
-        textCover: null,
-        metaTitle: null,
-        metaDescription: null,
-        gallery: {
-          main: null,
-          thumbnails: []
-        },
-        data: null,
-        pricing: {
-          daily: null,
-          weekly: null
-        }
-      }
+      product: {}
     };
   },
   head() {
     return {
-      title: this.product.textCover,
+      title: this.product?.cover?.text || "",
       meta: [
         {
           name: "title",
-          content: this.product.metaTitle ?? ""
+          content: this.product?.meta?.title || ""
         },
         {
           name: "description",
-          content: this.product.metaDescription ?? ""
+          content: this.product?.meta?.desc || ""
         }
       ]
     };
@@ -147,29 +137,37 @@ export default {
 
     const product = products[0];
 
-    this.product.data = product;
-    this.product.imageCover = process.env.apiUrl + product.ImageCover.url;
-
-    this.product.metaTitle = product.MetaTitle;
-    this.product.textCover = product.TextCover;
-    this.product.metaDescription = product.MetaDescription;
-
-    this.product.gallery.main = process.env.apiUrl + product.MainImage.url;
-    product.ProductGallery.forEach(image => {
-      this.product.gallery.thumbnails.push(process.env.apiUrl + image.url);
-    });
-
-    this.product.pricing.weekly = product.WeekPrice;
-    this.product.pricing.daily = product.DailyPriceAfterWeek;
-
-    this.product.descriptions = {
+    this.product = {
+      data: product,
+      info: {
+        id: product.id,
+        slug: product.ProductSlug,
+        name: product.Name
+      },
+      cover: {
+        image:  process.env.apiUrl + product.ImageCover.url,
+        text: product.TextCover
+      },
+      meta: {
+        title: product.MetaTitle,
+        desc: product.MetaDescription
+      },
+      gallery: {
+        main:  process.env.apiUrl + product.MainImage.url,
+        thumbnails: product.ProductGallery.map(img => process.env.apiUrl + img.url)
+      },
+      pricing: {
+        daily: product.DailyPriceAfterWeek,
+        weekly: product.WeekPrice,
+      },
+      descriptions: {
       short: product.DescriptionShort,
       long: product.DescriptionLong
-    }
+      },
+      icons: product.ProductSpecifications
+    };
 
-    this.product.icons = product.ProductSpecifications;
-
-    console.log(this.product, {});
+    console.log(this.product, 5);
   }
 };
 </script>
@@ -182,7 +180,7 @@ export default {
     width: 90px;
     height: 90px;
     margin: 15px;
-    border: 1px solid rgba(0,0,0,.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     cursor: pointer;
     img {
       width: 100%;
