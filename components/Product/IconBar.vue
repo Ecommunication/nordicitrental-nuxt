@@ -3,9 +3,9 @@
     <div v-for="(icon, index) in icons" :key="index">
       <div class="icon text-center">
         <div class="img-container">
-          <img :src="icon.img.src" :alt="icon.img.alt" />
+          <img :src="icon.Icon.url | imageUrl" :alt="icon.Icon.alternativeText" />
         </div>
-        <div class="desc">{{ icon.desc }}</div>
+        <div class="desc">{{ icon.Description }}</div>
       </div>
     </div>
   </div>
@@ -13,43 +13,8 @@
 
 <script>
 export default {
-  data() {
-    return {
-      icons: [
-        {
-          img: {
-            src:
-              "https://nordicitrental.dk/wp-content/themes/shopifiq/images/specs/cpu.png",
-            alt: "processor"
-          },
-          desc: "Intel Core i5... @ 2.4 GHz"
-        },
-        {
-          img: {
-            src:
-              "https://nordicitrental.dk/wp-content/themes/shopifiq/images/specs/cpu.png",
-            alt: "processor"
-          },
-          desc: "Intel Core i5... @ 2.4 GHz"
-        },
-        {
-          img: {
-            src:
-              "https://nordicitrental.dk/wp-content/themes/shopifiq/images/specs/cpu.png",
-            alt: "processor"
-          },
-          desc: "Intel Core i5... @ 2.4 GHz"
-        },
-        {
-          img: {
-            src:
-              "https://nordicitrental.dk/wp-content/themes/shopifiq/images/specs/cpu.png",
-            alt: "processor"
-          },
-          desc: "Intel Core i5... @ 2.4 GHz"
-        }
-      ]
-    };
+  props: {
+    icons: { type: Array, required: true },
   }
 };
 </script>

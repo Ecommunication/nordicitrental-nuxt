@@ -12,6 +12,7 @@
     </p>
 
     <div v-else-if="data">
+
       <BackgroundImg
         v-if="data.ImageCover"
         :minHeight="420"
@@ -31,7 +32,20 @@
           padding="45px"
         >
           <template v-slot:actions>
-            <Button :button="buttons.callMe" />
+      <div>
+        <div class="button btn-primary" @click="showModal">
+          Ring Mig Op
+        </div>
+
+        <Modal v-show="isModalVisible" @close="closeModal" :width="600">
+          <template v-slot:header>
+            Call Me
+          </template>
+          <template v-slot:body>
+            <CallMeForm />
+          </template>
+        </Modal>
+      </div>
           </template>
         </TextCard>
 
@@ -137,28 +151,25 @@ import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 import Button from "@/components/Utilities/Button";
 import ContactUsForm from "@/components/Formular/Contact";
+import Modal from "@/components/Utilities/Modal";
+import CallMeForm from "@/components/Utilities/CallMeForm"
 
 export default {
   components: {
     TextCard,
     BackgroundImg,
     Button,
-    ContactUsForm
+    ContactUsForm,
+    Modal,
+    CallMeForm
   },
   data() {
     return {
+      isModalVisible: false,
       data: null,
       errorAfterFetch: null,
       apiUrl: process.env.apiUrl,
       buttons: {
-        callMe: {
-          label: "Ring Mig Op",
-          variant: "btn-primary",
-          action: {
-            type: "modal",
-            modal: "call-me"
-          }
-        },
         goToProduct: {
           label: "Se Produkter",
           variant: "btn-dark",
@@ -186,6 +197,14 @@ export default {
     } catch (e) {
       this.errorAfterFetch = e;
       console.log(e);
+    }
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
   }
 };

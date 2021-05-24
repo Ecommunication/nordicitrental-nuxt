@@ -1,28 +1,28 @@
 <template>
   <div class="description-tab">
-    <h3 class="title">{{title}}</h3>
-    <div class="description">{{desc}}</div>
+    <div v-html="description"></div>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      title: String,
-      desc: String
-    }
+export default {
+  props: {
+    description: String
   }
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .description-tab {
   padding: 0 25px;
-}
-.title {
-  margin-bottom: 20px;
-}
-.description {
-  font-size: 0.75em;
-  line-height: 25px;
+  p {
+    font-size: 0.75em;
+    line-height: 25px;
+    font-weight: 100;
+  }
+  h2, h3 {
+    margin-bottom: 20px;
+    color: #092D4F;
+  }
 }
 </style>
