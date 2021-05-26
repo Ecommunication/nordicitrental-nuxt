@@ -1,8 +1,6 @@
 <template>
-  <!-- About Us -->
-  <div>
-    <CartList :cart="cart" />
-
+  <div class="booking">
+    <!-- TODO: img is missing -->
     <BackgroundImg
       v-if="cover.img"
       :minHeight="470"
@@ -13,17 +11,27 @@
         <h1 class="slider-title title-white">{{ cover.text }}</h1>
       </template>
     </BackgroundImg>
+
+    <div class="breadcrumb"></div>
+
+    <CartList :cart="cart.items" />
+    <div style="width: 80%; margin-left: auto; margin-right: auto;">
+      <div class="button btn-block btn-primary">Udfør booking</div>
+      <Totals :cart="cart" />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import CartList from "@/components/Cart/CartList";
+import Totals from "@/components/Cart/Totals";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 
 export default {
   components: {
     CartList,
+    Totals,
     BackgroundImg
   },
   computed: {
@@ -39,9 +47,13 @@ export default {
       apiUrl: process.env.apiUrl
     };
   },
-  async fetch() {},
-  methods: {}
+  async fetch() {}
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.booking {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+</style>
