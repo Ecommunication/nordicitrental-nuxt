@@ -47,6 +47,7 @@
       <div
         class="add-to-cart ml-3 button btn-primary"
         :class="canBePlaced ? '' : 'btn-disabled'"
+        @click="submit"
       >
         TILFØJ TIL KURV
       </div>
@@ -57,6 +58,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 export default {
@@ -65,7 +67,8 @@ export default {
   },
   props: {
     dailyPrice: { type: String, required: true },
-    weeklyPrice: { type: String, required: true }
+    weeklyPrice: { type: String, required: true },
+    product: { type: Object, required: true }
   },
   computed: {
     noOfDays() {
@@ -92,6 +95,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["addToCart"]),
     // days can be -x, +x
     shiftDateXDays(date, days) {
       const DAY = 1 * 24 * 60 * 60 * 1000;
@@ -123,6 +127,21 @@ export default {
       const diffInMs = d2 - d1;
       const diffInDays = diffInMs / ONE_DAY_IN_MS;
       return diffInDays;
+    },
+    submit(){
+      if(!this.canBePlaced) return;
+
+      const payload = {
+        price: this.price,
+        amount: this.amount,
+        noOfDays: this.noOfDays,
+        startDate: this.start,
+        endDate: this.end,
+        product: this.product
+      }
+
+      console.log(payload)
+      this.addToCart(payload)
     }
   }
 };
