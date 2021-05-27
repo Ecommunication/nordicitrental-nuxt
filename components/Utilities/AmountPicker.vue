@@ -4,14 +4,35 @@
     type="number"
     step="1"
     min="1"
-    v-model="form.amount"
+    v-model="amountLocal"
   />
 </template>
 
 <script>
 export default {
   props: {
-    form: { type: Object, required: true },
+    amount: { type: Number, required: true }
+  },
+  data() {
+    return {
+      amountLocal: this.amount
+    };
+  },
+  watch: {
+    amountLocal(val) {
+      if (this.isPositiveInt(val)) {
+        console.log("amount", val);
+        this.$emit("changed", parseInt(val));
+      }
+    }
+  },
+  methods: {
+    isPositiveInt(no) {
+      const int = parseInt(no);
+      if (isNaN(int)) return false;
+      if (int < 1) return false;
+      return true;
+    }
   }
 };
 </script>

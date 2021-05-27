@@ -1,7 +1,10 @@
 const exampleCart = [
   {
+    itemId: 1622050471663,
+    productId: 1,
+    amount: 3,
+    unitPrice: 340,
     price: 1020,
-    amount: "3",
     noOfDays: 9,
     startDate: "2021-05-24T21:00:00.000Z",
     endDate: "2021-06-01T21:00:00.000Z",
@@ -369,8 +372,11 @@ const exampleCart = [
     }
   },
   {
+    itemId: 1622050422910,
+    productId: 2,
+    amount: 2,
+    unitPrice: 380,
     price: 760,
-    amount: "2",
     noOfDays: 11,
     startDate: "2021-06-04T21:00:00.000Z",
     endDate: "2021-06-14T21:00:00.000Z",
@@ -691,19 +697,94 @@ const exampleCart = [
   }
 ];
 
+const SHIPMENT_METHODS = {
+  PICK_UP: {
+    cost: 0,
+    method: "pick-up"
+  },
+  DELIVERY: {
+    cost: 800,
+    method: "delivery"
+  },
+}
+
 export const state = () => ({
   apiUrl: process.env.apiUrl,
-  cart: [...exampleCart]
+  cart: {
+    items: [...exampleCart],
+    shipping: SHIPMENT_METHODS.DELIVERY,
+  }
 });
+
+export const getters = {
+  noOfItems: (state) => state.cart.items.length,
+  itemsTotal: (state) => state.cart.items.reduce((acc, cur) => acc + cur.price, 0),
+  shippingCost: (state) => state.cart.shipping && state.cart.shipping.cost || 0,
+  beforeTax: (state, getters) => getters.itemsTotal + getters.shippingCost,
+  vat: (state, getters) => getters.beforeTax * 0.25,
+  afterTax: (state, getters) => getters.vat + getters.beforeTax
+}
 
 export const mutations = {
   ADD_TO_CART(state, productData) {
-    state.cart.push(productData);
+    state.cart.items.push(productData);
+  },
+  UPDATE_AMOUNT(state, { cartItem, amount, price }) {
+    cartItem.amount = amount;
+    cartItem.price = price;
+  },
+  DELETE_ITEM(state, cartItemIndex) {
+    const { items } = state.cart;
+    items.splice(cartItemIndex, 1);
+  },
+  SET_SHIPMENT_METHOD(state, shipmentMethod){
+    state.cart.shipping = shipmentMethod;
   }
 };
 
 export const actions = {
   addToCart({ commit }, payload) {
-    commit("ADD_TO_CART", payload);
+    const itemId = new Date().getTime();
+    commit("ADD_TO_CART", { ...payload, itemId });
+  },
+  getCartItem({ commit, state }, { itemId, returnObj = false }) {
+    const { items } = state.cart;
+    const cartItemIndex = items.findIndex(item => item.itemId === itemId);
+    if (cartItemIndex === -1)
+      throw new Error("Invalid Product Id / Cart doesn't have this item.");
+    const cartItem = items[cartItemIndex];
+    return returnObj ? cartItem : cartItemIndex;
+  },
+  async deleteItem({ commit, dispatch }, itemId) {
+    const cartItemIndex = await dispatch("getCartItem", {
+      itemId,
+      returnObj: false
+    });
+    commit("DELETE_ITEM", cartItemIndex);
+  },
+  async updateAmount({ commit, dispatch }, { itemId, amount }) {
+    const cartItem = await dispatch("getCartItem", {
+      itemId,
+      returnObj: true
+    });
+    const price = amount * cartItem.unitPrice;
+    commit("UPDATE_AMOUNT", { cartItem, amount, price });
+  },
+  async setShipmentMethod({commit}, shipmentMethod){
+    let method;
+    switch (shipmentMethod) {
+      case "delivery":
+        method = SHIPMENT_METHODS.DELIVERY
+        break;
+
+      case "pick-up":
+        method = SHIPMENT_METHODS.PICK_UP
+        break;
+
+      default:
+        method = SHIPMENT_METHODS.DELIVERY
+        break;
+    }
+    commit("SET_SHIPMENT_METHOD", method)
   }
 };

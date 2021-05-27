@@ -2,29 +2,29 @@
   <div>
     <p class="title">Vælg lejeperiode:</p>
     <client-only>
-    <div class="date-picker-container">
-      <div>
-        <div class="date-picker-label">Start</div>
-        <date-picker
-          class="date-picker"
-          v-model="start"
-          valueType="date"
-          format="DD/M/YYYY"
-          :disabled-date="disableBeforeToday"
-        ></date-picker>
-      </div>
+      <div class="date-picker-container">
+        <div>
+          <div class="date-picker-label">Start</div>
+          <date-picker
+            class="date-picker"
+            v-model="start"
+            valueType="date"
+            format="DD/M/YYYY"
+            :disabled-date="disableBeforeToday"
+          ></date-picker>
+        </div>
 
-      <div>
-        <div class="date-picker-label">End</div>
-        <date-picker
-          class="date-picker"
-          v-model="end"
-          valueType="date"
-          format="DD/M/YYYY"
-          :disabled-date="disableBeforeStartDatePlusAWeek"
-        ></date-picker>
+        <div>
+          <div class="date-picker-label">End</div>
+          <date-picker
+            class="date-picker"
+            v-model="end"
+            valueType="date"
+            format="DD/M/YYYY"
+            :disabled-date="disableBeforeStartDatePlusAWeek"
+          ></date-picker>
+        </div>
       </div>
-    </div>
     </client-only>
 
     <div class="price">
@@ -37,12 +37,9 @@
     </div>
 
     <div class="actions mt-8">
-      <input
-        class="amount-picker"
-        type="number"
-        step="1"
-        min="1"
-        v-model="amount"
+      <AmountPicker
+        :amount="amount"
+        @changed="onAmountPickerChange"
       />
       <div
         class="add-to-cart ml-3 button btn-primary"
@@ -58,12 +55,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import { mapActions } from "vuex";
 import DatePicker from "vue2-datepicker";
+import AmountPicker from "@/components/Utilities/AmountPicker";
 import "vue2-datepicker/index.css";
 export default {
   components: {
-    DatePicker
+    DatePicker,
+    AmountPicker
   },
   props: {
     dailyPrice: { type: String, required: true },
@@ -75,16 +74,21 @@ export default {
       const dayDifference = this.dayDifference(this.start, this.end) + 1;
       return dayDifference > 0 ? dayDifference : 0;
     },
-    price() {
-      const unitPrice = this.calculatePrice(
+    unitPrice(){
+      return this.calculatePrice(
         this.dailyPrice,
         this.weeklyPrice,
         this.noOfDays
       );
-      return unitPrice * this.amount;
+    },
+    price() {
+      return this.unitPrice * this.amount;
     },
     canBePlaced() {
       return this.noOfDays > 7;
+    },
+    productId(){
+      return this.product.info.id
     }
   },
   data() {
@@ -96,6 +100,9 @@ export default {
   },
   methods: {
     ...mapActions(["addToCart"]),
+    onAmountPickerChange(amount){
+      this.amount = parseInt(amount)
+    },
     // days can be -x, +x
     shiftDateXDays(date, days) {
       const DAY = 1 * 24 * 60 * 60 * 1000;
@@ -128,20 +135,22 @@ export default {
       const diffInDays = diffInMs / ONE_DAY_IN_MS;
       return diffInDays;
     },
-    submit(){
-      if(!this.canBePlaced) return;
+    submit() {
+      if (!this.canBePlaced) return;
 
       const payload = {
-        price: this.price,
+        productId: this.productId,
         amount: this.amount,
+        unitPrice: this.unitPrice,
+        price: this.price,
         noOfDays: this.noOfDays,
         startDate: this.start,
         endDate: this.end,
         product: this.product
-      }
+      };
 
-      console.log(payload)
-      this.addToCart(payload)
+      console.log(payload);
+      this.addToCart(payload);
     }
   }
 };
