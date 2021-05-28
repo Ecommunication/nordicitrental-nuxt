@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState,mapActions } from "vuex";
 import CartList from "@/components/Cart/CartList";
 import Totals from "@/components/Cart/Totals";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
@@ -46,6 +46,9 @@ export default {
       errorAfterFetch: null,
       apiUrl: process.env.apiUrl
     };
+  },
+  methods: {
+    ...mapActions(['switchPersistanceState'])
   },
   async fetch() {}
 };

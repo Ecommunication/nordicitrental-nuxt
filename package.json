@@ -17,7 +17,8 @@
     "slick-slider": "^1.8.2",
     "v-calendar": "^2.3.0",
     "vue2-datepicker": "^3.9.0",
-    "vuejs-datepicker": "^1.6.2"
+    "vuejs-datepicker": "^1.6.2",
+    "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.0.3",

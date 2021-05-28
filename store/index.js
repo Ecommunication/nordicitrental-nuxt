@@ -708,10 +708,14 @@ const SHIPMENT_METHODS = {
   },
 }
 
+const LOCALSTORAGE_KEYS = {
+  items: "cart-items"
+}
+
 export const state = () => ({
   apiUrl: process.env.apiUrl,
   cart: {
-    items: [...exampleCart],
+    items: [],
     shipping: SHIPMENT_METHODS.DELIVERY,
   }
 });
@@ -739,7 +743,10 @@ export const mutations = {
   },
   SET_SHIPMENT_METHOD(state, shipmentMethod){
     state.cart.shipping = shipmentMethod;
-  }
+  },
+  SET_STATE(state, payload) {
+    state.persistedState = payload
+  },
 };
 
 export const actions = {

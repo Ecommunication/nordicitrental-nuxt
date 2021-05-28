@@ -24,7 +24,8 @@ export default {
     plugins: [
         '~/plugins/globals.js',
         '~/plugins/filters/prices.js',
-        '~/plugins/filters/date.js'
+        '~/plugins/filters/date.js',
+        '~/plugins/persistedState.client.js'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
