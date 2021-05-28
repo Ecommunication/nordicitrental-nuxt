@@ -60,9 +60,6 @@ export default {
   props: {
     cart: { type: Array, required: true }
   },
-  created() {
-    console.log(this.cart);
-  },
   methods: {
     ...mapActions(["updateAmount", "deleteItem"]),
     async onAmountPickerChange(itemId, amount) {
@@ -78,7 +75,6 @@ export default {
 
 <style lang="scss" scoped>
 .cart-list {
-  margin: 0 auto;
   font-size: 0.8em;
   padding: 40px 0 20px 0;
 
