@@ -4,52 +4,28 @@
       <div>
         Ordre .... Header Image ...
         <Breadcrumb class="mt-10 mb-10" />
-        {{ form }}
-        <div class="title1 mb-7">Faktureringsoplysninger</div>
-        <div class="customer-contact-form">
-          <InputField
-            class="mb-10"
-            label="Fornavn"
-            errorMsg="error msg"
-            :input="form.firstName"
-            @changed="val => (form.firstName = val)"
-            validationRule="isRequired"
-          />
-          <!-- :validationRule="v => v === 'asd'" -->
-        </div>
+        <CustomerInformationForm />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Breadcrumb from "@/components/Cart/Breadcrumb";
-import InputField from "@/components/Utilities/InputField";
+import CustomerInformationForm from "@/components/Formular/CustomerInformation";
 
 export default {
   components: {
     Breadcrumb,
-    InputField
-  },
-  methods: {
-
+    CustomerInformationForm
   },
   data() {
-    return {
-      form: {
-        firstName: "",
-        lastName: "",
-        companyName: "",
-        streetNameAndNo: ""
-      }
-    };
+    return {};
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.title1 {
-  font-weight: bold;
-  color: #092d4f;
-}
+
 </style>
