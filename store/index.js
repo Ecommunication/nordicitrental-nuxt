@@ -705,25 +705,37 @@ const SHIPMENT_METHODS = {
   DELIVERY: {
     cost: 800,
     method: "delivery"
-  },
-}
+  }
+};
+
+// Helpers
+const validate = (validations, value) => {
+  const errors = [];
+  validations.forEach(validation => {
+    if (!validation.rule(value)) {
+      errors.push(validation.msg);
+    }
+  });
+  return errors;
+};
 
 export const state = () => ({
   apiUrl: process.env.apiUrl,
   cart: {
-    items: [...exampleCart],
-    shipping: SHIPMENT_METHODS.DELIVERY,
+    items: [],
+    shipping: SHIPMENT_METHODS.DELIVERY
   }
 });
 
 export const getters = {
-  noOfItems: (state) => state.cart.items.length,
-  itemsTotal: (state) => state.cart.items.reduce((acc, cur) => acc + cur.price, 0),
-  shippingCost: (state) => state.cart.shipping && state.cart.shipping.cost || 0,
+  noOfItems: state => state.cart.items.length,
+  itemsTotal: state =>
+    state.cart.items.reduce((acc, cur) => acc + cur.price, 0),
+  shippingCost: state => (state.cart.shipping && state.cart.shipping.cost) || 0,
   beforeTax: (state, getters) => getters.itemsTotal + getters.shippingCost,
   vat: (state, getters) => getters.beforeTax * 0.25,
   afterTax: (state, getters) => getters.vat + getters.beforeTax
-}
+};
 
 export const mutations = {
   ADD_TO_CART(state, productData) {
@@ -737,8 +749,11 @@ export const mutations = {
     const { items } = state.cart;
     items.splice(cartItemIndex, 1);
   },
-  SET_SHIPMENT_METHOD(state, shipmentMethod){
+  SET_SHIPMENT_METHOD(state, shipmentMethod) {
     state.cart.shipping = shipmentMethod;
+  },
+  SET_STATE(state, payload) {
+    state.persistedState = payload;
   }
 };
 
@@ -770,21 +785,44 @@ export const actions = {
     const price = amount * cartItem.unitPrice;
     commit("UPDATE_AMOUNT", { cartItem, amount, price });
   },
-  async setShipmentMethod({commit}, shipmentMethod){
+  async setShipmentMethod({ commit }, shipmentMethod) {
     let method;
     switch (shipmentMethod) {
       case "delivery":
-        method = SHIPMENT_METHODS.DELIVERY
+        method = SHIPMENT_METHODS.DELIVERY;
         break;
 
       case "pick-up":
-        method = SHIPMENT_METHODS.PICK_UP
+        method = SHIPMENT_METHODS.PICK_UP;
         break;
 
       default:
-        method = SHIPMENT_METHODS.DELIVERY
+        method = SHIPMENT_METHODS.DELIVERY;
         break;
     }
-    commit("SET_SHIPMENT_METHOD", method)
+    commit("SET_SHIPMENT_METHOD", method);
+  },
+  async sendCart({ commit, state }, userInfoForm) {
+    console.log(state.cart);
+    console.log(userInfoForm);
+    const payload = {
+      OrderFirstName: "Caner"
+    };
+    const r = await this.$axios.$post("http://localhost:1337/orders", payload);
+    console.log(r);
+  },
+  validateForm({}, {validations, form} ){
+    const errors = {}
+    Object.entries(validations).forEach(([key, validation]) => {
+      const value = form[key];
+      const keyErrors = validate(validation, value);
+      errors[key] = keyErrors
+    });
+
+    const hasAnyError = Object.values(this.errors).some(
+      error => !!error.length
+    );
+
+    return { errors, hasAnyError }
   }
 };

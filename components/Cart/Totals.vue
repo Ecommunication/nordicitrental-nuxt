@@ -63,19 +63,23 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex"
+import { mapActions, mapState, mapGetters } from "vuex"
 export default {
   computed: {
+    ...mapState(['cart']),
     ...mapGetters(["vat", "afterTax"])
   },
   data() {
     return {
-      option: "delivery"
+      option: ""
     };
   },
   methods: {
     ...mapActions(["setShipmentMethod"])
   },
+  created(){
+    this.option = this.cart.shipping.method
+  }
 };
 </script>
 
