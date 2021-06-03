@@ -697,16 +697,6 @@ const exampleCart = [
   }
 ];
 
-class Order {
-  constructor(items, shipping, customer) {
-    console.log({
-      items,
-      shipping,
-      customer
-    });
-  }
-}
-
 const SHIPMENT_METHODS = {
   PICK_UP: {
     cost: 0,
@@ -717,6 +707,23 @@ const SHIPMENT_METHODS = {
     method: "delivery"
   }
 };
+
+class Cart {
+  constructor(){
+    this.items = [];
+    this.shipping = SHIPMENT_METHODS.DELIVERY
+  }
+}
+
+class Order {
+  constructor(items, shipping, customer) {
+    console.log({
+      items,
+      shipping,
+      customer
+    });
+  }
+}
 
 // Helpers
 const validate = (validations, value) => {
@@ -731,10 +738,7 @@ const validate = (validations, value) => {
 
 export const state = () => ({
   apiUrl: process.env.apiUrl,
-  cart: {
-    items: [],
-    shipping: SHIPMENT_METHODS.DELIVERY
-  }
+  cart: new Cart()
 });
 
 export const getters = {
@@ -764,6 +768,9 @@ export const mutations = {
   },
   SET_STATE(state, payload) {
     state.persistedState = payload;
+  },
+  RESET_CART(state){
+    state.cart = new Cart()
   }
 };
 
@@ -819,6 +826,8 @@ export const actions = {
       userInfoForm
     );
     console.log(order);
+
+    commit("RESET_CART")
 
     /* const payload = {
       OrderFirstName: "Caner"
