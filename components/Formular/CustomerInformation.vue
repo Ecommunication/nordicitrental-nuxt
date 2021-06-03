@@ -144,18 +144,15 @@ export default {
         billingAddress: null,
         shippingAddress: null,
         useDifferentShippingAddress: false,
-        phone: "",
-        email: "",
-        cvrNumber: "",
+        phone: "44152125252",
+        email: "caner@shopdra.com",
+        cvrNumber: "555",
         comments: ""
       },
       errors: {},
       formValidations: {
-        phone: [
-          validations.isRequired,
-          { rule: v => v === "000", msg: "this %s should be 000" }
-        ],
-        email: [validations.isRequired],
+        phone: [validations.isRequired, validations.isPhone],
+        email: [validations.isRequired, validations.isEmail],
         cvrNumber: [validations.isRequired]
       }
     };
@@ -187,11 +184,7 @@ export default {
     async submit() {
       this.billingAddressSubmitTrigger = new Date();
 
-      if (!this.useDifferentShippingAddress) {
-        this.form.shippingAddress = JSON.parse(
-          JSON.stringify(this.form.billingAddress)
-        );
-      } else {
+      if (this.useDifferentShippingAddress) {
         this.shippingAddressSubmitTrigger = new Date();
       }
 
@@ -205,14 +198,28 @@ export default {
         error => !!error.length
       );
 
-      setTimeout(() => {
+      setTimeout(async () => {
+        const canBeSubmitted =
+          !hasAnyError && !this.hasBillingErrors && !this.hasShippingErrors;
+
+        if (!this.useDifferentShippingAddress) {
+          this.form.shippingAddress = JSON.parse(
+            JSON.stringify(this.form.billingAddress)
+          );
+        }
+
         console.log(this.form, {
+          canBeSubmitted,
           hasAnyError,
           hasBillingErrors: this.hasBillingErrors,
           hasShippingErrors: this.hasShippingErrors
         });
+
+        if(canBeSubmitted){
+          await this.sendCart(this.form);
+        }
+
       }, 100);
-      //await this.sendCart(this.form);
     }
   }
 };

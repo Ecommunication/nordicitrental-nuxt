@@ -23,7 +23,7 @@ export default {
       items: [
         { label: "Bookinger", path: "/kurv" },
         { label: "Ordre", path: "/kurv/ordre" },
-        { label: "Kvittering" }
+        { label: "Kvittering", path: "/kurv/kvittering" }
       ]
     };
   },
