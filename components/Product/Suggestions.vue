@@ -1,6 +1,6 @@
 <template>
   <div class="mb-10">
-    <h2 class="title text-blue">Du kunne også være interesseret i...</h2>
+    <h2 class="ml-3">Du kunne også være interesseret i...</h2>
     <div class="products">
       <div
         @mouseenter="hover = product.id"
@@ -35,10 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin: 20px 0 40px 0;
-  font-size: 24px;
-}
 .products {
   display: flex;
   cursor: pointer;

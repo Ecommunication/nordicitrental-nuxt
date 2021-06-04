@@ -34,6 +34,12 @@ body {
   line-height: normal;
 }
 
+h2 {
+  margin: 20px 0;
+  font-size: 1.2em;
+  color: $mainBlue;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1000px;
@@ -109,7 +115,8 @@ footer {
 }
 
 input,
-textarea {
+textarea,
+select {
   border-radius: 3px;
   border: 1px solid #e6e6e6;
   padding: 10px;
@@ -117,6 +124,9 @@ textarea {
 }
 input[type=checkbox]{
   width: auto;
+}
+select {
+  background: none;
 }
 
 .input-container {

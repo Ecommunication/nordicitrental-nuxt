@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "productId": 1,
+      "amount": 5,
+      "unitPrice": 320,
+      "price": 1600,
+      "noOfDays": 8,
+      "startDate": "2021-05-27T21:00:00.000Z",
+      "endDate": "2021-06-03T21:00:00.000Z",
+      "itemId": 1622210291975
+    }
+  ],
+  "shipping": {
+    "cost": 0,
+    "method": "pick-up"
+  },
+  "customer": {
+    "billingAddress": {
+      "firstName": "caner",
+      "lastName": "sezgin",
+      "companyName": "shopdra",
+      "streetNameAndNo": "shopdra street",
+      "town": "shopdra town",
+      "country": "denmark",
+      "zipCode": "12345"
+    },
+    "shippingAddress": {
+      "firstName": "another name",
+      "lastName": "another surname",
+      "companyName": "another company",
+      "streetNameAndNo": "another street",
+      "town": "another town",
+      "country": "sweden",
+      "zipCode": "89+"
+    },
+    "useDifferentShippingAddress": true,
+    "phone": "44152125252",
+    "email": "caner@shopdra.com",
+    "cvrNumber": "gdfh",
+    "comments": "comment comment comment"
+  }
+}

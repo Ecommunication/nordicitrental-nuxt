@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 70px;">
-    <h2 v-if="title" class="text-blue text-center">{{ title }}</h2>
+    <h2 v-if="title" class="text-center">{{ title }}</h2>
     <div class="form-row">
       <div class="left-col">
         <slot name="left-col"></slot>

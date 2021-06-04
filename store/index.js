@@ -708,6 +708,23 @@ const SHIPMENT_METHODS = {
   }
 };
 
+class Cart {
+  constructor(){
+    this.items = [];
+    this.shipping = SHIPMENT_METHODS.DELIVERY
+  }
+}
+
+class Order {
+  constructor(items, shipping, customer) {
+    console.log({
+      items,
+      shipping,
+      customer
+    });
+  }
+}
+
 // Helpers
 const validate = (validations, value) => {
   const errors = [];
@@ -721,10 +738,7 @@ const validate = (validations, value) => {
 
 export const state = () => ({
   apiUrl: process.env.apiUrl,
-  cart: {
-    items: [],
-    shipping: SHIPMENT_METHODS.DELIVERY
-  }
+  cart: new Cart()
 });
 
 export const getters = {
@@ -754,6 +768,9 @@ export const mutations = {
   },
   SET_STATE(state, payload) {
     state.persistedState = payload;
+  },
+  RESET_CART(state){
+    state.cart = new Cart()
   }
 };
 
@@ -803,26 +820,34 @@ export const actions = {
     commit("SET_SHIPMENT_METHOD", method);
   },
   async sendCart({ commit, state }, userInfoForm) {
-    console.log(state.cart);
-    console.log(userInfoForm);
-    const payload = {
+    const order = new Order(
+      state.cart.items,
+      state.cart.shipping,
+      userInfoForm
+    );
+    console.log(order);
+
+    commit("RESET_CART")
+
+    /* const payload = {
       OrderFirstName: "Caner"
     };
-    const r = await this.$axios.$post("http://localhost:1337/orders", payload);
-    console.log(r);
+    const { data } = await this.$axios.$post("http://localhost:1337/orders", payload);
+    console.log(data);
+    return data */
   },
-  validateForm({}, {validations, form} ){
-    const errors = {}
+  validateForm({}, { validations, form }) {
+    const errors = {};
     Object.entries(validations).forEach(([key, validation]) => {
       const value = form[key];
       const keyErrors = validate(validation, value);
-      errors[key] = keyErrors
+      errors[key] = keyErrors;
     });
 
     const hasAnyError = Object.values(this.errors).some(
       error => !!error.length
     );
 
-    return { errors, hasAnyError }
+    return { errors, hasAnyError };
   }
 };

@@ -47,7 +47,13 @@
 
     <div class="row">
       <div class="col-xs-12 col-md-4">
-        Multi Selection (Land)
+        <Selection
+          label="Vælg et land"
+          :options="countryOptions"
+          :input="form.country"
+          :defaultOption="countryOptions[0]"
+          @onChange="val => onChange('country', val, formValidations.country)"
+        />
       </div>
       <div class="col-xs-12 col-md-4">
         <InputField
@@ -72,37 +78,42 @@
 <script>
 import Vue from "vue";
 import InputField from "@/components/Utilities/Form/InputField";
+import Selection from "@/components/Utilities/Form/Selection";
 import validations from "@/components/Formular/validations.js";
 export default {
   components: {
-    InputField
+    InputField,
+    Selection
   },
   props: ["submitTrigger"],
   data() {
     return {
       pageKey: 0,
       form: {
-        firstName: "",
-        lastName: "",
-        companyName: "",
-        streetNameAndNo: "",
-        town: "",
+        firstName: "caner",
+        lastName: "sezgin",
+        companyName: "shopdra",
+        streetNameAndNo: "shopdra street",
+        town: "shopdra town",
         country: "",
-        zipCode: ""
+        zipCode: "12345"
       },
       errors: {},
       formValidations: {
-        firstName: [
-          { rule: v => v === "000", msg: "xxxxxxx %s uld be 000" },
-          validations.isRequired
-        ],
+        firstName: [validations.isRequired],
         lastName: [validations.isRequired],
         companyName: [validations.isRequired],
         streetNameAndNo: [validations.isRequired],
         town: [validations.isRequired],
         country: [],
         zipCode: [validations.isRequired]
-      }
+      },
+      countryOptions: [
+        { value: "denmark", label: "Danmark" },
+        { value: "norway", label: "Norge" },
+        { value: "sweden", label: "Sverige" },
+        { value: "germany", label: "Tyskland" }
+      ]
     };
   },
   watch: {

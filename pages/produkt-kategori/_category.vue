@@ -30,6 +30,8 @@
                     </section>
                 </div>
             </div>
+
+            <div class="description" v-html="category.description"></div>
         </div>
     </div>
 </template>
@@ -69,12 +71,15 @@
                 process.env.apiUrl + '/product-categories?Slug=' + this.$route.params.category
             ).then(res => res.json());
 
+            console.log(fetchCategory)
+
             const category = fetchCategory[0];
 
             this.category.cover.text = category.TextCover;
             this.category.cover.image = process.env.apiUrl + category.ImageCover.url;
             this.category.metaTitle = category.MetaTitle;
             this.category.metaDescription = category.MetaDescription;
+            this.category.description = category.Description;
             this.products = category.products;
         }
     }
