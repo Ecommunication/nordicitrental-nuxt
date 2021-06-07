@@ -65,8 +65,8 @@ export default {
     AmountPicker
   },
   props: {
-    dailyPrice: { type: String, required: true },
-    weeklyPrice: { type: String, required: true },
+    dailyPrice: { type: Number, required: true },
+    weeklyPrice: { type: Number, required: true },
     product: { type: Object, required: true }
   },
   computed: {

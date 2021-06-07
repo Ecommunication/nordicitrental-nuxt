@@ -1,13 +1,7 @@
 <template>
-  <p class="grid-small margin-center" v-if="$fetchState.pending">
-    Indlæser side
-  </p>
-  <p class="grid-small margin-center" v-else-if="$fetchState.error">
-    Vi kunne desværre ikke indlæse siden i øjeblikket. Prøv igen senere.
-  </p>
-  <div class="index" v-else>
-    <CoverSlider :slides="indexData.IndexPageSlider" />
-    <div class="grid-wide mg-auto mt-16" v-if="indexData.IndexCategories">
+  <div class="index">
+    <CoverSlider :slides="data.IndexPageSlider" />
+    <div class="grid-wide mg-auto mt-16" v-if="data.IndexCategories">
       <div class="text-center mb-20">
         <h3 class="text-blue title-md">Vælg et produkt du ønsker at leje:</h3>
       </div>
@@ -16,7 +10,7 @@
         <nuxt-link
           to="/"
           class="flex flex-column flex-justify-center flex-align-center border-radius-medium border-all pr-6 pl-6"
-          v-for="(cat, index) in indexData.IndexCategories"
+          v-for="(cat, index) in data.IndexCategories"
           :key="index"
         >
           <span v-if="cat.Image.url"
@@ -40,7 +34,7 @@
       </div>
       <div class="grid-wide wrap-grid wrap-4 mt-3">
         <div
-          v-for="(item, index) in indexData.IndexRentalBennefits"
+          v-for="(item, index) in data.IndexRentalBennefits"
           :key="index"
           class="flex flex-justify-center flex-column text-center pl-6 pr-6"
         >
@@ -65,29 +59,29 @@
           class="outline outline-image-box"
           :style="
             `background-image: url(${$formatImage(
-              indexData.IndexLetterboxImageLeft.url
+              data.IndexLetterboxImageLeft.url
             )})`
           "
         />
         <div
           class="outline pl-10 pr-10 pt-32 pb-10 bg-blue"
-          v-html="indexData.IndexLetterboxTextLeft"
+          v-html="data.IndexLetterboxTextLeft"
         />
       </div>
       <div
         class="outline pl-32 pr-32 pt-20 pb-10 bg-gray-dark"
-        v-html="indexData.IndexLetterboxTextRight"
+        v-html="data.IndexLetterboxTextRight"
       />
     </div>
 
     <div class="grid-wide">
-      <div class="pt-10 pb-10" v-html="indexData.IndexServiceDescription"></div>
+      <div class="pt-10 pb-10" v-html="data.IndexServiceDescription"></div>
     </div>
 
     <div class="grid-wide wrap-grid wrap-4">
       <div
         class="text-center"
-        v-for="(item, index) in indexData.IndexCategoriesCount"
+        v-for="(item, index) in data.IndexCategoriesCount"
         :key="index"
       >
         <span class="block">{{ item.Title }}</span>
@@ -101,7 +95,7 @@
         <div class="wrap-grid wrap-4">
           <div
             class="text-center flex flex-justify-center flex-align-center"
-            v-for="(item, index) in indexData.IndexReferencesCarousel"
+            v-for="(item, index) in data.IndexReferencesCarousel"
             :key="index"
           >
             <span
@@ -115,18 +109,22 @@
     <div class="index-contact-box wrap-grid wrap-2">
       <div
         class="index-contact-box__image"
-        :style="`background-image: url(${$formatImage(indexData.IndexContactLeftImage.url)})`"
+        :style="
+          `background-image: url(${$formatImage(
+            data.IndexContactLeftImage.url
+          )})`
+        "
       ></div>
       <div>
         <div
           class="text-center pt-20 pb-20"
-          v-html="indexData.IndexContactRightText"
+          v-html="data.IndexContactRightText"
         ></div>
         <div class="grid-small">
           <div class="wrap-grid wrap-2">
             <div>
               <span>Kontakt</span>
-              <div v-html="indexData.IndexContactRightInfo" />
+              <div v-html="data.IndexContactRightInfo" />
             </div>
             <div>
               <span>Bliv ringet op</span>
@@ -140,19 +138,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      indexData: []
-    };
-  },
-  async fetch() {
-    try {
-      const response = await fetch(process.env.apiUrl + "/forside");
-      this.indexData = await response.json();
-      console.log(this.indexData);
-    } catch (e) {
-      console.log(e);
-    }
+  async asyncData({ params, $axios }) {
+    const data = await $axios.$get("/forside");
+    return { data };
   }
 };
 </script>
