@@ -96,7 +96,6 @@ export default {
   components: { BackgroundImg, AddToCart, Tabs, IconBar, Suggestions },
   data() {
     return {
-      apiUrl: process.env.apiUrl,
       products: [
         {
           id: 1,
@@ -145,7 +144,7 @@ export default {
         name: product.Name
       },
       cover: {
-        image:  process.env.apiUrl + product.ImageCover.url,
+        image:  this.$formatImage(product.ImageCover.url),
         text: product.TextCover
       },
       meta: {
@@ -153,8 +152,8 @@ export default {
         desc: product.MetaDescription
       },
       gallery: {
-        main:  process.env.apiUrl + product.MainImage.url,
-        thumbnails: product.ProductGallery.map(img => process.env.apiUrl + img.url)
+        main:  this.$formatImage(product.MainImage.url),
+        thumbnails: product.ProductGallery.map(img => this.$formatImage(img.url))
       },
       pricing: {
         daily: product.DailyPriceAfterWeek,

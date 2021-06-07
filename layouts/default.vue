@@ -42,7 +42,7 @@ export default {
       res.json()
     );
 
-    this.siteLogo = "http://localhost:1337" + meta.Logo.url;
+    this.siteLogo = this.$formatImage(meta.Logo.url);
     this.sitePhone = meta.Telephone;
     this.footerData = {
       widget1: meta.FooterWidget1,

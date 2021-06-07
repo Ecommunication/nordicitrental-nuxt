@@ -709,9 +709,9 @@ const SHIPMENT_METHODS = {
 };
 
 class Cart {
-  constructor(){
+  constructor() {
     this.items = [];
-    this.shipping = SHIPMENT_METHODS.DELIVERY
+    this.shipping = SHIPMENT_METHODS.DELIVERY;
   }
 }
 
@@ -737,7 +737,6 @@ const validate = (validations, value) => {
 };
 
 export const state = () => ({
-  apiUrl: process.env.apiUrl,
   cart: new Cart()
 });
 
@@ -769,8 +768,8 @@ export const mutations = {
   SET_STATE(state, payload) {
     state.persistedState = payload;
   },
-  RESET_CART(state){
-    state.cart = new Cart()
+  RESET_CART(state) {
+    state.cart = new Cart();
   }
 };
 
@@ -827,7 +826,7 @@ export const actions = {
     );
     console.log(order);
 
-    commit("RESET_CART")
+    commit("RESET_CART");
 
     /* const payload = {
       OrderFirstName: "Caner"

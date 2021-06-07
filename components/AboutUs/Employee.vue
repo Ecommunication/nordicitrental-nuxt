@@ -3,7 +3,7 @@
     <img
       class="employee-img "
       v-if="employee.AboutUsEmployeesImage"
-      :src="apiUrl + employee.AboutUsEmployeesImage.url"
+      :src="employee.AboutUsEmployeesImage.url | formatImage"
       :alt="employee.AboutUsEmployeesImage.alternativeText"
     />
     <h3 class="employee-name">{{ employee.AboutUsEmployeesName }}</h3>
@@ -15,11 +15,6 @@
 export default {
   props: {
     employee: { type: Object, required: true }
-  },
-  data() {
-    return {
-      apiUrl: process.env.apiUrl
-    };
   }
 };
 </script>

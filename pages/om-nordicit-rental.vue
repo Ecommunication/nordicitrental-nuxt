@@ -15,7 +15,7 @@
       <BackgroundImg
         v-if="data.ImageCover"
         :minHeight="420"
-        :src="apiUrl + data.ImageCover.url"
+        :src="data.ImageCover.url | formatImage"
         style="display: flex; align-items: center;"
       >
         <template v-slot:body>
@@ -34,7 +34,7 @@
         <BackgroundImg
           v-if="data.RightImageCol1"
           :minHeight="500"
-          :src="apiUrl + data.RightImageCol1.url"
+          :src="data.RightImageCol1.url | formatImage"
         />
       </div>
 
@@ -64,11 +64,13 @@
               ...data.AboutUsEmployees,
               ...data.AboutUsEmployees,
               ...data.AboutUsEmployees,
-              ...data.AboutUsEmployees
+              ...data.AboutUsEmployees,
+               ...data.AboutUsEmployees,
+                ...data.AboutUsEmployees
             ]"
             :key="employee.id"
           >
-            <Employee :employee="employee" />
+            <Employee :employee="employee" style="width: 300px" />
           </div>
         </div>
       </div>
