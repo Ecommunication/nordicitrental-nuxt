@@ -33,13 +33,6 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState(["meta"]),
-    head () {
-      return {
-        meta: [
-          { hid: 'robots', name: 'robots', content: 'noindex' }
-        ]
-      }
-    },
     footer() {
       return {
         widget1: this.meta.FooterWidget1,
