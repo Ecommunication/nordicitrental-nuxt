@@ -3,7 +3,7 @@
     <div v-for="(icon, index) in icons" :key="index">
       <div class="icon text-center">
         <div class="img-container">
-          <img :src="icon.Icon.url | imageUrl" :alt="icon.Icon.alternativeText" />
+          <img :src="icon.Icon.url | formatImage" :alt="icon.Icon.alternativeText" />
         </div>
         <div class="desc">{{ icon.Description }}</div>
       </div>

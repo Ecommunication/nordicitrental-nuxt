@@ -5,7 +5,7 @@
       <BackgroundImg
         v-if="cover.img"
         :minHeight="470"
-        :src="cover.img | imgUrl"
+        :src="cover.img | formatImage"
         style="display: flex; align-items: center;"
       >
         <template v-slot:body>
@@ -54,7 +54,6 @@ export default {
         img: ""
       },
       errorAfterFetch: null,
-      apiUrl: process.env.apiUrl
     };
   },
   methods: {

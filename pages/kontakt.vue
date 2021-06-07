@@ -15,7 +15,7 @@
       <BackgroundImg
         v-if="data.ImageCover"
         :minHeight="420"
-        :src="apiUrl + data.ImageCover.url"
+        :src="data.ImageCover.url | formatImage"
         style="display: flex; align-items: center;"
       >
         <template v-slot:body>
