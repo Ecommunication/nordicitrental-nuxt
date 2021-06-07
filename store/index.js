@@ -697,33 +697,7 @@ const exampleCart = [
   }
 ];
 
-const SHIPMENT_METHODS = {
-  PICK_UP: {
-    cost: 0,
-    method: "pick-up"
-  },
-  DELIVERY: {
-    cost: 800,
-    method: "delivery"
-  }
-};
-
-class Cart {
-  constructor() {
-    this.items = [];
-    this.shipping = SHIPMENT_METHODS.DELIVERY;
-  }
-}
-
-class Order {
-  constructor(items, shipping, customer) {
-    console.log({
-      items,
-      shipping,
-      customer
-    });
-  }
-}
+import { Cart, Order, SHIPMENT_METHODS } from "../utils/dto"
 
 // Helpers
 const validate = (validations, value) => {
@@ -737,6 +711,7 @@ const validate = (validations, value) => {
 };
 
 export const state = () => ({
+  meta: {},
   cart: new Cart()
 });
 
@@ -770,6 +745,9 @@ export const mutations = {
   },
   RESET_CART(state) {
     state.cart = new Cart();
+  },
+  SET_META_DATA(state, data) {
+    state.meta = data;
   }
 };
 
@@ -802,20 +780,7 @@ export const actions = {
     commit("UPDATE_AMOUNT", { cartItem, amount, price });
   },
   async setShipmentMethod({ commit }, shipmentMethod) {
-    let method;
-    switch (shipmentMethod) {
-      case "delivery":
-        method = SHIPMENT_METHODS.DELIVERY;
-        break;
-
-      case "pick-up":
-        method = SHIPMENT_METHODS.PICK_UP;
-        break;
-
-      default:
-        method = SHIPMENT_METHODS.DELIVERY;
-        break;
-    }
+    const method = Object.values(SHIPMENT_METHODS).find(sm => sm.method === shipmentMethod) || SHIPMENT_METHODS.DELIVERY;
     commit("SET_SHIPMENT_METHOD", method);
   },
   async sendCart({ commit, state }, userInfoForm) {
@@ -831,7 +796,7 @@ export const actions = {
     /* const payload = {
       OrderFirstName: "Caner"
     };
-    const { data } = await this.$axios.$post("http://localhost:1337/orders", payload);
+    const { data } = await this.$axios.$post("/orders", payload);
     console.log(data);
     return data */
   },
@@ -848,5 +813,12 @@ export const actions = {
     );
 
     return { errors, hasAnyError };
+  },
+  async getMetaData({ commit }) {
+    const data = await this.$axios.$get("/general-meta");
+    commit("SET_META_DATA", data);
+  },
+  async nuxtServerInit({ dispatch }) {
+    await dispatch("getMetaData");
   }
 };

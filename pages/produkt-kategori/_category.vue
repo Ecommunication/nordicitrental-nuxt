@@ -1,41 +1,41 @@
 <template>
-  <p class="grid-small margin-center" v-if="$fetchState.pending">
-    Indlæser side
-  </p>
-  <p class="grid-small margin-center" v-else-if="$fetchState.error">
-    Vi kunne desværre ikke indlæse siden i øjeblikket. Prøv igen senere.
-  </p>
-  <div v-else>
+  <div>
     <CoverImage
       :textCover="category.cover.text"
       :imageCover="category.cover.image"
     />
     <div class="product-category grid-small margin-center">
-      <div class="product" v-for="product in products" :key="product.id">
+      <div
+        class="product"
+        v-for="product in category.products"
+        :key="product.info.id"
+      >
         <div class="product-image">
           <div>
             <img
               class="product-image__image-cover img-responsive"
-              :src="product.MainImage.url | formatImage"
+              :src="product.gallery.main"
               alt=""
             />
           </div>
         </div>
         <div class="product-info">
-          <span class="product-info__title block">{{ product.Name }}</span>
+          <span class="product-info__title block">{{ product.info.name }}</span>
           <div class="product-info__description">
-            {{ product.CategoryDescription }}
+            {{ product.description }}
           </div>
           <section class="product-info__details">
             <div class="product-info__details-pricing">
               <div class="product-info__details-pricing__weekly">
-                <span class="block">{{ product.WeekPrice | formatPrice }}</span>
+                <span class="block">{{
+                  product.pricing.weekly | formatPrice
+                }}</span>
                 <i class="product-info__details-pricing__price-info"
                   >Pris for første uges leje</i
                 >
               </div>
               <div class="product-info__details-pricing__daily">
-                <span>{{ product.DailyPriceAfterWeek | formatPrice }}</span>
+                <span>{{ product.pricing.daily | formatPrice }}</span>
                 <i class="product-info__details-pricing__price-info"
                   >Pris efter første uges leje, pr. dag.</i
                 >
@@ -43,7 +43,7 @@
             </div>
             <div class="product-info__details-buy">
               <nuxt-link
-                :to="'/produkt/' + product.ProductSlug"
+                :to="'/produkt/' + product.info.slug"
                 class="btn btn-shop btn-blue"
                 >Vælg produkt</nuxt-link
               >
@@ -57,53 +57,34 @@
   </div>
 </template>
 <script>
+import { Category } from "@/utils/dto";
+
 export default {
-  data() {
-    return {
-      category: {
-        cover: {
-          text: null,
-          image: null
-        },
-        description: null,
-        metaTitle: null,
-        metaDescription: null
-      },
-      products: []
-    };
+  computed: {
+    category() {
+      return new Category(this.data[0]);
+    }
   },
   head() {
     return {
-      title: this.category.metaTitle,
+      title: this.category.meta.title,
       meta: [
         {
           name: "title",
-          content: "This is some title"
+          content: this.category.meta.title
         },
         {
           name: "description",
-          content: this.category.metaDescription
+          content: this.category.meta.desc
         }
       ]
     };
   },
-  async fetch() {
-    const fetchCategory = await fetch(
-      process.env.apiUrl +
-        "/product-categories?Slug=" +
-        this.$route.params.category
-    ).then(res => res.json());
-
-    console.log(fetchCategory);
-
-    const category = fetchCategory[0];
-
-    this.category.cover.text = category.TextCover;
-    this.category.cover.image = this.$formatImage(category.ImageCover.url);
-    this.category.metaTitle = category.MetaTitle;
-    this.category.metaDescription = category.MetaDescription;
-    this.category.description = category.Description;
-    this.products = category.products;
+  async asyncData({ params, $axios, $config }) {
+    const data = await $axios.$get(
+      `/product-categories?Slug=${params.category}`
+    );
+    return { data };
   }
 };
 </script>

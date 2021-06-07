@@ -1,11 +1,5 @@
 <template>
-  <p class="grid-small margin-center" v-if="$fetchState.pending">
-    Indlæser side
-  </p>
-  <p class="grid-small margin-center" v-else-if="$fetchState.error">
-    Vi kunne desværre ikke indlæse siden i øjeblikket. Prøv igen senere.
-  </p>
-  <div v-else>
+  <div>
     <BackgroundImg
       v-if="product.cover.image"
       :minHeight="460"
@@ -86,6 +80,7 @@
   </div>
 </template>
 <script>
+import { Product } from "@/utils/dto";
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
 import IconBar from "@/components/Product/IconBar";
@@ -110,9 +105,13 @@ export default {
           title: "Data simkort med 3G/4G til iPad"
         }
       ],
-      featuresTab: {},
-      product: {}
+      featuresTab: {}
     };
+  },
+  computed: {
+    product() {
+      return new Product(this.data[0]);
+    }
   },
   head() {
     return {
@@ -129,44 +128,9 @@ export default {
       ]
     };
   },
-  async fetch() {
-    const products = await fetch(
-      process.env.apiUrl + "/products?ProductSlug=" + this.$route.params.product
-    ).then(res => res.json());
-
-    const product = products[0];
-
-    this.product = {
-      data: product,
-      info: {
-        id: product.id,
-        slug: product.ProductSlug,
-        name: product.Name
-      },
-      cover: {
-        image:  this.$formatImage(product.ImageCover.url),
-        text: product.TextCover
-      },
-      meta: {
-        title: product.MetaTitle,
-        desc: product.MetaDescription
-      },
-      gallery: {
-        main:  this.$formatImage(product.MainImage.url),
-        thumbnails: product.ProductGallery.map(img => this.$formatImage(img.url))
-      },
-      pricing: {
-        daily: product.DailyPriceAfterWeek,
-        weekly: product.WeekPrice,
-      },
-      descriptions: {
-      short: product.DescriptionShort,
-      long: product.DescriptionLong
-      },
-      icons: product.ProductSpecifications
-    };
-
-    console.log(this.product, 5);
+  async asyncData({ params, $axios, $config }) {
+    const data = await $axios.$get(`/products?ProductSlug=${params.product}`);
+    return { data };
   }
 };
 </script>
