@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="kvittering">
-      <div>
+    <div class="row">
+      <div class="col">
         kvittering .... Header Image ...
         <Breadcrumb class="mt-10 mb-10" />
 
@@ -113,9 +113,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.kvittering {
-  padding-bottom: 80px;
-}
 .message {
   font-size: 0.8em;
   color: #092d4f;

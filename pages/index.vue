@@ -7,13 +7,13 @@
         <h3 class="text-blue title-md mb-10" style="text-align: center;">
           Vælg et produkt du ønsker at leje:
         </h3>
-        <div class="row" style="max-width: 1200px;">
+        <div class="row" style="max-width: 1200px; justify-content: space-between;">
           <div
             class="col mx-2"
             v-for="(cat, index) in data.IndexCategories"
             :key="index"
           >
-            <nuxt-link to="/">
+            <nuxt-link :to="`/produkt-kategori/${cat.Title}`">
               <div class="category-card">
                 <img :src="cat.Image.url | formatImage" />
                 <span class="category-title text-md weight-thin">{{
@@ -25,7 +25,7 @@
         </div>
 
         <div class="grid flex flex-justify-center">
-          <nuxt-link to="/" class="btn btn-blue text-center mx-auto mt-10">
+          <nuxt-link to="/alle-produktkategorier" class="btn btn-blue text-center mx-auto mt-10">
             Alle produkter
           </nuxt-link>
         </div>
@@ -197,8 +197,8 @@ export default {
   background: rgb(238, 238, 238);
 }
 .category-card {
-  width: 210px;
-  height: 210px;
+  width: 180px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
