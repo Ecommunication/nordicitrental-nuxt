@@ -1,6 +1,5 @@
 /* Typo sizes */
 .title-lg {
-
 }
 
 .title-md {
@@ -8,11 +7,10 @@
 }
 
 .title-sm {
-
 }
 
 .text-normal {
-  font-size: 1.0em;
+  font-size: 1em;
 }
 
 .text-small {
@@ -46,7 +44,7 @@
 }
 
 .text-faded {
-  color: $grayLight
+  color: $grayLight;
 }
 
 /* links */
@@ -62,5 +60,6 @@ p {
 
 h2 {
   font-size: 2em;
-  margin-bottom: 0.625em
+  color: $mainBlue;
+  margin-bottom: 0.625em;
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     class="background-image"
-    :style="`min-height: ${minHeight}px; background-image: url(${src})`"
+    :style="`height: 100%; width: 100%; background-image: url(${src})`"
   >
     <slot name="body"></slot>
   </div>
@@ -11,7 +11,12 @@
 export default {
   props: {
     src: { type: String, required: true },
-    minHeight: { type: Number, default: 600 }
+    minHeight: { type: Number, required: false }
+  },
+  computed: {
+    minHeightProcessed() {
+      return this.minHeight ? `${this.minHeight}px` : "100%";
+    }
   }
 };
 </script>
