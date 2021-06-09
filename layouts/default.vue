@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <!--     <header class="main-header grid-small margin-center flex">
+    <header v-if="false" class="main-header grid-small margin-center flex">
       <div class="main-header__logo flex">
         <nuxt-link to="/" class="flex">
           <img
@@ -21,7 +21,7 @@
           <HeaderNavigation />
         </div>
       </div>
-    </header> -->
+    </header>
     <main>
       <nuxt />
     </main>

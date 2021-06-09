@@ -18,7 +18,7 @@ export default {
     BackgroundImg
   },
   props: {
-    height: { type: Number, default: 400 },
+    height: { type: Number, default: 420 },
     img: { type: String, required: true },
     text: { type: String, required: false }
   }

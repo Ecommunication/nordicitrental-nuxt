@@ -1,64 +1,83 @@
 <template>
   <div>
-    <BackgroundImg
+    <HeaderImg
       v-if="data.ImageCover"
-      :minHeight="420"
-      :src="data.ImageCover.url | formatImage"
-      style="display: flex; align-items: center;"
-    >
-      <template v-slot:body>
-        <h1 class="slider-title title-white">{{ data.TextCover }}</h1>
-      </template>
-    </BackgroundImg>
+      :img="data.ImageCover.url | formatImage"
+      :text="data.TextCover"
+    />
 
-    <!-- Todo: create row/col grid structure for responsive feature. Currently not provided both in here and the home page components -->
-    <div class="index-letter-box wrap-grid grid-cols-2">
-      <TextCard
-        v-if="data.LeftTextCol1"
-        :contentHtml="data.LeftTextCol1"
-        backgroundClass="bg-gray-dark"
-        padding="55px"
-      />
-      <BackgroundImg
-        v-if="data.RightImageCol1"
-        :minHeight="500"
-        :src="data.RightImageCol1.url | formatImage"
-      />
-    </div>
-
-    <div class="section">
-      <TextCard v-if="data.MidTextCol2" :contentHtml="data.MidTextCol2" />
-    </div>
-
-    <div class="section bg-blue">
-      <RefCompanyLogoBar :companies="data.MidColReference3" />
-    </div>
-
-    <div class="section bg-gray-dark wrap-grid wrap-2">
-      <div v-for="quote in data.MidColReference4" :key="quote.id">
-        <RefCompanyQuote
-          :logo="quote.MidColReference4Logo"
-          :author="quote.MidColReference4Author"
-          :text="quote.MidColReference4Text"
+    <div class="row">
+      <div class="col-md-6 px-0">
+        <TextCard
+          style="height: 100%;"
+          v-if="data.LeftTextCol1"
+          :contentHtml="data.LeftTextCol1"
+          backgroundClass="bg-gray-dark"
+        />
+      </div>
+      <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">
+        <BackgroundImg
+          v-if="data.RightImageCol1"
+          :src="data.RightImageCol1.url | formatImage"
         />
       </div>
     </div>
 
-    <div class="section employee-table">
-      <h3>{{ data.EmployeeHeader }}</h3>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-        <div
-          v-for="employee in [
-            ...data.AboutUsEmployees,
-            ...data.AboutUsEmployees,
-            ...data.AboutUsEmployees,
-            ...data.AboutUsEmployees,
-            ...data.AboutUsEmployees,
-            ...data.AboutUsEmployees
-          ]"
-          :key="employee.id"
-        >
-          <Employee :employee="employee" style="width: 300px" />
+    <div class="row">
+      <div class="col">
+        <TextCard v-if="data.MidTextCol2" :contentHtml="data.MidTextCol2" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col bg-blue py-10" style="width: 100%;">
+        <RefCompanyLogoBar :companies="data.MidColReference3" />
+      </div>
+    </div>
+
+    <div class="bg-gray-dark">
+      <div style="max-width: 1350px; margin: auto;">
+        <div class="row">
+          <div
+            class="col-md-6"
+            style="width: 100%;"
+            v-for="quote in data.MidColReference4"
+            :key="quote.id"
+          >
+            <RefCompanyQuote
+              :logo="quote.MidColReference4Logo"
+              :author="quote.MidColReference4Author"
+              :text="quote.MidColReference4Text"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="employee-table">
+      <div style="max-width: 1300px; margin: 0 auto;">
+        <h3>{{ data.EmployeeHeader }}</h3>
+      </div>
+      <div style="width: 100%; max-width: 1000px; margin: 0 auto;">
+        <div class="row">
+          <div
+            class="col-lg-4 col-md-6"
+            style="width: 100%;"
+            v-for="employee in [
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees,
+              ...data.AboutUsEmployees
+            ]"
+            :key="employee.id"
+          >
+            <Employee
+              :employee="employee"
+              style="width: 300px; margin: 0 auto;"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -67,6 +86,7 @@
 
 <script>
 import TextCard from "@/components/Utilities/TextCard";
+import HeaderImg from "@/components/Utilities/HeaderImg";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 import RefCompanyLogoBar from "@/components/AboutUs/RefCompanyLogoBar";
 import RefCompanyQuote from "@/components/AboutUs/RefCompanyQuote";
@@ -74,6 +94,7 @@ import Employee from "@/components/AboutUs/Employee";
 export default {
   components: {
     TextCard,
+    HeaderImg,
     BackgroundImg,
     RefCompanyLogoBar,
     RefCompanyQuote,
@@ -87,12 +108,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section {
-  padding: 42px 230px;
-}
 .employee-table {
+  padding: 50px;
   h3 {
-    margin: 40px 0;
+    margin-bottom: 10px;
     font-size: 40px;
     color: #092d4f;
   }

@@ -4,7 +4,6 @@
       v-if="data.ImageCover"
       :img="data.ImageCover.url | formatImage"
       :text="data.TextCover"
-      :height="420"
     />
 
     <div class="row">
