@@ -2,20 +2,22 @@
   <div class="mb-10">
     <h2 class="ml-3">Du kunne også være interesseret i...</h2>
     <div class="products">
-      <div
-        @mouseenter="hover = product.id"
-        @mouseleave="hover = null"
-        class="product"
-        :class="hover === product.id ? 'active' : ''"
-        v-for="product in products"
-        :key="product.id"
-      >
-        <div class="product-img-container">
-          <img class="product-img" :src="product.img" alt="" />
+      <div class="row">
+        <div class="col" v-for="product in products" :key="product.id">
+          <div
+            @mouseenter="hover = product.id"
+            @mouseleave="hover = null"
+            class="product"
+            :class="hover === product.id ? 'active' : ''"
+          >
+            <div class="product-img-container">
+              <img class="product-img" :src="product.img" alt="" />
+            </div>
+            <h3 class="product-title text-blue text-center mt-3">
+              {{ product.title }}
+            </h3>
+          </div>
         </div>
-        <h3 class="product-title text-blue text-center mt-3">
-          {{ product.title }}
-        </h3>
       </div>
     </div>
   </div>
@@ -36,7 +38,6 @@ export default {
 
 <style lang="scss" scoped>
 .products {
-  display: flex;
   cursor: pointer;
   .product {
     display: block;
