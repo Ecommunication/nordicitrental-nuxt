@@ -107,14 +107,14 @@
     </div>
 
     <div class="row">
-      <div class="col" style="width: 100%;">
+      <div class="col py-14" style="width: 100%;">
         <ContactUsForm
           :title="data.ContactHeader"
           formTitle="Send os en besked, så kontakter vi dig i dag."
           style="margin: 0 auto;"
         >
           <template v-slot:left-col>
-            <div class="text-left employee">
+            <div class="text-center">
               <h3 class="text-blue">Kontakt</h3>
               <p class="mt-10">
                 <img

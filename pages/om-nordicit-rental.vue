@@ -31,7 +31,7 @@
 
     <div class="row">
       <div class="col bg-blue py-10" style="width: 100%;">
-        <RefCompanyLogoBar :companies="data.MidColReference3" />
+        <RefCompanyLogoBar :images="data.MidColReference3.map(i => $formatImage(i.Logo.url))" />
       </div>
     </div>
 

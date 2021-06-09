@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 50px;">
+  <div>
     <h2 v-if="title" class="text-center">{{ title }}</h2>
     <div class="form-row">
       <div class="left-col">
@@ -7,7 +7,7 @@
       </div>
       <div class="right-col">
         <div class="form text-center">
-          <h3 v-if="formTitle" class="text-blue">{{ formTitle }}</h3>
+          <h3 v-if="formTitle" class="text-blue mb-10">{{ formTitle }}</h3>
 
           <form class="mt-5">
             <div class="input-container">
