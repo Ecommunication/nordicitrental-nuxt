@@ -52,6 +52,8 @@
         </div>
       </div>
 
+      <CategorySlider title="Lignende produkter" :categories="[]" titlePosition="left" />
+
       <div class="row">
         <div class="col">
           <div class="description" v-html="category.description"></div>
@@ -62,11 +64,13 @@
 </template>
 <script>
 import HeaderImg from "@/components/Utilities/HeaderImg";
+import CategorySlider from "@/components/Category/Slider"
 import { Category } from "@/utils/dto";
 
 export default {
   components: {
-    HeaderImg
+    HeaderImg,
+    CategorySlider
   },
   computed: {
     category() {
@@ -94,6 +98,7 @@ export default {
     const data = await $axios.$get(
       `/product-categories?Slug=${params.category}`
     );
+    console.log(data)
     return { data };
   }
 };
@@ -128,7 +133,7 @@ export default {
     .product-description {
       margin: 7px 0;
       font-size: 0.7em;
-      height: 68px;
+      height: 80px;
       overflow: hidden;
     }
     .product-body {

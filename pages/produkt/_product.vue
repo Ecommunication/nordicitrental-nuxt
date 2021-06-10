@@ -137,6 +137,7 @@ export default {
   },
   async asyncData({ params, $axios, $config }) {
     const data = await $axios.$get(`/products?ProductSlug=${params.product}`);
+    console.log(data)
     return { data };
   }
 };

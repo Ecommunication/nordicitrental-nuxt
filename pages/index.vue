@@ -2,35 +2,20 @@
   <div class="index">
     <CoverSlider :slides="data.IndexPageSlider" />
 
-    <div class="row py-10">
-      <div class="col" style="width:100%;">
-        <h3 class="text-blue title-md mb-10" style="text-align: center;">
-          Vælg et produkt du ønsker at leje:
-        </h3>
-        <div class="row" style="max-width: 1200px; justify-content: space-between;">
-          <div
-            class="col mx-2"
-            v-for="(cat, index) in data.IndexCategories"
-            :key="index"
-          >
-            <nuxt-link :to="`/produkt-kategori/${cat.Title}`">
-              <div class="category-card">
-                <img :src="cat.Image.url | formatImage" />
-                <span class="category-title text-md weight-thin">{{
-                  cat.Title
-                }}</span>
-              </div>
-            </nuxt-link>
-          </div>
-        </div>
-
-        <div class="grid flex flex-justify-center">
-          <nuxt-link to="/alle-produktkategorier" class="btn btn-blue text-center mx-auto mt-10">
-            Alle produkter
-          </nuxt-link>
-        </div>
+    <CategorySlider
+      class="py-10"
+      title="Vælg et produkt du ønsker at leje"
+      :categories="data.IndexCategories"
+    >
+      <div class="grid flex flex-justify-center">
+        <nuxt-link
+          to="/alle-produktkategorier"
+          class="btn btn-blue text-center mx-auto mt-10"
+        >
+          Alle produkter
+        </nuxt-link>
       </div>
-    </div>
+    </CategorySlider>
 
     <div class="row py-10 bg-gray-light">
       <div class="col" style="max-width: 1200px; width: 100%; margin: 0 auto;">
@@ -172,6 +157,7 @@
 </template>
 
 <script>
+import CategorySlider from "@/components/Category/Slider";
 import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 import RefCompanyLogoBar from "@/components/AboutUs/RefCompanyLogoBar";
@@ -186,32 +172,12 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/forside");
-    console.log(data);
     return { data };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.category-card:hover {
-  background: rgb(238, 238, 238);
-}
-.category-card {
-  width: 180px;
-  height: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  img {
-    max-width: 110px;
-    max-height: 100px;
-    width: 100%;
-    height: 100%;
-  }
-}
-
 .info {
   display: flex;
   flex-wrap: wrap;

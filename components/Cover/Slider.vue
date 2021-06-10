@@ -1,17 +1,21 @@
 <template>
-  <div class="main-cover cover-slider">
-    <div class="cover-slider__container">
+  <div class="cover-slider">
+    <div class="cover-slider-container">
       <div
-        class="cover-slider__item"
+        class="cover-slider-item"
         v-for="slide in slides"
         :key="slide.id"
         :style="`background: url(${$formatImage(slide.BackgroundImage.url)})`"
       >
-        <section class="capture grid-small margin-center">
-          <div class="flex flex-column capture__text">
-            <span class="block" v-html="slide.TextAreaHeader"></span>
-            <span class="block" v-html="slide.TextAreaSubHeader"></span>
-          </div>
+        <section class="capture abs-center">
+          <h1
+            class="slider-title title-white mb-2"
+            v-html="slide.TextAreaHeader"
+          ></h1>
+          <h1
+            class="slider-title title-white"
+            v-html="slide.TextAreaSubHeader"
+          ></h1>
         </section>
       </div>
     </div>
@@ -24,7 +28,7 @@ export default {
   props: ["slides"],
   mounted() {
     setTimeout(function() {
-      var allBoxes = $(".cover-slider__container").children("div");
+      var allBoxes = $(".cover-slider-container").children("div");
       transitionBox(null, allBoxes.first());
 
       function transitionBox(from, to) {
@@ -32,7 +36,7 @@ export default {
           var nextTo;
           if (to.is(":last-child")) {
             nextTo = to
-              .closest(".cover-slider__container")
+              .closest(".cover-slider-container")
               .children("div")
               .first();
           } else {
@@ -58,3 +62,44 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.cover-slider {
+  height: 500px;
+  .cover-slider-container {
+    height: 100%;
+    .cover-slider-item {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      background-position: center center !important;
+      display: none;
+      .abs-center {
+        position: absolute;
+        left: 25%;
+        top: 25%;
+        h1 {
+          font-size: 2em;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .cover-slider {
+    height: 250px;
+    .cover-slider-container {
+      .cover-slider-item {
+        .abs-center {
+          left: 10%;
+          top: 10%;
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+</style>
