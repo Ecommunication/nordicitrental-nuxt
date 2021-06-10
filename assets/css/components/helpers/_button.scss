@@ -1,8 +1,7 @@
 .button {
+  display: inline-block;
   padding: 10px 30px;
   cursor: pointer;
-  float: left;
-  clear: both;
   font-size: 0.8em;
   text-transform: uppercase;
   border: 1px solid $white;
@@ -11,10 +10,6 @@
   background: $mainBlue;
   color: $white;
 }
-/* .btn-primary:hover {
-  background: $white;
-  color: $mainBlue;
-} */
 .btn-dark {
   background: $white;
   color: $mainBlue;

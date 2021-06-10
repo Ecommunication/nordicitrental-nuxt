@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="ordre">
-      <div>
+    <div class="row" style="padding: 16px;">
+      <div class="col" style="width: 100%;">
         Ordre .... Header Image ...
         <Breadcrumb class="mt-10 mb-10" />
         <CustomerInformationForm />
@@ -26,6 +26,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

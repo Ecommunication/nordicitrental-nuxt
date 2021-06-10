@@ -2,6 +2,7 @@
 
 @import "components/variables";
 @import "components/grid";
+@import "components/flex";
 
 /* Helpers */
 @import "components/helpers/inputs";
@@ -15,7 +16,6 @@
 /* Pages */
 @import "components/pages/index";
 @import "components/shop/category";
-@import "components/shop/product";
 
 /* Utils */
 @import "components/responsive";
@@ -29,15 +29,9 @@
 
 body {
   color: $textMain;
-  font-family: "Open Sans";
+  font-family: 'Open Sans', Arial, sans-serif;
   font-size: 20px;
   line-height: normal;
-}
-
-h2 {
-  margin: 20px 0;
-  font-size: 1.2em;
-  color: $mainBlue;
 }
 
 .container {

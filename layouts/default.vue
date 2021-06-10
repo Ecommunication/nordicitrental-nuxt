@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <header class="main-header grid-small margin-center flex">
+  <div>
+    <header v-if="false" class="main-header grid-small margin-center flex">
       <div class="main-header__logo flex">
         <nuxt-link to="/" class="flex">
           <img
@@ -25,7 +25,7 @@
     <main>
       <nuxt />
     </main>
-    <FooterMain :footer="footer" />
+    <Footer :footer="footer" />
   </div>
 </template>
 <script>

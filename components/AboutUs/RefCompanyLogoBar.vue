@@ -1,12 +1,7 @@
 <template>
   <div class="ref-company-logo-bar">
-    <span v-for="company in companies" :key="company.id">
-      <img
-        class="logo"
-        v-if="company.Logo"
-        :src="company.Logo.url | formatImage"
-        :alt="company.Logo.alternativeText"
-      />
+    <span v-for="(image, index) in images" :key="index">
+      <img class="logo" :src="image" :style="elStyle" />
     </span>
   </div>
 </template>
@@ -14,7 +9,11 @@
 <script>
 export default {
   props: {
-    companies: {
+    elStyle: {
+      type: String,
+      required: false
+    },
+    images: {
       type: Array,
       required: true
     }
@@ -26,7 +25,7 @@ export default {
 .ref-company-logo-bar {
   text-align: center;
   .logo {
-    margin: 2em;
+    margin: 2em 3em;
   }
 }
 </style>

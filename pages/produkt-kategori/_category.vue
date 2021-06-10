@@ -1,68 +1,78 @@
 <template>
   <div>
-    <CoverImage
-      :textCover="category.cover.text"
-      :imageCover="category.cover.image"
+    <HeaderImg
+      v-if="category.cover"
+      :img="category.cover.image"
+      :text="category.cover.text"
+      :height="490"
     />
-    <div class="product-category grid-small margin-center">
-      <div
-        class="product"
-        v-for="product in category.products"
-        :key="product.info.id"
-      >
-        <div class="product-image">
-          <div>
-            <img
-              class="product-image__image-cover img-responsive"
-              :src="product.gallery.main"
-              alt=""
-            />
-          </div>
-        </div>
-        <div class="product-info">
-          <span class="product-info__title block">{{ product.info.name }}</span>
-          <div class="product-info__description">
-            {{ product.description }}
-          </div>
-          <section class="product-info__details">
-            <div class="product-info__details-pricing">
-              <div class="product-info__details-pricing__weekly">
-                <span class="block">{{
-                  product.pricing.weekly | formatPrice
-                }}</span>
-                <i class="product-info__details-pricing__price-info"
-                  >Pris for første uges leje</i
-                >
-              </div>
-              <div class="product-info__details-pricing__daily">
-                <span>{{ product.pricing.daily | formatPrice }}</span>
-                <i class="product-info__details-pricing__price-info"
-                  >Pris efter første uges leje, pr. dag.</i
+
+    <div class="container mt-10">
+      <div class="row">
+        <div class="col">
+          <div
+            class="product"
+            v-for="product in category.products"
+            :key="product.info.id"
+          >
+            <div class="product-image">
+              <img :src="product.gallery.main" />
+            </div>
+            <div class="product-info">
+              <div class="product-title text-blue">{{ product.info.name }}</div>
+              <div
+                class="product-description"
+                v-html="product.descriptions.short"
+              ></div>
+              <div class="product-body">
+                <div class="mb-3">
+                  <div class="price-weekly">
+                    {{ product.pricing.weekly | formatPrice }}
+                  </div>
+                  <div class="explanation">
+                    Pris for første uges leje
+                  </div>
+                  <div class="mt-1">
+                    <span class="price-daily">{{
+                      product.pricing.daily | formatPrice
+                    }}</span>
+                    <span class="explanation"
+                      >Pris efter første uges leje, pr. dag.</span
+                    >
+                  </div>
+                </div>
+                <nuxt-link
+                  :to="'/produkt/' + product.info.slug"
+                  class="btn btn-shop btn-blue product-button"
+                  >Vælg produkt</nuxt-link
                 >
               </div>
             </div>
-            <div class="product-info__details-buy">
-              <nuxt-link
-                :to="'/produkt/' + product.info.slug"
-                class="btn btn-shop btn-blue"
-                >Vælg produkt</nuxt-link
-              >
-            </div>
-          </section>
+          </div>
         </div>
       </div>
 
-      <div class="description" v-html="category.description"></div>
+      <div class="row">
+        <div class="col">
+          <div class="description" v-html="category.description"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import HeaderImg from "@/components/Utilities/HeaderImg";
 import { Category } from "@/utils/dto";
 
 export default {
+  components: {
+    HeaderImg
+  },
   computed: {
     category() {
-      return new Category(this.data[0]);
+      const category = new Category(this.data[0]);
+      console.log(category);
+      return category;
     }
   },
   head() {
@@ -88,3 +98,60 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.explanation {
+  font-size: 0.65em;
+  font-style: italic;
+}
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 2px solid #e9e9e9;
+  .product-image {
+    text-align: center;
+    display: block;
+    width: 289px;
+    img {
+      width: 80%;
+      height: 80%;
+    }
+  }
+  .product-info {
+    flex: 1;
+    .product-title {
+      font-weight: 600;
+    }
+    .product-description {
+      margin: 7px 0;
+      font-size: 0.7em;
+      height: 68px;
+      overflow: hidden;
+    }
+    .product-body {
+      color: #092d4f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .price-weekly {
+        font-size: 2.1em;
+        font-weight: 700;
+      }
+      .price-daily {
+        font-weight: 600;
+      }
+
+      .product-button {
+        font-size: 0.7em;
+      }
+    }
+  }
+}
+.col {
+  padding: 16px;
+}
+</style>

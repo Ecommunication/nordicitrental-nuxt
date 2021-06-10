@@ -1,36 +1,33 @@
 <template>
   <div>
-    <BackgroundImg
+    <HeaderImg
       v-if="data.ImageCover"
-      :minHeight="420"
-      :src="data.ImageCover.url | formatImage"
-      style="display: flex; align-items: center;"
-    >
-      <template v-slot:body>
-        <h1 class="slider-title title-white">{{ data.TextCover }}</h1>
-      </template>
-    </BackgroundImg>
+      :img="data.ImageCover.url | formatImage"
+      :text="data.TextCover"
+    />
 
-    <div>
-      <ContactUsForm :formTitle="contactUsTitle">
-        <template v-slot:left-col>
-          <div class="text-left employee">
-            <h3 class="text-blue">Kontakt info</h3>
-            <div class="mt-6">
-              <div>Nordic IT rental ApS</div>
-              <div>Industriparken 22A</div>
-              <div>2750 Ballerup</div>
-              <div>Tel: +45 7199 8904</div>
-              <div>E-mail: salg@nordicitrental.dk</div>
+    <div class="row">
+      <div class="col py-10" style="width: 100%;">
+        <ContactUsForm :formTitle="contactUsTitle">
+          <template v-slot:left-col>
+            <div class="text-left employee">
+              <h3 class="text-blue">Kontakt info</h3>
+              <div class="mt-6">
+                <div>Nordic IT rental ApS</div>
+                <div>Industriparken 22A</div>
+                <div>2750 Ballerup</div>
+                <div>Tel: +45 7199 8904</div>
+                <div>E-mail: salg@nordicitrental.dk</div>
+              </div>
             </div>
-          </div>
-        </template>
-      </ContactUsForm>
-      <div
-        class="text-blue"
-        style="width: 90%; max-width: 1000px; margin: 0 auto;"
-      >
-        <h3 style="margin: 20px 0;">Du finder os her:</h3>
+          </template>
+        </ContactUsForm>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col" style="width: 90%; max-width: 1000px; margin: 0 auto;">
+        <h3 class="text-blue" style="margin-bottom: 20px;">Du finder os her:</h3>
         <GoogleMap
           class="mb-14"
           :mapConfig="googleMap.config"
@@ -44,6 +41,7 @@
 
 <script>
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
+import HeaderImg from "@/components/Utilities/HeaderImg";
 import ContactUsForm from "@/components/Formular/Contact";
 import GoogleMap from "@/components/Utilities/GoogleMap";
 
@@ -51,6 +49,7 @@ const coords = { lat: -25.363882, lng: 131.044922 }; // Todo: get coordinates
 export default {
   components: {
     BackgroundImg,
+    HeaderImg,
     ContactUsForm,
     GoogleMap
   },

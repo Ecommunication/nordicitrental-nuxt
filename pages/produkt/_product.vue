@@ -1,67 +1,59 @@
 <template>
   <div>
-    <BackgroundImg
-      v-if="product.cover.image"
-      :minHeight="460"
-      :src="product.cover.image"
-      style="display: flex; align-items: center;"
-    >
-      <template v-slot:body>
-        <h1 class="slider-title title-white" style="margin: auto;">
-          {{ product.cover.text }}
-        </h1>
-      </template>
-    </BackgroundImg>
+    <HeaderImg
+      v-if="product.cover"
+      :img="product.cover.image"
+      :text="product.cover.text"
+      :height="460"
+    />
 
-    <div class="mt-14 product grid-small margin-center">
-      <div
-        class="product-gallery"
-        style="max-width: 500px; margin-right: 50px "
-      >
-        <div class="product-gallery__main-image">
-          <img class="img-responsive" :src="product.gallery.main" alt="" />
-        </div>
-        <div class="product-galery-other-images">
-          <div
-            class="product-galery-other-img-container"
-            v-for="(image, index) in product.gallery.thumbnails"
-            :key="index"
-          >
-            <img :src="image" />
-          </div>
-        </div>
-      </div>
-      <div class="product-meta">
-        <IconBar class="mb-14" :icons="product.icons" />
-        <div class="product-meta__specs"></div>
-        <div class="product-meta__prices">
-          <div class="product-meta__prices-weekly">
-            <span>
-              {{ product.pricing.weekly | formatPrice }}
-              <i class="product-meta__prices-price-info"
-                >(Pris for første uges leje)</i
+    <div class="container py-10">
+      <div class="row" style="justify-content: center; padding: 16px;">
+        <div class="col-md-4">
+          <div class="product-gallery">
+            <div class="product-gallery-main-image">
+              <img :src="product.gallery.main" alt="" />
+            </div>
+            <div class="product-gallery-other-images">
+              <div
+                class="product-gallery-other-img-container"
+                v-for="(image, index) in product.gallery.thumbnails"
+                :key="index"
               >
-            </span>
-          </div>
-          <div class="product-meta__prices-daily">
-            <span>
-              {{ product.pricing.daily | formatPrice }}
-              <i class="product-meta__prices-price-info"
-                >(Pris efter første uges leje, pr. dag.)</i
-              >
-            </span>
+                <img :src="image" />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="product-meta__description">
-          <div
-            style="font-size: 0.8em; line-height: 25px;"
-            v-html="product.descriptions.short"
-          ></div>
-        </div>
-        <div class="product-meta__buy-section">
-          <div class="product-meta__buy-section__addons"></div>
-          <div class="product-meta__buy-section__period">
+        <div class="col-md-8">
+          <div class="product-meta">
+            <IconBar class="mb-8" :icons="product.icons" />
+            <div class="product-prices text-blue">
+              <div class="price-weekly-container">
+                <span class="price-weekly">{{
+                  product.pricing.weekly | formatPrice
+                }}</span>
+                <span class="price-explanation"
+                  >(Pris for første uges leje)</span
+                >
+              </div>
+              <div class="price-daily-container">
+                <span class="price-daily">{{
+                  product.pricing.daily | formatPrice
+                }}</span>
+                <span class="price-explanation"
+                  >(Pris efter første uges leje, pr. dag.)</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-description"
+              v-html="product.descriptions.short"
+            ></div>
+
             <AddToCart
+              class="mt-8"
               :product="product"
               :dailyPrice="product.pricing.daily"
               :weeklyPrice="product.pricing.weekly"
@@ -69,13 +61,20 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="product grid-small margin-center mt-10">
-      <Tabs :description="product.descriptions.long" :features="featuresTab" />
-    </div>
+      <div class="row mt-10">
+        <div class="col">
+          <Tabs
+            :description="product.descriptions.long"
+            :features="featuresTab"
+          />
+        </div>
+      </div>
 
-    <div class="product grid-small margin-center mt-10">
-      <Suggestions :products="products" />
+      <div class="row mt-10">
+        <div class="col">
+          <Suggestions :products="products" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -85,10 +84,18 @@ import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
 import IconBar from "@/components/Product/IconBar";
 import Suggestions from "@/components/Product/Suggestions";
+import HeaderImg from "@/components/Utilities/HeaderImg";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 
 export default {
-  components: { BackgroundImg, AddToCart, Tabs, IconBar, Suggestions },
+  components: {
+    HeaderImg,
+    BackgroundImg,
+    AddToCart,
+    Tabs,
+    IconBar,
+    Suggestions
+  },
   data() {
     return {
       products: [
@@ -136,21 +143,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.product-galery-other-images {
-  display: flex;
-  flex-wrap: wrap;
-  .product-galery-other-img-container {
-    width: 90px;
-    height: 90px;
-    margin: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    cursor: pointer;
+.product-gallery {
+  margin-right: 20px;
+  .product-gallery-main-image {
+    max-height: 300px;
+    max-width: 300px;
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      background-position: center center;
     }
+  }
+  .product-gallery-other-images {
+    display: flex;
+    flex-wrap: wrap;
+    .product-gallery-other-img-container {
+      width: 90px;
+      height: 90px;
+      margin: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-position: center center;
+      }
+    }
+  }
+}
+.product-meta {
+  .product-prices {
+    font-weight: 700;
+    .price-weekly {
+      font-size: 1.8em;
+    }
+    .price-explanation {
+      margin-left: 5px;
+      font-size: 0.9em;
+    }
+  }
+
+  .product-description {
+    font-size: 0.8em;
+    font-weight: 100;
   }
 }
 </style>
