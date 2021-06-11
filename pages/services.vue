@@ -7,7 +7,7 @@
     />
 
     <div class="row">
-      <div class="col-md-6 px-0">
+      <div class="col-md-6 px-0 py-0">
         <TextCard
           v-if="data.LeftTextCol1"
           :contentHtml="data.LeftTextCol1"
@@ -31,7 +31,7 @@
           </template>
         </TextCard>
       </div>
-      <div class="col-md-6 px-0">
+      <div class="col-md-6 px-0 py-0">
         <TextCard
           v-if="data.RightTextCol1"
           :contentHtml="data.RightTextCol1"
@@ -46,7 +46,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6 px-0" style="min-height: 526px; width: 100%;">
+      <div class="col-md-6 px-0 py-0" style="min-height: 526px; width: 100%;">
         <BackgroundImg
           v-if="data.LeftImageCol2"
           :src="data.LeftImageCol2.url | formatImage"
@@ -63,7 +63,7 @@
     </div>
 
     <div class="row">
-      <div class="col" style="width: 100%;">
+      <div class="col px-0 py-0" style="width: 100%;">
         <TextCard
           v-if="data.MidTextCol3"
           :contentHtml="data.MidTextCol3"
@@ -95,13 +95,12 @@
     </div>
 
     <div class="row">
-      <div class="col">
+      <div class="col px-0">
         <TextCard
           v-if="data.MidTextCol5"
           :contentHtml="data.MidTextCol5"
           backgroundClass="bg-blue"
           :dark="true"
-          padding="42px 230px"
         />
       </div>
     </div>

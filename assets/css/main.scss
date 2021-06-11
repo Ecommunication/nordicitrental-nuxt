@@ -19,7 +19,6 @@
 
 /* Utils */
 @import "components/responsive";
-@import "components/slider/cover-slider";
 
 * {
   margin: 0;
@@ -37,54 +36,6 @@ body {
 .container {
   margin: 0 auto;
   max-width: 1000px;
-}
-
-.main-header {
-  margin-bottom: 10px;
-
-  &__navigation {
-    &-cart {
-      background-color: $mainBlue;
-      padding: 10px 20px;
-      color: #fff;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-
-      i {
-        margin-right: 20px;
-      }
-    }
-
-    &-cta {
-      padding: 1em 0 1em;
-      font-size: 1.1em;
-      font-weight: 100;
-    }
-
-    /*
-      Navigation
-    */
-    .main-navigation {
-      list-style: none;
-      display: flex;
-
-      li {
-        &:not(:last-child) {
-          a {
-            padding-right: 2em;
-          }
-        }
-      }
-
-      a {
-        color: $mainBlue;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1em;
-        display: block;
-      }
-    }
-  }
 }
 
 footer {

@@ -8,7 +8,7 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: 'robots', name: 'robots', content: 'noindex, nofollow' }
+      { hid: "robots", name: "robots", content: "noindex, nofollow" }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
@@ -35,11 +35,22 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios"],
-
-  axios: {
-    baseURL: process.env.API_URL,
-  },
+  modules: [
+    [
+      "@nuxtjs/axios",
+      {
+        baseURL: process.env.API_URL
+      }
+    ],
+    [
+      "@nuxtjs/recaptcha",
+      {
+        hideBadge: false,
+        siteKey: process.env.RECAPTCHA_SITE_KEY,
+        version: 2
+      }
+    ]
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

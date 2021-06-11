@@ -13,6 +13,7 @@
             <div class="input-container">
               <div class="label">Navn:</div>
               <input
+                v-model="form.name"
                 type="text"
                 name="your-name"
                 value=""
@@ -62,11 +63,7 @@
               ></textarea>
             </div>
 
-            <div class="input-container">
-              <div class="button btn-primary" style="float: none; width: 100%">
-                Send
-              </div>
-            </div>
+            <Recaptcha :form="form" />
           </form>
         </div>
       </div>
@@ -75,10 +72,24 @@
 </template>
 
 <script>
+import Recaptcha from "@/components/Formular/RecaptchaV2";
 export default {
+  components: { Recaptcha },
   props: {
     title: { type: String, required: false },
     formTitle: { type: String, required: false }
+  },
+  data() {
+    return {
+      form: {
+        name: ""
+      }
+    };
+  },
+  methods: {
+    submit() {
+      console.log(this.form, "is submitting");
+    }
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col px-0" :style="`min-height: ${height}px; width: 100%;`">
+    <div class="col px-0 py-0" :style="`min-height: ${height}px; width: 100%;`">
       <BackgroundImg :src="img" class="bg-img">
         <template v-slot:body v-if="text">
           <h1 class="slider-title title-white">{{ text }}</h1>
