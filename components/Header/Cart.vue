@@ -1,8 +1,8 @@
 <template>
   <div class="cart">
     <nuxt-link to="/kurv">
-      <span>
-        <i class="fas fa-shopping-cart mr-2"></i>
+      <span class="pr-2">
+        <i class="fas fa-shopping-cart mr-11"></i>
         Produkter ({{ noOfItems }})
       </span>
     </nuxt-link>
@@ -20,12 +20,14 @@ export default {
 
 <style lang="scss" scoped>
 .cart {
+  position: relative;
   display: inline-block;
   background: #092d4f;
-  padding: 9px 36px 9px 18px;
+  padding: 8px 36px 8px 14px;
   font-size: 0.8em;
-  border-bottom-right-radius: 30px;
+  border-bottom-right-radius: 25px;
 }
+
 a {
   color: white;
 }

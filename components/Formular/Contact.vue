@@ -9,62 +9,75 @@
         <div class="form text-center">
           <h3 v-if="formTitle" class="text-blue mb-10">{{ formTitle }}</h3>
 
-          <form class="mt-5">
+          <form class="mt-5" :key="formKey">
             <div class="input-container">
-              <div class="label">Navn:</div>
-              <input
-                v-model="form.name"
-                type="text"
-                name="your-name"
-                value=""
-                aria-required="true"
-                aria-invalid="false"
+              <InputField
+                label="Navn"
+                :input="form.name"
+                @onChange="val => onChange('name', val, formValidations.name)"
+                :errors="errors.name"
               />
             </div>
 
             <div class="input-container">
-              <div class="label">Email:</div>
-              <input
-                type="email"
-                name="your-email"
-                value=""
-                aria-required="true"
-                aria-invalid="false"
+              <InputField
+                label="E-mailadresse"
+                :input="form.email"
+                @onChange="val => onChange('email', val, formValidations.email)"
+                :errors="errors.email"
               />
             </div>
 
             <div class="input-container">
-              <div class="label">Virksomhed:</div>
-              <input
-                type="text"
-                name="your-subject"
-                value=""
-                aria-invalid="false"
+              <InputField
+                label="Firmanavn"
+                :input="form.companyName"
+                @onChange="
+                  val =>
+                    onChange('companyName', val, formValidations.companyName)
+                "
+                :errors="errors.companyName"
               />
             </div>
 
             <div class="input-container">
-              <div class="label">Telefon:</div>
-              <input
-                type="text"
-                name="your-subject"
-                value=""
-                aria-invalid="false"
+              <InputField
+                label="Telefon"
+                :input="form.phone"
+                @onChange="val => onChange('phone', val, formValidations.phone)"
+                :errors="errors.phone"
               />
             </div>
 
             <div class="input-container">
-              <div class="label">Besked:</div>
-              <textarea
-                name="your-message"
-                cols="40"
-                rows="10"
-                aria-invalid="false"
-              ></textarea>
+              <Textarea
+                label="Besked"
+                :input="form.message"
+                :rows="8"
+                @changed="val => (form.message = val)"
+              />
             </div>
 
-            <Recaptcha :form="form" />
+            <Recaptcha
+              :form="form"
+              :formValidations="formValidations"
+              @changeErrors="val => (errors = val)"
+              @formSubmitted="isModalVisible = true"
+            />
           </form>
+          <Modal
+            v-show="isModalVisible"
+            @close="closeModal"
+            :width="600"
+          >
+            <template v-slot:header>
+              Kontakt
+            </template>
+            <template v-slot:body>
+              <div>Tak for din henvendelse.</div>
+              <div>Vi vil vende tilbage så snart som muligt.</div>
+            </template>
+          </Modal>
         </div>
       </div>
     </div>
@@ -72,23 +85,65 @@
 </template>
 
 <script>
+import Modal from "@/components/Utilities/Modal";
+import InputField from "@/components/Utilities/Form/InputField";
+import Textarea from "@/components/Utilities/Form/Textarea";
 import Recaptcha from "@/components/Formular/RecaptchaV2";
+import validations from "@/components/Formular/validations.js";
+
 export default {
-  components: { Recaptcha },
+  components: { Modal, InputField, Textarea, Recaptcha },
   props: {
     title: { type: String, required: false },
     formTitle: { type: String, required: false }
   },
   data() {
     return {
+      formKey: new Date(),
+      isModalVisible: false,
       form: {
-        name: ""
-      }
+        name: "",
+        email: "",
+        companyName: "",
+        phone: "",
+        message: ""
+      },
+      formValidations: {
+        name: [validations.isRequired],
+        email: [validations.isRequired, validations.isEmail],
+        companyName: [validations.isRequired],
+        phone: [validations.isRequired, validations.isPhone]
+      },
+      errors: {}
     };
   },
   methods: {
-    submit() {
-      console.log(this.form, "is submitting");
+    onChange(key, val, valid) {
+      this.form[key] = val;
+      this.errors[key] = this.validate(valid, val);
+    },
+    validate(valid, value) {
+      const errors = [];
+      valid.forEach(validation => {
+        if (!validation.rule(value)) {
+          errors.push(validation.msg);
+        }
+      });
+      return errors;
+    },
+    resetForm() {
+      this.form = {
+        name: "",
+        email: "",
+        companyName: "",
+        phone: "",
+        message: ""
+      };
+      this.formKey = new Date();
+    },
+    closeModal() {
+      this.isModalVisible = false;
+      this.resetForm();
     }
   }
 };
