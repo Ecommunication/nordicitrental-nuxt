@@ -10,7 +10,7 @@
           <HeaderCart />
         </div>
 
-        <div class="mb-5">
+        <div class="mb-5 px-3">
           <HeaderCta :cta="header.telephone" />
         </div>
 
