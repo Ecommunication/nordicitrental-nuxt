@@ -9,11 +9,12 @@
       >
         <section class="capture abs-center">
           <h1
-            class="slider-title title-white mb-2"
+            class="slider-title title-white mb-2" style="display: inline-block;"
             v-html="slide.TextAreaHeader"
           ></h1>
+          <br>
           <h1
-            class="slider-title title-white"
+            class="slider-title title-white" style="display: inline-block;"
             v-html="slide.TextAreaSubHeader"
           ></h1>
         </section>

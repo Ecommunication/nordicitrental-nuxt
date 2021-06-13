@@ -2,31 +2,34 @@
   <div class="index">
     <CoverSlider :slides="data.IndexPageSlider" />
 
-    <CategorySlider
-      class="py-10"
-      title="Vælg et produkt du ønsker at leje"
-      :categories="data.IndexCategories"
-    >
-      <div class="grid flex flex-justify-center">
-        <nuxt-link
-          to="/alle-produktkategorier"
-          class="btn btn-blue text-center mx-auto mt-10"
-        >
-          Alle produkter
-        </nuxt-link>
-      </div>
-    </CategorySlider>
+    <div class="grid-wide" style="width: 90%; margin: 0 auto;">
+      <CategorySlider
+        class="py-8"
+        title="Vælg et produkt du ønsker at leje"
+        :categories="data.IndexCategories"
+      >
+        <div class="grid flex flex-justify-center">
+          <nuxt-link
+            to="/alle-produktkategorier"
+            class="btn btn-blue text-center mx-auto mt-10 title-sm"
+            style="padding-right: 30px; padding-left: 30px; "
+          >
+            Alle produkter
+          </nuxt-link>
+        </div>
+      </CategorySlider>
+    </div>
 
     <div class="row py-10 bg-gray-light">
-      <div class="col" style="max-width: 1200px; width: 100%; margin: 0 auto;">
+      <div class="col" style="width: 100%; margin: 0 auto;">
         <h3
-          class="text-blue title-md weight-thin mb-10"
-          style="text-align: center;"
+          class="text-blue title-md weight-thin mb-6"
+          style="text-align: center; font-size: 26px;"
         >
           Vi har gjort det nemt at leje IT udstyr
         </h3>
 
-        <div class="info">
+        <div class="info grid-wide" style="width: 90%; margin: 0 auto;">
           <div
             class="info-card"
             v-for="(item, index) in data.IndexRentalBennefits"
@@ -34,7 +37,11 @@
           >
             <img class="info-card-img" :src="item.Icon.url | formatImage" />
             <div class="info-card-body">
-              <span class="info-card-title text-blue">{{ item.Title }}</span>
+              <span
+                class="info-card-title text-blue mb-3"
+                style="font-weight: 700;"
+                >{{ item.Title }}</span
+              >
               <span class="info-card-desc">{{ item.Description }}</span>
             </div>
           </div>
@@ -55,6 +62,7 @@
           v-if="data.IndexLetterboxTextRight"
           :contentHtml="data.IndexLetterboxTextRight"
           backgroundClass="bg-gray-dark"
+          largeCSS="padding: 45px 170px;"
         />
       </div>
     </div>
@@ -66,6 +74,8 @@
           v-if="data.IndexLetterboxTextLeft"
           :contentHtml="data.IndexLetterboxTextLeft"
           backgroundClass="bg-blue"
+          largeCSS="padding: 150px 40px; 0 40px"
+
         />
       </div>
       <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">
@@ -82,6 +92,7 @@
         v-if="data.IndexServiceDescription"
         :contentHtml="data.IndexServiceDescription"
         backgroundClass="bg-white"
+
       />
     </div>
 
@@ -127,6 +138,7 @@
       <div class="col-md-6 px-0">
         <ContactUsForm
           class="my-10"
+          customCSS="padding: 0 50px;"
           :title="data.ContactHeader"
           formTitle="Send os en besked, så kontakter vi dig i dag."
           style="margin: 0 auto;"

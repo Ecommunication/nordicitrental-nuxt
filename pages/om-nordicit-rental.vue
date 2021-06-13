@@ -13,6 +13,7 @@
           v-if="data.LeftTextCol1"
           :contentHtml="data.LeftTextCol1"
           backgroundClass="bg-gray-dark"
+          largeCSS="padding: 45px 170px;"
         />
       </div>
       <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">

@@ -10,26 +10,37 @@
         :height="460"
       /> -->
 
-        <Breadcrumb class="mt-16 mb-4" />
+        <div v-if="noOfItems">
+          <Breadcrumb class="mt-16 mb-4" />
 
-        <CartList :cart="cart.items" />
+          <CartList :cart="cart.items" />
 
-        <nuxt-link to="/kurv/ordre">
-          <div
-            class="button btn-block btn-primary mt-2 mb-2"
-            style="border-radius: 7px;"
-          >
-            Udfør booking
-          </div>
-        </nuxt-link>
-        <Totals :cart="cart" />
+          <nuxt-link to="/kurv/ordre">
+            <div
+              class="button btn-block btn-primary mt-2 mb-2"
+              style="border-radius: 7px;"
+            >
+              Udfør booking
+            </div>
+          </nuxt-link>
+          <Totals :cart="cart" />
+        </div>
+
+        <div v-else>
+          <div>Kurven er tom</div>
+          <nuxt-link to="/">
+            <div class="button btn-primary">
+              Gå til produkter
+            </div>
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import CartList from "@/components/Cart/CartList";
 import Breadcrumb from "@/components/Cart/Breadcrumb";
 import Totals from "@/components/Cart/Totals";
@@ -43,7 +54,8 @@ export default {
     Breadcrumb
   },
   computed: {
-    ...mapState(["cart"])
+    ...mapState(["cart"]),
+    ...mapGetters(["noOfItems"])
   },
   data() {
     return {

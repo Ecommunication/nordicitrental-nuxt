@@ -1,9 +1,12 @@
 <template>
-  <div class="row">
+  <div class="row ">
     <div class="col px-0 py-0" :style="`min-height: ${height}px; width: 100%;`">
       <BackgroundImg :src="img" class="bg-img">
         <template v-slot:body v-if="text">
-          <h1 class="slider-title title-white">{{ text }}</h1>
+          <div class="body-wrapper grid-small">
+
+          <h1 class="slider-title title-white ">{{ text }}</h1>
+          </div>
         </template>
       </BackgroundImg>
     </div>
@@ -26,9 +29,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.body-wrapper {
+  width: 100%;
+  display: inline-flex;
+}
 .bg-img {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 </style>

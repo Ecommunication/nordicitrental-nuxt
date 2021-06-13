@@ -12,6 +12,7 @@
           v-if="data.LeftTextCol1"
           :contentHtml="data.LeftTextCol1"
           backgroundClass="bg-white"
+          largeCSS="padding: 45px 170px;"
         >
           <template v-slot:actions>
             <div>
@@ -37,6 +38,7 @@
           :contentHtml="data.RightTextCol1"
           backgroundClass="bg-blue"
           :dark="true"
+          largeCSS="padding: 45px 170px;"
         >
           <template v-slot:actions>
             <Button :button="buttons.goToProduct" />
@@ -58,6 +60,7 @@
           v-if="data.RightTextCol2"
           :contentHtml="data.RightTextCol2"
           backgroundClass="bg-gray-darkest"
+          largeCSS="padding: 45px 170px;"
         />
       </div>
     </div>
@@ -105,7 +108,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row grid-small">
       <div class="col py-14" style="width: 100%;">
         <ContactUsForm
           :title="data.ContactHeader"
