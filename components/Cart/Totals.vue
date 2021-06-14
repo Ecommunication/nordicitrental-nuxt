@@ -52,13 +52,6 @@
         </div>
       </div>
     </div>
-
-    <div class="mt-5">
-      <small
-        >Note: Shipping and taxes are estimated and will be updated during
-        checkout based on your billing and shipping information.</small
-      >
-    </div>
   </div>
 </template>
 

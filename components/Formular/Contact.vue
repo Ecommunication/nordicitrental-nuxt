@@ -1,62 +1,51 @@
 <template>
   <div>
     <h2 v-if="title" class="text-center">{{ title }}</h2>
-    <div class="form-row">
+    <div class="form-row" :style="customCSS">
       <div class="left-col">
         <slot name="left-col"></slot>
       </div>
       <div class="right-col">
-        <div class="form text-center">
+        <div class="form">
           <h3 v-if="formTitle" class="text-blue mb-10">{{ formTitle }}</h3>
 
           <form class="mt-5" :key="formKey">
-            <div class="input-container">
-              <InputField
-                label="Navn"
-                :input="form.name"
-                @onChange="val => onChange('name', val, formValidations.name)"
-                :errors="errors.name"
-              />
-            </div>
+            <InputField
+              label="Navn"
+              :input="form.name"
+              @onChange="val => onChange('name', val, formValidations.name)"
+              :errors="errors.name"
+            />
 
-            <div class="input-container">
-              <InputField
-                label="E-mailadresse"
-                :input="form.email"
-                @onChange="val => onChange('email', val, formValidations.email)"
-                :errors="errors.email"
-              />
-            </div>
+            <InputField
+              label="E-mailadresse"
+              :input="form.email"
+              @onChange="val => onChange('email', val, formValidations.email)"
+              :errors="errors.email"
+            />
 
-            <div class="input-container">
-              <InputField
-                label="Firmanavn"
-                :input="form.companyName"
-                @onChange="
-                  val =>
-                    onChange('companyName', val, formValidations.companyName)
-                "
-                :errors="errors.companyName"
-              />
-            </div>
+            <InputField
+              label="Firmanavn"
+              :input="form.companyName"
+              @onChange="
+                val => onChange('companyName', val, formValidations.companyName)
+              "
+              :errors="errors.companyName"
+            />
 
-            <div class="input-container">
-              <InputField
-                label="Telefon"
-                :input="form.phone"
-                @onChange="val => onChange('phone', val, formValidations.phone)"
-                :errors="errors.phone"
-              />
-            </div>
+            <InputField
+              label="Telefon"
+              :input="form.phone"
+              @onChange="val => onChange('phone', val, formValidations.phone)"
+              :errors="errors.phone"
+            />
 
-            <div class="input-container">
-              <Textarea
-                label="Besked"
-                :input="form.message"
-                :rows="8"
-                @changed="val => (form.message = val)"
-              />
-            </div>
+            <Textarea
+              label="Besked"
+              :input="form.message"
+              :rows="8"
+              @changed="val => (form.message = val)"
+            />
 
             <Recaptcha
               :form="form"
@@ -65,11 +54,7 @@
               @formSubmitted="isModalVisible = true"
             />
           </form>
-          <Modal
-            v-show="isModalVisible"
-            @close="closeModal"
-            :width="600"
-          >
+          <Modal v-show="isModalVisible" @close="closeModal" :width="600">
             <template v-slot:header>
               Kontakt
             </template>
@@ -94,12 +79,13 @@ import validations from "@/components/Formular/validations.js";
 export default {
   components: { Modal, InputField, Textarea, Recaptcha },
   props: {
+    customCSS: { type: String, required: false },
     title: { type: String, required: false },
     formTitle: { type: String, required: false }
   },
   data() {
     return {
-      formKey: new Date(),
+      formKey: new Date().getTime(),
       isModalVisible: false,
       form: {
         name: "",
@@ -139,7 +125,7 @@ export default {
         phone: "",
         message: ""
       };
-      this.formKey = new Date();
+      this.formKey = new Date().getTime();
     },
     closeModal() {
       this.isModalVisible = false;
@@ -153,13 +139,21 @@ export default {
 .form-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 
   .left-col {
-    margin: 0 75px 30px 75px;
+    margin-bottom: 25px;
   }
 
   .right-col {
+    .form {
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  .form-row {
+    justify-content: space-around;
+    padding: 0 20px;
   }
 }
 </style>

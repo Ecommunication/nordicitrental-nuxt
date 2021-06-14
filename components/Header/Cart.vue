@@ -1,11 +1,14 @@
 <template>
-  <div class="cart">
-    <nuxt-link to="/kurv">
-      <span class="pr-2">
-        <i class="fas fa-shopping-cart mr-11"></i>
-        Produkter ({{ noOfItems }})
-      </span>
-    </nuxt-link>
+  <div>
+    <div v-if="!noOfItems" class="cart-placeholder"></div>
+    <div v-else class="cart">
+      <nuxt-link to="/kurv">
+        <span class="pr-2">
+          <i class="fas fa-shopping-cart mr-11"></i>
+          Produkter ({{ noOfItems }})
+        </span>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -26,6 +29,11 @@ export default {
   padding: 8px 36px 8px 14px;
   font-size: 0.8em;
   border-bottom-right-radius: 25px;
+}
+
+.cart-placeholder {
+  height: 38px;
+  width: 100%;
 }
 
 a {

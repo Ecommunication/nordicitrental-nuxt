@@ -1,104 +1,105 @@
 <template>
-  <div class="cover-slider">
-    <div class="cover-slider-container">
+  <div>
+    <div
+      class="custom-slider-container"
+      v-for="(slide, index) in slides"
+      :key="index"
+    >
       <div
-        class="cover-slider-item"
-        v-for="slide in slides"
-        :key="slide.id"
-        :style="`background: url(${$formatImage(slide.BackgroundImage.url)})`"
+        class="slider-item"
+        :style="{
+          opacity: selectedIndex === index ? 1 : 0
+        }"
       >
-        <section class="capture abs-center">
-          <h1
-            class="slider-title title-white mb-2"
-            v-html="slide.TextAreaHeader"
-          ></h1>
-          <h1
-            class="slider-title title-white"
-            v-html="slide.TextAreaSubHeader"
-          ></h1>
-        </section>
+        <div class="row" v-if="selectedIndex === index">
+          <div
+            class="col px-0 py-0"
+            :style="`min-height: ${500}px; width: 100%;`"
+          >
+            <BackgroundImg
+              :src="slide.BackgroundImage.url | formatImage"
+              style=" display: flex; align-items: center;"
+            >
+              <template
+                v-slot:body
+                v-if="slide.TextAreaHeader || slide.TextAreaSubHeader"
+              >
+                <div class="grid-small" style="width: 100%;">
+                  <div
+                    class="slider-title title-white slider-title-1"
+                    v-html="slide.TextAreaHeader"
+                  ></div>
+                  <br />
+                  <div
+                    class="mt-2 slider-title title-white slider-title-2"
+                    v-html="slide.TextAreaSubHeader"
+                  ></div>
+                </div>
+              </template>
+            </BackgroundImg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import $ from "jquery";
+import BackgroundImg from "@/components/Utilities/BackgroundImg";
 
 export default {
   props: ["slides"],
+  components: {
+    BackgroundImg
+  },
+  data() {
+    return {
+      selectedIndex: 0,
+      duration: 5 // sec
+    };
+  },
   mounted() {
-    setTimeout(function() {
-      var allBoxes = $(".cover-slider-container").children("div");
-      transitionBox(null, allBoxes.first());
-
-      function transitionBox(from, to) {
-        function next() {
-          var nextTo;
-          if (to.is(":last-child")) {
-            nextTo = to
-              .closest(".cover-slider-container")
-              .children("div")
-              .first();
-          } else {
-            nextTo = to.next();
-          }
-          to.fadeIn(500, function() {
-            setTimeout(function() {
-              transitionBox(to, nextTo);
-            }, 8000);
-          });
-        }
-
-        if (from) {
-          from.fadeOut(500, next);
-        } else {
-          next();
-        }
+    const interval = setInterval(() => {
+      if (this.slides.length > 0) {
+        this.selectedIndex = this.getNextIndex(this.slides, this.selectedIndex);
+        console.log(this.selectedIndex);
+      } else {
+        console.log("stop");
+        clearInterval(interval);
       }
-    }, 100);
+    }, this.duration * 1000);
   },
   methods: {
-    transitionBox: function() {}
+    getNextIndex(arr, currentIndex) {
+      const lastIndex = arr.length - 1;
+      let nextIndex = currentIndex + 1;
+      if (nextIndex > lastIndex) {
+        nextIndex = 0;
+      }
+      return nextIndex;
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.cover-slider {
-  height: 500px;
-  .cover-slider-container {
-    height: 100%;
-    .cover-slider-item {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background-repeat: no-repeat !important;
-      background-size: cover !important;
-      background-position: center center !important;
-      display: none;
-      .abs-center {
-        position: absolute;
-        left: 25%;
-        top: 25%;
-        h1 {
-          font-size: 2em;
-        }
-      }
+.custom-slider-container {
+  .slider-item {
+    transition: 2s ease;
+    .slider-title {
+      display: inline-block;
     }
   }
 }
+</style>
 
-@media only screen and (max-width: 600px) {
-  .cover-slider {
-    height: 250px;
-    .cover-slider-container {
-      .cover-slider-item {
-        .abs-center {
-          left: 10%;
-          top: 10%;
-          width: 80%;
-        }
-      }
+<style lang="scss">
+.custom-slider-container {
+  .slider-item {
+    .slider-title.slider-title-1 {
+      font-size: 40px;
+    }
+    .slider-title.slider-title-2 {
+      font-size: 30px;
     }
   }
 }
