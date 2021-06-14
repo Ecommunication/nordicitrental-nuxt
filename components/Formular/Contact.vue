@@ -85,7 +85,7 @@ export default {
   },
   data() {
     return {
-      formKey: new Date(),
+      formKey: new Date().getTime(),
       isModalVisible: false,
       form: {
         name: "",
@@ -125,7 +125,7 @@ export default {
         phone: "",
         message: ""
       };
-      this.formKey = new Date();
+      this.formKey = new Date().getTime();
     },
     closeModal() {
       this.isModalVisible = false;

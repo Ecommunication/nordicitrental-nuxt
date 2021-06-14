@@ -53,10 +53,12 @@
             ></div>
 
             <AddToCart
+              :key="addToCartKey"
               class="mt-8"
               :product="product"
               :dailyPrice="product.pricing.daily"
               :weeklyPrice="product.pricing.weekly"
+              @addedToCart="onAddedToCart"
             />
           </div>
         </div>
@@ -76,10 +78,50 @@
         </div>
       </div>
     </div>
+
+    <Modal
+      v-show="isModalVisible && Object.keys(modalData).length"
+      @close="closeDialog"
+      :width="500"
+    >
+      <template v-slot:header>
+        Produktet er lagt i kurven
+      </template>
+      <template v-slot:body>
+        <div style="font-size: 0.8em; width: 80%; margin: 0 auto;">
+          <div class="text-center">
+            <i
+              class="fas fa-cart-arrow-down"
+              style="font-size: 100px; color: #092D4F;"
+            ></i>
+          </div>
+          <div class="mt-5">
+            <div class="text-blue" style="font-weight: 600;">
+              {{ modalData.title }}
+            </div>
+            Lejeperiode fra:
+            <span class="ml-1">
+              {{ modalData.startDate | formatDate }} -
+              {{ modalData.endDate | formatDate }}
+            </span>
+          </div>
+          <div class="my-5 text-blue" style="font-weight: 600;">
+            Totalpris: {{ modalData.price | formatPrice }}
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <div class="button btn-primary" @click="goToProduct">
+              FORTSÆT MED AT KOBE
+            </div>
+            <div class="button btn-primary" @click="goToCart">CHECKUD</div>
+          </div>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 <script>
 import { Product } from "@/utils/dto";
+import Modal from "@/components/Utilities/Modal";
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
 import IconBar from "@/components/Product/IconBar";
@@ -91,6 +133,7 @@ export default {
   components: {
     HeaderImg,
     BackgroundImg,
+    Modal,
     AddToCart,
     Tabs,
     IconBar,
@@ -98,6 +141,9 @@ export default {
   },
   data() {
     return {
+      addToCartKey: new Date().getTime(),
+      isModalVisible: true,
+      modalData: {},
       products: [
         {
           id: 1,
@@ -137,8 +183,29 @@ export default {
   },
   async asyncData({ params, $axios, $config }) {
     const data = await $axios.$get(`/products?ProductSlug=${params.product}`);
-    console.log(data)
     return { data };
+  },
+  methods: {
+    onAddedToCart(cartData) {
+      this.isModalVisible = true;
+      this.modalData = {
+        endDate: cartData.endDate,
+        startDate: cartData.startDate,
+        title: cartData?.product?.info?.name,
+        price: cartData.price
+      };
+    },
+    closeDialog() {
+      this.isModalVisible = false;
+      this.modalData = {};
+    },
+    goToCart() {
+      this.$router.push("/kurv");
+    },
+    goToProduct() {
+      this.closeDialog();
+      this.addToCartKey = new Date().getTime();
+    }
   }
 };
 </script>

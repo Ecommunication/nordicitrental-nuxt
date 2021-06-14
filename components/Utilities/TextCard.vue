@@ -17,7 +17,7 @@ export default {
     contentHtml: { type: String, required: true },
     backgroundClass: { type: String, default: "bg-white" },
     dark: { type: Boolean, default: false },
-    largeCSS: { type: String, default: false }
+    largeCSS: { type: String, required: false }
   }
 };
 </script>

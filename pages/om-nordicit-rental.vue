@@ -32,7 +32,9 @@
 
     <div class="row">
       <div class="col bg-blue py-10" style="width: 100%;">
-        <RefCompanyLogoBar :images="data.MidColReference3.map(i => $formatImage(i.Logo.url))" />
+        <RefCompanyLogoBar
+          :images="data.MidColReference3.map(i => $formatImage(i.Logo.url))"
+        />
       </div>
     </div>
 
@@ -64,7 +66,7 @@
           <div
             class="col-lg-4 col-md-6"
             style="width: 100%;"
-            v-for="employee in [
+            v-for="(employee, index) in [
               ...data.AboutUsEmployees,
               ...data.AboutUsEmployees,
               ...data.AboutUsEmployees,
@@ -72,7 +74,7 @@
               ...data.AboutUsEmployees,
               ...data.AboutUsEmployees
             ]"
-            :key="employee.id"
+            :key="index"
           >
             <Employee
               :employee="employee"

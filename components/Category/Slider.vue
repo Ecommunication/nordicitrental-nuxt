@@ -25,7 +25,7 @@
 export default {
   props: {
     title: { type: String, required: true },
-    categories: { type: Object, required: true },
+    categories: { type: Array, required: true },
     titlePosition: { type: String, default: "center" }
   }
 };
