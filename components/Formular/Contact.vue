@@ -150,10 +150,11 @@ export default {
     }
   }
 }
+
 @media screen and (max-width: 767px) {
   .form-row {
-    justify-content: space-around;
-    padding: 0 20px;
+    justify-content: space-around !important;
+    padding: 0 20px !important;
   }
 }
 </style>

@@ -15,17 +15,91 @@
         </div>
 
         <div class="mb-2">
-          <HeaderNavigation />
+          <HeaderNavigation
+            :navigation="navList"
+            :showDropdown="showDropdown"
+            @onClickMainMenu="val => (showDropdown = val)"
+          />
+          <HeaderMobileNavigation :items="mobileMenu" />
         </div>
       </div>
     </header>
+    <HeaderFullMenu
+      :show="showDropdown === 'product'"
+      :items="categories"
+      @onClickMainMenu="val => (showDropdown = val)"
+    />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     header: { type: Object, required: true }
+  },
+  computed: {
+    ...mapState(["navigation"]),
+    categories() {
+      const arr =
+        this.navigation?.Products && this.navigation.Products.length
+          ? this.navigation.Products[0]
+          : {};
+      const categories = arr.Products || [];
+
+      return categories.map(category => category.product_categories);
+    },
+    navList() {
+      console.log("!!!", this.navigation.NavSingle);
+      return this.navigation.NavSingle.map(nav => {
+        const items = nav.NavSingleR.map(e => ({
+          label: e.Title,
+          link: nav.Rooturl
+        }));
+
+        return {
+          label: nav.RootTitle,
+          link: nav.Rooturl,
+          items
+        };
+      });
+    },
+    mobileMenu() {
+      const menus = [];
+
+      const products = {
+        label: "Produkter",
+        link: "#",
+        items: this.categories.map(category => {
+          const copiedCategory = JSON.parse(JSON.stringify(category))
+          const categoryProduct = copiedCategory.shift() || {};
+
+          return {
+            label: categoryProduct.Name || "",
+            link: `/produkt-kategori/${categoryProduct.Slug}`,
+            items: copiedCategory.map(product => {
+              return {
+                label: product.Name || "",
+                link: `/produkt/${product.Slug}`
+              };
+            })
+          };
+        })
+      };
+
+      menus.push(products);
+
+      this.navList.forEach(nav => {
+        menus.push(nav)
+      });
+
+      return menus;
+    }
+  },
+  data() {
+    return {
+      showDropdown: false
+    };
   }
 };
 </script>

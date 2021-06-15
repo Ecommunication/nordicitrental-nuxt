@@ -54,16 +54,14 @@ export default {
   data() {
     return {
       selectedIndex: 0,
-      duration: 5 // sec
+      duration: 8 // sec
     };
   },
   mounted() {
     const interval = setInterval(() => {
       if (this.slides.length > 0) {
         this.selectedIndex = this.getNextIndex(this.slides, this.selectedIndex);
-        console.log(this.selectedIndex);
       } else {
-        console.log("stop");
         clearInterval(interval);
       }
     }, this.duration * 1000);
@@ -102,5 +100,18 @@ export default {
       font-size: 30px;
     }
   }
+}
+
+@media screen and (max-width: 767px) {
+.custom-slider-container {
+  .slider-item {
+    .slider-title.slider-title-1 {
+      font-size: 20px;
+    }
+    .slider-title.slider-title-2 {
+      font-size: 16px;
+    }
+  }
+}
 }
 </style>
