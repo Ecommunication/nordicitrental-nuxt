@@ -1,4 +1,4 @@
-import { Cart, Order, SHIPMENT_METHODS } from "../utils/dto"
+import { Cart, Order, SHIPMENT_METHODS } from "../utils/dto";
 
 // Helpers
 const validate = (validations, value) => {
@@ -13,6 +13,7 @@ const validate = (validations, value) => {
 
 export const state = () => ({
   meta: {},
+  navigation: {},
   cart: new Cart()
 });
 
@@ -49,6 +50,9 @@ export const mutations = {
   },
   SET_META_DATA(state, data) {
     state.meta = data;
+  },
+  SET_NAVIGATION(state, data) {
+    state.navigation = data;
   }
 };
 
@@ -81,7 +85,10 @@ export const actions = {
     commit("UPDATE_AMOUNT", { cartItem, amount, price });
   },
   async setShipmentMethod({ commit }, shipmentMethod) {
-    const method = Object.values(SHIPMENT_METHODS).find(sm => sm.method === shipmentMethod) || SHIPMENT_METHODS.DELIVERY;
+    const method =
+      Object.values(SHIPMENT_METHODS).find(
+        sm => sm.method === shipmentMethod
+      ) || SHIPMENT_METHODS.DELIVERY;
     commit("SET_SHIPMENT_METHOD", method);
   },
   async sendCart({ commit, state }, userInfoForm) {
@@ -116,9 +123,18 @@ export const actions = {
   },
   async getMetaData({ commit }) {
     const data = await this.$axios.$get("/general-meta");
+    console.log("META", { data });
     commit("SET_META_DATA", data);
   },
+  async getNavigation({ commit }) {
+    const data = await this.$axios.$get("/navigation");
+    console.log("NAV", { data });
+    commit("SET_NAVIGATION", data);
+  },
   async nuxtServerInit({ dispatch }) {
-    await dispatch("getMetaData");
+    await Promise.all([
+      dispatch("getMetaData"),
+      dispatch("getNavigation")
+    ])
   }
 };

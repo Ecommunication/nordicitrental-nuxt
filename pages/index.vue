@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="width: 100%;">
       <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">
         <BackgroundImg
           v-if="data.IndexLetterboxImageLeft"
