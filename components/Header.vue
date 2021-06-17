@@ -50,7 +50,6 @@ export default {
       return categories.map(category => category.product_categories);
     },
     navList() {
-      console.log("!!!", this.navigation.NavSingle);
       return this.navigation.NavSingle.map(nav => {
         const items = nav.NavSingleR.map(e => ({
           label: e.Title,

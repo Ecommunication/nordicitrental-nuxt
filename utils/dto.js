@@ -20,7 +20,7 @@ export class Product {
       name: data.Name
     };
     this.cover = {
-      image: formatImage(data.ImageCover.url),
+      image: formatImage(data?.ImageCover?.url || ""),
       text: data.TextCover
     };
     this.meta = {
@@ -28,12 +28,12 @@ export class Product {
       desc: data.MetaDescription
     };
     this.gallery = {
-      main: formatImage(data.MainImage.url),
-      thumbnails: data.ProductGallery.map(img => formatImage(img.url))
+      main: formatImage(data?.MainImage?.url || ""),
+      thumbnails: data.ProductGallery.map(img => formatImage(img?.url || ""))
     };
     this.pricing = {
-      daily: data.DailyPriceAfterWeek,
-      weekly: data.WeekPrice
+      daily: parseFloat(data.DailyPriceAfterWeek),
+      weekly: parseFloat(data.WeekPrice)
     };
     this.descriptions = {
       short: data.DescriptionShort,
@@ -72,5 +72,42 @@ export class Order {
       shipping,
       customer
     });
+
+    this.OrderProductsDetails = this.processItems(items)
+    this.CustomerId = ""
+    this.OrderComments = ""
+    this.OrderShippingFirstName = ""
+    this.OrderShippingLastName = ""
+    this.OrderShippingCompany = ""
+    this.OrderShippingAddress = ""
+    this.OrderShippingCity = ""
+    this.OrderShippingZip = ""
+    this.OrderShippingCountry = ""
+  }
+
+  processItems(items){
+    return items.map(item => {
+      return {
+        ProductId: 0,
+        ProductRentalFrom: "",
+        ProductRentalTo: "",
+        ProductRentalSum: 0
+      }
+    })
+  }
+}
+
+export class Customer {
+  constructor(data){
+    console.log(data)
+    this.CustomerFirstName = data.firstName || "";
+    this.CustomerLastName = data.lastName || "";
+    this.CustomerEmail = data.email || "";
+    this.CustomerCompanyName = data.companyName || "";
+    this.CustomerCity = data.town || "";
+    this.CustomerZip = data.zipCode || "";
+    this.CustomerCountry = "";
+    this.CustomerPhone = "";
+    this.CustomerCompanyCVR = "";
   }
 }

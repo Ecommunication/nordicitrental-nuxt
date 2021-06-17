@@ -2,7 +2,7 @@ import Vue from "vue";
 
 const baseURL = process.env.apiUrl;
 console.log({ baseURL });
-export const formatImage = val => baseURL + val;
+export const formatImage = val => val ? baseURL + val : "";
 
 Vue.filter("formatImage", formatImage);
 

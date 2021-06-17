@@ -19,7 +19,12 @@
         </td>
         <td class="product-thumbnail">
           <nuxt-link :to="`/produkt/${item.product.info.slug}`">
-            <img width="220" height="220" :src="item.product.gallery.main" />
+            <img
+              v-if="item.product.gallery.main"
+              width="220"
+              height="220"
+              :src="item.product.gallery.main"
+            />
           </nuxt-link>
         </td>
         <td>
@@ -63,7 +68,6 @@ export default {
   methods: {
     ...mapActions(["updateAmount", "deleteItem"]),
     async onAmountPickerChange(itemId, amount) {
-      console.log("!!", itemId, typeof amount);
       await this.updateAmount({ itemId, amount });
     },
     async onDeleteItem(itemId) {
