@@ -59,5 +59,8 @@ export default {
     apiUrl: process.env.API_URL,
     googleApiKey: process.env.GOOGLE_MAPS_API_KEY,
     serviceApi: process.env.SERVICE_API
+  },
+  server: {
+    port: 3001
   }
 };
