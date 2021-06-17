@@ -1,4 +1,4 @@
-import { Cart, Order, Customer, SHIPMENT_METHODS } from "../utils/dto";
+import { Cart, Order, Customer, SHIPMENT_METHODS, Product } from "../utils/dto";
 
 // Helpers
 const validate = (validations, value) => {
@@ -14,7 +14,8 @@ const validate = (validations, value) => {
 export const state = () => ({
   meta: {},
   navigation: {},
-  cart: new Cart()
+  cart: new Cart(),
+  orderReceipt: null
 });
 
 export const getters = {
@@ -53,10 +54,18 @@ export const mutations = {
   },
   SET_NAVIGATION(state, data) {
     state.navigation = data;
+  },
+  SET_ORDER_RECEIPT(state, { customer, order }) {
+    state.orderReceipt = { customer, order };
   }
 };
 
 export const actions = {
+  async getProduct({}, id){
+    const data = await this.$axios.$get(`/products/${id}`);
+    const product = new Product(data);
+    return product;
+  },
   addToCart({ commit }, payload) {
     const itemId = new Date().getTime();
     commit("ADD_TO_CART", { ...payload, itemId });
@@ -99,20 +108,51 @@ export const actions = {
       phone: userInfoForm.phone
     });
 
+    // Upsert Customer
+    const customersWithThisEmail = await this.$axios.$get(
+      `/customers?CustomerEmail=${customer.CustomerEmail}`
+    );
+    let oldCustomer;
+    if (customersWithThisEmail.length) {
+      oldCustomer = customersWithThisEmail[0];
+    }
+
+    let customerResponse;
+    if (oldCustomer) {
+      customerResponse = await this.$axios.$put(
+        `/customers/${oldCustomer.id}`,
+        customer
+      );
+      console.log("updating customer");
+    } else {
+      customerResponse = await this.$axios.$post(`/customers`, customer);
+      console.log("creating customer");
+    }
+
+    // Create Order
+    if (!customerResponse.id) {
+      throw new Error(
+        "Customer Couldn't be updated/created. Order not created."
+      );
+    }
+
     const order = new Order(
+      customerResponse.id,
       state.cart.items,
       state.cart.shipping,
-      userInfoForm
+      userInfoForm.shippingAddress,
+      userInfoForm.comments
     );
 
-    //commit("RESET_CART");
+    console.log({ customer, order });
+    const orderResponse = await this.$axios.$post("/orders", order);
 
-    /* const payload = {
-      OrderFirstName: "Caner"
-    };
-    const { data } = await this.$axios.$post("/orders", payload);
-    console.log(data);
-    return data */
+    commit("SET_ORDER_RECEIPT", {
+      customer: customerResponse,
+      order: orderResponse
+    });
+    commit("RESET_CART");
+
   },
   validateForm({}, { validations, form }) {
     const errors = {};

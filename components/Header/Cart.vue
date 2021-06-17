@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div v-if="!noOfItems" class="cart-placeholder"></div>
-    <div v-else class="cart">
-      <nuxt-link to="/kurv">
-        <span class="pr-2">
-          <i class="fas fa-shopping-cart mr-11"></i>
-          Produkter ({{ noOfItems }})
-        </span>
-      </nuxt-link>
-    </div>
+    <ClientOnly>
+      <div v-if="!noOfItems" class="cart-placeholder"></div>
+      <div v-if="!!noOfItems" class="cart2">
+        <nuxt-link to="/kurv">
+          <span class="pr-2">
+            <i class="fas fa-shopping-cart mr-11"></i>
+            Produkter ({{ noOfItems }})
+          </span>
+        </nuxt-link>
+      </div>
+    </ClientOnly>
   </div>
 </template>
 
@@ -22,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cart {
+.cart2 {
   position: relative;
   display: inline-block;
   background: #092d4f;

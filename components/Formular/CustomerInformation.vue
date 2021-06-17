@@ -217,6 +217,7 @@ export default {
 
         if(canBeSubmitted){
           await this.sendCart(this.form);
+          this.$router.push("/kurv/kvittering")
         }
 
       }, 100);
