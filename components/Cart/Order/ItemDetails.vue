@@ -31,7 +31,7 @@
 <script>
 export default {
   props: {
-    items: { type: Object, required: true }
+    items: { type: Array, required: true }
   }
 };
 </script>

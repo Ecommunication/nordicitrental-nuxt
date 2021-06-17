@@ -1,42 +1,44 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col" style="width: 100%;">
-        <!-- TODO: img is missing -->
-        <!-- <HeaderImg
+  <ClientOnly>
+    <div class="container">
+      <div class="row">
+        <div class="col" style="width: 100%;">
+          <!-- TODO: img is missing -->
+          <!-- <HeaderImg
         v-if="product.cover"
         :img="product.cover.image"
         :text="product.cover.text"
         :height="460"
       /> -->
 
-        <div v-if="noOfItems">
-          <Breadcrumb class="mt-16 mb-4" />
+          <div v-if="noOfItems">
+            <Breadcrumb class="mt-16 mb-4" />
 
-          <CartList :cart="cart.items" />
+            <CartList :cart="cart.items" />
 
-          <nuxt-link to="/kurv/ordre">
-            <div
-              class="button btn-block btn-primary mt-2 mb-2"
-              style="border-radius: 7px;"
-            >
-              Udfør booking
-            </div>
-          </nuxt-link>
-          <Totals :cart="cart" />
-        </div>
+            <nuxt-link to="/kurv/ordre">
+              <div
+                class="button btn-block btn-primary mt-2 mb-2"
+                style="border-radius: 7px;"
+              >
+                Udfør booking
+              </div>
+            </nuxt-link>
+            <Totals :cart="cart" />
+          </div>
 
-        <div v-else>
-          <div>Kurven er tom</div>
-          <nuxt-link to="/">
-            <div class="button btn-primary">
-              Gå til produkter
-            </div>
-          </nuxt-link>
+          <div v-else>
+            <div>Kurven er tom</div>
+            <nuxt-link to="/">
+              <div class="button btn-primary">
+                Gå til produkter
+              </div>
+            </nuxt-link>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <script>

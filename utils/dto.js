@@ -66,48 +66,61 @@ export class Cart {
 }
 
 export class Order {
-  constructor(items, shipping, customer) {
+  constructor(customerId, items, shipping, shippingAdd, comments) {
     console.log({
+      customerId,
       items,
       shipping,
-      customer
+      shippingAdd,
+      comments
     });
 
     this.OrderProductsDetails = this.processItems(items)
-    this.CustomerId = ""
-    this.OrderComments = ""
-    this.OrderShippingFirstName = ""
-    this.OrderShippingLastName = ""
-    this.OrderShippingCompany = ""
-    this.OrderShippingAddress = ""
-    this.OrderShippingCity = ""
-    this.OrderShippingZip = ""
-    this.OrderShippingCountry = ""
+    this.CustomerId = customerId
+    this.OrderComments = comments || "";
+    this.OrderShippingFirstName = shippingAdd.firstName || "";
+    this.OrderShippingLastName = shippingAdd.lastName || "";
+    this.OrderShippingCompany = shippingAdd.companyName || "";
+    this.OrderShippingAddress = shippingAdd.streetNameAndNo || "";
+    this.OrderShippingCity = shippingAdd.town || "";
+    this.OrderShippingZip = shippingAdd.zipCode || "";
+    this.OrderShippingCountry = shippingAdd.country || "";
+    this.ShippingHandling = shipping.method || "";
+    this.OrderTotal = this.getOrderTotal(items, shipping.cost)
   }
 
   processItems(items){
     return items.map(item => {
       return {
-        ProductId: 0,
-        ProductRentalFrom: "",
-        ProductRentalTo: "",
-        ProductRentalSum: 0
+        ProductId: item.productId,
+        ProductRentalFrom: item.startDate,
+        ProductRentalTo: item.endDate,
+        ProductRentalSum: item.price,
+        ProductQty: item.amount
       }
     })
+  }
+
+  getOrderTotal(items, shippingCost){
+    const itemsCost = items.reduce((total, item) => {
+      total += item.price
+      return total
+    }, 0)
+    return itemsCost + shippingCost
   }
 }
 
 export class Customer {
   constructor(data){
-    console.log(data)
     this.CustomerFirstName = data.firstName || "";
     this.CustomerLastName = data.lastName || "";
     this.CustomerEmail = data.email || "";
     this.CustomerCompanyName = data.companyName || "";
+    this.CustomerAddress = data.streetNameAndNo || "";
     this.CustomerCity = data.town || "";
     this.CustomerZip = data.zipCode || "";
-    this.CustomerCountry = "";
-    this.CustomerPhone = "";
-    this.CustomerCompanyCVR = "";
+    this.CustomerCountry = data.country || "";
+    this.CustomerPhone = data.phone || "";
+    this.CustomerCompanyCVR = data.cvrNumber || "";
   }
 }

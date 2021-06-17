@@ -26,29 +26,31 @@
           <div>2750 Ballerup</div>
         </div>
 
-        <div>
-          <div class="mt-10">
-            <h2>Order Details</h2>
-            <ItemDetails :items="items" />
-            <OrderDetails :details="orderDetails" />
-          </div>
+        <ClientOnly>
+          <div class="py-10">
+            <div>
+              <h2>Order Details</h2>
+              <ItemDetails :items="items" />
+              <OrderDetails :details="orderDetails" />
+            </div>
 
-          <div class="mt-10">
-            <h2>Kundeoplysninger</h2>
-            <CustomerInformation :information="customerInformation" />
-          </div>
+            <div class="mt-10">
+              <h2>Kundeoplysninger</h2>
+              <CustomerInformation :information="customerInformation" />
+            </div>
 
-          <div class="mt-10">
-            <Addresses :addresses="addresses" />
+            <div class="mt-10">
+              <Addresses :addresses="addresses" />
+            </div>
           </div>
-        </div>
+        </ClientOnly>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import Breadcrumb from "@/components/Cart/Breadcrumb";
 import ItemDetails from "@/components/Cart/Order/ItemDetails";
 import OrderDetails from "@/components/Cart/Order/Details";
@@ -63,51 +65,87 @@ export default {
     CustomerInformation,
     Addresses
   },
+  computed: {
+    ...mapState(["orderReceipt"]),
+    orderDetails() {
+      return {
+        subtotal: (this.orderReceipt?.order?.OrderProductsDetails || []).reduce(
+          (total, item) => {
+            total += item.ProductRentalSum;
+            return total;
+          },
+          0
+        ),
+        shipping: 0, // todo: missing
+        vat: 0, // todo: missing
+        total: this.orderReceipt?.order?.OrderTotal,
+        paymentMethod: "", // todo: missing
+        remark: this.orderReceipt?.order?.OrderComments,
+        cvr: this.orderReceipt?.customer?.CustomerCompanyCVR
+      };
+    },
+    customerInformation() {
+      return {
+        email: "[email protected]",
+        telephone: this.orderReceipt?.customer.CustomerPhone
+      };
+    },
+    addresses() {
+      return {
+        billing: `
+          ${this.orderReceipt?.customer?.CustomerAddress}
+          ${this.orderReceipt?.customer?.CustomerCity}
+          ${this.orderReceipt?.customer?.CustomerCountry}
+        `,
+        shipping: `
+          ${this.orderReceipt?.order?.OrderShippingAddress}
+          ${this.orderReceipt?.order?.OrderShippingCity}
+          ${this.orderReceipt?.order?.OrderShippingCountry}
+        `
+      };
+    }
+  },
   data() {
     return {
-      items: [
-        {
-          slug: "iPad-air",
-          title: "iPad Air - WiFi only",
-          productId: 1,
-          amount: 5,
-          total: 320,
-          noOfDays: 8,
-          startDate: "2021-05-27T21:00:00.000Z",
-          endDate: "2021-06-03T21:00:00.000Z",
-          itemId: 1622210291975
-        },
-        {
-          slug: "i-pad-air-2-4",
-          title: "Another iPad",
-          productId: 2,
-          amount: 1,
-          total: 420,
-          noOfDays: 12,
-          startDate: "2021-06-01T21:00:00.000Z",
-          endDate: "2021-06-13T21:00:00.000Z",
-          itemId: 1622210291979
-        }
-      ],
-      orderDetails: {
-        subtotal: 320,
-        shipping: 800,
-        vat: 280,
-        paymentMethod: "Bank Transfer",
-        total: 1400,
-        remark:
-          "Caner from Proxify, just checking this is mock order, please do not take into consideration",
-        cvr: "123"
-      },
-      customerInformation: {
-        email: "[email protected]",
-        telephone: "123456789"
-      },
-      addresses: {
-        billing: "Nybrogade 2 1203 Copenhagen K",
-        shipping: "Clematisvænget 22 Vesterborg Region Sjælland 4953 Denmark"
-      }
+      items: []
     };
+  },
+  async created() {
+    if (!this.orderReceipt) {
+      this.$router.push("/");
+    } else {
+      this.items = await this.getItems();
+    }
+  },
+  methods: {
+    ...mapActions(["getProduct"]),
+    async getItems() {
+      const items = await Promise.all(
+        (this.orderReceipt?.order?.OrderProductsDetails || []).map(
+          async item => {
+            const product = await this.getProduct(item.ProductId).catch(
+              e => null
+            );
+            console.log(product);
+
+            return {
+              slug: product?.info?.slug,
+              title: product?.info?.name,
+              amount: item.ProductQty,
+              total: item.ProductRentalSum,
+              noOfDays:
+                1 +
+                (new Date(item?.ProductRentalTo).getTime() -
+                  new Date(item?.ProductRentalFrom).getTime()) /
+                  (1000 * 60 * 60 * 24),
+              startDate: item?.ProductRentalFrom,
+              endDate: item?.ProductRentalTo
+            };
+          }
+        )
+      );
+      return items;
+    }
   }
 };
 </script>
