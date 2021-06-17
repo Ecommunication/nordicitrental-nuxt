@@ -1,4 +1,4 @@
-import { Cart, Order, SHIPMENT_METHODS } from "../utils/dto";
+import { Cart, Order, Customer, SHIPMENT_METHODS } from "../utils/dto";
 
 // Helpers
 const validate = (validations, value) => {
@@ -92,13 +92,20 @@ export const actions = {
     commit("SET_SHIPMENT_METHOD", method);
   },
   async sendCart({ commit, state }, userInfoForm) {
+    const customer = new Customer({
+      ...userInfoForm.billingAddress,
+      cvrNumber: userInfoForm.cvrNumber,
+      email: userInfoForm.email,
+      phone: userInfoForm.phone
+    });
+
     const order = new Order(
       state.cart.items,
       state.cart.shipping,
       userInfoForm
     );
 
-    commit("RESET_CART");
+    //commit("RESET_CART");
 
     /* const payload = {
       OrderFirstName: "Caner"
@@ -123,18 +130,13 @@ export const actions = {
   },
   async getMetaData({ commit }) {
     const data = await this.$axios.$get("/general-meta");
-    console.log("META", { data });
     commit("SET_META_DATA", data);
   },
   async getNavigation({ commit }) {
     const data = await this.$axios.$get("/navigation");
-    console.log("NAV", { data });
     commit("SET_NAVIGATION", data);
   },
   async nuxtServerInit({ dispatch }) {
-    await Promise.all([
-      dispatch("getMetaData"),
-      dispatch("getNavigation")
-    ])
+    await Promise.all([dispatch("getMetaData"), dispatch("getNavigation")]);
   }
 };

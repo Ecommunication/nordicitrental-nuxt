@@ -1,20 +1,19 @@
 <template>
   <div class="mobile-navigation">
-    <select v-if="leafItems" v-model="page">
-      <option value="">Navigation</option>
-      <option
-        v-for="(item, index) in leafItems"
-        :key="index"
-        :value="item.link"
+    <ClientOnly>
+      <select v-if="leafItems" v-model="page">
+        <option value="">Navigation</option>
+        <option
+          v-for="(item, index) in leafItems"
+          :key="index"
+          :value="item.link"
         >
-
           <span v-if="item.level === 2 || item.level === 3"> - </span>
           <span v-if="item.level === 3"> - </span>
           {{ item.label }}
-
-        </option
-      >
-    </select>
+        </option>
+      </select>
+    </ClientOnly>
   </div>
 </template>
 

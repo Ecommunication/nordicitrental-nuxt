@@ -12,7 +12,7 @@
         <div class="col-md-4">
           <div class="product-gallery">
             <div class="product-gallery-main-image">
-              <img :src="product.gallery.main" alt="" />
+              <img v-if="product.gallery.main" :src="product.gallery.main" alt="" />
             </div>
             <div class="product-gallery-other-images">
               <div
