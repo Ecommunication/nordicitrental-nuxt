@@ -2,7 +2,7 @@
   <div class="input-checkbox">
     <input type="checkbox" v-model="inputLocal" />
     <label v-if="label" class="label" @click="inputLocal = !inputLocal"
-      >{{ label }}:</label
+      >{{ label }}</label
     >
     <div class="error-msg" v-if="errorMsg && showError" v-html="errorMsg"></div>
   </div>
