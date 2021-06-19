@@ -34,10 +34,20 @@
             </div></nuxt-link
           >
           <p class="booking-date">
-            : Total lejeperiode:
-            <span class="special">{{ item.noOfDays }}</span> dage. Fra:
-            <span class="special">{{ item.startDate | formatDate }}</span> til
-            <span class="special">{{ item.endDate | formatDate }}</span>
+            <span>
+              : Total lejeperiode:
+              <span class="special">{{ item.noOfDays }}</span> dage. Fra:
+              <span class="special">{{ item.startDate | formatDate }}</span> til
+              <span class="special">{{ item.endDate | formatDate }}</span>
+            </span>
+            <br />
+            <br />
+            <span>
+              <span class="text-blue">Tilvalg</span>
+              <span v-for="(opts, index) in item.productOptions" :key="index">
+                <span> <br> {{opts.name}} </span>
+              </span>
+            </span>
           </p>
         </td>
         <td class="product-price">

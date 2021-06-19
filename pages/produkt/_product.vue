@@ -120,7 +120,7 @@
   </div>
 </template>
 <script>
-import { Product } from "@/utils/dto";
+import { Product, ProductOption } from "@/utils/dto";
 import Modal from "@/components/Utilities/Modal";
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
@@ -161,11 +161,6 @@ export default {
       featuresTab: {}
     };
   },
-  computed: {
-    product() {
-      return new Product(this.data[0]);
-    }
-  },
   head() {
     return {
       title: this.product?.cover?.text || "",
@@ -182,8 +177,16 @@ export default {
     };
   },
   async asyncData({ params, $axios, $config }) {
-    const data = await $axios.$get(`/products?ProductSlug=${params.product}`);
-    return { data };
+    const productsData = (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
+    const productData = productsData[0] || {}
+    if(!productData) return;
+
+    const categories = await Promise.all(productData.product_categories.map(async cat => {
+      const categoryData = await $axios.$get(`/product-categories?Slug=${cat.Slug}`)
+      return categoryData && categoryData[0] ? categoryData[0] : []
+    }))
+    const product = new Product(productData, categories)
+    return { product };
   },
   methods: {
     onAddedToCart(cartData) {
