@@ -58,7 +58,11 @@ export default {
   env: {
     apiUrl: process.env.API_URL,
     googleApiKey: process.env.GOOGLE_MAPS_API_KEY,
-    serviceApi: process.env.SERVICE_API
+    serviceApi: process.env.SERVICE_API,
+    strapiAdminCredentials: {
+      identifier: process.env.STRAPI_ADMIN_IDENTIFIER,
+      password: process.env.STRAPI_ADMIN_PASSWORD
+    }
   },
   server: {
     port: 3001
