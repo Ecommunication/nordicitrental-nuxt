@@ -14,14 +14,9 @@
           </div>
 
           <div v-if="showDropdown === index" class="sub-menu">
-            <div
-              v-for="(item, index) in nav.items"
-              :key="index"
-              class="item-label col-item"
-              @click="goTo(item.link)"
-            >
+            <nuxt-link :to="item.link" class="item-label col-item" v-for="(item, index) in nav.items">
               {{ item.label }}
-            </div>
+            </nuxt-link>
           </div>
         </div>
       </div>

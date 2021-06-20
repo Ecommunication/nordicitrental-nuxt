@@ -1,49 +1,56 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        kvittering .... Header Image ...
-        <Breadcrumb class="mt-10 mb-10" />
+  <div>
+    <HeaderImg
+        v-if="data.ImageCover"
+        :img="data.ImageCover.url | formatImage"
+        :text="data.TextCover"
+    />
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          kvittering .... Header Image ...
+          <Breadcrumb class="mt-10 mb-10" />
 
-        <div class="message">
-          <p>Kære kunde.</p>
-          <p>Tak for din bestilling</p>
-          <p>
-            Du vil modtage en lejeaftale/tilbud pr. e-mail inden for få timer.
-            Lejeaftalen/tilbuddet skal accepteres ved at besvare e-mailen med et
-            ”godkendt”. Aftalen er gældende, når vi har modtaget den accepterede
-            lejeaftale/tilbud.
-          </p>
-          <p>
-            Når vi har modtaget den godkendte lejeaftale/tilbud, vil du kort
-            efter modtage en faktura til betaling. Betalingsbetingelserne
-            fremgår af fakturaen. Betaling kan ske via kontooverførsel. Vilkår
-            og betingelser er angivet i lejeaftale/tilbud samt på fakturaen.
-          </p>
-          <p>Med venlig hilsen</p>
-          <div>pNordic IT Rental</div>
-          <div>Industriparken 22A</div>
-          <div>2750 Ballerup</div>
-        </div>
-
-        <ClientOnly>
-          <div class="py-10">
-            <div>
-              <h2>Order Details</h2>
-              <ItemDetails :items="items" />
-              <OrderDetails :details="orderDetails" />
-            </div>
-
-            <div class="mt-10">
-              <h2>Kundeoplysninger</h2>
-              <CustomerInformation :information="customerInformation" />
-            </div>
-
-            <div class="mt-10">
-              <Addresses :addresses="addresses" />
-            </div>
+          <div class="message">
+            <p>Kære kunde.</p>
+            <p>Tak for din bestilling</p>
+            <p>
+              Du vil modtage en lejeaftale/tilbud pr. e-mail inden for få timer.
+              Lejeaftalen/tilbuddet skal accepteres ved at besvare e-mailen med et
+              ”godkendt”. Aftalen er gældende, når vi har modtaget den accepterede
+              lejeaftale/tilbud.
+            </p>
+            <p>
+              Når vi har modtaget den godkendte lejeaftale/tilbud, vil du kort
+              efter modtage en faktura til betaling. Betalingsbetingelserne
+              fremgår af fakturaen. Betaling kan ske via kontooverførsel. Vilkår
+              og betingelser er angivet i lejeaftale/tilbud samt på fakturaen.
+            </p>
+            <p>Med venlig hilsen</p>
+            <div>pNordic IT Rental</div>
+            <div>Industriparken 22A</div>
+            <div>2750 Ballerup</div>
           </div>
-        </ClientOnly>
+
+          <ClientOnly>
+            <div class="py-10">
+              <div>
+                <h2>Order Details</h2>
+                <ItemDetails :items="items" />
+                <OrderDetails :details="orderDetails" />
+              </div>
+
+              <div class="mt-10">
+                <h2>Kundeoplysninger</h2>
+                <CustomerInformation :information="customerInformation" />
+              </div>
+
+              <div class="mt-10">
+                <Addresses :addresses="addresses" />
+              </div>
+            </div>
+          </ClientOnly>
+        </div>
       </div>
     </div>
   </div>
@@ -56,12 +63,14 @@ import ItemDetails from "@/components/Cart/Order/ItemDetails";
 import OrderDetails from "@/components/Cart/Order/Details";
 import CustomerInformation from "@/components/Cart/Order/CustomerInformation";
 import Addresses from "@/components/Cart/Order/Addresses";
+import HeaderImg from "@/components/Utilities/HeaderImg";
 
 export default {
   components: {
     Breadcrumb,
     ItemDetails,
     OrderDetails,
+    HeaderImg,
     CustomerInformation,
     Addresses
   },
@@ -109,6 +118,10 @@ export default {
     return {
       items: []
     };
+  },
+  async asyncData({ params, $axios }) {
+    const data = await $axios.$get("/checkud-ordre");
+    return { data };
   },
   async created() {
     if (!this.orderReceipt) {

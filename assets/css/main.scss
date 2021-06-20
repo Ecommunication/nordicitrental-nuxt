@@ -11,11 +11,12 @@
 @import "components/helpers/margins";
 @import "components/helpers/typo";
 @import "components/helpers/widths";
-@import "components/helpers//button";
+@import "components/helpers/button";
 
 /* Pages */
 @import "components/pages/index";
 @import "components/shop/category";
+@import "components/shop/checkout";
 
 /* Utils */
 @import "components/responsive";

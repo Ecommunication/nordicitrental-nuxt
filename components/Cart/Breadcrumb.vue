@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumb">
-    <div v-for="(item, index) in items" :key="index">
-      <div
+    <ul v-for="(item, index) in items" :key="index">
+      <li
         class="breadcrumb-item"
         :class="`
         ${path === item.path ? 'selected' : ''}
@@ -9,9 +9,9 @@
         ${index === items.length - 1 ? 'last-child' : ''}
         `"
       >
-        {{ item.label }}
-      </div>
-    </div>
+        <i class="interceptor">{{index+1}}.</i> {{ item.label }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -39,23 +39,46 @@ export default {
   display: flex;
   font-size: 0.8em;
 
-  .breadcrumb-item {
-    background: #092d4f;
-    color: #ffffff;
-    padding: 0 50px;
-    line-height: 53px;
-  }
+  ul {
+    list-style: none;
 
-  .breadcrumb-item.selected {
-    font-weight: bold;
-  }
-  .breadcrumb-item.first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-  }
-  .breadcrumb-item.last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    .breadcrumb-item {
+      background: #092d4f;
+      color: #ffffff;
+      padding: 0 50px;
+      line-height: 53px;
+
+      .interceptor {
+        font-style: normal;
+        margin-right: 10px;
+      }
+    }
+
+    .breadcrumb-item {
+      &.selected {
+        font-weight: bold;
+        position: relative;
+
+        &:before {
+          content: '';
+          background: url('~/assets/images/icons/breadcrumb/tick.png') no-repeat;
+          width: 30px;
+          height: 30px;
+          display: block;
+          position:absolute;
+          left: 11px;
+          top: 12px;
+        }
+      }
+    }
+    .breadcrumb-item.first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    .breadcrumb-item.last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
   }
 }
 </style>

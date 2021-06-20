@@ -23,6 +23,7 @@
               v-if="item.product.gallery.main"
               width="220"
               height="220"
+              class="product-thumbnail-image"
               :src="item.product.gallery.main"
             />
           </nuxt-link>
@@ -35,19 +36,20 @@
           >
           <p class="booking-date">
             <span>
-              : Total lejeperiode:
-              <span class="special">{{ item.noOfDays }}</span> dage. Fra:
+              Total lejeperiode:
+              <span class="special">{{ item.noOfDays }}</span> dage.  <br />
+              Fra:
               <span class="special">{{ item.startDate | formatDate }}</span> til
               <span class="special">{{ item.endDate | formatDate }}</span>
             </span>
             <br />
             <br />
-            <span>
+            <div v-if="item.productOptions">
               <span class="text-blue">Tilvalg</span>
               <span v-for="(opts, index) in item.productOptions" :key="index">
                 <span> <br> {{opts.name}} </span>
               </span>
-            </span>
+            </div>
           </p>
         </td>
         <td class="product-price">
