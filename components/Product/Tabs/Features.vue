@@ -1,27 +1,18 @@
 <template>
   <div class="features-table" style="width: 100%">
-    <!-- Todo: make it dynamic according to data type -->
-    <div class="table-row">
-      <div class="table-key">Mærke</div>
-      <div class="table-value">Apple</div>
-    </div>
-
-    <div class="table-row">
-      <div class="table-key">Model</div>
-      <div class="table-value">iPad Air</div>
-    </div>
-
-    <div class="table-row">
-      <div class="table-key">Processor</div>
-      <div class="table-value">
-        A7-processor med 64-bit-arkitektur og M7-bevægelseshjælpeprocessor
-      </div>
+    <div class="table-row" v-for="(feature, index) in features" :key="index">
+      <div class="table-key">{{ feature.key }}</div>
+      <div class="table-value">{{ feature.value }}</div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    features: { type: Array, required: true }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

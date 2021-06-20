@@ -43,7 +43,10 @@ export class Product {
       short: data.DescriptionShort,
       long: data.DescriptionLong
     };
-    this.icons = data.ProductSpecifications;
+    this.features = (data.ProductAttributes || []).map(attr => ({
+      key: attr.AttributeKey,
+      value: attr.AttributeValue
+    }));
     this.categories = categories
     this.options = this.getProductOptions(data.ProductOptionsP, categories)
   }
@@ -95,7 +98,7 @@ export class Order {
       comments
     });
 
-    this.OrderProductsDetails = this.processItems(items);
+    this.Products = this.processItems(items);
     this.CustomerId = customerId;
     this.OrderComments = comments || "";
     this.OrderShippingFirstName = shippingAdd.firstName || "";
@@ -113,11 +116,15 @@ export class Order {
     return items.map(item => {
       return {
         ProductId: item.productId,
+        ProductName: item.product?.info?.name || '',
         ProductRentalFrom: item.startDate,
         ProductRentalTo: item.endDate,
         ProductRentalSum: item.price,
         ProductQty: item.amount,
-        ProductOptions: item.productOptions
+        ProductOptions: item.productOptions.map(po => ({
+          ProductName: po.name,
+          ProductPrice: po.price
+        }))
       };
     });
   }

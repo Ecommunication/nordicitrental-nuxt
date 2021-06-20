@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-8">
           <div class="product-meta">
-            <IconBar class="mb-8" :icons="product.icons" />
+            <IconBar class="mb-8" :features="product.features" />
             <div class="product-prices text-blue">
               <div class="price-weekly-container">
                 <span class="price-weekly">{{
@@ -67,7 +67,7 @@
         <div class="col">
           <Tabs
             :description="product.descriptions.long"
-            :features="featuresTab"
+            :features="product.features"
           />
         </div>
       </div>
@@ -158,7 +158,6 @@ export default {
           title: "Data simkort med 3G/4G til iPad"
         }
       ],
-      featuresTab: {}
     };
   },
   head() {
@@ -186,6 +185,8 @@ export default {
       return categoryData && categoryData[0] ? categoryData[0] : []
     }))
     const product = new Product(productData, categories)
+    console.log(product, 2);
+
     return { product };
   },
   methods: {

@@ -1,11 +1,12 @@
 <template>
   <div class="icon-bar">
-    <div v-for="(icon, index) in icons" :key="index">
+    <div v-for="icon in icons" :key="icon.key">
+      {{icon.key}}
       <div class="icon text-center">
         <div class="img-container">
-          <img :src="icon.Icon.url | formatImage" :alt="icon.Icon.alternativeText" />
+          <img v-if="img" :src="img" />
         </div>
-        <div class="desc">{{ icon.Description }}</div>
+        <div class="desc">{{ icon.value }}</div>
       </div>
     </div>
   </div>
@@ -14,8 +15,39 @@
 <script>
 export default {
   props: {
-    icons: { type: Array, required: true },
-  }
+    features: { type: Array, default: [] },
+  },
+  computed: {
+    icons(){
+      const features = this.features.map(feature => {
+        return {
+          key: feature.key,
+          value: this.shortenText(feature.value),
+          img: ""
+        }
+      })
+
+
+
+
+    }
+  },
+  data() {
+    return {
+      iconData: [
+        {key: "Cpu", img: ""},
+        {key: "Ram", img: ""},
+        {key: "HDD", img: ""},
+        {key: "Screen Size", img: ""},
+        {key: "Screen Resolution", img: ""},
+      ]
+    }
+  },
+  methods: {
+    shortenText(val) {
+      return val.length > 14 ? val.substr(0, 14) + " ..." : val
+    }
+  },
 };
 </script>
 

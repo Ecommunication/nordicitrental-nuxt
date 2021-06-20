@@ -16,7 +16,7 @@
         <DescriptionTab :description="description" />
       </div>
       <div v-else-if="selected === 1">
-        <FeaturesTab />
+        <FeaturesTab :features="features" />
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
   components: { DescriptionTab, FeaturesTab },
   props: {
     description: { type: String, required: true },
-    features: { type: Object, required: true }
+    features: { type: Array, required: true }
   },
   data() {
     return {

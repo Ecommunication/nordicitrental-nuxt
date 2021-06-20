@@ -69,7 +69,7 @@ export default {
     ...mapState(["orderReceipt"]),
     orderDetails() {
       return {
-        subtotal: (this.orderReceipt?.order?.OrderProductsDetails || []).reduce(
+        subtotal: (this.orderReceipt?.order?.Products || []).reduce(
           (total, item) => {
             total += item.ProductRentalSum;
             return total;
@@ -121,7 +121,7 @@ export default {
     ...mapActions(["getProduct"]),
     async getItems() {
       const items = await Promise.all(
-        (this.orderReceipt?.order?.OrderProductsDetails || []).map(
+        (this.orderReceipt?.order?.Products || []).map(
           async item => {
             const product = await this.getProduct(item.ProductId).catch(
               e => null

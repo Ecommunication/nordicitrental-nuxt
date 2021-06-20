@@ -192,6 +192,7 @@ export default {
           .map(o => ({
             id: o.option.id,
             name: o.option.Name,
+            price: o.option.FixedPrice
           }))
       };
 
