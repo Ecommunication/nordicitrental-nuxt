@@ -74,7 +74,7 @@
 
       <div class="row mt-10">
         <div class="col">
-          <Suggestions :products="products" />
+          <Suggestions :products="product.upsell" />
         </div>
       </div>
     </div>
@@ -144,20 +144,6 @@ export default {
       addToCartKey: new Date().getTime(),
       isModalVisible: true,
       modalData: {},
-      products: [
-        {
-          id: 1,
-          img:
-            "https://nordicitrental.dk/wp-content/uploads/2015/05/ipadstander-220x220.jpg",
-          title: "iPad gulvstander – sort"
-        },
-        {
-          id: 2,
-          img:
-            "https://nordicitrental.dk/wp-content/uploads/2014/10/simcard-220x165.gif",
-          title: "Data simkort med 3G/4G til iPad"
-        }
-      ],
     };
   },
   head() {
@@ -185,7 +171,7 @@ export default {
       return categoryData && categoryData[0] ? categoryData[0] : []
     }))
     const product = new Product(productData, categories)
-    console.log(product, 2);
+    console.log(product, 1, categories);
 
     return { product };
   },

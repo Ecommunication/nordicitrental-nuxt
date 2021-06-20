@@ -52,11 +52,17 @@
         </div>
       </div>
 
-      <CategorySlider title="Lignende produkter" :categories="[]" titlePosition="left" />
+      <CategorySlider
+        v-if="category.upsell && category.upsell.length"
+        title="Lignende produkter"
+        :categories="category.upsell"
+        titlePosition="left"
+        :titlePaddingBottom="16"
+      />
 
-      <div class="row">
+      <div class="row py-5" v-if="category.description">
         <div class="col">
-          <div class="description" v-html="category.description"></div>
+          <div class="category-description" v-html="category.description"></div>
         </div>
       </div>
     </div>
@@ -64,20 +70,13 @@
 </template>
 <script>
 import HeaderImg from "@/components/Utilities/HeaderImg";
-import CategorySlider from "@/components/Category/Slider"
+import CategorySlider from "@/components/Category/Slider";
 import { Category } from "@/utils/dto";
 
 export default {
   components: {
     HeaderImg,
     CategorySlider
-  },
-  computed: {
-    category() {
-      const category = new Category(this.data[0]);
-      console.log(category);
-      return category;
-    }
   },
   head() {
     return {
@@ -95,11 +94,19 @@ export default {
     };
   },
   async asyncData({ params, $axios, $config }) {
-    const data = await $axios.$get(
-      `/product-categories?Slug=${params.category}`
+    const slug = params.category.toLowerCase();
+    const categoriesData = await $axios.$get(
+      `/product-categories?Slug=${slug}`
     );
-    console.log(data)
-    return { data };
+
+    const categoryData = categoriesData[0] || {};
+    if (!categoryData) return;
+
+    const category = new Category(categoryData)
+
+    console.log(categoryData, category, 3)
+
+    return { category };
   }
 };
 </script>

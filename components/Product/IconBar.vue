@@ -1,10 +1,9 @@
 <template>
   <div class="icon-bar">
     <div v-for="icon in icons" :key="icon.key">
-      {{icon.key}}
       <div class="icon text-center">
         <div class="img-container">
-          <img v-if="img" :src="img" />
+          <img v-if="icon.img" :src="icon.img" />
         </div>
         <div class="desc">{{ icon.value }}</div>
       </div>
@@ -15,39 +14,56 @@
 <script>
 export default {
   props: {
-    features: { type: Array, default: [] },
+    features: { type: Array, default: [] }
   },
   computed: {
-    icons(){
-      const features = this.features.map(feature => {
-        return {
-          key: feature.key,
-          value: this.shortenText(feature.value),
-          img: ""
-        }
-      })
-
-
-
-
+    icons() {
+      return this.iconData
+        .map(i => {
+          const feature = this.features.find(
+            f => f.key.toLowerCase() === i.key.toLowerCase()
+          );
+          return feature && feature.value
+            ? {
+                ...i,
+                value: this.shortenText(feature.value)
+              }
+            : null;
+        })
+        .filter(i => i);
     }
   },
   data() {
     return {
       iconData: [
-        {key: "Cpu", img: ""},
-        {key: "Ram", img: ""},
-        {key: "HDD", img: ""},
-        {key: "Screen Size", img: ""},
-        {key: "Screen Resolution", img: ""},
+        {
+          key: "Processor",
+          img: require("@/assets/images/icons/product/mini-specifications/cpu.png")
+        },
+        {
+          key: "Ram",
+          img: require("@/assets/images/icons/product/mini-specifications/mem.png")
+        },
+        {
+          key: "Harddisk",
+          img: require("@/assets/images/icons/product/mini-specifications/hdd.png")
+        },
+        {
+          key: "Skærm",
+          img: require("@/assets/images/icons/product/mini-specifications/screen-size.png")
+        },
+        {
+          key: "Opløsning",
+          img: require("@/assets/images/icons/product/mini-specifications/screen-resolution.png")
+        }
       ]
-    }
+    };
   },
   methods: {
     shortenText(val) {
-      return val.length > 14 ? val.substr(0, 14) + " ..." : val
+      return val.length > 14 ? val.substr(0, 14) + " ..." : val;
     }
-  },
+  }
 };
 </script>
 

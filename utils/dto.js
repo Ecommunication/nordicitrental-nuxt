@@ -15,7 +15,7 @@ export class Product {
   constructor(data, categories = []) {
     if (!data) return {};
 
-    console.log(data)
+    console.log(data);
 
     this._data = data;
     this.info = {
@@ -47,30 +47,34 @@ export class Product {
       key: attr.AttributeKey,
       value: attr.AttributeValue
     }));
-    this.categories = categories
-    this.options = this.getProductOptions(data.ProductOptionsP, categories)
+    this.categories = categories;
+    this.options = this.getProductOptions(data.ProductOptionsP, categories);
+    this.upsell = (data?.ProductsUpsell || []).map(p => new Product(p));
   }
 
-
-  getProductOptions(optsFromProduct = [], categories = []){
+  getProductOptions(optsFromProduct = [], categories = []) {
     const productOptionsFromCategory = [];
 
-    categories.map(cat => cat.ProductOptionsP).forEach(opts => {
-      productOptionsFromCategory.push(...opts)
-    });
+    categories
+      .map(cat => cat.ProductOptionsP)
+      .forEach(opts => {
+        productOptionsFromCategory.push(...opts);
+      });
 
     const options = [...optsFromProduct, ...productOptionsFromCategory];
-    const uniqueOptionIds = [...new Set(options.map(o => o.id))]
+    const uniqueOptionIds = [...new Set(options.map(o => o.id))];
 
-    return uniqueOptionIds.map(id => options.find(o => o.id === id))
+    return uniqueOptionIds.map(id => options.find(o => o.id === id));
   }
 }
 
 export class Category {
   constructor(data) {
+    if (!data) return {};
+
     this.cover = {
       text: data.TextCover,
-      image: formatImage(data.ImageCover.url)
+      image: formatImage(data?.ImageCover?.url || "")
     };
     this.meta = {
       title: data.MetaTitle,
@@ -78,6 +82,11 @@ export class Category {
     };
     this.description = data.Description;
     this.products = data.products.map(product => new Product(product));
+    this.upsell = (data?.CategoryUpsell || []).map(cat => ({
+      Image: cat.UpsellIcon,
+      Title: cat.Name,
+      Slug: cat.Slug
+    }))
   }
 }
 
@@ -116,7 +125,7 @@ export class Order {
     return items.map(item => {
       return {
         ProductId: item.productId,
-        ProductName: item.product?.info?.name || '',
+        ProductName: item.product?.info?.name || "",
         ProductRentalFrom: item.startDate,
         ProductRentalTo: item.endDate,
         ProductRentalSum: item.price,
