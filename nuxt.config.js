@@ -1,4 +1,23 @@
 export default {
+  debug:true,
+  server: {
+    port: process.env.SERVERPORT,
+    host: process.env.SERVERHOST
+  },
+  /*
+  ** Nuxt rendering mode
+  ** See https://nuxtjs.org/api/configuration-mode
+  */
+  mode: 'universal',
+  /*
+  ** Nuxt target
+  ** See https://nuxtjs.org/api/configuration-target
+  */
+  target: 'server',
+  /*
+  ** Headers of the page
+  ** See https://nuxtjs.org/api/configuration-head
+  */
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "nordic-frontend",
@@ -63,8 +82,5 @@ export default {
       identifier: process.env.STRAPI_ADMIN_IDENTIFIER,
       password: process.env.STRAPI_ADMIN_PASSWORD
     }
-  },
-  server: {
-    port: 3001
   }
 };
