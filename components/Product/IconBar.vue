@@ -1,11 +1,11 @@
 <template>
   <div class="icon-bar">
-    <div v-for="(icon, index) in icons" :key="index">
+    <div v-for="icon in icons" :key="icon.key">
       <div class="icon text-center">
         <div class="img-container">
-          <img :src="icon.Icon.url | formatImage" :alt="icon.Icon.alternativeText" />
+          <img v-if="icon.img" :src="icon.img" />
         </div>
-        <div class="desc">{{ icon.Description }}</div>
+        <div class="desc">{{ icon.value }}</div>
       </div>
     </div>
   </div>
@@ -14,7 +14,55 @@
 <script>
 export default {
   props: {
-    icons: { type: Array, required: true },
+    features: { type: Array, default: [] }
+  },
+  computed: {
+    icons() {
+      return this.iconData
+        .map(i => {
+          const feature = this.features.find(
+            f => f.key.toLowerCase() === i.key.toLowerCase()
+          );
+          return feature && feature.value
+            ? {
+                ...i,
+                value: this.shortenText(feature.value)
+              }
+            : null;
+        })
+        .filter(i => i);
+    }
+  },
+  data() {
+    return {
+      iconData: [
+        {
+          key: "Processor",
+          img: require("@/assets/images/icons/product/mini-specifications/cpu.png")
+        },
+        {
+          key: "Ram",
+          img: require("@/assets/images/icons/product/mini-specifications/mem.png")
+        },
+        {
+          key: "Harddisk",
+          img: require("@/assets/images/icons/product/mini-specifications/hdd.png")
+        },
+        {
+          key: "Skærm",
+          img: require("@/assets/images/icons/product/mini-specifications/screen-size.png")
+        },
+        {
+          key: "Opløsning",
+          img: require("@/assets/images/icons/product/mini-specifications/screen-resolution.png")
+        }
+      ]
+    };
+  },
+  methods: {
+    shortenText(val) {
+      return val.length > 14 ? val.substr(0, 14) + " ..." : val;
+    }
   }
 };
 </script>

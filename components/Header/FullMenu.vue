@@ -8,7 +8,7 @@
           class="item-label"
           :class="index === 0 ? 'col-title' : 'col-item'"
           @click="
-            goTo(`/produkt-kategori/${item.Slug}`)
+            goTo(`/${index === 0 ? 'produkt-kategori' : 'produkt'}/${item.Slug}`)
           "
         >
           {{ item.Name }}

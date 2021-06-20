@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div v-if="options.length" class="mb-5">
+      <p class="title mb-1">Tilføj Tilvalg:</p>
+
+      <div v-for="(option, index) in options" :key="index">
+        <Checkbox
+          v-if="option.key === OPTIONS.MICROSOFT_OFFICE"
+          :label="option.option.Name"
+          :input="option.value"
+          @changed="val => (option.value = val)"
+        />
+      </div>
+    </div>
+
     <p class="title">Vælg lejeperiode:</p>
     <client-only>
       <div class="date-picker-container">
@@ -37,10 +50,7 @@
     </div>
 
     <div class="actions mt-8">
-      <AmountPicker
-        :amount="amount"
-        @changed="onAmountPickerChange"
-      />
+      <AmountPicker :amount="amount" @changed="onAmountPickerChange" />
       <div
         class="add-to-cart ml-3 button btn-primary"
         :class="canBePlaced ? '' : 'btn-disabled'"
@@ -58,11 +68,13 @@
 import { mapActions } from "vuex";
 import DatePicker from "vue2-datepicker";
 import AmountPicker from "@/components/Utilities/AmountPicker";
+import Checkbox from "@/components/Utilities/Form/Checkbox";
 import "vue2-datepicker/index.css";
 export default {
   components: {
     DatePicker,
-    AmountPicker
+    AmountPicker,
+    Checkbox
   },
   props: {
     dailyPrice: { type: Number, required: true },
@@ -70,16 +82,32 @@ export default {
     product: { type: Object, required: true }
   },
   computed: {
+    /* Options */
+    microsoftOfficeOption() {
+      const microsoftOfficeOption = this.options.find(
+        o => o.key === this.OPTIONS.MICROSOFT_OFFICE
+      );
+      return microsoftOfficeOption || {};
+    },
+    microsoftOfficeUnitPrice() {
+      return this.microsoftOfficeOption.value
+        ? this.microsoftOfficeOption.option.FixedPrice
+        : 0;
+    },
+    /* Add Options here */
+
     noOfDays() {
       const dayDifference = this.dayDifference(this.start, this.end) + 1;
       return dayDifference > 0 ? dayDifference : 0;
     },
-    unitPrice(){
-      return this.calculatePrice(
+    unitPrice() {
+      const productPrice = this.calculatePrice(
         this.dailyPrice,
         this.weeklyPrice,
         this.noOfDays
       );
+
+      return productPrice + this.microsoftOfficeUnitPrice /* + add addional options here */;
     },
     price() {
       return this.unitPrice * this.amount;
@@ -87,21 +115,33 @@ export default {
     canBePlaced() {
       return this.noOfDays > 7;
     },
-    productId(){
-      return this.product.info.id
+    productId() {
+      return this.product.info.id;
     }
   },
   data() {
     return {
+      OPTIONS: {
+        MICROSOFT_OFFICE: "microsoft-office"
+      },
       start: new Date(new Date().toDateString()),
       end: this.shiftDateXDays(new Date(), 7),
-      amount: 1
+      amount: 1,
+      options: []
     };
+  },
+  created() {
+    console.log(this.product.options);
+    this.options = this.product.options.map(o => ({
+      option: o,
+      key: o.ProductSlug,
+      value: null,
+    }));
   },
   methods: {
     ...mapActions(["addToCart"]),
-    onAmountPickerChange(amount){
-      this.amount = parseInt(amount)
+    onAmountPickerChange(amount) {
+      this.amount = parseInt(amount);
     },
     // days can be -x, +x
     shiftDateXDays(date, days) {
@@ -146,12 +186,19 @@ export default {
         noOfDays: this.noOfDays,
         startDate: this.start,
         endDate: this.end,
-        product: this.product
+        product: this.product,
+        productOptions: this.options
+          .filter(o => o.value)
+          .map(o => ({
+            id: o.option.id,
+            name: o.option.Name,
+            price: o.option.FixedPrice
+          }))
       };
 
       console.log(payload);
       this.addToCart(payload);
-      this.$emit('addedToCart', payload)
+      this.$emit("addedToCart", payload);
     }
   }
 };

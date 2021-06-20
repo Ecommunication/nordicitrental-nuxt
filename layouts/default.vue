@@ -34,25 +34,27 @@ export default {
 </script>
 
 <style lang="scss">
-.description {
+.category-description {
   h1,
   h2,
   h3,
   h4 {
+    margin-top: 30px;
     color: #092d4f;
   }
-}
-.description-tab {
-  padding: 0 25px;
+
   p {
-    font-size: 0.75em;
+    font-size: 0.8em;
     line-height: 25px;
-    font-weight: 100;
   }
-  h2,
+  h1 {
+    font-size: 1.4em;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
   h3 {
-    margin-bottom: 20px;
-    color: #092d4f;
+    font-size: 1em;
   }
 }
 

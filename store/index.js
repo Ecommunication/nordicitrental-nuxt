@@ -12,6 +12,7 @@ const validate = (validations, value) => {
 };
 
 export const state = () => ({
+  jwt: null,
   meta: {},
   navigation: {},
   cart: new Cart(),
@@ -57,11 +58,14 @@ export const mutations = {
   },
   SET_ORDER_RECEIPT(state, { customer, order }) {
     state.orderReceipt = { customer, order };
+  },
+  SET_JWT(state, jwt) {
+    state.jwt = jwt;
   }
 };
 
 export const actions = {
-  async getProduct({}, id){
+  async getProduct({}, id) {
     const data = await this.$axios.$get(`/products/${id}`);
     const product = new Product(data);
     return product;
@@ -101,6 +105,8 @@ export const actions = {
     commit("SET_SHIPMENT_METHOD", method);
   },
   async sendCart({ commit, state }, userInfoForm) {
+    const httpConfig =  { headers: { Authorization: `Bearer ${state.jwt}`}};
+
     const customer = new Customer({
       ...userInfoForm.billingAddress,
       cvrNumber: userInfoForm.cvrNumber,
@@ -110,8 +116,11 @@ export const actions = {
 
     // Upsert Customer
     const customersWithThisEmail = await this.$axios.$get(
-      `/customers?CustomerEmail=${customer.CustomerEmail}`
+      `/customers?CustomerEmail=${customer.CustomerEmail}`,
+      httpConfig
     );
+
+    console.log("!!!", customersWithThisEmail)
     let oldCustomer;
     if (customersWithThisEmail.length) {
       oldCustomer = customersWithThisEmail[0];
@@ -121,11 +130,12 @@ export const actions = {
     if (oldCustomer) {
       customerResponse = await this.$axios.$put(
         `/customers/${oldCustomer.id}`,
-        customer
+        customer,
+        httpConfig
       );
       console.log("updating customer");
     } else {
-      customerResponse = await this.$axios.$post(`/customers`, customer);
+      customerResponse = await this.$axios.$post(`/customers`, customer, httpConfig);
       console.log("creating customer");
     }
 
@@ -145,14 +155,13 @@ export const actions = {
     );
 
     console.log({ customer, order });
-    const orderResponse = await this.$axios.$post("/orders", order);
+    const orderResponse = await this.$axios.$post("/orders", order, httpConfig);
 
     commit("SET_ORDER_RECEIPT", {
       customer: customerResponse,
       order: orderResponse
     });
     commit("RESET_CART");
-
   },
   validateForm({}, { validations, form }) {
     const errors = {};
@@ -168,6 +177,10 @@ export const actions = {
 
     return { errors, hasAnyError };
   },
+  async loginAsAdmin({ commit }) {
+    const { jwt } = await this.$axios.$post("/auth/local", process.env.strapiAdminCredentials);
+    commit("SET_JWT", jwt);
+  },
   async getMetaData({ commit }) {
     const data = await this.$axios.$get("/general-meta");
     commit("SET_META_DATA", data);
@@ -177,6 +190,7 @@ export const actions = {
     commit("SET_NAVIGATION", data);
   },
   async nuxtServerInit({ dispatch }) {
+    await dispatch("loginAsAdmin");
     await Promise.all([dispatch("getMetaData"), dispatch("getNavigation")]);
   }
 };

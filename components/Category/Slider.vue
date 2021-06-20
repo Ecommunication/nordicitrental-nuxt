@@ -1,12 +1,12 @@
 <template>
   <div class="row">
     <div class="col" style="width:100%;">
-      <h3 class="text-blue title-md mb-12" :style="`text-align: ${titlePosition};`">
+      <h3 class="text-blue title-md" :style="`text-align: ${titlePosition}; padding-bottom: ${titlePaddingBottom}px;`">
         {{ title }}
       </h3>
       <div class="row" style="justify-content: space-around;">
         <div class="col mx-2" v-for="(cat, index) in categories" :key="index">
-          <nuxt-link :to="`/produkt-kategori/${cat.Title}`">
+          <nuxt-link :to="`/produkt-kategori/${cat.Slug}`">
             <div class="category-card">
               <img :src="cat.Image.url | formatImage" />
               <span class="category-title text-md weight-thin mt-6">{{
@@ -26,7 +26,8 @@ export default {
   props: {
     title: { type: String, required: true },
     categories: { type: Array, required: true },
-    titlePosition: { type: String, default: "center" }
+    titlePosition: { type: String, default: "center" },
+    titlePaddingBottom: { type: Number, default: 48 }
   }
 };
 </script>

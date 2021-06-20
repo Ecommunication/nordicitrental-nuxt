@@ -184,6 +184,7 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/forside");
+    console.log(data)
     return { data };
   }
 };

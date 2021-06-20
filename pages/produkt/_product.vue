@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-8">
           <div class="product-meta">
-            <IconBar class="mb-8" :icons="product.icons" />
+            <IconBar class="mb-8" :features="product.features" />
             <div class="product-prices text-blue">
               <div class="price-weekly-container">
                 <span class="price-weekly">{{
@@ -67,14 +67,14 @@
         <div class="col">
           <Tabs
             :description="product.descriptions.long"
-            :features="featuresTab"
+            :features="product.features"
           />
         </div>
       </div>
 
       <div class="row mt-10">
         <div class="col">
-          <Suggestions :products="products" />
+          <Suggestions :products="product.upsell" />
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@
   </div>
 </template>
 <script>
-import { Product } from "@/utils/dto";
+import { Product, ProductOption } from "@/utils/dto";
 import Modal from "@/components/Utilities/Modal";
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
@@ -144,27 +144,7 @@ export default {
       addToCartKey: new Date().getTime(),
       isModalVisible: true,
       modalData: {},
-      products: [
-        {
-          id: 1,
-          img:
-            "https://nordicitrental.dk/wp-content/uploads/2015/05/ipadstander-220x220.jpg",
-          title: "iPad gulvstander – sort"
-        },
-        {
-          id: 2,
-          img:
-            "https://nordicitrental.dk/wp-content/uploads/2014/10/simcard-220x165.gif",
-          title: "Data simkort med 3G/4G til iPad"
-        }
-      ],
-      featuresTab: {}
     };
-  },
-  computed: {
-    product() {
-      return new Product(this.data[0]);
-    }
   },
   head() {
     return {
@@ -182,8 +162,18 @@ export default {
     };
   },
   async asyncData({ params, $axios, $config }) {
-    const data = await $axios.$get(`/products?ProductSlug=${params.product}`);
-    return { data };
+    const productsData = (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
+    const productData = productsData[0] || {}
+    if(!productData) return;
+
+    const categories = await Promise.all(productData.product_categories.map(async cat => {
+      const categoryData = await $axios.$get(`/product-categories?Slug=${cat.Slug}`)
+      return categoryData && categoryData[0] ? categoryData[0] : []
+    }))
+    const product = new Product(productData, categories)
+    console.log(product, 1, categories);
+
+    return { product };
   },
   methods: {
     onAddedToCart(cartData) {
