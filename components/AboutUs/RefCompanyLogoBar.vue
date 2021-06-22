@@ -24,6 +24,9 @@ export default {
 <style lang="scss" scoped>
 .ref-company-logo-bar {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .logo {
     margin: 2em 3em;
   }

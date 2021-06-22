@@ -106,7 +106,11 @@
               <span class="info-card-title text-blue">{{ item.Title }}</span>
             </div>
             <img class="info-card-img" :src="item.Icon.url | formatImage" />
-            <Counter :end="item.Counter" :render="counterAnimationLoaded" :durationMs="2000" />
+            <Counter
+              :end="item.Counter"
+              :render="counterAnimationLoaded"
+              :durationMs="2000"
+            />
           </div>
         </div>
       </div>
@@ -114,12 +118,15 @@
 
     <div class="row">
       <div class="col bg-blue py-10" style="width: 100%;">
-        <RefCompanyLogoBar
-          :images="
-            data.IndexReferencesCarousel.map(item =>
+        <RefSlider
+          :images="[
+            ...data.IndexReferencesCarousel.map(item =>
+              $formatImage(item.Reference[0].url)
+            ),
+            ...data.IndexReferencesCarousel.map(item =>
               $formatImage(item.Reference[0].url)
             )
-          "
+          ]"
         />
       </div>
     </div>
@@ -165,7 +172,7 @@
 </template>
 
 <script>
-import Counter from "@/components/Utilities/Counter"
+import Counter from "@/components/Utilities/Counter";
 import CategorySlider from "@/components/Category/Slider";
 import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
