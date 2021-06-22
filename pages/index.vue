@@ -75,7 +75,6 @@
           :contentHtml="data.IndexLetterboxTextLeft"
           backgroundClass="bg-blue"
           largeCSS="padding: 150px 40px; 0 40px"
-
         />
       </div>
       <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">
@@ -92,11 +91,10 @@
         v-if="data.IndexServiceDescription"
         :contentHtml="data.IndexServiceDescription"
         backgroundClass="bg-white"
-
       />
     </div>
 
-    <div class="row py-10">
+    <div class="row py-10" ref="counterRef">
       <div class="col" style="max-width: 1200px; width: 100%; margin: 0 auto;">
         <div class="info">
           <div
@@ -108,9 +106,11 @@
               <span class="info-card-title text-blue">{{ item.Title }}</span>
             </div>
             <img class="info-card-img" :src="item.Icon.url | formatImage" />
-            <div class="info-card-spinner text-blue">
-              {{ item.Counter }}
-            </div>
+            <Counter
+              :end="item.Counter"
+              :render="counterAnimationLoaded"
+              :durationMs="2000"
+            />
           </div>
         </div>
       </div>
@@ -118,12 +118,15 @@
 
     <div class="row">
       <div class="col bg-blue py-10" style="width: 100%;">
-        <RefCompanyLogoBar
-          :images="
-            data.IndexReferencesCarousel.map(item =>
+        <RefSlider
+          :images="[
+            ...data.IndexReferencesCarousel.map(item =>
+              $formatImage(item.Reference[0].url)
+            ),
+            ...data.IndexReferencesCarousel.map(item =>
               $formatImage(item.Reference[0].url)
             )
-          "
+          ]"
         />
       </div>
     </div>
@@ -169,6 +172,7 @@
 </template>
 
 <script>
+import Counter from "@/components/Utilities/Counter";
 import CategorySlider from "@/components/Category/Slider";
 import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
@@ -177,6 +181,7 @@ import ContactUsForm from "@/components/Formular/Contact";
 
 export default {
   components: {
+    Counter,
     TextCard,
     BackgroundImg,
     RefCompanyLogoBar,
@@ -184,8 +189,39 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/forside");
-    console.log(data)
+    console.log(data);
     return { data };
+  },
+  data() {
+    return {
+      counterAnimationLoaded: false
+    };
+  },
+  beforeMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll(event) {
+      const isVisible = this.isInViewport(this.$refs.counterRef);
+      if (!this.counterAnimationLoaded && isVisible) {
+        this.counterAnimationLoaded = true;
+        console.log("call counter");
+      }
+    },
+    isInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
   }
 };
 </script>

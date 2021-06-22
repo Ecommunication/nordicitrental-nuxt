@@ -2,27 +2,47 @@
   <nav class="navigation">
     <div class="desktop-navigation">
       <div class="nav-item">
-        <div class="item-label" @click="throwMainMenuEvent('product')">
+        <div
+          class="item-label text-blue"
+          @click="throwMainMenuEvent('product')"
+        >
           Produkter
         </div>
       </div>
 
       <div v-for="(nav, index) in navigation" :key="index">
         <div class="nav-item">
-          <div class="item-label" @click="clickedMainMenu(index, nav)">
+          <div
+            class="item-label text-blue"
+            @click="clickedMainMenu(index, nav)"
+          >
             {{ nav.label }}
           </div>
-
           <div v-if="showDropdown === index" class="sub-menu">
-            <nuxt-link :to="item.link" class="item-label col-item" v-for="(item, index) in nav.items">
-              {{ item.label }}
+            <nuxt-link
+              :to="item.link"
+              class="item-label col-item"
+              v-for="(item, index) in nav.items"
+              :key="index"
+            >
+              <div
+                style="display: flex; justify-content: space-between;"
+                @mouseenter="() => (hover = index)"
+                @mouseleave="() => (hover = null)"
+              >
+                <div class="mr-2">{{ item.label }}</div>
+                <div class="hover-icon">
+                  <img
+                    v-if="hover === index"
+                    :src="require('@/assets/images/icons/menu/hover.svg')"
+                  />
+                </div>
+              </div>
             </nuxt-link>
           </div>
         </div>
       </div>
     </div>
-
-
   </nav>
 </template>
 
@@ -38,15 +58,20 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      hover: null
+    };
+  },
   mounted() {
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", e => {
       e.stopPropagation();
-      const isItemLabel = e.target.className.includes('item-label');
-      if(!isItemLabel){
+      const isItemLabel = e.target.className.includes("item-label");
+      if (!isItemLabel) {
         // close menu
-        this.throwMainMenuEvent(false)
+        this.throwMainMenuEvent(false);
       }
-    })
+    });
   },
   methods: {
     clickedMainMenu(navIndex, nav) {
@@ -81,9 +106,19 @@ export default {
       transition: all 0.2s ease;
       -webkit-transition: all 0.2s ease;
 
-      .item-label {}
+      .item-label {
+        .hover-icon {
+          height: 21px;
+          width: 21px;
+          img {
+            object-fit: contain;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
       .item-label:hover {
-        color: #326fa9;
+        color: #009edd;
       }
 
       .sub-menu {
@@ -110,7 +145,7 @@ export default {
         }
 
         .col-item:hover {
-          color: #326fa9;
+          color: #009edd;
         }
       }
     }

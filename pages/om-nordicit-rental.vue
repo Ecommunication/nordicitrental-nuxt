@@ -32,8 +32,18 @@
 
     <div class="row">
       <div class="col bg-blue py-10" style="width: 100%;">
-        <RefCompanyLogoBar
-          :images="data.MidColReference3.map(i => $formatImage(i.Logo.url))"
+        <RefSlider
+          :images="[
+            ...data.MidColReference3.map(item =>
+              $formatImage(item.Logo.url)
+            ),
+            ...data.MidColReference3.map(item =>
+              $formatImage(item.Logo.url)
+            ),
+             ...data.MidColReference3.map(item =>
+              $formatImage(item.Logo.url)
+            ),
+          ]"
         />
       </div>
     </div>
@@ -91,7 +101,6 @@
 import TextCard from "@/components/Utilities/TextCard";
 import HeaderImg from "@/components/Utilities/HeaderImg";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
-import RefCompanyLogoBar from "@/components/AboutUs/RefCompanyLogoBar";
 import RefCompanyQuote from "@/components/AboutUs/RefCompanyQuote";
 import Employee from "@/components/AboutUs/Employee";
 export default {
@@ -99,7 +108,6 @@ export default {
     TextCard,
     HeaderImg,
     BackgroundImg,
-    RefCompanyLogoBar,
     RefCompanyQuote,
     Employee
   },

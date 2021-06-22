@@ -2,17 +2,29 @@
   <div class="full-width-menus" :class="show ? 'active' : ''">
     <div class="menu-container">
       <div class="menu-col" v-for="(cat, index) in items" :key="index">
-        <div
+        <nuxt-link
           v-for="(item, index) in cat"
           :key="item.id"
-          class="item-label"
+          class="item-label text-blue mb-3"
           :class="index === 0 ? 'col-title' : 'col-item'"
-          @click="
-            goTo(`/${index === 0 ? 'produkt-kategori' : 'produkt'}/${item.Slug}`)
-          "
+          :to="`/${index === 0 ? 'produkt-kategori' : 'produkt'}/${item.Slug}`"
         >
-          {{ item.Name }}
-        </div>
+          <div
+            style="display: flex;"
+            @mouseenter="
+              () => (hover = index !== 0 ? cat[0].id + item.id : null)
+            "
+            @mouseleave="() => (hover = null)"
+          >
+            <div class="mr-2">{{ item.Name }}</div>
+            <div class="hover-icon">
+              <img
+                v-show="hover === cat[0].id + item.id"
+                :src="require('@/assets/images/icons/menu/hover.svg')"
+              />
+            </div>
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -25,13 +37,14 @@ export default {
     items: { type: Array, default: [] }
   },
   methods: {
-    goTo(path) {
-      this.throwMainMenuEvent(false);
-      this.$router.push(path);
-    },
     throwMainMenuEvent(val) {
       this.$emit("onClickMainMenu", val);
     }
+  },
+  data() {
+    return {
+      hover: null
+    };
   }
 };
 </script>
@@ -59,6 +72,21 @@ export default {
       flex-direction: column;
       flex-grow: 1;
       margin: 8px 0px;
+
+      .item-label {
+        .hover-icon {
+          height: 21px;
+          width: 21px;
+          img {
+            object-fit: contain;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+      .item-label:hover {
+        color: #009edd;
+      }
 
       .col-title {
         font-weight: 700;
