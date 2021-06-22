@@ -18,12 +18,11 @@
             <div class="product-image">
               <img :src="product.gallery.main" />
             </div>
-            <div class="product-info">
+            <div class="product-info mt-9">
               <div class="product-title text-blue">{{ product.info.name }}</div>
-              <div
-                class="product-description"
-                v-html="product.descriptions.short"
-              ></div>
+              <div class="product-description">
+                {{ getParsedDescription(product.descriptions.short) }}
+              </div>
               <div class="product-body">
                 <div class="mb-3">
                   <div class="price-weekly">
@@ -57,7 +56,9 @@
         title="Lignende produkter"
         :categories="category.upsell"
         titlePosition="left"
-        :titlePaddingBottom="16"
+        :titlePaddingBottom="20"
+        justifyContent="center"
+        :size="210"
       />
 
       <div class="row py-5" v-if="category.description">
@@ -102,11 +103,20 @@ export default {
     const categoryData = categoriesData[0] || {};
     if (!categoryData) return;
 
-    const category = new Category(categoryData)
+    const category = new Category(categoryData);
 
-    console.log(categoryData, category, 3)
+    console.log(categoryData, category, 3);
 
     return { category };
+  },
+  methods: {
+    getParsedDescription(desc) {
+      const plainText = desc.replace(/(<([^>]+)>)/gi, "");
+      const words = plainText.split(" ");
+      const first34Words = words.slice(0, 34);
+      const description = first34Words.join(" ") + (words.length > 34 ? " ..." : "");
+      return description;
+    }
   }
 };
 </script>
@@ -114,7 +124,7 @@ export default {
 <style lang="scss">
 .explanation {
   font-size: 0.65em;
-  font-style: italic;
+  font-weight: 300;
 }
 .product {
   display: flex;
@@ -135,13 +145,14 @@ export default {
   .product-info {
     flex: 1;
     .product-title {
-      font-weight: 600;
+      font-size: 23px;
+      font-weight: bold;
     }
     .product-description {
+      color: #585858;
       margin: 7px 0;
       font-size: 0.7em;
-      height: 80px;
-      overflow: hidden;
+      line-height: 25px;
     }
     .product-body {
       color: #092d4f;
@@ -154,7 +165,7 @@ export default {
         font-weight: 700;
       }
       .price-daily {
-        font-weight: 600;
+        font-weight: bold;
       }
 
       .product-button {

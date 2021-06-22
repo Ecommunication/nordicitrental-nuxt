@@ -17,9 +17,9 @@
       <div class="footer-2">
         <div class="footer-col">
           <RefCompanyLogoBar
-            style="text-align: left;"
             :images="footer.images.map(item => $formatImage(item.Image.url))"
             elStyle="margin: 1em 3em 1em 0;"
+            barStyle="justify-content: start;"
           />
         </div>
       </div>

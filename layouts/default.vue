@@ -34,12 +34,42 @@ export default {
 </script>
 
 <style lang="scss">
+.footer-col {
+  font-size: 14px;
+
+  strong {
+    font-size: 17px;
+    font-weight: 300;
+  }
+  li {
+    margin-bottom: 2px ;
+  }
+}
+
+.service-installation-delivery {
+  h2 {
+    font-size: 30px !important;
+    margin: 20px !important;
+  }
+  p {
+    font-size: 16px !important;
+  }
+}
+.text-card-body {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: 40px;
+    line-height: 42px;
+  }
+}
+
 .category-description {
   h1,
   h2,
   h3,
   h4 {
-    margin-top: 30px;
     color: #092d4f;
   }
 
@@ -48,13 +78,18 @@ export default {
     line-height: 25px;
   }
   h1 {
-    font-size: 1.4em;
+    font-size: 1.5em;
+    margin: 24.9px 0;
   }
   h2 {
     font-size: 1.2em;
   }
   h3 {
     font-size: 1em;
+  }
+  h4 {
+    font-size: 0.7em;
+    margin: 18.62px 0;
   }
 }
 

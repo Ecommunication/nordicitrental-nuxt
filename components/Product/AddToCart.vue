@@ -1,10 +1,10 @@
 <template>
   <div>
     <div v-if="options.length" class="mb-5">
-      <p class="title mb-1">Tilføj Tilvalg:</p>
+      <p class="title mb-2">Tilføj Tilvalg:</p>
 
       <div v-for="(option, index) in options" :key="index">
-        <Checkbox
+        <CheckboxRounded
           v-if="option.key === OPTIONS.MICROSOFT_OFFICE"
           :label="option.option.Name"
           :input="option.value"
@@ -28,7 +28,7 @@
         </div>
 
         <div>
-          <div class="date-picker-label">End</div>
+          <div class="date-picker-label">Slut</div>
           <date-picker
             class="date-picker"
             v-model="end"
@@ -68,13 +68,13 @@
 import { mapActions } from "vuex";
 import DatePicker from "vue2-datepicker";
 import AmountPicker from "@/components/Utilities/AmountPicker";
-import Checkbox from "@/components/Utilities/Form/Checkbox";
+import CheckboxRounded from "@/components/Utilities/Form/CheckboxRounded";
 import "vue2-datepicker/index.css";
 export default {
   components: {
     DatePicker,
     AmountPicker,
-    Checkbox
+    CheckboxRounded
   },
   props: {
     dailyPrice: { type: Number, required: true },

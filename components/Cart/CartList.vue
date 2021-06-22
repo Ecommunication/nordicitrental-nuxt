@@ -4,10 +4,10 @@
       <tr>
         <th></th>
         <th></th>
-        <th class="col3">Vare</th>
-        <th>Pris</th>
-        <th>Antal</th>
-        <th>Total</th>
+        <th class="table-header-cell col3">Vare</th>
+        <th class="table-header-cell">Pris</th>
+        <th class="table-header-cell">Antal</th>
+        <th class="table-header-cell">Total</th>
       </tr>
     </thead>
     <tbody>
@@ -44,15 +44,15 @@
             </span>
             <br />
             <br />
-            <div v-if="item.productOptions">
+            <span v-if="item.productOptions.length">
               <span class="text-blue">Tilvalg</span>
               <span v-for="(opts, index) in item.productOptions" :key="index">
                 <span> <br> {{opts.name}} </span>
               </span>
-            </div>
+            </span>
           </p>
         </td>
-        <td class="product-price">
+        <td class="product-price" style="min-width: 100px;">
           {{ (item.price / item.amount) | formatPrice }}
         </td>
         <td class="product-quantity">
@@ -94,9 +94,22 @@ export default {
   font-size: 0.8em;
   padding: 40px 0 20px 0;
 
+  th {
+    border: 1px solid #f5f5f5;
+  }
+
+  .table-header-cell {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 400;
+    color: #092d4f;
+  }
+
   .col3 {
     width: 385px;
   }
+
 
   .table-row {
     .product-remove {
@@ -107,9 +120,7 @@ export default {
     }
 
     .product-remove:hover {
-      border-radius: 100%;
-      border: 1.5px solid #092d4f;
-      color: #092d4f;
+      color: brown;
     }
 
     .product-name {
