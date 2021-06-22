@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="main-header grid-small">
+    <header ref="header" class="main-header grid-small">
       <nuxt-link to="/" class="logo">
         <img class="" :src="header.logo.src" :alt="header.logo.altText" />
       </nuxt-link>
@@ -24,6 +24,27 @@
         </div>
       </div>
     </header>
+
+    <!-- Minified -->
+    <div class="minified-header" v-show="minifiedHeader">
+      <div class="minified-wrapper">
+        <nuxt-link to="/" class="minified-logo">
+          <img class="" :src="header.logo.src" :alt="header.logo.altText" />
+        </nuxt-link>
+        <div class="minified-navigation">
+          <HeaderNavigation
+            :navigation="navList"
+            :showDropdown="showDropdown"
+            @onClickMainMenu="onClickMainMenu"
+          />
+          <HeaderMobileNavigation :items="mobileMenu" />
+        </div>
+        <div class="minified-cart ml-3">
+          <HeaderCart />
+        </div>
+      </div>
+    </div>
+
     <HeaderFullMenu
       :show="showDropdown === 'product'"
       :items="categories"
@@ -70,7 +91,7 @@ export default {
         label: "Produkter",
         link: "#",
         items: this.categories.map(category => {
-          const copiedCategory = JSON.parse(JSON.stringify(category))
+          const copiedCategory = JSON.parse(JSON.stringify(category));
           const categoryProduct = copiedCategory.shift() || {};
 
           return {
@@ -89,7 +110,7 @@ export default {
       menus.push(products);
 
       this.navList.forEach(nav => {
-        menus.push(nav)
+        menus.push(nav);
       });
 
       return menus;
@@ -97,8 +118,35 @@ export default {
   },
   data() {
     return {
-      showDropdown: false
+      showDropdown: false,
+      headerHeight: 0,
+      minifiedHeader: false
     };
+  },
+  beforeMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  mounted() {
+    const { header: headerEl } = this.$refs;
+    this.headerHeight = headerEl.clientHeight;
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll(event) {
+      const pageTopCoordinate = window.scrollY;
+      this.minifiedHeader = pageTopCoordinate > this.headerHeight;
+    },
+    scrollTop() {
+      window.scrollTo(0, 0);
+    },
+    onClickMainMenu(val) {
+      if (val === "product") {
+        this.scrollTop();
+      }
+      this.showDropdown = val;
+    }
   }
 };
 </script>
@@ -126,6 +174,35 @@ export default {
   }
 }
 
+.minified-header {
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  background: white;
+  .minified-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 940px;
+    height: 100%;
+    .minified-logo {
+      width: 70px;
+      height: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .minified-navigation {
+      margin-left: 100px;
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .main-header {
     justify-content: center;
@@ -133,6 +210,12 @@ export default {
     .right-col {
       margin-top: 10px;
       text-align: center;
+    }
+  }
+  .minified-header {
+    padding: 0 15px;
+    .minified-cart {
+      display: none;
     }
   }
 }

@@ -72,6 +72,14 @@ export class Category {
   constructor(data) {
     if (!data) return {};
 
+    this.info = {
+      id: data.id,
+      name: data.Name,
+      slug: data.Slug
+    }
+
+    this.img = formatImage((data?.UpsellIcon || {}).url || "")
+
     this.cover = {
       text: data.TextCover,
       image: formatImage(data?.ImageCover?.url || "")
