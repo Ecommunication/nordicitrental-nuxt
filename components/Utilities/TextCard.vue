@@ -1,7 +1,7 @@
 <template>
   <div
     class="text-card"
-    :class="`${backgroundClass} ${dark ? 'dark' : ''}`"
+    :class="`${backgroundClass} ${dark ? 'dark' : 'primary'}`"
     :style="largeCSS"
   >
     <div>
@@ -17,7 +17,7 @@ export default {
     contentHtml: { type: String, required: true },
     backgroundClass: { type: String, default: "bg-white" },
     dark: { type: Boolean, default: false },
-    largeCSS: { type: String, required: false }
+    largeCSS: { type: String, required: false },
   }
 };
 </script>
@@ -48,8 +48,13 @@ export default {
   }
 }
 .dark {
-  h2 {
+  h1, h2,h3, h4 {
     color: #ffffff;
+  }
+}
+.primary{
+    h1, h2,h3, h4 {
+    color: #092d4f;
   }
 }
 @media screen and (min-width: 1600px) {

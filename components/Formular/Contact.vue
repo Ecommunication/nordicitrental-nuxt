@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2 v-if="title" class="text-center">{{ title }}</h2>
+    <h2 v-if="title" class="text-center mb-10" style="font-size: 25px;">{{ title }}</h2>
     <div class="form-row" :style="customCSS">
       <div class="left-col">
         <slot name="left-col"></slot>
       </div>
       <div class="right-col">
         <div class="form">
-          <h3 v-if="formTitle" class="text-blue mb-10">{{ formTitle }}</h3>
+          <h3 v-if="formTitle" class="text-blue mb-10" style="font-size: 20px;">{{ formTitle }}</h3>
 
           <form class="mt-5" :key="formKey">
             <InputField
@@ -142,11 +142,14 @@ export default {
   justify-content: space-between;
 
   .left-col {
+    padding: 0 10px;
     margin-bottom: 25px;
   }
 
   .right-col {
+    padding: 0 10px;
     .form {
+      max-width: 300px;
     }
   }
 }

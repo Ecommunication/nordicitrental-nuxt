@@ -19,7 +19,7 @@
                 v-for="(image, index) in slide"
                 :key="index"
               >
-                <img class="logo" :src="image" :style="elStyle" />
+                <img class="logo" :src="image" />
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default {
 <style lang="scss" scoped>
 .custom-slider-container {
   .slider-item {
-    transition: 2s ease;
+    /* transition: 2s ease; */
     .slider-title {
       display: inline-block;
     }

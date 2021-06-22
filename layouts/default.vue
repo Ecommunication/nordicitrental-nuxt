@@ -34,6 +34,25 @@ export default {
 </script>
 
 <style lang="scss">
+.service-installation-delivery {
+  h2 {
+    font-size: 30px !important;
+    margin: 20px !important
+  }
+  p {
+    font-size: 16px !important;
+  }
+}
+.text-card-body {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: 40px;
+    line-height: 42px;
+  }
+}
+
 .category-description {
   h1,
   h2,

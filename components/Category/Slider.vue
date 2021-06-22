@@ -44,6 +44,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  border: 1px solid rgba(228, 228, 228, 0.35);
   img {
     max-width: 110px;
     max-height: 68px;
