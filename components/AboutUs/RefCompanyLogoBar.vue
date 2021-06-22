@@ -1,5 +1,5 @@
 <template>
-  <div class="ref-company-logo-bar">
+  <div class="ref-company-logo-bar" :style="barStyle">
     <span v-for="(image, index) in images" :key="index">
       <img class="logo" :src="image" :style="elStyle" />
     </span>
@@ -16,8 +16,12 @@ export default {
     images: {
       type: Array,
       required: true
+    },
+    barStyle: {
+      type: String,
+      required: false
     }
-  },
+  }
 };
 </script>
 
@@ -27,6 +31,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   .logo {
     margin: 2em 3em;
   }

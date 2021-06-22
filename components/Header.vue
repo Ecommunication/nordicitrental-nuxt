@@ -33,6 +33,7 @@
         </nuxt-link>
         <div class="minified-navigation">
           <HeaderNavigation
+            style="font-size: 16.5px;"
             :navigation="navList"
             :showDropdown="showDropdown"
             @onClickMainMenu="onClickMainMenu"
@@ -181,6 +182,7 @@ export default {
   width: 100%;
   height: 50px;
   background: white;
+  box-shadow: 0 0 3px 0 rgb(0 0 0 / 30%);
   .minified-wrapper {
     display: flex;
     justify-content: center;

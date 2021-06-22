@@ -122,7 +122,7 @@
           <ContactUsForm
             class="mt-5 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
-            :title="data.ContactHeader"
+            title="Lad os snakke om mulighederne for at leje"
             formTitle="Bliv ringet op"
             style="margin: 0 auto;"
           >

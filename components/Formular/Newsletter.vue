@@ -9,7 +9,7 @@
     <div class="mb-1">
       <input type="email" placeholder="E-mail" v-model="form.email" />
     </div>
-    <div @click="submit" class="mt-1 button btn-primary">Tilmeld</div>
+    <div @click="submit" class="mt-1 button btn-primary submitBtn">Tilmeld</div>
     <div v-if="message" class="mt-2 message">{{ message }}</div>
   </div>
 </template>
@@ -72,6 +72,14 @@ export default {
   .message {
     width: 100%;
     font-size: 0.9em;
+  }
+  .submitBtn {
+    background: #1561ad;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

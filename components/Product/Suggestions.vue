@@ -1,6 +1,6 @@
 <template>
   <div v-if="products.length" class="mb-10">
-    <h2 class="ml-3" style="font-size: 24px;">
+    <h2 class="ml-6 mb-6" style="font-size: 24px;">
       Du kunne også være interesseret i...
     </h2>
     <div class="products">

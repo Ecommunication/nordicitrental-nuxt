@@ -4,10 +4,10 @@
       <h3 class="text-blue title-md" :style="`text-align: ${titlePosition}; padding-bottom: ${titlePaddingBottom}px;`">
         {{ title }}
       </h3>
-      <div class="row" style="justify-content: space-around;">
+      <div class="row" :style="`justify-content: ${justifyContent};`">
         <div class="col mx-2" v-for="(cat, index) in categories" :key="index">
           <nuxt-link :to="`/produkt-kategori/${cat.Slug}`">
-            <div class="category-card">
+            <div class="category-card" :style="`width: ${size}px; height: ${size}px;`">
               <img :src="cat.Image.url | formatImage" />
               <span class="category-title text-md weight-thin mt-6">{{
                 cat.Title
@@ -27,7 +27,9 @@ export default {
     title: { type: String, required: true },
     categories: { type: Array, required: true },
     titlePosition: { type: String, default: "center" },
-    titlePaddingBottom: { type: Number, default: 48 }
+    titlePaddingBottom: { type: Number, default: 48 },
+    justifyContent: { type: String, default: 'space-around' },
+    size: { type: Number, default: 180 }
   }
 };
 </script>
@@ -37,8 +39,6 @@ export default {
   background: rgb(238, 238, 238);
 }
 .category-card {
-  width: 180px;
-  height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;

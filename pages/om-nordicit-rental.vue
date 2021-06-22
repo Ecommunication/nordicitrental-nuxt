@@ -33,17 +33,9 @@
     <div class="row">
       <div class="col bg-blue py-10" style="width: 100%;">
         <RefSlider
-          :images="[
-            ...data.MidColReference3.map(item =>
-              $formatImage(item.Logo.url)
-            ),
-            ...data.MidColReference3.map(item =>
-              $formatImage(item.Logo.url)
-            ),
-             ...data.MidColReference3.map(item =>
-              $formatImage(item.Logo.url)
-            ),
-          ]"
+          :images="
+            data.MidColReference3.map(item => $formatImage(item.Logo.url))
+          "
         />
       </div>
     </div>
@@ -76,14 +68,7 @@
           <div
             class="col-lg-4 col-md-6"
             style="width: 100%;"
-            v-for="(employee, index) in [
-              ...data.AboutUsEmployees,
-              ...data.AboutUsEmployees,
-              ...data.AboutUsEmployees,
-              ...data.AboutUsEmployees,
-              ...data.AboutUsEmployees,
-              ...data.AboutUsEmployees
-            ]"
+            v-for="(employee, index) in data.AboutUsEmployees"
             :key="index"
           >
             <Employee

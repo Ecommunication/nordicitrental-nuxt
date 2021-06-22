@@ -30,7 +30,8 @@ export default {
   background: #092d4f;
   padding: 8px 36px 8px 14px;
   font-size: 0.8em;
-  border-bottom-right-radius: 25px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .cart-placeholder {
