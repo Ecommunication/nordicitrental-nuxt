@@ -53,4 +53,11 @@ export default {
     font-size: 24px;
   }
 }
+
+@media screen and (max-width: 767px) {
+.category-card {
+  width: 170px !important;
+  height: 170px !important;
+}
+}
 </style>

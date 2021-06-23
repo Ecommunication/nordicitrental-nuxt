@@ -81,7 +81,7 @@ export default {
   border-bottom: 1px solid #eeeeee;
   justify-content: space-between;
   font-weight: 600;
-  color: #092D4F;
+  color: #092d4f;
   font-size: 1.2em;
 }
 
@@ -105,7 +105,7 @@ export default {
   cursor: pointer;
   font-weight: bold;
   background: transparent;
-   color: #092D4F;
+  color: #092d4f;
 }
 
 .modal-fade-enter,
@@ -116,5 +116,12 @@ export default {
 .modal-fade-enter-active,
 .modal-fade-leave-active {
   transition: opacity 0.5s ease;
+}
+
+@media only screen and (max-width: 767px) {
+  .modal {
+    height: 80% !important;
+    width: 99% !important;
+  }
 }
 </style>

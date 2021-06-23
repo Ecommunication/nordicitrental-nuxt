@@ -86,6 +86,7 @@
     </div>
 
     <Modal
+      class="cartNotifModal"
       v-show="isModalVisible && Object.keys(modalData).length"
       @close="closeDialog"
       :width="500"
@@ -94,12 +95,9 @@
         Produktet er lagt i kurven
       </template>
       <template v-slot:body>
-        <div style="font-size: 0.8em; width: 80%; margin: 0 auto;">
+        <div class="cartNotifModal-body">
           <div class="text-center">
-            <i
-              class="fas fa-cart-arrow-down"
-              style="font-size: 100px; color: #092D4F;"
-            ></i>
+            <i class="cartNotifModal-icon fas fa-cart-arrow-down"></i>
           </div>
           <div class="mt-5">
             <div class="text-blue" style="font-weight: 600;">
@@ -134,15 +132,15 @@
         {{ product.info.name }}
       </template>
       <template v-slot:body>
-        <div style="height: 600px;">
+        <div style="">
           <img
             style="width: 100%; height: 100%; object-fit: cover;"
             :src="imageModal"
           />
         </div>
-        <div style="display: flex;">
+        <div style="display: flex; width: 100%; flex-wrap: wrap;">
           <div
-            class="mx-2"
+            class="mr-2 mb-2"
             style="border: 1px solid #ccc; padding: 5px; cursor: pointer;"
             @click="openImageModal(image)"
             v-for="(image, index) in [
@@ -303,6 +301,27 @@ export default {
   .product-description {
     font-size: 0.8em;
     font-weight: 100;
+  }
+}
+
+.cartNotifModal {
+  .cartNotifModal-body {
+    width: 80%;
+    font-size: 0.8em;
+    margin: 0 auto;
+
+    .cartNotifModal-icon {
+      font-size: 100px !important;
+      color: #092d4f;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .cartNotifModal {
+    .cartNotifModal-body {
+      width: 100%;
+    }
   }
 }
 </style>

@@ -111,7 +111,7 @@ export default {
   .logo-container {
     max-width: 161px;
     height: 100%;
-    margin: 2em 3em;
+    margin: 40px 60px;
     .logo {
       width: 100%;
       height: 100%;
@@ -120,7 +120,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .custom-slider-container {
     .slider-item {
       .slider-title.slider-title-1 {
@@ -129,6 +129,12 @@ export default {
       .slider-title.slider-title-2 {
         font-size: 16px;
       }
+    }
+  }
+
+  .ref-company-logo-bar {
+    .logo-container {
+      margin: 10px 20px;
     }
   }
 }

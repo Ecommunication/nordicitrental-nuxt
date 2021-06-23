@@ -107,7 +107,10 @@ export default {
         this.noOfDays
       );
 
-      return productPrice + this.microsoftOfficeUnitPrice /* + add addional options here */;
+      return (
+        productPrice +
+        this.microsoftOfficeUnitPrice /* + add addional options here */
+      );
     },
     price() {
       return this.unitPrice * this.amount;
@@ -135,7 +138,7 @@ export default {
     this.options = this.product.options.map(o => ({
       option: o,
       key: o.ProductSlug,
-      value: null,
+      value: null
     }));
   },
   methods: {

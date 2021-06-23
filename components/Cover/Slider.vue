@@ -13,8 +13,8 @@
       >
         <div class="row" v-if="selectedIndex === index">
           <div
-            class="col px-0 py-0"
-            :style="`min-height: ${500}px; width: 100%;`"
+            class="slider-item-container col px-0 py-0"
+            :style="`width: 100%;`"
           >
             <BackgroundImg
               :src="slide.BackgroundImage.url | formatImage"
@@ -83,8 +83,11 @@ export default {
 .custom-slider-container {
   .slider-item {
     transition: 2s ease;
-    .slider-title {
-      display: inline-block;
+    .slider-item-container {
+      min-height: 500px;
+      .slider-title {
+        display: inline-block;
+      }
     }
   }
 }
@@ -103,15 +106,20 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-.custom-slider-container {
-  .slider-item {
-    .slider-title.slider-title-1 {
-      font-size: 20px;
-    }
-    .slider-title.slider-title-2 {
-      font-size: 16px;
+  .custom-slider-container {
+    .slider-item {
+      .slider-item-container {
+        min-height: 151px !important;
+        max-height: 151px !important;
+        height: 151px;
+        h3 {
+          font-size: 16px !important;
+        }
+        h4 {
+          font-size: 12px !important;
+        }
+      }
     }
   }
-}
 }
 </style>
