@@ -125,8 +125,10 @@ export class Order {
     this.OrderShippingCity = shippingAdd.town || "";
     this.OrderShippingZip = shippingAdd.zipCode || "";
     this.OrderShippingCountry = shippingAdd.country || "";
-    this.ShippingHandling = shipping.method || "";
-    this.OrderTotal = this.getOrderTotal(items, shipping.cost);
+    this.ShippingHandlingName = shipping.method || "";
+    this.ShippingHandlingCost = shipping.cost || 0;
+    this.OrderTotalExVat = this.getOrderTotal(items, shipping.cost);
+    this.OrderTotalVat = 1.25 * this.OrderTotalExVat
   }
 
   processItems(items) {
@@ -138,9 +140,12 @@ export class Order {
         ProductRentalTo: item.endDate,
         ProductRentalSum: item.price,
         ProductQty: item.amount,
+        ProductRentalSubTotal: item.totalPriceWithoutOptions,
         ProductOptions: item.productOptions.map(po => ({
           ProductName: po.name,
-          ProductPrice: po.price
+          ProductPrice: po.price,
+          ProductId: po.id,
+          ProductQty: 1
         }))
       };
     });

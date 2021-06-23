@@ -5,8 +5,10 @@
 
       <div v-for="(option, index) in options" :key="index">
         <CheckboxRounded
-          v-if="option.key === OPTIONS.MICROSOFT_OFFICE"
-          :label="option.option.Name"
+          class="mb-2"
+          :label="
+            `${option.option.Name} - ${$formatPrice(option.price)} eksl. moms`
+          "
           :input="option.value"
           @changed="val => (option.value = val)"
         />
@@ -82,38 +84,36 @@ export default {
     product: { type: Object, required: true }
   },
   computed: {
-    /* Options */
-    microsoftOfficeOption() {
-      const microsoftOfficeOption = this.options.find(
-        o => o.key === this.OPTIONS.MICROSOFT_OFFICE
+    selectedOptions() {
+      return this.options.filter(o => o.value);
+    },
+    productPrice() {
+      return this.calculatePrice(
+        this.dailyPrice,
+        this.weeklyPrice,
+        this.noOfDays
       );
-      return microsoftOfficeOption || {};
     },
-    microsoftOfficeUnitPrice() {
-      return this.microsoftOfficeOption.value
-        ? this.microsoftOfficeOption.option.FixedPrice
-        : 0;
+    productOptionPrice() {
+      return this.selectedOptions.reduce((total, opt) => {
+        total += opt.price;
+        return total;
+      }, 0);
     },
-    /* Add Options here */
+    unitPrice() {
+      return this.productPrice + this.productOptionPrice;
+    },
 
     noOfDays() {
       const dayDifference = this.dayDifference(this.start, this.end) + 1;
       return dayDifference > 0 ? dayDifference : 0;
     },
-    unitPrice() {
-      const productPrice = this.calculatePrice(
-        this.dailyPrice,
-        this.weeklyPrice,
-        this.noOfDays
-      );
 
-      return (
-        productPrice +
-        this.microsoftOfficeUnitPrice /* + add addional options here */
-      );
-    },
     price() {
       return this.unitPrice * this.amount;
+    },
+    totalPriceWithoutOptions(){
+      return this.productPrice * this.amount;
     },
     canBePlaced() {
       return this.noOfDays > 7;
@@ -124,21 +124,19 @@ export default {
   },
   data() {
     return {
-      OPTIONS: {
-        MICROSOFT_OFFICE: "microsoft-office"
-      },
+      options: [],
       start: new Date(new Date().toDateString()),
       end: this.shiftDateXDays(new Date(), 7),
-      amount: 1,
-      options: []
+      amount: 1
     };
   },
   created() {
-    console.log(this.product.options);
+    // {value} is changing this is why it is not in computed
     this.options = this.product.options.map(o => ({
       option: o,
       key: o.ProductSlug,
-      value: null
+      value: null,
+      price: o.FixedPrice
     }));
   },
   methods: {
@@ -186,17 +184,16 @@ export default {
         amount: this.amount,
         unitPrice: this.unitPrice,
         price: this.price,
+        totalPriceWithoutOptions: this.totalPriceWithoutOptions,
         noOfDays: this.noOfDays,
         startDate: this.start,
         endDate: this.end,
         product: this.product,
-        productOptions: this.options
-          .filter(o => o.value)
-          .map(o => ({
-            id: o.option.id,
-            name: o.option.Name,
-            price: o.option.FixedPrice
-          }))
+        productOptions: this.selectedOptions.map(o => ({
+          id: o.option.id,
+          name: o.option.Name,
+          price: o.price
+        }))
       };
 
       console.log(payload);

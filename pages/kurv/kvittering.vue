@@ -1,14 +1,13 @@
 <template>
   <div>
     <HeaderImg
-        v-if="data.ImageCover"
-        :img="data.ImageCover.url | formatImage"
-        :text="data.TextCover"
+      v-if="data.ImageCover"
+      :img="data.ImageCover.url | formatImage"
+      :text="data.TextCover"
     />
     <div class="container">
       <div class="row">
-        <div class="col">
-          kvittering .... Header Image ...
+        <div class="col" style="width: 100%;">
           <Breadcrumb class="mt-10 mb-10" />
 
           <div class="message">
@@ -16,9 +15,9 @@
             <p>Tak for din bestilling</p>
             <p>
               Du vil modtage en lejeaftale/tilbud pr. e-mail inden for få timer.
-              Lejeaftalen/tilbuddet skal accepteres ved at besvare e-mailen med et
-              ”godkendt”. Aftalen er gældende, når vi har modtaget den accepterede
-              lejeaftale/tilbud.
+              Lejeaftalen/tilbuddet skal accepteres ved at besvare e-mailen med
+              et ”godkendt”. Aftalen er gældende, når vi har modtaget den
+              accepterede lejeaftale/tilbud.
             </p>
             <p>
               Når vi har modtaget den godkendte lejeaftale/tilbud, vil du kort
@@ -76,20 +75,23 @@ export default {
   },
   computed: {
     ...mapState(["orderReceipt"]),
+    order(){
+      return this.orderReceipt?.order || {}
+    },
     orderDetails() {
       return {
-        subtotal: (this.orderReceipt?.order?.Products || []).reduce(
+        subtotal: (this.order.Products || []).reduce(
           (total, item) => {
             total += item.ProductRentalSum;
             return total;
           },
           0
         ),
-        shipping: 0, // todo: missing
-        vat: 0, // todo: missing
-        total: this.orderReceipt?.order?.OrderTotal,
+        shipping: this.order.ShippingHandlingCost,
+        vat: this.order.OrderTotalVat - this.order.OrderTotalExVat,
+        total: this.order.OrderTotalVat,
         paymentMethod: "", // todo: missing
-        remark: this.orderReceipt?.order?.OrderComments,
+        remark: this.order.OrderComments,
         cvr: this.orderReceipt?.customer?.CustomerCompanyCVR
       };
     },
@@ -146,6 +148,7 @@ export default {
               title: product?.info?.name,
               amount: item.ProductQty,
               total: item.ProductRentalSum,
+              options: item.ProductOptions,
               noOfDays:
                 1 +
                 (new Date(item?.ProductRentalTo).getTime() -

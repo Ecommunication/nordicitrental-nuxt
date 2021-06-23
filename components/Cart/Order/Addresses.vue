@@ -1,20 +1,18 @@
 <template>
-  <div>
-    <Table>
-      <tr style="background: none;">
-        <td class="table-title"><h2>Faktureringsadresse</h2></td>
-        <td class="table-title"><h2 class="pl-4">Leveringsadresse</h2></td>
-      </tr>
-      <tr>
-        <td class="td-left">
-          <div>{{ addresses.billing }}</div>
-        </td>
-        <td class="td-right">
-          <div>{{ addresses.shipping }}</div>
-        </td>
-      </tr>
-    </Table>
-  </div>
+  <Table>
+    <tr style="background: none;">
+      <td class="table-title"><h2>Faktureringsadresse</h2></td>
+      <td class="table-title"><h2 class="pl-4">Leveringsadresse</h2></td>
+    </tr>
+    <tr>
+      <td class="td-left">
+        <div>{{ addresses.billing }}</div>
+      </td>
+      <td class="td-right">
+        <div>{{ addresses.shipping }}</div>
+      </td>
+    </tr>
+  </Table>
 </template>
 
 <script>

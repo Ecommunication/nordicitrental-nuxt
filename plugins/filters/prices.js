@@ -1,6 +1,12 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-Vue.filter('formatPrice', function (val) {
-    const formattedPrice = new Intl.NumberFormat('da-DK').format(parseInt(val));
-    return 'Kr. ' + formattedPrice + ',-';
-});
+const formatPrice = val => {
+  const formattedPrice = new Intl.NumberFormat("da-DK").format(parseInt(val));
+  return "Kr. " + formattedPrice + ",-";
+};
+
+Vue.filter("formatPrice", formatPrice);
+
+export default ({ app }, inject) => {
+  inject("formatPrice", formatPrice);
+};
