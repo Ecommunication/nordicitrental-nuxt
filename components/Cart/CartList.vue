@@ -37,7 +37,7 @@
           <p class="booking-date">
             <span>
               Total lejeperiode:
-              <span class="special">{{ item.noOfDays }}</span> dage.  <br />
+              <span class="special">{{ item.noOfDays }}</span> dage. <br />
               Fra:
               <span class="special">{{ item.startDate | formatDate }}</span> til
               <span class="special">{{ item.endDate | formatDate }}</span>
@@ -47,12 +47,15 @@
             <span v-if="item.productOptions.length">
               <span class="text-blue">Tilvalg</span>
               <span v-for="(opts, index) in item.productOptions" :key="index">
-                <span> <br> {{opts.name}} </span>
+                <span>
+                  <br />
+                  {{ opts.name }}
+                </span>
               </span>
             </span>
           </p>
         </td>
-        <td class="product-price" style="min-width: 100px;">
+        <td class="product-price">
           {{ (item.price / item.amount) | formatPrice }}
         </td>
         <td class="product-quantity">
@@ -95,7 +98,7 @@ export default {
   padding: 40px 0 20px 0;
 
   th {
-    border: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
   }
 
   .table-header-cell {
@@ -109,7 +112,6 @@ export default {
   .col3 {
     width: 385px;
   }
-
 
   .table-row {
     .product-remove {
@@ -129,12 +131,41 @@ export default {
       font-size: 0.85em;
     }
 
+    .product-price {
+      min-width: 100px;
+    }
+
     .product-subtotal {
       width: 105px;
     }
 
     td {
-      padding: 0 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .cart-list {
+    font-size: 12px !important;
+    padding: 0;
+
+    td {
+      padding: 0 !important;
+    }
+
+    .product-price {
+      padding: 10px !important;
+      min-width: 75px !important;
+    }
+
+    .product-subtotal {
+      padding: 10px !important;
+      min-width: 75px;
+    }
+
+    .product-thumbnail-image {
+      display: none;
     }
   }
 }

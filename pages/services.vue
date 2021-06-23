@@ -72,9 +72,12 @@
           :contentHtml="data.MidTextCol3"
           backgroundClass="bg-blue"
           :dark="true"
+          containerCSS="max-width: 1600px; margin: 0 auto;"
         >
           <template v-slot:actions>
-            <Button :button="buttons.goToContact" />
+            <nuxt-link class="kontakt-os-btn" to="/kontakt"
+              >Kontakt Os</nuxt-link
+            >
           </template>
         </TextCard>
       </div>
@@ -97,38 +100,41 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row service-lad-os-overtage">
       <div class="col px-0">
         <TextCard
           v-if="data.MidTextCol5"
           :contentHtml="data.MidTextCol5"
           backgroundClass="bg-blue"
           :dark="true"
+          containerCSS="max-width: 1600px; margin: 0 auto;"
         />
       </div>
     </div>
 
     <div class="row grid-small">
-      <div class="col py-14" style="width: 100%;">
+      <div class="col pt-8" style="width: 100%;">
         <ContactUsForm
           :title="data.ContactHeader"
           formTitle="Send os en besked, så kontakter vi dig i dag."
-          style="margin: 0 auto;"
+          style="margin: 30px auto;"
+          customCSS="justify-content: center;"
+          titleStyle="font-size: 40px; margin-bottom: 24px;"
         >
           <template v-slot:left-col>
-            <div class="text-center">
-              <h3 class="text-blue">Kontakt</h3>
+            <div class="text-left">
+              <h3 class="text-blue" style="font-size: 20px;">Kontakt</h3>
               <p class="mt-10">
                 <img
                   src="https://nordicitrental.dk//wp-content/uploads/2017/12/employee_mic-135x135.png"
                   alt="Kontakt"
                 />
               </p>
-              <p style="font-size: 16px;">
+              <p style="font-size: 14px;">
                 Michael Vedel<br />
                 Salg – kunder
               </p>
-              <p class="mt-5" style="font-size: 16px;">
+              <p class="mt-5" style="font-size: 14px;">
                 Tlf. 71998904<br />
                 <a href="mailto:salg@nordicitrental.dk"
                   >salg@nordicitrental.dk</a
@@ -174,14 +180,6 @@ export default {
             type: "link",
             href: "/produkt-kategori"
           }
-        },
-        goToContact: {
-          label: "Kontakt Os",
-          variant: "btn-primary btn-large",
-          action: {
-            type: "link",
-            href: "/kontakt"
-          }
         }
       }
     };
@@ -211,5 +209,19 @@ export default {
     font-size: 40px;
     color: #092d4f;
   }
+}
+
+.kontakt-os-btn {
+  width: 250px;
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  margin-top: 10px;
+  display: block;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
 }
 </style>

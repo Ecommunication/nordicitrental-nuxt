@@ -3,13 +3,16 @@
     <ul v-for="(item, index) in items" :key="index">
       <li
         class="breadcrumb-item"
-        :class="`
+        :class="
+          `
         ${path === item.path ? 'selected' : ''}
         ${index === 0 ? 'first-child' : ''}
         ${index === items.length - 1 ? 'last-child' : ''}
-        `"
+        `
+        "
       >
-        <i class="interceptor">{{index+1}}.</i> {{ item.label }}
+        <div class="selected-icon"></div>
+        <i class="interceptor">{{ index + 1 }}.</i> {{ item.label }}
       </li>
     </ul>
   </div>
@@ -58,17 +61,15 @@ export default {
       &.selected {
         font-weight: bold;
         position: relative;
-
-        &:before {
-          content: '';
-          background: url('~/assets/images/icons/breadcrumb/tick.png') no-repeat;
-          width: 30px;
-          height: 30px;
-          display: block;
-          position:absolute;
-          left: 11px;
-          top: 12px;
-        }
+      }
+      .selected-icon {
+        background: url("~/assets/images/icons/breadcrumb/tick.png") no-repeat;
+        width: 30px;
+        height: 30px;
+        display: block;
+        position: absolute;
+        left: 11px;
+        top: 12px;
       }
     }
     .breadcrumb-item.first-child {
@@ -78,6 +79,19 @@ export default {
     .breadcrumb-item.last-child {
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .breadcrumb {
+    ul {
+      li.breadcrumb-item {
+        padding: 0 10px;
+        .selected-icon {
+          display: none;
+        }
+      }
     }
   }
 }

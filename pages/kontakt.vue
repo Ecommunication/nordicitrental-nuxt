@@ -9,11 +9,16 @@
     <div class="grid-small">
       <div class="row" style="width: 100%;">
         <div class="col py-10" style="width: 100%;">
-          <ContactUsForm :formTitle="contactUsTitle">
+          <ContactUsForm
+            :formTitle="contactUsTitle"
+            formStyle="max-width: 450px;"
+            leftColStyle="flex-grow: 1;"
+            rightColStyle="flex-grow: 1;"
+          >
             <template v-slot:left-col>
               <div class="text-left employee">
-                <h3 class="text-blue">Kontakt info</h3>
-                <div class="mt-6">
+                <h3 class="text-blue title1">Kontakt info</h3>
+                <div class="mt-6" style="font-size: 16px;">
                   <div>Nordic IT rental ApS</div>
                   <div>Industriparken 22A</div>
                   <div>2750 Ballerup</div>
@@ -29,7 +34,7 @@
 
     <div class="row">
       <div class="col" style="width: 90%; max-width: 1000px; margin: 0 auto;">
-        <h3 class="text-blue" style="margin-bottom: 20px;">
+        <h3 class="text-blue title1" style="margin-bottom: 20px;">
           Du finder os her:
         </h3>
         <GoogleMap
@@ -74,4 +79,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.title1 {
+  font-size: 20px;
+}
+</style>

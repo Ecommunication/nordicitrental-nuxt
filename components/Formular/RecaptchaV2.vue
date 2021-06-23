@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ml-5 mb-2">
-      <recaptcha />
+      <recaptcha style="margin-left: -20px;" />
       <div
         v-if="captchaError"
         class="text-left"
@@ -10,14 +10,12 @@
         Please verify that you are not a robot.
       </div>
     </div>
-    <div class="input-container">
-      <div
-        @click="submit"
-        class="button btn-primary"
-        style="float: none; width: 100%"
-      >
-        Send
-      </div>
+    <div
+      @click="submit"
+      class="button btn-primary"
+      style="float: none; width: 100%"
+    >
+      Send
     </div>
   </div>
 </template>

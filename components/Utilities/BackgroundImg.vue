@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="background-image"
-    :style="`height: 100%; width: 100%; background-image: url(${src})`"
-  >
+  <div class="background-image" :style="`background-image: url(${src})`">
     <slot name="body"></slot>
   </div>
 </template>
@@ -25,5 +22,7 @@ export default {
 .background-image {
   background-position: center center;
   background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 </style>

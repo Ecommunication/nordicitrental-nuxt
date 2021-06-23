@@ -42,7 +42,16 @@ export default {
     font-weight: 300;
   }
   li {
-    margin-bottom: 2px ;
+    margin-bottom: 2px;
+  }
+}
+
+.service-lad-os-overtage {
+  p {
+    margin-bottom: 20px !important;
+  }
+  h2 {
+    margin-bottom: 33.2px !important;
   }
 }
 
@@ -93,9 +102,35 @@ export default {
   }
 }
 
-@media only screen and (max-width: 600px) {
+.slider-title {
+  font-size: 50px;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+/*  Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1365px) {
   h1 {
-    font-size: 0.8em !important;
+    font-size: 32px;
+  }
+}
+
+/*  mobile */
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: 26px !important;
+  }
+  i, span, div {
+    font-size: 14px !important;
+  }
+  .slider-title {
+    font-size: 26px;
   }
 }
 </style>

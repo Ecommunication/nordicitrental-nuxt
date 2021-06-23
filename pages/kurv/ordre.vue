@@ -6,9 +6,9 @@
         :text="data.TextCover"
     />
     <div class="container">
-      <div class="row" style="padding: 16px;">
+      <div class="row">
         <div class="col" style="width: 100%;">
-          <Breadcrumb class="mt-10 mb-10" />
+          <Breadcrumb class="breadcrumb-el" />
           <CustomerInformationForm />
         </div>
       </div>
@@ -38,4 +38,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.breadcrumb-el {
+  margin: 60px 0 30px 0;
+}
+@media only screen and (max-width: 767px) {
+  .breadcrumb-el {
+    margin: 8px 0 20px 0;
+  }
+}
+</style>

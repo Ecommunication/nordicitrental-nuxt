@@ -1,16 +1,19 @@
 <template>
   <div>
     <header ref="header" class="main-header grid-small">
+      <div class="cart-in-mobile">
+        <HeaderCart />
+      </div>
       <nuxt-link to="/" class="logo">
         <img class="" :src="header.logo.src" :alt="header.logo.altText" />
       </nuxt-link>
 
       <div class="right-col">
-        <div class="mb-2">
+        <div class="cart-in-desktop mb-2">
           <HeaderCart />
         </div>
 
-        <div class="mb-5 px-3">
+        <div class="telephone-container">
           <HeaderCta :cta="header.telephone" />
         </div>
 
@@ -153,6 +156,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cart-in-mobile {
+  display: none;
+}
+
+  .telephone-container {
+    margin: 10px 0px;
+  }
+
 .main-header {
   display: flex;
   flex-wrap: wrap;
@@ -206,6 +217,19 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
+  .cart-in-desktop {
+    display: none;
+  }
+  .cart-in-mobile {
+    display: block;
+    width: 100%;
+    text-align: right;
+  }
+
+  .telephone-container {
+    margin: 30px;
+  }
+
   .main-header {
     justify-content: center;
 

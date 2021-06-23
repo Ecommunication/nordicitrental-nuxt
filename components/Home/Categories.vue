@@ -61,4 +61,21 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .info {
+    h3 {
+      font-size: 20px !important;
+    }
+    .info-card {
+      width: 110px;
+      .img-wrapper {
+      }
+      .info-card-spinner {
+        font-size: 3em;
+        font-weight: 700;
+      }
+    }
+  }
+}
 </style>

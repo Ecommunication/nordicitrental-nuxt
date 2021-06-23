@@ -1,13 +1,15 @@
 <template>
   <div>
-    <h2 v-if="title" class="text-center mb-10" style="font-size: 25px;">{{ title }}</h2>
+    <h2 v-if="title" class="text-center" :style="titleStyle">{{ title }}</h2>
     <div class="form-row" :style="customCSS">
-      <div class="left-col">
+      <div class="left-col" :style="leftColStyle">
         <slot name="left-col"></slot>
       </div>
-      <div class="right-col">
-        <div class="form">
-          <h3 v-if="formTitle" class="text-blue mb-10" style="font-size: 20px;">{{ formTitle }}</h3>
+      <div class="right-col" :style="rightColStyle">
+        <div class="form" :style="formStyle">
+          <h3 v-if="formTitle" class="text-blue" style="font-size: 20px;">
+            {{ formTitle }}
+          </h3>
 
           <form class="mt-5" :key="formKey">
             <InputField
@@ -15,6 +17,8 @@
               :input="form.name"
               @onChange="val => onChange('name', val, formValidations.name)"
               :errors="errors.name"
+              customStyle="padding-bottom: 12px;"
+              inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
             />
 
             <InputField
@@ -22,6 +26,8 @@
               :input="form.email"
               @onChange="val => onChange('email', val, formValidations.email)"
               :errors="errors.email"
+              customStyle="padding-bottom: 12px;"
+              inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
             />
 
             <InputField
@@ -31,6 +37,8 @@
                 val => onChange('companyName', val, formValidations.companyName)
               "
               :errors="errors.companyName"
+              customStyle="padding-bottom: 12px;"
+              inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
             />
 
             <InputField
@@ -38,6 +46,8 @@
               :input="form.phone"
               @onChange="val => onChange('phone', val, formValidations.phone)"
               :errors="errors.phone"
+              customStyle="padding-bottom: 12px;"
+              inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
             />
 
             <Textarea
@@ -45,6 +55,8 @@
               :input="form.message"
               :rows="8"
               @changed="val => (form.message = val)"
+              customStyle="padding-bottom: 12px;"
+              inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
             />
 
             <Recaptcha
@@ -81,7 +93,11 @@ export default {
   props: {
     customCSS: { type: String, required: false },
     title: { type: String, required: false },
-    formTitle: { type: String, required: false }
+    formTitle: { type: String, required: false },
+    titleStyle: { type: String, required: false },
+    formStyle: { type: String, required: false },
+    leftColStyle: { type: String, required: false },
+    rightColStyle: { type: String, required: false }
   },
   data() {
     return {
@@ -142,14 +158,14 @@ export default {
   justify-content: space-between;
 
   .left-col {
-    padding: 0 10px;
+    padding: 0 20px;
     margin-bottom: 25px;
   }
 
   .right-col {
-    padding: 0 10px;
+    padding: 0 20px;
     .form {
-      max-width: 300px;
+      max-width: 330px;
     }
   }
 }

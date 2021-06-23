@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .category-card:hover {
-  background: rgb(238, 238, 238);
+  background: rgba(63,47,121,.05);
 }
 .category-card {
   display: flex;
@@ -52,5 +52,12 @@ export default {
   .category-title {
     font-size: 24px;
   }
+}
+
+@media screen and (max-width: 767px) {
+.category-card {
+  width: 170px !important;
+  height: 170px !important;
+}
 }
 </style>

@@ -82,12 +82,12 @@ export default {
 }
 
 .round label:after {
-  border: 2px solid #092d4f;
+  border: 3px solid #092d4f;
   border-top: none;
   border-right: none;
   content: "";
-  height: 6px;
-  left: 7px;
+  height: 5px;
+  left: 6px;
   opacity: 0;
   position: absolute;
   top: 8px;

@@ -7,6 +7,7 @@
         class="py-8"
         title="Vælg et produkt du ønsker at leje"
         :categories="data.IndexCategories"
+        :size="210"
       >
         <div class="grid flex flex-justify-center">
           <nuxt-link
@@ -29,7 +30,7 @@
           Vi har gjort det nemt at leje IT udstyr
         </h3>
 
-        <div class="info grid-wide" style="width: 90%; margin: 0 auto;">
+        <div class="info grid-wide" style="margin: 0 auto;">
           <div
             class="info-card"
             v-for="(item, index) in data.IndexRentalBennefits"
@@ -49,17 +50,15 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row home-section-1">
       <div class="col-md-6 px-0">
-        <div style="min-height: 500px; width: 100%; height: 50%;">
+        <div class="home-section-1-1">
           <BackgroundImg
             v-if="data.IndexLetterboxImageLeft"
             :src="data.IndexLetterboxImageLeft.url | formatImage"
           />
         </div>
-        <div
-          style="min-height: 400px; width: 100%;  display: flex; flex-direction: column; justify-content: flex-end; background: #092D4F;"
-        >
+        <div class="home-section-1-2">
           <TextCard
             v-if="data.IndexLetterboxTextLeft"
             :contentHtml="data.IndexLetterboxTextLeft"
@@ -120,11 +119,13 @@
       <div class="col-md-6 px-0">
         <div style="max-width: 585px; margin: 0 auto;">
           <ContactUsForm
-            class="mt-5 mb-10"
+            class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
             title="Lad os snakke om mulighederne for at leje"
             formTitle="Bliv ringet op"
             style="margin: 0 auto;"
+            titleStyle="font-size: 25px; margin-bottom: 60px;"
+            formStyle="max-width: 300px;"
           >
             <template v-slot:left-col>
               <div class="text-center">
@@ -210,6 +211,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  width: 90%;
   .info-card {
     width: 250px;
     text-align: center;
@@ -232,6 +234,40 @@ export default {
     .info-card-spinner {
       font-size: 2.1em;
       font-weight: 700;
+    }
+  }
+}
+
+.home-section-1 {
+  .home-section-1-1 {
+    min-height: 500px;
+    width: 100%;
+    height: 50%;
+  }
+  .home-section-1-2 {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: #092d4f;
+    padding: 50px 0;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .info {
+    width: 100%;
+    .info-card {
+      width: 120px;
+    }
+  }
+  .home-section-1 {
+    .home-section-1-1 {
+      min-height: 300px;
+    }
+    .home-section-1-2 {
+      padding: 0;
     }
   }
 }

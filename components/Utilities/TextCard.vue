@@ -4,7 +4,7 @@
     :class="`${backgroundClass} ${dark ? 'dark' : 'primary'}`"
     :style="largeCSS"
   >
-    <div>
+    <div class="text-card-container" :style="containerCSS">
       <div class="text-card-body" v-html="contentHtml"></div>
       <slot name="actions"></slot>
     </div>
@@ -18,6 +18,7 @@ export default {
     backgroundClass: { type: String, default: "bg-white" },
     dark: { type: Boolean, default: false },
     largeCSS: { type: String, required: false },
+    containerCSS: { type: String, required: false }
   }
 };
 </script>
@@ -35,8 +36,6 @@ export default {
     margin: 0 auto;
   }
   .text-card-body {
-    margin-bottom: 30px;
-
     img {
       width: 100%;
       height: 100%;
@@ -48,12 +47,18 @@ export default {
   }
 }
 .dark {
-  h1, h2,h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     color: #ffffff;
   }
 }
-.primary{
-    h1, h2,h3, h4 {
+.primary {
+  h1,
+  h2,
+  h3,
+  h4 {
     color: #092d4f;
   }
 }

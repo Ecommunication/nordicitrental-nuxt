@@ -1,7 +1,7 @@
 <template>
   <div class="mobile-navigation">
     <ClientOnly>
-      <select v-if="leafItems" v-model="page">
+      <select v-if="leafItems" v-model="page" style="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);">
         <option value="">Navigation</option>
         <option
           v-for="(item, index) in leafItems"

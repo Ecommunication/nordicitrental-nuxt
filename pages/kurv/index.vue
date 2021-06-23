@@ -2,9 +2,9 @@
   <ClientOnly>
     <div>
       <HeaderImg
-          v-if="data.ImageCover"
-          :img="data.ImageCover.url | formatImage"
-          :text="data.TextCover"
+        v-if="data.ImageCover"
+        :img="data.ImageCover.url | formatImage"
+        :text="data.TextCover"
       />
       <div class="container">
         <div class="row">
@@ -12,7 +12,7 @@
             <!-- TODO: img is missing -->
 
             <div v-if="noOfItems">
-              <Breadcrumb class="mt-16 mb-4" />
+              <Breadcrumb class="breadcrumb-el" />
 
               <CartList :cart="cart.items" />
 
@@ -79,4 +79,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.breadcrumb-el {
+  margin: 60px 0 10px 0;
+}
+@media only screen and (max-width: 767px) {
+  .breadcrumb-el {
+    margin: 8px 0 20px 0;
+  }
+}
+</style>
