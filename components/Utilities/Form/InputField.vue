@@ -1,10 +1,11 @@
 <template>
-  <div class="input-field">
+  <div class="input-field" :style="customStyle">
     <div v-if="label" class="label">{{ label }}:</div>
     <input
       v-model="inputLocal"
       type="text"
       :class="firstErrorMsg ? 'withError' : ''"
+      :style="inputStyle"
     />
     <div class="error-msg" v-if="firstErrorMsg" v-html="firstErrorMsg"></div>
   </div>
@@ -19,7 +20,9 @@ export default {
       type: Object,
       required: false
     },
-    errors: { type: Array, required: false }
+    errors: { type: Array, required: false },
+    customStyle: { type: String, required: false },
+    inputStyle: { type: String, required: false }
   },
   computed: {
     firstErrorMsg() {

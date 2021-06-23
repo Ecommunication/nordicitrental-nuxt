@@ -12,13 +12,19 @@
         <div class="col-md-4">
           <div class="product-gallery">
             <div class="product-gallery-main-image">
-              <img v-if="product.gallery.main" :src="product.gallery.main" alt="" />
+              <img
+                v-if="product.gallery.main"
+                @click="openImageModal(product.gallery.main)"
+                :src="product.gallery.main"
+                alt=""
+              />
             </div>
             <div class="product-gallery-other-images">
               <div
                 class="product-gallery-other-img-container"
                 v-for="(image, index) in product.gallery.thumbnails"
                 :key="index"
+                @click="openImageModal(image)"
               >
                 <img :src="image" />
               </div>
@@ -117,6 +123,44 @@
         </div>
       </template>
     </Modal>
+
+    <Modal
+      class="imageModal"
+      v-show="imageModalIsOpen"
+      @close="closeImageModal"
+      :width="700"
+    >
+      <template v-slot:header>
+        {{ product.info.name }}
+      </template>
+      <template v-slot:body>
+        <div style="height: 600px;">
+          <img
+            style="width: 100%; height: 100%; object-fit: cover;"
+            :src="imageModal"
+          />
+        </div>
+        <div style="display: flex;">
+          <div
+            class="mx-2"
+            style="border: 1px solid #ccc; padding: 5px; cursor: pointer;"
+            @click="openImageModal(image)"
+            v-for="(image, index) in [
+              product.gallery.main,
+              ...product.gallery.thumbnails
+            ]"
+            :key="index"
+          >
+            <div style="width: 100px; height: 100px; ">
+              <img
+                style="width: 100%; height: 100%; object-fit: cover;"
+                :src="image"
+              />
+            </div>
+          </div>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 <script>
@@ -144,6 +188,8 @@ export default {
       addToCartKey: new Date().getTime(),
       isModalVisible: true,
       modalData: {},
+      imageModal: null,
+      imageModalIsOpen: false
     };
   },
   head() {
@@ -162,20 +208,32 @@ export default {
     };
   },
   async asyncData({ params, $axios, $config }) {
-    const productsData = (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
-    const productData = productsData[0] || {}
-    if(!productData) return;
+    const productsData =
+      (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
+    const productData = productsData[0] || {};
+    if (!productData) return;
 
-    const categories = await Promise.all(productData.product_categories.map(async cat => {
-      const categoryData = await $axios.$get(`/product-categories?Slug=${cat.Slug}`)
-      return categoryData && categoryData[0] ? categoryData[0] : []
-    }))
-    const product = new Product(productData, categories)
+    const categories = await Promise.all(
+      productData.product_categories.map(async cat => {
+        const categoryData = await $axios.$get(
+          `/product-categories?Slug=${cat.Slug}`
+        );
+        return categoryData && categoryData[0] ? categoryData[0] : [];
+      })
+    );
+    const product = new Product(productData, categories);
     console.log(product, 1, categories);
 
     return { product };
   },
   methods: {
+    openImageModal(imgSrc) {
+      this.imageModalIsOpen = true;
+      this.imageModal = imgSrc;
+    },
+    closeImageModal() {
+      this.imageModalIsOpen = false;
+    },
     onAddedToCart(cartData) {
       this.isModalVisible = true;
       this.modalData = {
@@ -204,6 +262,7 @@ export default {
 .product-gallery {
   margin-right: 20px;
   .product-gallery-main-image {
+    cursor: zoom-in;
     max-height: 300px;
     max-width: 300px;
     img {
@@ -219,7 +278,7 @@ export default {
       height: 90px;
       margin: 15px;
       border: 1px solid rgba(0, 0, 0, 0.05);
-      cursor: pointer;
+      cursor: zoom-in;
       img {
         width: 100%;
         height: 100%;

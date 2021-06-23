@@ -95,7 +95,7 @@ export default {
   padding: 40px 0 20px 0;
 
   th {
-    border: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
   }
 
   .table-header-cell {
@@ -134,7 +134,7 @@ export default {
     }
 
     td {
-      padding: 0 15px;
+      padding-right: 15px;
     }
   }
 }

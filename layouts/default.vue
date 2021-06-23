@@ -42,7 +42,16 @@ export default {
     font-weight: 300;
   }
   li {
-    margin-bottom: 2px ;
+    margin-bottom: 2px;
+  }
+}
+
+.service-lad-os-overtage {
+  p {
+    margin-bottom: 20px !important;
+  }
+  h2 {
+    margin-bottom: 33.2px !important;
   }
 }
 

@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .category-card:hover {
-  background: rgb(238, 238, 238);
+  background: rgba(63,47,121,.05);
 }
 .category-card {
   display: flex;

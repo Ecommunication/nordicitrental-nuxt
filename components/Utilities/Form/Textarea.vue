@@ -1,11 +1,12 @@
 <template>
-  <div class="input-textarea">
+  <div class="input-textarea" :style="customStyle">
     <div v-if="label" class="label">{{ label }}:</div>
     <textarea
       v-model="inputLocal"
       :cols="cols"
       :rows="rows"
       :class="showError ? 'withError' : ''"
+      :style="inputStyle"
     ></textarea>
     <div class="error-msg" v-if="errorMsg && showError" v-html="errorMsg"></div>
   </div>
@@ -21,7 +22,9 @@ export default {
     validation: {
       type: Object,
       required: false
-    }
+    },
+    customStyle: { type: String, required: true},
+    inputStyle: { type: String, required: true}
   },
   computed: {
     errorMsg() {

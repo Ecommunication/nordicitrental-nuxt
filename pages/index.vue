@@ -7,6 +7,7 @@
         class="py-8"
         title="Vælg et produkt du ønsker at leje"
         :categories="data.IndexCategories"
+        :size="210"
       >
         <div class="grid flex flex-justify-center">
           <nuxt-link
@@ -120,11 +121,13 @@
       <div class="col-md-6 px-0">
         <div style="max-width: 585px; margin: 0 auto;">
           <ContactUsForm
-            class="mt-5 mb-10"
+            class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
             title="Lad os snakke om mulighederne for at leje"
             formTitle="Bliv ringet op"
             style="margin: 0 auto;"
+            titleStyle="font-size: 25px; margin-bottom: 60px;"
+            formStyle="max-width: 300px;"
           >
             <template v-slot:left-col>
               <div class="text-center">
