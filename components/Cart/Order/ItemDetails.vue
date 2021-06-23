@@ -14,11 +14,17 @@
             <span style="font-weight: 600"> x {{ item.amount }}</span>
           </div>
           <div class="booking-details">
-            <div>Booking details</div>
+            <div style="font-weight: 600;">Booking details</div>
             <div>
               Total lejeperiode: {{ item.noOfDays }} dage. Fra:
               {{ item.startDate | formatDate }} til
               {{ item.endDate | formatDate }}
+            </div>
+            <div class="product-options mt-2" v-if="item.options.length">
+              <div style="font-weight: 600;">Tilvalg</div>
+              <div v-for="(option, index) in item.options" :key="index">
+                {{ option.ProductName }}
+              </div>
             </div>
           </div>
         </div>
@@ -61,5 +67,12 @@ td.td-right {
 .booking-details {
   font-size: 0.8em;
   padding: 10px 20px;
+}
+
+
+@media only screen and (max-width: 767px) {
+  table {
+  font-size: 1em;
+}
 }
 </style>

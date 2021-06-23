@@ -23,8 +23,8 @@ export default {
       type: Object,
       required: false
     },
-    customStyle: { type: String, required: true},
-    inputStyle: { type: String, required: true}
+    customStyle: { type: String, required: false},
+    inputStyle: { type: String, required: false}
   },
   computed: {
     errorMsg() {
