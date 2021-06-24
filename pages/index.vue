@@ -69,6 +69,7 @@
         </div>
       </div>
       <div class="col-md-6 px-0">
+        {{data.IndexLetterboxImageRight}}
         <TextCard
           style="height: 100%;"
           v-if="data.IndexLetterboxTextRight"
@@ -169,7 +170,6 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/forside");
-    console.log(data);
     return { data };
   },
   data() {
@@ -188,7 +188,6 @@ export default {
       const isVisible = this.isInViewport(this.$refs.counterRef);
       if (!this.counterAnimationLoaded && isVisible) {
         this.counterAnimationLoaded = true;
-        console.log("call counter");
       }
     },
     isInViewport(el) {

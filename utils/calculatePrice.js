@@ -1,5 +1,5 @@
 export default calculatePrice = (dailyPrice, weeklyPrice, days) => {
-  if (!days) return weeklyPrice; // todo: ask the business logic for this case
+  if (!days) return weeklyPrice;
   const NO_OF_DAYS_IN_WEEK = 8;
   const price =
     days <= NO_OF_DAYS_IN_WEEK

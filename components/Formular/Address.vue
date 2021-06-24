@@ -90,13 +90,13 @@ export default {
     return {
       pageKey: 0,
       form: {
-        firstName: "caner",
-        lastName: "sezgin",
-        companyName: "shopdra",
-        streetNameAndNo: "shopdra street",
-        town: "shopdra town",
+        firstName: "",
+        lastName: "",
+        companyName: "",
+        streetNameAndNo: "",
+        town: "",
         country: "",
-        zipCode: "12345"
+        zipCode: ""
       },
       errors: {},
       formValidations: {
@@ -118,7 +118,6 @@ export default {
   },
   watch: {
     submitTrigger(val) {
-      console.log("submitTrigger", val);
       if (val) {
         this.submit();
       }
@@ -152,7 +151,6 @@ export default {
       this.pageKey++;
 
       this.$emit("onSubmit", { form: this.form, hasAnyError });
-      console.log({ form: this.form, hasAnyError }, "from address component");
     }
   }
 };

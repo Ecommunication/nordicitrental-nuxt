@@ -21,7 +21,6 @@ export default {
   watch: {
     amountLocal(val) {
       if (this.isPositiveInt(val)) {
-        console.log("amount", val);
         this.$emit("changed", parseInt(val));
       }
     }

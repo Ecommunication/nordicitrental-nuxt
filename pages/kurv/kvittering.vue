@@ -141,7 +141,6 @@ export default {
             const product = await this.getProduct(item.ProductId).catch(
               e => null
             );
-            console.log(product);
 
             return {
               slug: product?.info?.slug,

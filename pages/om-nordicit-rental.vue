@@ -6,7 +6,7 @@
       :text="data.TextCover"
     />
 
-    <div class="row">
+    <div id="aboutus-value" class="row">
       <div class="col-md-6 px-0">
         <TextCard
           style="height: 100%;"
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="bg-gray-dark">
+    <div id="aboutus-customerstories" class="bg-gray-dark">
       <div style="max-width: 1350px; margin: auto;">
         <div class="row">
           <div
@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    <div class="employee-table">
+    <div id="aboutnitr-employees" class="employee-table">
       <div style="max-width: 1300px; margin: 0 auto;">
         <h3>{{ data.EmployeeHeader }}</h3>
       </div>

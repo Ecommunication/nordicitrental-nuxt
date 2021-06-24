@@ -78,7 +78,7 @@ export default {
       return this.navigation.NavSingle.map(nav => {
         const items = nav.NavSingleR.map(e => ({
           label: e.Title,
-          link: nav.Rooturl
+          link: nav.Rooturl + (e.Url || '')
         }));
 
         return {

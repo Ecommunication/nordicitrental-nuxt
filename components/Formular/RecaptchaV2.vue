@@ -37,7 +37,6 @@ export default {
       if (this.isFormValid()) {
         try {
           const token = await this.$recaptcha.getResponse();
-          console.log("ReCaptcha token:", token);
 
           // send token to server alongside your form data
 
@@ -46,7 +45,6 @@ export default {
           this.captchaError = null;
         } catch (error) {
           this.captchaError = error;
-          console.log("Login error:", error);
           return;
         }
 
@@ -55,7 +53,6 @@ export default {
             `${process.env.serviceApi}/email/send-email/contact-us`,
             this.form
           );
-          console.log("contact us form submitted");
           this.$emit("formSubmitted");
         } catch (error) {
           console.log(

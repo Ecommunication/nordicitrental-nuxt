@@ -144,9 +144,9 @@ export default {
         billingAddress: null,
         shippingAddress: null,
         useDifferentShippingAddress: false,
-        phone: "44152125252",
-        email: "caner@shopdra.com",
-        cvrNumber: "555",
+        phone: "",
+        email: "",
+        cvrNumber: "",
         comments: ""
       },
       errors: {},
@@ -172,13 +172,11 @@ export default {
     },
     validate(valid, value) {
       const errors = [];
-      console.log({ valid, value });
       valid.forEach(validation => {
         if (!validation.rule(value)) {
           errors.push(validation.msg);
         }
       });
-      console.log(errors);
       return errors;
     },
     async submit() {
@@ -207,13 +205,6 @@ export default {
             JSON.stringify(this.form.billingAddress)
           );
         }
-
-        console.log(this.form, {
-          canBeSubmitted,
-          hasAnyError,
-          hasBillingErrors: this.hasBillingErrors,
-          hasShippingErrors: this.hasShippingErrors
-        });
 
         if(canBeSubmitted){
           await this.sendCart(this.form);

@@ -47,7 +47,6 @@ export default {
       if (!this.validate()) return;
 
       const payload = { name: this.name, phone: this.phone };
-      console.log(payload);
       this.error = false;
       this.result = messages.success;
       this.resetForm();

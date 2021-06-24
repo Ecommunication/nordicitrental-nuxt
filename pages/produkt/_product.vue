@@ -116,7 +116,7 @@
             <div class="button btn-primary" @click="goToProduct">
               FORTSÆT MED AT KOBE
             </div>
-            <div class="button btn-primary" @click="goToCart">CHECKUD</div>
+            <nuxt-link class="button btn-primary" to="/kurv">CHECKUD</nuxt-link>
           </div>
         </div>
       </template>
@@ -220,7 +220,6 @@ export default {
       })
     );
     const product = new Product(productData, categories);
-    console.log(product, 1, categories);
 
     return { product };
   },
@@ -244,9 +243,6 @@ export default {
     closeDialog() {
       this.isModalVisible = false;
       this.modalData = {};
-    },
-    goToCart() {
-      this.$router.push("/kurv");
     },
     goToProduct() {
       this.closeDialog();

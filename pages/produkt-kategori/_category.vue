@@ -94,18 +94,23 @@ export default {
       ]
     };
   },
-  async asyncData({ params, $axios, $config }) {
+  async asyncData({ params, $axios, $config, route, store }) {
     const slug = params.category.toLowerCase();
     const categoriesData = await $axios.$get(
       `/product-categories?Slug=${slug}`
     );
 
+    console.log({route, store})
+
+    if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
+      /* return store.dispatch('throwError404', { slug }) */
+    }
+
     const categoryData = categoriesData[0] || {};
     if (!categoryData) return;
+    console.log({categoriesData})
 
     const category = new Category(categoryData);
-
-    console.log(categoryData, category, 3);
 
     return { category };
   },

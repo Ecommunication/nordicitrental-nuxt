@@ -54,11 +54,9 @@ export default {
   },
   watch: {
     inputLocal(val) {
-      console.log("changed", val);
       this.$emit("changed", val);
 
       if (this.validationRule) {
-        console.log("validation", this.validation);
         this.showError = !this.validationRule(val);
       }
     }

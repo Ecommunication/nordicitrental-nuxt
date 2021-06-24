@@ -39,7 +39,6 @@ export default {
     async submit() {
       if (this.form.email && this.form.firstname) {
         try {
-          console.log("submitting...", this.form);
           const r = await this.$axios.$post(
             `${process.env.serviceApi}/mailchimp/subscribe`,
             this.form

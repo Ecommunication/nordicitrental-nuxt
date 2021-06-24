@@ -196,7 +196,6 @@ export default {
         }))
       };
 
-      console.log(payload);
       this.addToCart(payload);
       this.$emit("addedToCart", payload);
     }
