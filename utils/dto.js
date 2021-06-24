@@ -15,8 +15,6 @@ export class Product {
   constructor(data, categories = []) {
     if (!data) return {};
 
-    console.log(data);
-
     this._data = data;
     this.info = {
       id: data.id,
@@ -89,7 +87,7 @@ export class Category {
       desc: data.MetaDescription
     };
     this.description = data.Description;
-    this.products = data.products.map(product => new Product(product));
+    this.products = (data.products || []).map(product => new Product(product));
     this.upsell = (data?.CategoryUpsell || []).map(cat => ({
       Image: cat.UpsellIcon,
       Title: cat.Name,
@@ -107,14 +105,6 @@ export class Cart {
 
 export class Order {
   constructor(customerId, items, shipping, shippingAdd, comments) {
-    console.log({
-      customerId,
-      items,
-      shipping,
-      shippingAdd,
-      comments
-    });
-
     this.Products = this.processItems(items);
     this.CustomerId = customerId;
     this.OrderComments = comments || "";

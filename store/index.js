@@ -120,7 +120,6 @@ export const actions = {
       httpConfig
     );
 
-    console.log("!!!", customersWithThisEmail)
     let oldCustomer;
     if (customersWithThisEmail.length) {
       oldCustomer = customersWithThisEmail[0];
@@ -133,10 +132,8 @@ export const actions = {
         customer,
         httpConfig
       );
-      console.log("updating customer");
     } else {
       customerResponse = await this.$axios.$post(`/customers`, customer, httpConfig);
-      console.log("creating customer");
     }
 
     // Create Order
@@ -154,7 +151,6 @@ export const actions = {
       userInfoForm.comments
     );
 
-    console.log({ customer, order });
     const orderResponse = await this.$axios.$post("/orders", order, httpConfig);
 
     commit("SET_ORDER_RECEIPT", {

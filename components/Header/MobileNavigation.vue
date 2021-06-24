@@ -64,7 +64,6 @@ export default {
   },
   watch: {
     page(val) {
-      console.log({ val });
       this.$router.push(val);
     }
   }

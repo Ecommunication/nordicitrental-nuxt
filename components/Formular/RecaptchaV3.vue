@@ -1,7 +1,5 @@
 <template>
-  <div>
-
-  </div>
+  <div></div>
 </template>
 
 <script>
@@ -17,7 +15,6 @@ export default {
     async onSubmit() {
       try {
         const token = await this.$recaptcha.execute("login");
-        console.log("ReCaptcha token:", token);
 
         // send token to server alongside your form data
       } catch (error) {

@@ -39,7 +39,6 @@ export default {
           break;
 
         case "modal":
-          console.log("open modal", this.modal); // todo
           break;
 
         default:

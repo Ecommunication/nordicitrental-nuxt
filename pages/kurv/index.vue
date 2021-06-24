@@ -9,8 +9,6 @@
       <div class="container">
         <div class="row">
           <div class="col" style="width: 100%;">
-            <!-- TODO: img is missing -->
-
             <div v-if="noOfItems">
               <Breadcrumb class="breadcrumb-el" />
 

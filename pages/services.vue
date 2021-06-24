@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div id="service-rentrange" class="row">
       <div class="col-md-6 px-0 py-0" style="min-height: 526px; width: 100%;">
         <BackgroundImg
           v-if="data.LeftImageCol2"
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div id="service-howto" class="row">
       <div class="col px-0 py-0" style="width: 100%;">
         <TextCard
           v-if="data.MidTextCol3"
@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div id="service-reasons" class="row">
       <div class="col-md-6 px-0">
         <TextCard
           class="pb-0"
@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <div class="row service-lad-os-overtage">
+    <div id="service-handle" class="row service-lad-os-overtage">
       <div class="col px-0">
         <TextCard
           v-if="data.MidTextCol5"
@@ -166,6 +166,11 @@ export default {
     ContactUsForm,
     Modal,
     CallMeForm
+  },
+  computed:{
+    currentRouteHash(){
+      return this.$router.currentRoute.hash.replace("#", "")
+    }
   },
   data() {
     return {
