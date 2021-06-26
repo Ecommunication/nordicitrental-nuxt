@@ -52,9 +52,9 @@
       </div>
 
       <CategorySlider
-        v-if="category.upsell && category.upsell.length"
+        v-if="category.CategoryUpsell && category.CategoryUpsell.length"
         title="Lignende produkter"
-        :categories="category.upsell"
+        :categories="category.CategoryUpsell"
         titlePosition="left"
         :titlePaddingBottom="20"
         justifyContent="center"
