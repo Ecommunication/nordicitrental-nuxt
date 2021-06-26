@@ -1,4 +1,30 @@
-@media screen and (max-width: 767px) {
+/*  Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1365px) {
+  h1 {
+    font-size: 32px;
+  }
+}
+
+/*  mobile */
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: 26px !important;
+  }
+
+  i, span, div {
+    font-size: 14px !important;
+  }
+
+  .slider-title {
+    font-size: 26px;
+  }
+
   .img-responsive {
     max-width: 100%;
   }

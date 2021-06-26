@@ -18,7 +18,7 @@ export default {
 
         // send token to server alongside your form data
       } catch (error) {
-        console.log("Login error:", error);
+
       }
     }
   },

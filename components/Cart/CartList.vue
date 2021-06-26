@@ -1,75 +1,79 @@
 <template>
-  <table class="cart-list">
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th class="table-header-cell col3">Vare</th>
-        <th class="table-header-cell">Pris</th>
-        <th class="table-header-cell">Antal</th>
-        <th class="table-header-cell">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table-row" v-for="item in cart" :key="item.itemId">
-        <td>
-          <div @click="onDeleteItem(item.itemId)" class="product-remove">
-            x
-          </div>
-        </td>
-        <td class="product-thumbnail">
-          <nuxt-link :to="`/produkt/${item.product.info.slug}`">
-            <img
-              v-if="item.product.gallery.main"
-              width="220"
-              height="220"
-              class="product-thumbnail-image"
-              :src="item.product.gallery.main"
-            />
-          </nuxt-link>
-        </td>
-        <td>
-          <nuxt-link :to="`/produkt/${item.product.info.slug}`"
-            ><div class="product-name">
-              {{ item.product.info.name }}
-            </div></nuxt-link
-          >
-          <p class="booking-date">
-            <span>
-              Total lejeperiode:
-              <span class="special">{{ item.noOfDays }}</span> dage. <br />
-              Fra:
-              <span class="special">{{ item.startDate | formatDate }}</span> til
-              <span class="special">{{ item.endDate | formatDate }}</span>
-            </span>
-            <br />
-            <br />
-            <span v-if="item.productOptions.length">
-              <span class="text-blue">Tilvalg</span>
-              <span v-for="(opts, index) in item.productOptions" :key="index">
-                <span>
-                  <br />
-                  {{ opts.name }}
-                </span>
+    <table class="cart-list">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th class="table-header-cell col3">Vare</th>
+          <th class="table-header-cell">Pris</th>
+          <th class="table-header-cell">Antal</th>
+          <th class="table-header-cell">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row" v-for="item in cart" :key="item.itemId">
+          <td>
+            <div @click="onDeleteItem(item.itemId)" class="product-remove">
+              x
+            </div>
+          </td>
+          <td class="product-thumbnail">
+            <nuxt-link :to="`/produkt/${item.product.info.slug}`">
+              <img
+                v-if="item.product.gallery.main"
+                width="220"
+                height="220"
+                class="product-thumbnail-image"
+                :src="item.product.gallery.main"
+              />
+            </nuxt-link>
+          </td>
+          <td>
+            <nuxt-link :to="`/produkt/${item.product.info.slug}`"
+              ><div class="product-name">
+              <p>
+                <strong>{{ item.product.info.name }}</strong>
+              </p>
+              </div></nuxt-link
+            >
+            <div class="booking-date">
+              <span class="text-muted">
+                Total lejeperiode:
+                <span>{{ item.noOfDays }}</span> dage.
+                Fra:
+                <span>{{ item.startDate | formatDate }}</span> til
+                <span>{{ item.endDate | formatDate }}</span>
               </span>
-            </span>
-          </p>
-        </td>
-        <td class="product-price">
-          {{ (item.price / item.amount) | formatPrice }}
-        </td>
-        <td class="product-quantity">
-          <AmountPicker
-            :amount="item.amount"
-            @changed="amount => onAmountPickerChange(item.itemId, amount)"
-          />
-        </td>
-        <td class="product-subtotal">
-          {{ item.price | formatPrice }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+              <div class="product-options">
+                <span v-if="item.productOptions && item.productOptions.length > 0">
+                <span class="text-blue">
+                  <u>Tilvalg</u>
+                </span>
+                  <span v-for="(opts, index) in item.productOptions" :key="index">
+                    <span>
+                      <br />
+                      {{ opts.name }} - {{opts.price | formatPrice}} ekskl. moms
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </td>
+          <td class="product-price">
+            {{ (item.price / item.amount) | formatPrice }}
+          </td>
+          <td class="product-quantity">
+            <AmountPicker
+              :amount="item.amount"
+              @changed="amount => onAmountPickerChange(item.itemId, amount)"
+            />
+          </td>
+          <td class="product-subtotal">
+            {{ item.price | formatPrice }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </template>
 
 <script>
@@ -93,80 +97,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cart-list {
-  font-size: 0.8em;
-  padding: 40px 0 20px 0;
-
-  th {
-    border-bottom: 1px solid #f5f5f5;
-  }
-
-  .table-header-cell {
-    text-align: left;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 400;
-    color: #092d4f;
-  }
-
-  .col3 {
-    width: 385px;
-  }
-
-  .table-row {
-    .product-remove {
-      font-weight: 600;
-      padding: 6px 12px 9px 12px;
-      cursor: pointer;
-      border: 1.5px solid white;
-    }
-
-    .product-remove:hover {
-      color: brown;
-    }
-
-    .product-name {
-    }
-    .booking-date {
-      font-size: 0.85em;
-    }
-
-    .product-price {
-      min-width: 100px;
-    }
-
-    .product-subtotal {
-      width: 105px;
-    }
-
-    td {
-      padding-right: 15px;
-    }
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .cart-list {
-    font-size: 12px !important;
-    padding: 0;
-
-    td {
-      padding: 0 !important;
-    }
-
-    .product-price {
-      padding: 10px !important;
-      min-width: 75px !important;
-    }
-
-    .product-subtotal {
-      padding: 10px !important;
-      min-width: 75px;
-    }
-
-    .product-thumbnail-image {
-      display: none;
-    }
-  }
-}
+/* Again too much styles in scoped, should be used sparingly in my opinion */
 </style>

@@ -55,10 +55,7 @@ export default {
           );
           this.$emit("formSubmitted");
         } catch (error) {
-          console.log(
-            "contact us form submission error",
-            error?.response?.data
-          );
+
         }
       }
     },
@@ -73,7 +70,6 @@ export default {
     },
     isFormValid() {
       Object.entries(this.formValidations).forEach(([key, validation]) => {
-        console.log({ key, validation, f: this.form });
         const value = this.form[key];
         const errors = this.validate(validation, value);
         this.formErrors[key] = errors;
@@ -85,7 +81,6 @@ export default {
         }
       );
 
-      console.log({ form: this.form, hasAnyError });
       this.$emit("changeErrors", this.formErrors);
       return !hasAnyError;
     }

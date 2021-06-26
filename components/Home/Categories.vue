@@ -40,21 +40,28 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 0 auto;
-  h3 {
-    font-size: 1em;
-    font-weight: bold;
-    color: #092d4f;
+
+  @media screen and (min-width: 767px) {
+    h3 {
+      font-size: 1em;
+      font-weight: bold;
+      color: #092d4f;
+    }
   }
+
   .info-card {
     text-align: center;
     margin: 15px;
+
     .img-wrapper {
       height: 160px;
       margin: 12px 0;
+
       .info-card-img {
         padding: 35px 0;
       }
     }
+
     .info-card-spinner {
       font-size: 2.1em;
       font-weight: 700;
@@ -65,12 +72,14 @@ export default {
 @media only screen and (max-width: 767px) {
   .info {
     h3 {
-      font-size: 20px !important;
+      font-size: 20px; //please never use important in css
     }
     .info-card {
       width: 110px;
+
       .img-wrapper {
       }
+
       .info-card-spinner {
         font-size: 3em;
         font-weight: 700;

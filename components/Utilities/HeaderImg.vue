@@ -4,8 +4,7 @@
       <BackgroundImg :src="img" class="bg-img">
         <template v-slot:body v-if="text">
           <div class="body-wrapper grid-small">
-
-          <h1 class="slider-title title-white">{{ text }}</h1>
+            <h1 class="slider-title title-white">{{ text }}</h1>
           </div>
         </template>
       </BackgroundImg>

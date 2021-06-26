@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
 
 @import "components/variables";
 @import "components/grid";
@@ -16,7 +17,8 @@
 /* Pages */
 @import "components/pages/index";
 @import "components/shop/category";
-@import "components/shop/checkout";
+@import "components/shop/product";
+@import "components/shop/cart";
 
 /* Utils */
 @import "components/responsive";
@@ -32,6 +34,9 @@ body {
   font-family: 'Open Sans', Arial, sans-serif;
   font-size: 20px;
   line-height: normal;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .container {
@@ -46,12 +51,37 @@ footer {
   a {
     color: #fff;
   }
+
+  .footer-col {
+    font-size: 14px;
+
+    strong {
+      font-size: 17px;
+      font-weight: 300;
+    }
+    li {
+      margin-bottom: 2px;
+    }
+  }
 }
 
 .title-white {
   color: $white;
   background: rgba(9, 45, 79, 0.8);
   border-radius: 3px;
+}
+
+.slider-title {
+  font-size: 50px;
+  padding: 20px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.error-404 {
+  .illustration-404 {
+    max-width: 310px;
+    margin: 40px 0;
+  }
 }
 
 input,

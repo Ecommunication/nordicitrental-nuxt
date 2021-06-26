@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="product-category">
     <HeaderImg
       v-if="category.cover"
       :img="category.cover.image"
@@ -100,15 +100,12 @@ export default {
       `/product-categories?Slug=${slug}`
     );
 
-    console.log({route, store})
-
     if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
       /* return store.dispatch('throwError404', { slug }) */
     }
 
     const categoryData = categoriesData[0] || {};
     if (!categoryData) return;
-    console.log({categoriesData})
 
     const category = new Category(categoryData);
 
@@ -125,61 +122,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.explanation {
-  font-size: 0.65em;
-  font-weight: 300;
-}
-.product {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  border-bottom: 2px solid #e9e9e9;
-  .product-image {
-    text-align: center;
-    display: block;
-    width: 289px;
-    img {
-      width: 80%;
-      height: 80%;
-    }
-  }
-  .product-info {
-    flex: 1;
-    .product-title {
-      font-size: 23px;
-      font-weight: bold;
-    }
-    .product-description {
-      color: #585858;
-      margin: 7px 0;
-      font-size: 0.7em;
-      line-height: 25px;
-    }
-    .product-body {
-      color: #092d4f;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      .price-weekly {
-        font-size: 2.1em;
-        font-weight: 700;
-      }
-      .price-daily {
-        font-weight: bold;
-      }
-
-      .product-button {
-        font-size: 0.7em;
-      }
-    }
-  }
-}
-.col {
-  padding: 16px;
-}
-</style>

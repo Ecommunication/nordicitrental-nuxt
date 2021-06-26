@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%;">
+  <div class="w-100">
     <div class="tabs">
       <div v-for="(tab, index) in tabs" :key="index">
         <div

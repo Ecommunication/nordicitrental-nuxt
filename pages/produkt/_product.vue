@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="product-single">
     <HeaderImg
-      v-if="product.cover"
-      :img="product.cover.image"
-      :text="product.cover.text"
-      :height="460"
+        v-if="product.cover"
+        :img="product.cover.image"
+        :text="product.cover.text || product.info.name"
+        :height="460"
     />
 
     <div class="container py-10">
@@ -13,83 +13,72 @@
           <div class="product-gallery">
             <div class="product-gallery-main-image">
               <img
-                v-if="product.gallery.main"
-                @click="openImageModal(product.gallery.main)"
-                :src="product.gallery.main"
-                alt=""
+                  v-if="product.gallery.main"
+                  @click="openImageModal(product.gallery.main)"
+                  :src="product.gallery.main"
+                  alt=""
               />
             </div>
             <div class="product-gallery-other-images">
               <div
-                class="product-gallery-other-img-container"
-                v-for="(image, index) in product.gallery.thumbnails"
-                :key="index"
-                @click="openImageModal(image)"
+                  class="product-gallery-other-img-container"
+                  v-for="(image, index) in product.gallery.thumbnails"
+                  :key="index"
+                  @click="openImageModal(image)"
               >
-                <img :src="image" />
+                <img :src="image"/>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-8">
           <div class="product-meta">
-            <IconBar class="mb-8" :features="product.features" />
+            <IconBar class="mb-8" :features="product.features"/>
             <div class="product-prices text-blue">
               <div class="price-weekly-container">
-                <span class="price-weekly">{{
-                  product.pricing.weekly | formatPrice
-                }}</span>
-                <span class="price-explanation"
-                  >(Pris for første uges leje)</span
-                >
+                <span class="price-weekly">{{ product.pricing.weekly | formatPrice }}</span>
+                <span class="price-explanation">(Pris for første uges leje)</span>
               </div>
               <div class="price-daily-container">
-                <span class="price-daily">{{
-                  product.pricing.daily | formatPrice
-                }}</span>
-                <span class="price-explanation"
-                  >(Pris efter første uges leje, pr. dag.)</span
-                >
+                <span class="price-daily">{{ product.pricing.daily | formatPrice }}</span>
+                <span class="price-explanation">(Pris efter første uges leje, pr. dag.)</span>
               </div>
             </div>
 
-            <div
-              class="product-description"
-              v-html="product.descriptions.short"
-            ></div>
+            <div class="product-description" v-html="product.descriptions.short" /> <!-- Just use a shorthand if no closing need-->
 
             <AddToCart
-              :key="addToCartKey"
-              class="mt-8"
-              :product="product"
-              :dailyPrice="product.pricing.daily"
-              :weeklyPrice="product.pricing.weekly"
-              @addedToCart="onAddedToCart"
+                :key="addToCartKey"
+                class="mt-8"
+                :product="product"
+                :dailyPrice="product.pricing.daily"
+                :weeklyPrice="product.pricing.weekly"
+                @addedToCart="onAddedToCart"
             />
           </div>
         </div>
       </div>
       <div class="row mt-10">
-        <div class="col">
+        <div class="col w-100">
           <Tabs
-            :description="product.descriptions.long"
-            :features="product.features"
+              :description="product.descriptions.long"
+              :features="product.features"
           />
         </div>
       </div>
 
       <div class="row mt-10">
         <div class="col">
-          <Suggestions :products="product.upsell" />
+          <Suggestions :products="product.upsell"/>
         </div>
       </div>
     </div>
 
     <Modal
-      class="cartNotifModal"
-      v-show="isModalVisible && Object.keys(modalData).length"
-      @close="closeDialog"
-      :width="500"
+        class="cartNotifModal"
+        v-show="isModalVisible && Object.keys(modalData).length"
+        @close="closeDialog"
+        :width="500"
     >
       <template v-slot:header>
         Produktet er lagt i kurven
@@ -114,19 +103,21 @@
           </div>
           <div style="display: flex; justify-content: space-between;">
             <div class="button btn-primary" @click="goToProduct">
-              FORTSÆT MED AT KOBE
+              <span class="text-uppercase">Fortsæt med at købe</span>
             </div>
-            <nuxt-link class="button btn-primary" to="/kurv">CHECKUD</nuxt-link>
+            <nuxt-link class="button btn-primary" to="/kurv">
+              <span class="text-uppercase">Checkud</span>
+            </nuxt-link>
           </div>
         </div>
       </template>
     </Modal>
 
     <Modal
-      class="imageModal"
-      v-show="imageModalIsOpen"
-      @close="closeImageModal"
-      :width="700"
+        class="imageModal"
+        v-show="imageModalIsOpen"
+        @close="closeImageModal"
+        :width="700"
     >
       <template v-slot:header>
         {{ product.info.name }}
@@ -134,25 +125,25 @@
       <template v-slot:body>
         <div style="">
           <img
-            style="width: 100%; height: 100%; object-fit: cover;"
-            :src="imageModal"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              :src="imageModal"
           />
         </div>
-        <div style="display: flex; width: 100%; flex-wrap: wrap;">
+        <div class="flex w-100 flex-wrap">
           <div
-            class="mr-2 mb-2"
-            style="border: 1px solid #ccc; padding: 5px; cursor: pointer;"
-            @click="openImageModal(image)"
-            v-for="(image, index) in [
+              class="mr-2 mb-2"
+              style="border: 1px solid #ccc; padding: 5px; cursor: pointer;"
+              @click="openImageModal(image)"
+              v-for="(image, index) in [
               product.gallery.main,
               ...product.gallery.thumbnails
             ]"
-            :key="index"
+              :key="index"
           >
             <div style="width: 100px; height: 100px; ">
               <img
-                style="width: 100%; height: 100%; object-fit: cover;"
-                :src="image"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                  :src="image"
               />
             </div>
           </div>
@@ -162,7 +153,7 @@
   </div>
 </template>
 <script>
-import { Product, ProductOption } from "@/utils/dto";
+import {Product, ProductOption} from "@/utils/dto";
 import Modal from "@/components/Utilities/Modal";
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
@@ -205,23 +196,23 @@ export default {
       ]
     };
   },
-  async asyncData({ params, $axios, $config }) {
+  async asyncData({params, $axios, $config}) {
     const productsData =
-      (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
+        (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
     const productData = productsData[0] || {};
     if (!productData) return;
 
     const categories = await Promise.all(
-      productData.product_categories.map(async cat => {
-        const categoryData = await $axios.$get(
-          `/product-categories?Slug=${cat.Slug}`
-        );
-        return categoryData && categoryData[0] ? categoryData[0] : [];
-      })
+        productData.product_categories.map(async cat => {
+          const categoryData = await $axios.$get(
+              `/product-categories?Slug=${cat.Slug}`
+          );
+          return categoryData && categoryData[0] ? categoryData[0] : [];
+        })
     );
     const product = new Product(productData, categories);
 
-    return { product };
+    return {product};
   },
   methods: {
     openImageModal(imgSrc) {
@@ -251,73 +242,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.product-gallery {
-  margin-right: 20px;
-  .product-gallery-main-image {
-    cursor: zoom-in;
-    max-height: 300px;
-    max-width: 300px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .product-gallery-other-images {
-    display: flex;
-    flex-wrap: wrap;
-    .product-gallery-other-img-container {
-      width: 90px;
-      height: 90px;
-      margin: 15px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      cursor: zoom-in;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        background-position: center center;
-      }
-    }
-  }
-}
-.product-meta {
-  .product-prices {
-    font-weight: 700;
-    .price-weekly {
-      font-size: 1.8em;
-    }
-    .price-explanation {
-      margin-left: 5px;
-      font-size: 0.9em;
-    }
-  }
-
-  .product-description {
-    font-size: 0.8em;
-    font-weight: 100;
-  }
-}
-
-.cartNotifModal {
-  .cartNotifModal-body {
-    width: 80%;
-    font-size: 0.8em;
-    margin: 0 auto;
-
-    .cartNotifModal-icon {
-      font-size: 100px !important;
-      color: #092d4f;
-    }
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .cartNotifModal {
-    .cartNotifModal-body {
-      width: 100%;
-    }
-  }
-}
-</style>

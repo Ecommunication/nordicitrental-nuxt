@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div>
+    <div class="checkout-cart">
       <HeaderImg
         v-if="data.ImageCover"
         :img="data.ImageCover.url | formatImage"
