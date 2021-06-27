@@ -3,7 +3,7 @@
     <HeaderImg
       v-if="category.cover"
       :img="category.cover.image"
-      :text="category.cover.text"
+      :text="category.cover.text || category.info.name"
       :height="490"
     />
 
