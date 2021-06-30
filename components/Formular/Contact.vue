@@ -104,11 +104,11 @@ export default {
       formKey: new Date().getTime(),
       isModalVisible: false,
       form: {
-        name: "Simon",
-        email: "mail@simonduun.com",
-        companyName: "Company",
-        phone: "1234567891",
-        message: "message"
+        name: "",
+        email: "",
+        companyName: "",
+        phone: "",
+        message: ""
       },
       formValidations: {
         name: [validations.isRequired],
