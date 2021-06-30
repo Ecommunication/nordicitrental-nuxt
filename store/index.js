@@ -105,7 +105,7 @@ export const actions = {
     commit("SET_SHIPMENT_METHOD", method);
   },
   async sendCart({ commit, state }, userInfoForm) {
-    const httpConfig =  { headers: { Authorization: `Bearer ${state.jwt}`}};
+    const httpConfig = { headers: { Authorization: `Bearer ${state.jwt}`}};
 
     const customer = new Customer({
       ...userInfoForm.billingAddress,

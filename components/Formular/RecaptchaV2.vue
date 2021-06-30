@@ -49,13 +49,17 @@ export default {
         }
 
         try {
-          await this.$axios.post(
-            `${process.env.serviceApi}/email/send-email/contact-us`,
-            this.form
-          );
+          await this.$axios.$post(`/mails`, {
+            'Name' : this.form.name,
+            'Email' : this.form.email,
+            'Company' : this.form.companyName,
+            'Phone' : this.form.phone,
+            'Message' : this.form.message,
+          });
+
           this.$emit("formSubmitted");
         } catch (error) {
-
+          console.log(error)
         }
       }
     },
