@@ -10,7 +10,7 @@
         placeholder="Telefon nr."
       />
 
-      <div @click="submit" class="button btn-primary btn-block">Send</div>
+      <button @click="submit" v-if="!isSubmitted" class="button btn-primary btn-block">Send</button>
     </div>
     <div
     v-if="result"
@@ -25,11 +25,11 @@
 <script>
 
 const messages = {
-  success: "We will get back to you, soon!",
+  success: "Vi vil vende tilbage snarest muligt.",
   error: {
-    nameNotEmpty: "Navn can not be empty.",
-    phoneNotEmpty: "Phone can not be empty",
-    phoneNotValid: "Phone format is not valid."
+    nameNotEmpty: "Navn skal være udfyldt.",
+    phoneNotEmpty: "Telefon nr. skal være udfyldt",
+    phoneNotValid: "Telefon nr. er ikke gyldigt."
   }
 }
 
@@ -39,14 +39,28 @@ export default {
       name: "",
       phone: "",
       error: false,
-      result: ""
+      result: "",
+      isSubmitted: false,
     };
   },
   methods: {
     submit() {
       if (!this.validate()) return;
 
-      const payload = { name: this.name, phone: this.phone };
+
+      try {
+        this.$axios.$post(`/mails-call-us`, {
+          'Name' : this.name,
+          'Phone' : this.phone,
+        });
+
+        this.$emit("formSubmitted");
+        this.isSubmitted = true;
+      } catch (error) {
+        console.log(error)
+      }
+
+
       this.error = false;
       this.result = messages.success;
       this.resetForm();
@@ -64,7 +78,7 @@ export default {
         return false;
       }
 
-      const phoneValidationRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+      const phoneValidationRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{2,6}$/im
       if(!this.phone.match(phoneValidationRegex)){
         this.result = messages.error.phoneNotValid;
         this.error = true

@@ -3,7 +3,7 @@
     <HeaderImg
       v-if="data.ImageCover"
       :img="data.ImageCover.url | formatImage"
-      :text="data.TextCover"
+      text="Alle produkter"
     />
 
 

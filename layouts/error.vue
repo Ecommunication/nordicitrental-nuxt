@@ -23,6 +23,11 @@ export default {
   components: {
     HeaderImg,
   },
+  head() {
+    return {
+      title: "Nordic IT Rental - Siden blev ikke fundet",
+    };
+  },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/error-404");
     return { data };

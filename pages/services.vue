@@ -22,7 +22,7 @@
 
               <Modal v-show="isModalVisible" @close="closeModal" :width="600">
                 <template v-slot:header>
-                  Call Me
+                  Ring mig op
                 </template>
                 <template v-slot:body>
                   <CallMeForm />
@@ -171,6 +171,21 @@ export default {
     currentRouteHash(){
       return this.$router.currentRoute.hash.replace("#", "")
     }
+  },
+  head() {
+    return {
+      title: "Nordic IT Rental" + this.data.PageTitle,
+      meta: [
+        {
+          name: "title",
+          content: this.data.MetaTitle || ""
+        },
+        {
+          name: "description",
+          content: this.data.MetaDescription || ""
+        }
+      ]
+    };
   },
   data() {
     return {

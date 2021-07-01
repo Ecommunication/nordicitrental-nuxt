@@ -58,6 +58,21 @@ export default {
     ...mapState(["cart"]),
     ...mapGetters(["noOfItems"])
   },
+  head() {
+    return {
+      title: "Nordic IT Rental",
+      meta: [
+        {
+          name: "title",
+          content: this.data.MetaTitle || ""
+        },
+        {
+          name: "description",
+          content: this.data.MetaDescription || ""
+        }
+      ]
+    };
+  },
   data() {
     return {
       cover: {

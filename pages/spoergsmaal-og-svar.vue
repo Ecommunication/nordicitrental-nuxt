@@ -28,6 +28,21 @@ export default {
     RefCompanyQuote,
     Employee
   },
+  head() {
+    return {
+      title: "Nordic IT Rental" + this.data.PageTitle,
+      meta: [
+        {
+          name: "title",
+          content: this.data.MetaTitle || ""
+        },
+        {
+          name: "description",
+          content: this.data.MetaDescription || ""
+        }
+      ]
+    };
+  },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/sporgsmal-og-svar");
     return { data };

@@ -116,6 +116,21 @@ export default {
       };
     }
   },
+  head() {
+    return {
+      title: "Nordic IT Rental" + this.data.PageTitle,
+      meta: [
+        {
+          name: "title",
+          content: this.data.MetaTitle || ""
+        },
+        {
+          name: "description",
+          content: this.data.MetaDescription || ""
+        }
+      ]
+    };
+  },
   data() {
     return {
       items: []

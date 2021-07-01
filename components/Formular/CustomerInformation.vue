@@ -85,9 +85,9 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <div @click="submit" class="button btn-primary">
-            Ordre
-          </div>
+          <button @click="submit" class="button btn-primary">
+            Bestil ordre
+          </button>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ export default {
   */
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "nordic-frontend",
+    title: "Nordic IT Rental",
     htmlAttrs: {
       lang: "en"
     },
