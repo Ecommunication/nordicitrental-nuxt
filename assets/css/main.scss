@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
-
+@import "fonts";
+@import "components/variables";
 @import "components/variables";
 @import "components/grid";
 @import "components/flex";
@@ -31,12 +30,16 @@
 
 body {
   color: $textMain;
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+}
+
+h1, h2, h3, h4, p, span {
+  font-family: 'Open Sans', sans-serif;
 }
 
 .container {
@@ -48,6 +51,7 @@ footer {
   ul {
     list-style: none;
   }
+
   a {
     color: #fff;
   }
@@ -59,6 +63,7 @@ footer {
       font-size: 17px;
       font-weight: 300;
     }
+
     li {
       margin-bottom: 2px;
     }
@@ -92,9 +97,11 @@ select {
   padding: 10px;
   width: 100%;
 }
-input[type=checkbox]{
+
+input[type=checkbox] {
   width: auto;
 }
+
 select {
   background: none;
 }
@@ -103,9 +110,10 @@ select {
   margin-bottom: 8px;
   padding: 0 20px;
 }
+
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   margin: 3px;
 }
 
@@ -118,3 +126,65 @@ select {
   font-weight: bold;
   color: #092d4f;
 }
+
+/*
+  Header slider
+*/
+
+.custom-slider-container {
+  h3 {
+    font-family: 'Ubuntu', sans-serif;
+  }
+}
+
+.custom-slider-container {
+  .slider-item {
+    .slider-title.slider-title-1 {
+      font-size: 40px;
+    }
+
+    .slider-title.slider-title-2 {
+      font-size: 30px;
+    }
+  }
+}
+
+.ref-company-logo-bar {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .logo-container {
+    max-width: 161px;
+    height: 100%;
+    margin: 40px 60px;
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .custom-slider-container {
+    .slider-item {
+      .slider-title.slider-title-1 {
+        font-size: 20px;
+      }
+
+      .slider-title.slider-title-2 {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .ref-company-logo-bar {
+    .logo-container {
+      margin: 10px 20px;
+    }
+  }
+}
+
