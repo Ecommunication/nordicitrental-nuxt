@@ -48,7 +48,7 @@ export default {
       if (!this.validate()) return;
 
       try {
-        this.$axios.$post(process.env.apiUrl + '/mails-call-us', {
+        this.$axios.$post(process.env.apiUrl + '/mails-calls', {
           'Name' : this.name,
           'Phone' : this.phone,
         });

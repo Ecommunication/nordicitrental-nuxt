@@ -8,7 +8,7 @@
         </td>
       </tr>
       <tr>
-        <td class="td-left"><div>Telephone:</div></td>
+        <td class="td-left"><div>Telefon nr.:</div></td>
         <td class="td-right">
           <div>
             {{ information.telephone }}
