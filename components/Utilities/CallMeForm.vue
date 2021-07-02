@@ -4,18 +4,18 @@
       <input v-model="name" class="mb-4" type="text" placeholder="Navn" />
 
       <input
-        v-model="phone"
-        class="mb-4"
-        type="text"
-        placeholder="Telefon nr."
+          v-model="phone"
+          class="mb-4"
+          type="text"
+          placeholder="Telefon nr."
       />
 
       <button @click="submit" v-if="!isSubmitted" class="button btn-primary btn-block">Send</button>
     </div>
     <div
-    v-if="result"
-      class="mt-2 result-container"
-      :class="error ? 'msg-error' : 'msg-success'"
+        v-if="result"
+        class="mt-2 result-container"
+        :class="error ? 'msg-error' : 'msg-success'"
     >
       {{ result }}
     </div>
