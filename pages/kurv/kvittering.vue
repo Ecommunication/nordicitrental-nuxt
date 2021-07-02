@@ -26,15 +26,15 @@
               og betingelser er angivet i lejeaftale/tilbud samt på fakturaen.
             </p>
             <p>Med venlig hilsen</p>
-            <div>pNordic IT Rental</div>
-            <div>Industriparken 22A</div>
-            <div>2750 Ballerup</div>
+            <p>Nordic IT Rental</p>
+            <p>Industriparken 22A</p>
+            <p>2750 Ballerup</p>
           </div>
 
           <ClientOnly>
             <div class="py-10">
               <div>
-                <h2>Order Details</h2>
+                <h2>Ordredetaljer</h2>
                 <ItemDetails :items="items" />
                 <OrderDetails :details="orderDetails" />
               </div>
@@ -97,7 +97,7 @@ export default {
     },
     customerInformation() {
       return {
-        email: "[email protected]",
+        email: this.orderReceipt?.customer.CustomerEmail,
         telephone: this.orderReceipt?.customer.CustomerPhone
       };
     },

@@ -9,12 +9,11 @@
         <div>
           <div>
             <nuxt-link :to="`/produkt/${item.slug}`">
-              {{ item.title }}
+              <span>{{ item.amount }}x</span> {{ item.title }}
             </nuxt-link>
-            <span style="font-weight: 600"> x {{ item.amount }}</span>
           </div>
           <div class="booking-details">
-            <div style="font-weight: 600;">Booking details</div>
+            <div style="font-weight: 600;">Booking detailjer</div>
             <div>
               Total lejeperiode: {{ item.noOfDays }} dage. Fra:
               {{ item.startDate | formatDate }} til
