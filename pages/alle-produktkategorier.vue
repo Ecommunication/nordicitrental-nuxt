@@ -16,11 +16,12 @@
         v-for="(category, index) in categories"
         :key="index"
       >
-        <div class="category-card-container">
-          <div class="category-img-container">
-            <img :src="category.img" />
+        <div class="category-card-container" v-if="category.products.length > 0">
+          <div class="category-img-container text-center">
+            <img :src="category.img" v-if="category.img" />
+            <img src="~/assets/images/icons/no-photos.svg" alt="" style="max-width: 70px;" v-else>
           </div>
-          <div class="category-title">
+          <div class="category-title text-center">
             {{ category.info.name }} ({{ category.products.length }})
           </div>
         </div>
