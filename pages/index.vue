@@ -132,7 +132,7 @@
               <div class="text-center">
                 <h3 class="text-blue" style="font-size: 20px;">Kontakt</h3>
                 <img
-                  src="https://nordicitrental.dk//wp-content/uploads/2017/12/employee_mic-135x135.png"
+                  src="~/assets/images/employee_mic.png"
                   alt="Kontakt"
                 />
                 <p style="font-size: 16px;">
