@@ -122,7 +122,7 @@
           <ContactUsForm
             class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
-            title="Lad os snakke om mulighederne for at leje"
+            title="Lad os tale om mulighederne for at leje"
             formTitle="Bliv ringet op"
             style="margin: 0 auto;"
             titleStyle="font-size: 25px; margin-bottom: 60px;"

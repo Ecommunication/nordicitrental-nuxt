@@ -101,7 +101,7 @@
     </div>
 
     <div id="service-handle" class="row service-lad-os-overtage">
-      <div class="col px-0">
+      <div class="col px-0 w-100">
         <TextCard
           v-if="data.MidTextCol5"
           :contentHtml="data.MidTextCol5"
