@@ -25,10 +25,13 @@
               <Totals :cart="cart" />
             </div>
 
-            <div v-else>
-              <div>Kurven er tom</div>
-              <nuxt-link to="/">
-                <div class="button btn-primary">
+            <div v-else class="cart-empty text-center py-10">
+              <h1 class="text-blue">Kurven er tom for bookinger</h1>
+
+              <p><img class="mt-10 mb-10" src="~/assets/images/icons/empty-cart.svg" width="150px" alt=""></p>
+
+              <nuxt-link to="/alle-produktkategorier">
+                <div class="button btn-primary ">
                   Gå til produkter
                 </div>
               </nuxt-link>
