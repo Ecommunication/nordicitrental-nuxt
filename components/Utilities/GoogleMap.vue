@@ -19,11 +19,10 @@ export default {
     };
   },
   async mounted() {
-    const { googleApiKey } = process.env;
 
     const mapContainer = this.$refs.googleMap;
     const loader = new GoogleMapsApiLoader({
-      apiKey: googleApiKey,
+      apiKey: "AIzaSyCCYODvHoqobemnujFdw47_HewYV3JTYtg",
       version: "weekly",
       libraries: ["places"]
     });

@@ -6,28 +6,19 @@
         :text="product.cover.text || product.info.name"
         :height="460"
     />
-
     <div class="container py-10">
       <div class="row" style="justify-content: center; padding: 16px;">
         <div class="col-md-4">
           <div class="product-gallery">
             <div class="product-gallery-main-image">
-              <img
-                  v-if="product.gallery.main"
-                  @click="openImageModal(product.gallery.main)"
-                  :src="product.gallery.main"
-                  alt=""
-              />
+              <img v-if="product.gallery.main" @click="openImageModal(product.gallery.main)" :src="product.gallery.main" alt=""/>
             </div>
-            <div class="product-gallery-other-images">
-              <div
-                  class="product-gallery-other-img-container"
-                  v-for="(image, index) in product.gallery.thumbnails"
-                  :key="index"
-                  @click="openImageModal(image)"
-              >
-                <img :src="image"/>
-              </div>
+            <div class="product-gallery__thumbs">
+              <VueSlickCarousel :arrows="true" :dots="true" :slidesToShow="2">
+                <div class="product-gallery__thumbs-thumb" v-for="(image, index) in product.gallery.thumbnails" :key="index">
+                  <span><img :src="image" @click="openImageModal(image)" /></span>
+                </div>
+              </VueSlickCarousel>
             </div>
           </div>
         </div>
@@ -119,34 +110,19 @@
         @close="closeImageModal"
         :width="700"
     >
-      <template v-slot:header>
-        {{ product.info.name }}
-      </template>
       <template v-slot:body>
-        <div style="">
+        <div class="product-modal-main-image">
           <img
-              style="width: 100%; height: 100%; object-fit: cover;"
               :src="imageModal"
           />
         </div>
-        <div class="flex w-100 flex-wrap">
-          <div
-              class="mr-2 mb-2"
-              style="border: 1px solid #ccc; padding: 5px; cursor: pointer;"
-              @click="openImageModal(image)"
-              v-for="(image, index) in [
-              product.gallery.main,
-              ...product.gallery.thumbnails
-            ]"
-              :key="index"
-          >
-            <div style="width: 100px; height: 100px; ">
-              <img
-                  style="width: 100%; height: 100%; object-fit: cover;"
-                  :src="image"
-              />
+
+        <div class="flex w-100 flex-wrap product-modal-thumbs">
+          <VueSlickCarousel :arrows="true" :dots="true" :slidesToShow="2" refs="VueSlickCarousel">
+            <div class="product-modal-thumb" v-for="(image, index) in product.gallery.thumbnails">
+              <span><img :src="image" @click="openImageModal(image)" /></span>
             </div>
-          </div>
+          </VueSlickCarousel>
         </div>
       </template>
     </Modal>
@@ -161,6 +137,10 @@ import IconBar from "@/components/Product/IconBar";
 import Suggestions from "@/components/Product/Suggestions";
 import HeaderImg from "@/components/Utilities/HeaderImg";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+// optional style for arrows & dots
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
 export default {
   components: {
@@ -170,7 +150,8 @@ export default {
     AddToCart,
     Tabs,
     IconBar,
-    Suggestions
+    Suggestions,
+    VueSlickCarousel,
   },
   data() {
     return {
@@ -178,7 +159,12 @@ export default {
       isModalVisible: true,
       modalData: {},
       imageModal: null,
-      imageModalIsOpen: false
+      imageModalIsOpen: false,
+      productThumbsSettings: {
+        slidesToShow: 3,
+        arrows: true,
+        dots: false,
+      }
     };
   },
   head() {
@@ -218,6 +204,7 @@ export default {
     openImageModal(imgSrc) {
       this.imageModalIsOpen = true;
       this.imageModal = imgSrc;
+      console.log(this.$refs.slick);
     },
     closeImageModal() {
       this.imageModalIsOpen = false;

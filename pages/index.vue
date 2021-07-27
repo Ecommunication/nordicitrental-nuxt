@@ -118,7 +118,7 @@
         />
       </div>
       <div class="col-md-6 px-0">
-        <div style="max-width: 585px; margin: 0 auto;">
+        <div style="max-width: 700px; margin: 0 auto;">
           <ContactUsForm
             class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
@@ -126,10 +126,10 @@
             formTitle="Bliv ringet op"
             style="margin: 0 auto;"
             titleStyle="font-size: 25px; margin-bottom: 60px;"
-            formStyle="max-width: 300px;"
+            formStyle="max-width: 700px;"
           >
             <template v-slot:left-col>
-              <div class="text-center">
+              <div class="text-center pr-20">
                 <h3 class="text-blue" style="font-size: 20px;">Kontakt</h3>
                 <img
                   src="~/assets/images/employee_mic.png"

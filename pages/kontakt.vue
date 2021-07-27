@@ -19,11 +19,13 @@
               <div class="text-left employee">
                 <h3 class="text-blue title1">Kontakt info</h3>
                 <div class="mt-6" style="font-size: 16px;">
-                  <div>Nordic IT rental ApS</div>
-                  <div>Industriparken 22A</div>
-                  <div>2750 Ballerup</div>
-                  <div>Tel: +45 7199 8904</div>
-                  <div>E-mail: salg@nordicitrental.dk</div>
+                  <p>
+                    Nordic IT rental ApS<br>
+                    Industriparken 22A<br>
+                    2750 Ballerup<br>
+                    Tel: +45 7199 8904<br>
+                    E-mail: salg@nordicitrental.dk
+                  </p>
                 </div>
               </div>
             </template>
@@ -54,7 +56,7 @@ import HeaderImg from "@/components/Utilities/HeaderImg";
 import ContactUsForm from "@/components/Formular/Contact";
 import GoogleMap from "@/components/Utilities/GoogleMap";
 
-const coords = { lat: -25.363882, lng: 131.044922 }; // Todo: get coordinates
+const coords = { lat: 55.727014, lng: 12.3736072 }; // Todo: get coordinates
 export default {
   components: {
     BackgroundImg,

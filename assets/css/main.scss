@@ -28,18 +28,39 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   color: $textMain;
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
 }
 
 h1, h2, h3, h4, p, span {
   font-family: 'Open Sans', sans-serif;
+}
+
+#main-content {
+  flex: 1 0 auto;
+}
+
+@media screen and (min-width: 767px) {
+  #__nuxt, #__layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  #__layout>div {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
 }
 
 .container {
@@ -48,24 +69,31 @@ h1, h2, h3, h4, p, span {
 }
 
 footer {
-  ul {
-    list-style: none;
-  }
-
-  a {
-    color: #fff;
-  }
-
-  .footer-col {
-    font-size: 14px;
-
-    strong {
-      font-size: 17px;
-      font-weight: 300;
+  &#main-footer {
+    @media screen and (min-width: 767px) {
+      margin-top: auto;
+      flex-shrink: 0;
     }
 
-    li {
-      margin-bottom: 2px;
+    ul {
+      list-style: none;
+    }
+
+    a {
+      color: #fff;
+    }
+
+    .footer-col {
+      font-size: 14px;
+
+      strong {
+        font-size: 17px;
+        font-weight: 300;
+      }
+
+      li {
+        margin-bottom: 2px;
+      }
     }
   }
 }
@@ -166,6 +194,70 @@ select {
       object-fit: contain;
     }
   }
+}
+
+/*
+  Full top menu
+*/
+
+.full-width-menus {
+  font-size: 0.8em;
+  width: 100%;
+  position: absolute;
+  background: #f3f5f4;
+  z-index: 1000;
+  padding: 16px;
+  border-top: 1px solid #ececec;
+  transition: visibility 0s, opacity 0.4s ease;
+  visibility: hidden;
+  opacity: 0;
+
+  .menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 940px;
+    margin: auto;
+
+    .menu-col {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin: 8px 0px;
+
+      .item-label {
+        .hover-icon {
+          height: 21px;
+          width: 21px;
+
+          img {
+            object-fit: contain;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+
+      .item-label:hover {
+        color: #009edd;
+      }
+
+      .col-title {
+        font-weight: 700;
+        color: #092d4f;
+      }
+
+      .col-title,
+      .col-item {
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+.full-width-menus.active {
+  visibility: visible;
+  opacity: 1;
 }
 
 @media only screen and (max-width: 767px) {
