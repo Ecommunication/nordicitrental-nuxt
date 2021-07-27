@@ -1,4 +1,9 @@
 .product-single {
+
+  .slick-prev:before, .slick-next:before {
+    color: $mainBlue;
+  }
+
   .product-gallery {
     margin-right: 20px;
 
@@ -6,31 +11,75 @@
       cursor: zoom-in;
       max-height: 300px;
       max-width: 300px;
+      overflow: hidden;
 
       img {
         width: 100%;
         height: 100%;
+        cursor: pointer;
       }
     }
 
-    .product-gallery-other-images {
-      display: flex;
-      flex-wrap: wrap;
+    .product-gallery {
+      &__thumbs {
+        width: 100%;
+        height: 80px;
+        margin-top: 50px;
 
-      .product-gallery-other-img-container {
-        width: 90px;
-        height: 90px;
-        margin: 15px;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        cursor: zoom-in;
+        &-thumb {
+          height: 80px;
+          position: relative;
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          background-position: center center;
+          img {
+            max-width: 100%;
+            max-height: 100%;
+            margin:auto;
+            //position: absolute;
+            //top: 0;
+            //bottom: 0;
+            //margin: auto;
+            //cursor: pointer;
+          }
         }
       }
+    }
+  }
+
+  .product-modal-thumb-container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  //.product-modal-thumbs {
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //}
+
+  .product-modal-thumb {
+    text-align: center;
+
+    img {
+      max-width: 50px;
+      max-height: 50px;
+    }
+  }
+
+  .product-modal-main-image {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    overflow: hidden;
+
+    img {
+      max-width: 100%;
+      max-height: 90%;
+      margin: auto;
+      display: block;
     }
   }
 

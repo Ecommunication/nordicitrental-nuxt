@@ -6,7 +6,7 @@
       :text="category.cover.text || category.info.name"
       :height="490"
     />
-
+    <section id="main-content">
     <div class="container mt-10">
       <div class="row">
         <div class="col">
@@ -67,6 +67,7 @@
         </div>
       </div>
     </div>
+    </section>
   </div>
 </template>
 <script>
@@ -95,13 +96,19 @@ export default {
     };
   },
   async asyncData({ params, $axios, $config, route, store }) {
-    const slug = params.category.toLowerCase();
-    const categoriesData = await $axios.$get(
-      `/product-categories?Slug=${slug}`
+    const slug = params.pathMatch.toLowerCase();
+    var categoriesData = await $axios.$get(
+      `/product-categories?CustomPermalink=${slug}`
     );
 
     if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
-      /* return store.dispatch('throwError404', { slug }) */
+      categoriesData = await $axios.$get(
+          `/product-categories?Slug=${slug}`
+      );
+
+      if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
+        return store.dispatch('throwError404', { slug })
+      }
     }
 
     const categoryData = categoriesData[0] || {};

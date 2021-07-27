@@ -101,7 +101,7 @@
     </div>
 
     <div id="service-handle" class="row service-lad-os-overtage">
-      <div class="col px-0">
+      <div class="col px-0 w-100">
         <TextCard
           v-if="data.MidTextCol5"
           :contentHtml="data.MidTextCol5"
@@ -116,19 +116,18 @@
       <div class="col pt-8" style="width: 100%;">
         <ContactUsForm
           :title="data.ContactHeader"
-          formTitle="Send os en besked, så kontakter vi dig i dag."
+          formTitle="Bliv ringet op"
           style="margin: 30px auto;"
           customCSS="justify-content: center;"
           titleStyle="font-size: 40px; margin-bottom: 24px;"
         >
           <template v-slot:left-col>
-            <div class="text-left">
+            <div class="text-left pr-20">
               <h3 class="text-blue" style="font-size: 20px;">Kontakt</h3>
               <p class="mt-10">
                 <img
-                  src="https://nordicitrental.dk//wp-content/uploads/2017/12/employee_mic-135x135.png"
-                  alt="Kontakt"
-                />
+                  src="~/assets/images/employee_mic.png"
+                  alt="Kontakt"/>
               </p>
               <p style="font-size: 14px;">
                 Michael Vedel<br />

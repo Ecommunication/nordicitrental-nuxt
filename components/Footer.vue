@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-blue pt-5 pb-1">
+  <footer class="bg-blue pt-5 pb-1" id="main-footer">
     <div class="footer-container">
       <div class="footer-1">
         <div class="footer-col" v-html="footer.widget1" />
