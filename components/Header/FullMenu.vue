@@ -16,7 +16,7 @@
             "
             @mouseleave="() => (hover = null)"
           >
-            <div class="mr-2">{{ item.Name }}</div>
+            <div class="mr-2">{{ item.MenuTitle || item.Name }}</div>
             <div class="hover-icon">
               <img
                 v-show="hover === cat[0].id + item.id"
