@@ -170,7 +170,7 @@ export default {
   },
   head() {
     return {
-      title: "Nordic IT Rental" + this.data.PageTitle,
+      title: this.data.PageTitle,
       meta: [
         {
           name: "title",
