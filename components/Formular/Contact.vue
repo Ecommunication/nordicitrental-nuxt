@@ -1,8 +1,10 @@
 <template>
   <div>
-    <h2 v-if="title" class="text-center" :style="titleStyle">{{ title }}</h2>
+    <h2 v-if="title" id="contactUsFormHeader" class="text-center" :style="titleStyle">
+      {{title}}
+    </h2>
     <div class="form-row" :style="customCSS">
-      <div class="left-col" :style="leftColStyle">
+      <div id="contactUsLeftCol" class="left-col" :style="leftColStyle">
         <slot name="left-col"></slot>
       </div>
       <div class="right-col" :style="rightColStyle">
@@ -152,28 +154,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+@media screen and (min-width: 767px) {
+  .index {
+    #contactUsFormHeader {
+      font-size: 1.6em;
+    }
 
-  .left-col {
-    padding: 0 20px;
-    margin-bottom: 25px;
-  }
-
-  .right-col {
-    padding: 0 20px;
-    .form {
-      max-width: 330px;
+    #contactUsLeftCol {
+      padding-right: 90px;
     }
   }
 }
-
-@media screen and (max-width: 767px) {
   .form-row {
-    justify-content: space-around !important;
-    padding: 0 20px !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .left-col {
+      padding: 0 20px;
+      margin-bottom: 25px;
+    }
+
+    .right-col {
+      padding: 0 20px;
+      .form {
+        max-width: 330px;
+      }
+    }
   }
-}
+
+  @media screen and (max-width: 767px) {
+    .form-row {
+      justify-content: space-around !important;
+      padding: 0 20px !important;
+    }
+  }
 </style>
