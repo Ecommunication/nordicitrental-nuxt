@@ -122,14 +122,14 @@
           <ContactUsForm
             class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
-            title="Lad os tale om mulighederne for at leje"
+            :title="data.IndexContactRightText"
             formTitle="Bliv ringet op"
             style="margin: 0 auto;"
-            titleStyle="font-size: 25px; margin-bottom: 60px;"
+            titleStyle="margin-bottom: 60px;"
             formStyle="max-width: 700px;"
           >
             <template v-slot:left-col>
-              <div class="text-center pr-20">
+              <div class="text-center pr-35">
                 <h3 class="text-blue" style="font-size: 20px;">Kontakt</h3>
                 <img
                   src="~/assets/images/employee_mic.png"
@@ -185,6 +185,7 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/forside");
+    console.log(data)
     return { data };
   },
   data() {
