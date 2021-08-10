@@ -97,13 +97,14 @@ export default {
   },
   async asyncData({ params, $axios, $config, route, store }) {
     const slug = params.pathMatch.toLowerCase();
+    const order = '';
     var categoriesData = await $axios.$get(
-      `/product-categories?CustomPermalink=${slug}`
+      `/product-categories?CustomPermalink=${slug}` + order
     );
 
     if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
       categoriesData = await $axios.$get(
-          `/product-categories?Slug=${slug}`
+          `/product-categories?Slug=${slug}` + order
       );
 
       if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){

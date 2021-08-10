@@ -1,4 +1,4 @@
-import { formatImage } from "../plugins/globals";
+import {formatImage} from "../plugins/globals";
 
 export const SHIPMENT_METHODS = {
   PICK_UP: {
@@ -9,6 +9,28 @@ export const SHIPMENT_METHODS = {
     cost: 800,
     method: "delivery"
   }
+};
+
+var sort = function (prop, arr) {
+  prop = prop.split('.');
+  var len = prop.length;
+
+  arr.sort(function (a, b) {
+    var i = 0;
+    while( i < len ) {
+      a = a[prop[i]];
+      b = b[prop[i]];
+      i++;
+    }
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  return arr;
 };
 
 export class Product {
@@ -87,7 +109,14 @@ export class Category {
       desc: data.MetaDescription
     };
     this.description = data.Description;
-    this.products = (data.products || []).map(product => new Product(product));
+
+
+
+    const unsortedProducts = (data.products || []).map(product => new Product(product))
+
+    this.products = sort('pricing.weekly', unsortedProducts);
+
+
     this.upsell = (data?.CategoryUpsell || []).map(cat => ({
       Image: cat.UpsellIcon,
       Title: cat.Name,
