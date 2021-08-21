@@ -117,7 +117,7 @@
           />
         </div>
 
-        <div class="flex w-100 flex-wrap product-modal-thumbs">
+        <div class="flex w-100 flex-wrap product-modal-thumbs" v-if="product.gallery.thumbnails">
           <VueSlickCarousel :arrows="true" :dots="true" :slidesToShow="2" refs="VueSlickCarousel">
             <div class="product-modal-thumb" v-for="(image, index) in product.gallery.thumbnails">
               <span><img :src="image" @click="openImageModal(image)" /></span>
@@ -204,7 +204,6 @@ export default {
     openImageModal(imgSrc) {
       this.imageModalIsOpen = true;
       this.imageModal = imgSrc;
-      console.log(this.$refs.slick);
     },
     closeImageModal() {
       this.imageModalIsOpen = false;
