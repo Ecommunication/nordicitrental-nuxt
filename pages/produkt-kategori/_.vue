@@ -98,7 +98,7 @@ export default {
     };
   },
   async asyncData({ params, $axios, $config, route, store }) {
-    const slug = params.pathMatch.toLowerCase();
+    const slug = params.pathMatch.toLowerCase().replace(/\/+$/, '');
     const order = '';
     var categoriesData = await $axios.$get(
       `/product-categories?CustomPermalink=${slug}` + order
