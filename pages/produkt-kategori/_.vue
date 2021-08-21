@@ -25,17 +25,19 @@
               </div>
               <div class="product-body">
                 <div class="mb-3">
-                  <div class="price-weekly">
-                    {{ product.pricing.weekly | formatPrice }}
-                  </div>
-                  <div class="explanation">
-                    Pris for første uges leje
+                  <div class="prices">
+                    <div class="price-weekly">
+                      {{ product.pricing.weekly | formatPrice }}
+                    </div>
+                    <div class="explanation price-explanation">
+                      Pris for første uges leje
+                    </div>
                   </div>
                   <div class="mt-1">
                     <span class="price-daily">{{
                       product.pricing.daily | formatPrice
                     }}</span>
-                    <span class="explanation"
+                    <span class="explanation price-explanation"
                       >Pris efter første uges leje, pr. dag.</span
                     >
                   </div>
