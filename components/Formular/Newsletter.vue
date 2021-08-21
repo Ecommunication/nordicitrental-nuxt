@@ -9,7 +9,7 @@
     <div class="mb-1">
       <input type="email" placeholder="E-mail" v-model="form.email" />
     </div>
-    <div @click="submit" class="mt-1 button btn-primary submitBtn">Tilmeld</div>
+    <div v-if="!disableSubmit" @click="submit" class="mt-1 button btn-primary submitBtn">Tilmeld</div>
     <div v-if="message" class="mt-2 message">{{ message }}</div>
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
       defaultErrorMsg: "Something went wrong",
       successMsg: "You have successfully subscribed to our newsletter.",
       message: null,
+      disableSubmit: false,
       form: {
         firstname: "",
         company: "",
@@ -40,27 +41,17 @@ export default {
       if (this.form.email && this.form.firstname) {
         try {
           const r = await this.$axios.$post(
-            `${process.env.serviceApi}/mailchimp/subscribe`,
+            `${process.env.serviceApi}/api/mailchimp/subscribe`,
             this.form
           );
-          this.message = this.successMsg;
-          this.resetForm();
+          this.message = "Du er nu tilmeldt vores nyhedsbrev.";
+          this.disableSubmit = true
         } catch (error) {
-          this.message =
-            "Error: " + (error?.response?.data?.title || this.defaultErrorMsg);
+          this.message = "Der skete desværre en fejl. Dette kan skyldes at du allerede er tilmeldt.";
         }
       }
     }
   },
-  watch: {
-    message(val) {
-      if (val) {
-        setTimeout(() => {
-          this.message = null;
-        }, 3000);
-      }
-    }
-  }
 };
 </script>
 
