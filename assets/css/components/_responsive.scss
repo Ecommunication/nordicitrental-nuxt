@@ -21,6 +21,14 @@
   $bgImgContainerHeight: 256px;
 
   .product-single {
+    .product-gallery {
+      margin-bottom: 30px;
+    }
+
+    .product-gallery__thumbs {
+      display: none;
+    }
+
     .bg-img-container {
       min-height: $bgImgContainerHeight;
       & > div {
