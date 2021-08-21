@@ -14,7 +14,3 @@ export default ({ app }, inject) => {
   inject("formatImage", formatImage);
   inject("formatHTML", formatHTML);
 };
-
-
-
-
