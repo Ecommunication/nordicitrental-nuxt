@@ -6,7 +6,7 @@
         <option
           v-for="(item, index) in leafItems"
           :key="index"
-          :value="item.link"
+          :value="item.CustomPermalink || item.link"
         >
           <span v-if="item.level === 2 || item.level === 3"> - </span>
           <span v-if="item.level === 3"> - </span>

@@ -58,7 +58,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
+
 export default {
   props: {
     header: { type: Object, required: true }
@@ -100,11 +101,11 @@ export default {
 
           return {
             label: categoryProduct.Name || "",
-            link: `/produkt-kategori/${categoryProduct.Slug}`,
+            link: `/produkt-kategori/${categoryProduct.CustomPermalink || categoryProduct.Slug}`,
             items: copiedCategory.map(product => {
               return {
                 label: product.Name || "",
-                link: `/produkt/${product.Slug}`
+                link: `/produkt-kategori/${product.CustomPermalink || product.Slug}`
               };
             })
           };
