@@ -161,7 +161,7 @@ export default {
   },
   head() {
     return {
-      title: this.product?.cover?.text || "",
+      title: this.product?.meta?.title || "",
       meta: [
         {
           name: "title",
