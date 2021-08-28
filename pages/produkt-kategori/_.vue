@@ -1,5 +1,5 @@
 <template>
-  <div class="product-category">
+  <div class="product-category" v-if="category">
     <HeaderImg
       v-if="category.cover"
       :img="category.cover.image"
@@ -82,44 +82,48 @@ export default {
     HeaderImg,
     CategorySlider
   },
-  head() {
-    return {
-      title: this.category.meta.title,
-      meta: [
-        {
-          name: "title",
-          content: this.category.meta.title
-        },
-        {
-          name: "description",
-          content: this.category.meta.desc
-        }
-      ]
-    };
-  },
   async asyncData({ params, $axios, $config, route, store }) {
-    const slug = params.pathMatch.toLowerCase().replace(/\/+$/, '');
-    const order = '';
-    var categoriesData = await $axios.$get(
-      `/product-categories?CustomPermalink=${slug}` + order
-    );
-
-    if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
-      categoriesData = await $axios.$get(
-          `/product-categories?Slug=${slug}` + order
+    try {
+      const slug = params.pathMatch.toLowerCase().replace(/\/+$/, '');
+      const order = '';
+      var categoriesData = await $axios.$get(
+          `/product-categories?CustomPermalink=${slug}` + order
       );
 
       if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
-        return store.dispatch('throwError404', { slug })
+        categoriesData = await $axios.$get(
+            `/product-categories?Slug=${slug}` + order
+        );
+
+        if(categoriesData && Array.isArray(categoriesData) && !categoriesData.length){
+          return store.dispatch('throwError404', { slug })
+        }
       }
+
+      const categoryData = categoriesData[0] || {};
+      if (!categoryData) return;
+
+      const category = new Category(categoryData);
+
+      return { category };
+    } catch (e) {
+      console.log(e)
     }
-
-    const categoryData = categoriesData[0] || {};
-    if (!categoryData) return;
-
-    const category = new Category(categoryData);
-
-    return { category };
+  },
+  head() {
+    return {
+      title: null,
+      meta: [
+        {
+          name: "title",
+          content: null
+        },
+        {
+          name: "description",
+          content: null
+        }
+      ]
+    };
   },
   methods: {
     getParsedDescription(desc) {

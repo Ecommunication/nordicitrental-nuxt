@@ -58,13 +58,13 @@ export default {
     };
   },
   mounted() {
-    // const interval = setInterval(() => {
-    //   if (this.slides.length > 0) {
-    //     this.selectedIndex = this.getNextIndex(this.slides, this.selectedIndex);
-    //   } else {
-    //     clearInterval(interval);
-    //   }
-    // }, this.duration * 1000);
+    const interval = setInterval(() => {
+      if (this.slides.length > 0) {
+        this.selectedIndex = this.getNextIndex(this.slides, this.selectedIndex);
+      } else {
+        clearInterval(interval);
+      }
+    }, this.duration * 1000);
   },
   methods: {
     getNextIndex(arr, currentIndex) {
