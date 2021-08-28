@@ -13,7 +13,7 @@
             <div class="product-gallery-main-image">
               <img v-if="product.gallery.main" @click="openImageModal(product.gallery.main)" :src="product.gallery.main" alt=""/>
             </div>
-            <div class="product-gallery__thumbs">
+            <div class="product-gallery__thumbs" v-if="product.gallery.thumbnails > 1">
               <VueSlickCarousel :arrows="true" :dots="true" :slidesToShow="2">
                 <div class="product-gallery__thumbs-thumb" v-for="(image, index) in product.gallery.thumbnails" :key="index">
                   <span><img :src="image" @click="openImageModal(image)" /></span>
@@ -115,14 +115,6 @@
           <img
               :src="imageModal"
           />
-        </div>
-
-        <div class="flex w-100 flex-wrap product-modal-thumbs" v-if="product.gallery.thumbnails">
-          <VueSlickCarousel :arrows="true" :dots="true" :slidesToShow="2" refs="VueSlickCarousel">
-            <div class="product-modal-thumb" v-for="(image, index) in product.gallery.thumbnails">
-              <span><img :src="image" @click="openImageModal(image)" /></span>
-            </div>
-          </VueSlickCarousel>
         </div>
       </template>
     </Modal>
