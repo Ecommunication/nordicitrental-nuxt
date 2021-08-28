@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="coverSlider">
     <div
       class="custom-slider-container"
       v-for="(slide, index) in slides"
@@ -26,7 +26,7 @@
               >
                 <div class="grid-small" style="width: 100%;">
                   <div
-                    class="slider-title title-white slider-title-1"
+                    class=" slider-title title-white slider-title-1"
                     v-html="slide.TextAreaHeader"
                   ></div>
                   <br />
@@ -58,13 +58,13 @@ export default {
     };
   },
   mounted() {
-    const interval = setInterval(() => {
-      if (this.slides.length > 0) {
-        this.selectedIndex = this.getNextIndex(this.slides, this.selectedIndex);
-      } else {
-        clearInterval(interval);
-      }
-    }, this.duration * 1000);
+    // const interval = setInterval(() => {
+    //   if (this.slides.length > 0) {
+    //     this.selectedIndex = this.getNextIndex(this.slides, this.selectedIndex);
+    //   } else {
+    //     clearInterval(interval);
+    //   }
+    // }, this.duration * 1000);
   },
   methods: {
     getNextIndex(arr, currentIndex) {
@@ -82,7 +82,7 @@ export default {
 <style lang="scss" scoped>
 .custom-slider-container {
   .slider-item {
-    transition: 2s ease;
+    //transition: 2s ease;
     .slider-item-container {
       min-height: 500px;
       .slider-title {
@@ -91,35 +91,22 @@ export default {
     }
   }
 }
-</style>
-
-<style lang="scss">
-.custom-slider-container {
-  .slider-item {
-    .slider-title.slider-title-1 {
-      font-size: 40px;
-    }
-    .slider-title.slider-title-2 {
-      font-size: 30px;
-    }
-  }
-}
 
 @media screen and (max-width: 767px) {
-  .custom-slider-container {
-    .slider-item {
-      .slider-item-container {
-        min-height: 151px !important;
-        max-height: 151px !important;
-        height: 151px;
-        h3 {
-          font-size: 16px !important;
-        }
-        h4 {
-          font-size: 12px !important;
-        }
-      }
-    }
-  }
+  //.custom-slider-container {
+  //  .slider-item {
+  //    .slider-item-container {
+  //      min-height: 151px !important;
+  //      max-height: 151px !important;
+  //      height: 151px;
+  //      h3 {
+  //        font-size: 16px !important;
+  //      }
+  //      h4 {
+  //        font-size: 12px !important;
+  //      }
+  //    }
+  //  }
+  //}
 }
 </style>

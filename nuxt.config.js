@@ -22,7 +22,7 @@ export default {
   head: {
     title: "Nordic IT Rental",
     htmlAttrs: {
-      lang: "en"
+      lang: "da"
     },
     meta: [
       { charset: "utf-8" },
