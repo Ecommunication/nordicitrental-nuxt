@@ -112,15 +112,15 @@ export default {
   },
   head() {
     return {
-      title: null,
+      title: this.product?.meta?.title,
       meta: [
         {
           name: "title",
-          content: null
+          content: this.product?.meta?.title
         },
         {
           name: "description",
-          content: null
+          content: this.product?.meta?.desc
         }
       ]
     };
