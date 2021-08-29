@@ -112,15 +112,15 @@ export default {
   },
   head() {
     return {
-      title: this.product?.meta?.title,
+      title: this.category?.meta?.title,
       meta: [
         {
           name: "title",
-          content: this.product?.meta?.title
+          content: this.category?.meta?.title
         },
         {
           name: "description",
-          content: this.product?.meta?.desc
+          content: this.category?.meta?.desc
         }
       ]
     };
