@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h2 v-if="title" id="contactUsFormHeader" class="text-center" :style="titleStyle">
-      {{title}}
-    </h2>
+    <h2 v-if="title" id="contactUsFormHeader" class="text-center" :style="titleStyle" v-html="title" />
     <div class="form-row" :style="customCSS">
       <div id="contactUsLeftCol" class="left-col" :style="leftColStyle">
         <slot name="left-col"></slot>
