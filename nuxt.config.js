@@ -75,6 +75,9 @@ export default {
         siteKey: process.env.RECAPTCHA_SITE_KEY,
         version: 2
       }
+    ],
+    [
+      "@nuxtjs/sitemap"
     ]
   ],
 
