@@ -16,11 +16,17 @@
       </div>
       <div class="footer-2">
         <div class="footer-col">
-          <RefCompanyLogoBar
-            :images="footer.images.map(item => $formatImage(item.Image.url))"
-            elStyle="margin: 1em 3em 1em 0;"
-            barStyle="justify-content: start;"
-          />
+          <div class="ref-company-logo-bar">
+            <span v-for="(image, index) in footer.images" :key="index">
+              <img class="logo" :src="image.Image.url | formatImage" :alt="image.Image.alternativeText" />
+            </span>
+            <a href="https://www.linkedin.com/company/nordic-it-retnal-aps" target="_blank">
+              <img :src="'/uploads/linked_in_9ba84ec3c3.png' | formatImage" alt="Nordic IT Rental - Linkedin">
+            </a>
+            <a href="https://www.facebook.com/nordicitrental" target="_blank">
+              <img :src="'/uploads/FB_icon_29ff5245e9.png' | formatImage" alt="Nordic IT Rental - Facebook">
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -28,12 +34,10 @@
 </template>
 <script>
 import NewsletterForm from "@/components/Formular/Newsletter";
-import RefCompanyLogoBar from "@/components/AboutUs/RefCompanyLogoBar";
 
 export default {
   components: {
-    NewsletterForm,
-    RefCompanyLogoBar
+    NewsletterForm
   },
   props: ["footer"]
 };
@@ -60,6 +64,22 @@ footer {
 
     .footer-2 {
       border-top: 1px solid #395a79;
+    }
+  }
+
+  .ref-company-logo-bar {
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .logo {
+      margin: 2em 3em;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 }

@@ -150,14 +150,12 @@
 import CategorySlider from "@/components/Category/Slider";
 import TextCard from "@/components/Utilities/TextCard";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
-import RefCompanyLogoBar from "@/components/AboutUs/RefCompanyLogoBar";
 import ContactUsForm from "@/components/Formular/Contact";
 
 export default {
   components: {
     TextCard,
     BackgroundImg,
-    RefCompanyLogoBar,
     ContactUsForm
   },
   head() {
