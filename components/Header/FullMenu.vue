@@ -21,6 +21,7 @@
               <img
                 v-show="hover === cat[0].id + item.id"
                 :src="require('@/assets/images/icons/menu/hover.svg')"
+                alt="Nordic IT Rental - Menu hover"
               />
             </div>
           </div>

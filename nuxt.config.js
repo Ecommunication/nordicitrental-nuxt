@@ -82,7 +82,19 @@ export default {
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    cache: true,
+    collapseBooleanAttributes: true,
+    decodeEntities: true,
+    minifyCSS: true,
+    minifyJS: true,
+    processConditionalComments: true,
+    removeEmptyAttributes: true,
+    removeRedundantAttributes: true,
+    trimCustomFragments: true,
+    useShortDoctype: true,
+    indicator: true,
+  },
 
   env: {
     apiUrl: process.env.API_URL,
