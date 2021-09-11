@@ -16,7 +16,7 @@
             :key="product.info.id"
           >
             <div class="product-image">
-              <img :src="product.gallery.main" />
+              <img :src="product.gallery.main.url" :alt="product.gallery.main.alternativeText" />
             </div>
             <div class="product-info mt-9">
               <div class="product-title text-blue">{{ product.info.name }}</div>

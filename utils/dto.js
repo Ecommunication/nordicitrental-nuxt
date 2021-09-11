@@ -52,7 +52,10 @@ export class Product {
       desc: data.MetaDescription
     };
     this.gallery = {
-      main: formatImage(data?.MainImage?.url || ""),
+      main: {
+        url: formatImage(data?.MainImage?.url || ""),
+        alternativeText: data?.MainImage?.alternativeText || 'Nordic IT Rental udlejning - ' + data?.Name,
+      },
       thumbnails: data.ProductGallery.map(img => formatImage(img?.url || ""))
     };
     this.pricing = {
@@ -110,12 +113,9 @@ export class Category {
     };
     this.description = data.Description;
 
-
-
     const unsortedProducts = (data.products || []).map(product => new Product(product))
 
     this.products = sort('pricing.weekly', unsortedProducts);
-
 
     this.upsell = (data?.CategoryUpsell || []).map(cat => ({
       Image: cat.UpsellIcon,

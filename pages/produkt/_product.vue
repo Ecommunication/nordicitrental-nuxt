@@ -11,7 +11,7 @@
         <div class="col-md-4">
           <div class="product-gallery">
             <div class="product-gallery-main-image">
-              <img v-if="product.gallery.main" @click="openImageModal(product.gallery.main)" :src="product.gallery.main" alt=""/>
+              <img v-if="product.gallery.main.url" @click="openImageModal(product.gallery.main.url)" :src="product.gallery.main.url" :alt="product.gallery.main.alternativeText"/>
             </div>
             <div class="product-gallery__thumbs" v-if="product.gallery.thumbnails > 1">
               <VueSlickCarousel :arrows="true" :dots="true" :slidesToShow="2">
