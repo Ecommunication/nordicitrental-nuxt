@@ -3,7 +3,7 @@
     <div class="info-card" v-for="(item, index) in categories" :key="index">
       <h3>{{ item.Title }}</h3>
       <div class="img-wrapper">
-        <img class="info-card-img" :src="item.Icon.url | formatImage" />
+        <img class="info-card-img" :alt="'Service, installation & levering - ' + item.Title" :src="item.Icon.url | formatImage" />
       </div>
       <Counter
         :end="item.Counter"

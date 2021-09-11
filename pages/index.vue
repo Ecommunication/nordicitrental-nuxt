@@ -36,7 +36,7 @@
             v-for="(item, index) in data.IndexRentalBennefits"
             :key="index"
           >
-            <img class="info-card-img" :src="item.Icon.url | formatImage" />
+            <img class="info-card-img" :alt="item.Icon.alternativeText" :src="item.Icon.url | formatImage" />
             <div class="info-card-body">
               <span
                 class="info-card-title text-blue mb-3"
@@ -98,17 +98,9 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col bg-blue py-10" style="width: 100%;">
-        <RefSlider
-          :images="
-            data.IndexReferencesCarousel.map(item =>
-              $formatImage(item.Reference[0].url)
-            )
-          "
-        />
-      </div>
-    </div>
+    <RefSlider
+      :images="data.IndexReferencesCarousel"
+    />
 
     <div class="row">
       <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">
@@ -185,7 +177,6 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/forside");
-    console.log(data)
     return { data };
   },
   data() {
