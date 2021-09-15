@@ -4,7 +4,8 @@
       <VueSlickCarousel :centerMode="true" :arrows="true" :dots="true" :slidesToShow="4">
         <div class="frontpage-references__images-image flex flex-justify-center" v-for="(image, index) in images">
           <div>
-            <img :src="image.Reference[0].url | formatImage" :alt="image.Reference[0].alternativeText">
+            <img v-if="image.Reference" :src="image.Reference[0].url | formatImage" :alt="image.Reference[0].alternativeText">
+            <img v-else :src="image">
           </div>
         </div>
       </VueSlickCarousel>
