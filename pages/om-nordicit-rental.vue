@@ -30,15 +30,32 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col bg-blue py-10" style="width: 100%;">
-        <RefSlider
-          :images="
-            data.MidColReference3.map(item => $formatImage(item.Logo.url))
-          "
-        />
-      </div>
-    </div>
+    <swiper
+        :slides-per-view="3"
+        :space-between="50"
+        @swiper="onSwiper"
+        @slideChange="onSlideChange"
+    >
+      <swiper-slide>Slide 1</swiper-slide>
+      <swiper-slide>Slide 2</swiper-slide>
+      <swiper-slide>Slide 3</swiper-slide>
+    </swiper>
+
+<!--    <div class="row">-->
+<!--      <div class="col bg-blue py-10" style="width: 100%;">-->
+<!--        <div class="references-slider bg-blue py-10">-->
+<!--          <div class="references-slider__images">-->
+<!--            <VueSlickCarousel :arrows="false" :dots="false">-->
+<!--              <div class="frontpage-references__images-image flex flex-justify-center" v-for="(image, index) in data.MidColReference3">-->
+<!--                <div>-->
+<!--                    <img :src="image.Logo.url | formatImage">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </VueSlickCarousel>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div id="aboutus-customerstories" class="bg-gray-dark">
       <div style="max-width: 1350px; margin: auto;">
@@ -88,6 +105,8 @@ import HeaderImg from "@/components/Utilities/HeaderImg";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
 import RefCompanyQuote from "@/components/AboutUs/RefCompanyQuote";
 import Employee from "@/components/AboutUs/Employee";
+
+
 export default {
   components: {
     TextCard,

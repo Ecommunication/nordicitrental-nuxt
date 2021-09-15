@@ -59,7 +59,6 @@ export default {
 
           this.$emit("formSubmitted");
         } catch (error) {
-          console.log(error)
         }
       }
     },

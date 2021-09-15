@@ -16,7 +16,7 @@
             :key="product.info.id"
           >
             <div class="product-image">
-              <img :src="product.gallery.main.url" :alt="product.gallery.main.alternativeText" />
+              <img :src="product.gallery.main.url"  />
             </div>
             <div class="product-info mt-9">
               <div class="product-title text-blue">{{ product.info.name }}</div>
@@ -107,7 +107,6 @@ export default {
 
       return { category };
     } catch (e) {
-      console.log(e)
     }
   },
   head() {

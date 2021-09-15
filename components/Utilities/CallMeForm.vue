@@ -56,7 +56,6 @@ export default {
         this.$emit("formSubmitted");
         this.isSubmitted = true;
       } catch (error) {
-        console.log(error)
       }
 
 

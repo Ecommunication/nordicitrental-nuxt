@@ -8,11 +8,9 @@
         <div class="col mx-2" v-for="(cat, index) in categories" :key="index">
           <nuxt-link :to="`/produkt-kategori/${cat.Slug}`">
             <div class="category-card" :style="`width: ${size}px; height: ${size}px;`">
-              <img :alt="cat.Image.alternativeText" v-if="cat.Image" :src="cat.Image.url | formatImage" />
-              <img :alt="cat.Image.alternativeText" v-else src="~/assets/images/icons/no-photos.svg" />
-              <span class="category-title text-md weight-thin mt-6">{{
-                cat.Title
-              }}</span>
+              <img :alt="(cat.Image.alternativeText) ? cat.Image.alternativeText : 'Nordic IT Rental udlejning - ' + cat.Title " v-if="cat.Image" :src="cat.Image.url | formatImage" />
+              <img :alt="'Nordic IT Rental udlejning - ' + cat.Title" v-else src="~/assets/images/icons/no-photos.svg" />
+              <span class="category-title text-md weight-thin mt-6">{{cat.Title }}</span>
             </div>
           </nuxt-link>
         </div>

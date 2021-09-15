@@ -3,8 +3,9 @@
     <div class="frontpage-references__images">
       <VueSlickCarousel :centerMode="true" :arrows="true" :dots="true" :slidesToShow="4">
         <div class="frontpage-references__images-image flex flex-justify-center" v-for="(image, index) in images">
+
           <div>
-            <img :src="image.Reference[0].url | formatImage" :alt="image.Reference[0].alternativeText">
+<!--            <img :src="image.Logo.url | formatImage" :alt="image.Logo.alternativeText">-->
           </div>
         </div>
       </VueSlickCarousel>
@@ -26,21 +27,5 @@ export default {
 };
 </script>
 <style lang="scss">
-  .frontpage-references {
-    .slick-track {
-      display: flex !important;
-      align-items: center !important;
-    }
-    &__images {
-      max-width: 1200px;
-      margin: auto;
-      &-image {
-        & > div {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      }
-    }
-  }
+
 </style>

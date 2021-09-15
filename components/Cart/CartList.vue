@@ -20,11 +20,11 @@
           <td class="product-thumbnail">
             <nuxt-link :to="`/produkt/${item.product.info.slug}`">
               <img
-                v-if="item.product.gallery.main"
+                v-if="item.product.gallery.main.url"
                 width="220"
                 height="220"
                 class="product-thumbnail-image"
-                :src="item.product.gallery.main"
+                :src="item.product.gallery.main.url"
               />
             </nuxt-link>
           </td>
