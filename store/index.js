@@ -144,6 +144,9 @@ export const actions = {
     }
 
     const order = new Order(
+      userInfoForm.email,
+      userInfoForm.cvrNumber,
+      userInfoForm.phone,
       customerResponse.id,
       state.cart.items,
       state.cart.shipping,

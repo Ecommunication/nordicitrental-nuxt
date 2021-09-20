@@ -133,7 +133,7 @@ export class Cart {
 }
 
 export class Order {
-  constructor(customerId, items, shipping, shippingAdd, comments) {
+  constructor(email, cvrNumber, phone, customerId, items, shipping, shippingAdd, comments) {
     this.Products = this.processItems(items);
     this.CustomerId = customerId;
     this.OrderComments = comments || "";
@@ -144,6 +144,9 @@ export class Order {
     this.OrderShippingCity = shippingAdd.town || "";
     this.OrderShippingZip = shippingAdd.zipCode || "";
     this.OrderShippingCountry = shippingAdd.country || "";
+    this.OrderEmail = email || "";
+    this.OrderCvrNew = cvrNumber || "";
+    this.OrderPhone = phone || "";
     this.ShippingHandlingName = shipping.method || "";
     this.ShippingHandlingCost = shipping.cost || 0;
     this.OrderTotalExVat = this.getOrderTotal(items, shipping.cost);
