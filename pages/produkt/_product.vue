@@ -36,7 +36,7 @@
               </div>
             </div>
 
-            <div class="product-description" v-html="product.descriptions.short" /> <!-- Just use a shorthand if no closing need-->
+            <div class="product-description" v-html="product.descriptions.short" />
 
             <AddToCart
                 :key="addToCartKey"
@@ -94,7 +94,7 @@
           </div>
           <div style="display: flex; justify-content: space-between;">
             <div class="button btn-primary" @click="goToProduct">
-              <span class="text-uppercase">Fortsæt med at købe</span>
+              <span class="text-uppercase">Fortsæt med at leje</span>
             </div>
             <nuxt-link class="button btn-primary" to="/kurv">
               <span class="text-uppercase">Checkud</span>

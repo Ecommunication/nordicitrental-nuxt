@@ -25,6 +25,7 @@
             v-model="start"
             valueType="date"
             format="DD/M/YYYY"
+            :lang="lang"
             :disabled-date="disableBeforeToday"
           ></date-picker>
         </div>
@@ -124,6 +125,13 @@ export default {
   },
   data() {
     return {
+      lang: {
+        formatLocale: {
+          firstDayOfWeek: 1,
+          monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+          weekdaysMin: ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'],
+        },
+      },
       options: [],
       start: new Date(new Date().toDateString()),
       end: this.shiftDateXDays(new Date(), 7),
