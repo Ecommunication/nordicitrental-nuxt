@@ -22,7 +22,7 @@
             />
 
             <InputField
-              label="E-mailadresse"
+              label="E-mail"
               :input="form.email"
               @onChange="val => onChange('email', val, formValidations.email)"
               :errors="errors.email"

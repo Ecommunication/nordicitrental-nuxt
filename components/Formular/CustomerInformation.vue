@@ -25,7 +25,7 @@
         </div>
         <div class="col-xs-12 col-md-4">
           <InputField
-            label="E-mailadresse"
+            label="E-mail"
             :input="form.email"
             @onChange="val => onChange('email', val, formValidations.email)"
             :errors="errors.email"
