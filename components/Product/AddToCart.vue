@@ -37,6 +37,7 @@
             v-model="end"
             valueType="date"
             format="DD/M/YYYY"
+            :lang="lang"
             :disabled-date="disableBeforeStartDatePlusAWeek"
           ></date-picker>
         </div>
