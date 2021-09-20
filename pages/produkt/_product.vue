@@ -97,7 +97,7 @@
               <span class="text-uppercase">Fortsæt med at leje</span>
             </div>
             <nuxt-link class="button btn-primary" to="/kurv">
-              <span class="text-uppercase">Checkud</span>
+              <span class="text-uppercase">Bestil</span>
             </nuxt-link>
           </div>
         </div>
