@@ -69,7 +69,11 @@
       background: rgba(0,0,0, 60%);
       top: 0;
       left: 0;
-      display: flex;
+      display: none;
+
+      &.active {
+        display: flex;
+      }
 
       &-inner {
         width: 700px;

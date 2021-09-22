@@ -14,11 +14,11 @@
           </div>
         </div>
       </div>
-      <span class="product-gallery__arrows product-gallery__arrow product-gallery__arrows-right" v-bind:class="{disabled: this.thumbnailsIndex === this.maxThumbnails}">
+      <span class="product-gallery__arrows product-gallery__arrow product-gallery__arrows-right" v-bind:class="{disabled: this.thumbnailsIndex === this.maxThumbnails -3}">
           <i @click="moveThumbnails('right')" class="fas fa-chevron-circle-right"></i>
       </span>
     </div>
-    <div class="product-gallery__modal">
+    <div class="product-gallery__modal" v-bind:class="{active: this.showGalleryModal}">
       <div class="product-gallery__modal-inner">
         <span class="product-gallery__modal-inner__arrows product-gallery__modal-inner__arrow product-gallery__modal-inner__arrows-left" v-bind:class="{disabled: this.modalGalleryIndex === 0}">
           <i @click="moveModalGalleryImages('left')" class="fas fa-chevron-circle-left"></i>
@@ -46,6 +46,7 @@ export default {
       gridScroll: 33.33,
       modalGallery: [],
       modalGalleryIndex: 0,
+      showGalleryModal: false,
     }
   },
   created() {
@@ -60,6 +61,8 @@ export default {
   methods: {
     openModal(index) {
       this.modalGalleryIndex = index;
+      this.showGalleryModal = true;
+      console.log('test');
     },
     moveModalGalleryImages: function (pointer) {
       var newIndex = this.modalGalleryIndex;
