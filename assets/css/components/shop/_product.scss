@@ -5,44 +5,110 @@
   }
 
   .product-gallery {
-    margin-right: 20px;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 
-    .product-gallery-main-image {
+    &__main-image {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
       cursor: zoom-in;
-      max-height: 300px;
-      max-width: 300px;
       overflow: hidden;
+    }
 
-      img {
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
+    &__arrow {
+      &.disabled {
+        opacity: 0.2;
+        pointer-events: none;
       }
     }
 
-    .product-gallery {
-      &__thumbs {
-        width: 100%;
-        height: 80px;
-        margin-top: 50px;
+    &__arrows {
+      position: absolute;
+      top: 33%;
+      cursor: pointer;
 
-        &-thumb {
-          height: 80px;
-          position: relative;
+      &-left {
+        left: -30px;
+      }
+      &-right {
+        right: -30px;
+      }
+    }
+
+    &__thumbs {
+      width: 100%;
+      height: 80px;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+
+      &-scroller {
+        display: flex;
+        transition: all .3s ease-in;
+
+        &__thumb {
+          flex: 0 0 33.33%;
 
           img {
             max-width: 100%;
             max-height: 100%;
-            margin:auto;
-            //position: absolute;
-            //top: 0;
-            //bottom: 0;
-            //margin: auto;
-            //cursor: pointer;
+            padding: 10px;
           }
         }
       }
     }
+
+    &__modal {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 3000;
+      background: rgba(0,0,0, 60%);
+      top: 0;
+      left: 0;
+      display: flex;
+
+      &-inner {
+        width: 700px;
+        margin: auto;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        border-radius: 3px;
+        position: relative;
+
+        &__arrow {
+          &.disabled {
+            opacity: 0.2;
+            pointer-events: none;
+          }
+        }
+
+        &__arrows {
+          position: absolute;
+          top: 50%;
+          cursor: pointer;
+
+          &-left {
+            left: 10px;
+          }
+          &-right {
+            right: 10px;
+          }
+        }
+
+        figure{
+          img{
+            max-width: 500px;
+            transition: all .3s ease-in;
+          }
+        }
+      }
+    }
+
   }
 
   .product-modal-thumb-container {
@@ -50,12 +116,6 @@
     display: flex;
     justify-content: center;
   }
-
-  //.product-modal-thumbs {
-  //  display: flex;
-  //  justify-content: center;
-  //  align-items: center;
-  //}
 
   .product-modal-thumb {
     text-align: center;

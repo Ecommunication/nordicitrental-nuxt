@@ -189,7 +189,7 @@ export default {
 
 .minified-header {
   position: fixed;
-  z-index: 99999999;
+  z-index: 99;
   top: 0;
   width: 100%;
   height: 50px;
