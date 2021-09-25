@@ -76,7 +76,7 @@ export default {
       this.thumbArrowLeft = false;
     }
 
-    if (this.maxThumbnails > 2) {
+    if (this.maxThumbnails > 3) {
       this.thumbArrowRight = true;
     }
   },
