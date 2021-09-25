@@ -10,13 +10,14 @@
     <div class="container mt-10">
       <div class="row">
         <div class="col">
-          <div
+          <nuxt-link
+            :to="'/produkt/' + product.info.slug"
             class="product"
             v-for="product in category.products"
             :key="product.info.id"
           >
             <div class="product-image">
-              <img :src="product.gallery.main.url" :alt="product.gallery.main.alternativeText" />
+              <img :src="product.gallery.main.url | formatImage" :alt="product.gallery.main.alternativeText" />
             </div>
             <div class="product-info mt-9">
               <div class="product-title text-blue">{{ product.info.name }}</div>
@@ -49,8 +50,7 @@
                 >
               </div>
             </div>
-          </div>
-        </div>
+          </nuxt-link>
       </div>
 
       <CategorySlider
@@ -68,6 +68,7 @@
           <div class="category-description" v-html="category.description"></div>
         </div>
       </div>
+    </div>
     </div>
     </section>
   </div>

@@ -169,15 +169,17 @@ export default {
     const productData = productsData[0] || {};
     if (!productData) return;
 
-    const categories = await Promise.all(
-        productData.product_categories.map(async cat => {
-          const categoryData = await $axios.$get(
-              `/product-categories?Slug=${cat.Slug}`
-          );
-          return categoryData && categoryData[0] ? categoryData[0] : [];
-        })
-    );
-    const product = new Product(productData, categories);
+    // const categories = await Promise.all(
+    //     productData.product_categories.map(async cat => {
+    //       const categoryData = await $axios.$get(
+    //           `/product-categories?Slug=${cat.Slug}`
+    //       );
+    //       return categoryData && categoryData[0] ? categoryData[0] : [];
+    //     })
+    // );
+
+
+    const product = new Product(productData, []);
 
     return {product};
   },
