@@ -7,12 +7,12 @@
         <img v-if="gallery.main.url" :src="mainImage | formatImage" :alt="gallery.main.alternativeText"
              @click="openModal(0)"/>
       </div>
-      <div class="product-gallery__thumbnails">
+      <div class="product-gallery__thumbnails" v-if="thumbnails.length > 1">
         <span class="product-gallery__arrows product-gallery__arrow product-gallery__arrows-left"
               v-bind:class="{disabled: !this.thumbArrowLeft}">
             <i @click="moveThumbnails('left')" class="fas fa-chevron-circle-left"></i>
         </span>
-        <div class="product-gallery__thumbs" v-if="thumbnails.length > 1">
+        <div class="product-gallery__thumbs">
           <div class="product-gallery__thumbs-scroller" v-bind:style="scrollerTranslate">
             <div class="product-gallery__thumbs-scroller__thumb" v-for="(image, index) in thumbnails" :key="index">
               <span><img :src="image.url" :alt="image.alternativeText" @click="openModal(index)"/></span>
