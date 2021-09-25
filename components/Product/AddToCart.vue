@@ -1,10 +1,10 @@
 <template>
   <div>
     <div v-if="options.length" class="mb-5">
-      <p class="title mb-2">Tilføj Tilvalg:</p>
+      <p class="title mb-2">Tilføj tilvalg:</p>
 
       <div v-for="(option, index) in options" :key="index">
-        <CheckboxRounded
+        <CheckboxRounded v-if="option.price"
           class="mb-2"
           :label="
             `${option.option.Name} - ${$formatPrice(option.price)} eksl. moms`

@@ -9,18 +9,7 @@
     <div class="container py-10">
       <div class="row" style="justify-content: center; padding: 16px;">
         <div class="col-md-4">
-          <div class="product-gallery">
-            <div class="product-gallery-main-image">
-              <img v-if="product.gallery.main.url" @click="openImageModal(product.gallery.main.url)" :src="product.gallery.main.url" :alt="product.gallery.main.alternativeText"/>
-            </div>
-            <div class="product-gallery__thumbs" v-if="product.gallery.thumbnails > 1">
-              <VueSlickCarousel :arrows="true" :dots="true" :slidesToShow="2">
-                <div class="product-gallery__thumbs-thumb" v-for="(image, index) in product.gallery.thumbnails" :key="index">
-                  <span><img :src="image" @click="openImageModal(image)" /></span>
-                </div>
-              </VueSlickCarousel>
-            </div>
-          </div>
+            <ProductGallery :gallery="product.gallery" />
         </div>
         <div class="col-md-8">
           <div class="product-meta">
@@ -180,15 +169,17 @@ export default {
     const productData = productsData[0] || {};
     if (!productData) return;
 
-    const categories = await Promise.all(
-        productData.product_categories.map(async cat => {
-          const categoryData = await $axios.$get(
-              `/product-categories?Slug=${cat.Slug}`
-          );
-          return categoryData && categoryData[0] ? categoryData[0] : [];
-        })
-    );
-    const product = new Product(productData, categories);
+    // const categories = await Promise.all(
+    //     productData.product_categories.map(async cat => {
+    //       const categoryData = await $axios.$get(
+    //           `/product-categories?Slug=${cat.Slug}`
+    //       );
+    //       return categoryData && categoryData[0] ? categoryData[0] : [];
+    //     })
+    // );
+
+
+    const product = new Product(productData, []);
 
     return {product};
   },

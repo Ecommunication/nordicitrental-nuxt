@@ -18,8 +18,10 @@
 @import "components/shop/product";
 @import "components/shop/cart";
 
-/* Utils */
-@import "components/responsive";
+/* Responsive */
+@import "responsive/general";
+@import "responsive/product";
+@import "responsive/product-category";
 
 * {
   margin: 0;
@@ -104,8 +106,6 @@ footer {
 }
 
 .slider-title {
-  font-size: 50px;
-  padding: 20px;
   font-family: 'Ubuntu', sans-serif;
 }
 

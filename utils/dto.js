@@ -53,10 +53,10 @@ export class Product {
     };
     this.gallery = {
       main: {
-        url: formatImage(data?.MainImage?.url || ""),
+        url: data?.MainImage?.url,
         alternativeText: data?.MainImage?.alternativeText || 'Nordic IT Rental udlejning - ' + data?.Name,
       },
-      thumbnails: data.ProductGallery.map(img => formatImage(img?.url || ""))
+      thumbnails: data.ProductGallery,
     };
     this.pricing = {
       daily: parseFloat(data.DailyPriceAfterWeek),
