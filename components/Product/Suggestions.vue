@@ -14,7 +14,7 @@
               :class="hover === product.info.id ? 'active' : ''"
             >
               <div class="product-img-container">
-                <img class="product-img" :src="product.gallery.main.url" :alt="product.gallery.main.alternativeText" />
+                <img class="product-img" :src="product.gallery.main.url | formatImage" :alt="product.gallery.main.alternativeText" />
               </div>
               <h3 class="product-title text-blue text-center mt-3">
                 {{ product.info.name }}
