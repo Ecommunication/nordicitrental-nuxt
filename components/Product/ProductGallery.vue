@@ -108,18 +108,20 @@ export default {
       const imageUrl = "https://nordic.nordicitrental.dk";
       const defaultAltText = "";
 
-      thumbnails.push({
-        url: imageUrl + this.gallery.main.url,
-        alternativeText: this.gallery.main.url.alternativeText,
-      });
+      // console.log(this.gallery.main)
 
-      this.gallery.thumbnails.forEach(function (item) {
-        const obj = {
-          url: imageUrl + item.url,
-          alternativeText: item.alternativeText,
-        }
-        thumbnails.push(obj)
-      })
+      // thumbnails.push({
+      //   url: imageUrl + this.gallery.main.url,
+      //   alternativeText: '',
+      // });
+      //
+      // this.gallery.thumbnails.forEach(function (item) {
+      //   const obj = {
+      //     url: imageUrl + item.url,
+      //     alternativeText: item.alternativeText,
+      //   }
+      //   thumbnails.push(obj)
+      // })
 
       this.thumbnails = thumbnails;
     },

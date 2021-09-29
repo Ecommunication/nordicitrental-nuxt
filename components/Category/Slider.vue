@@ -1,13 +1,13 @@
 <template>
   <div class="row">
-    <div class="col" style="width:100%;">
-      <h3 class="text-blue title-md" :style="`text-align: ${titlePosition}; padding-bottom: ${titlePaddingBottom}px;`">
+    <div class="col">
+      <h3 class="text-blue title-md">
         {{ title }}
       </h3>
-      <div class="row" :style="`justify-content: ${justifyContent};`">
+      <div class="row">
         <div class="col mx-2" v-for="(cat, index) in categories" :key="index">
           <nuxt-link :to="`/produkt-kategori/${cat.Slug}`">
-            <div class="category-card" :style="`width: ${size}px; height: ${size}px;`">
+            <div class="category-card">
               <img :alt="(cat.Image.alternativeText) ? cat.Image.alternativeText : 'Nordic IT Rental udlejning - ' + cat.Title " v-if="cat.Image" :src="cat.Image.url | formatImage" />
               <img :alt="'Nordic IT Rental udlejning - ' + cat.Title" v-else src="~/assets/images/icons/no-photos.svg" />
               <span class="category-title text-md weight-thin mt-6">{{
@@ -56,9 +56,9 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-.category-card {
-  width: 170px !important;
-  height: 170px !important;
-}
+  .category-card {
+    width: 170px !important;
+    height: 170px !important;
+  }
 }
 </style>

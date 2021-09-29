@@ -2,18 +2,16 @@
   <div class="index" id="index">
     <CoverSlider :slides="data.IndexPageSlider" />
 
-    <div class="grid-wide" style="width: 90%; margin: 0 auto;">
+    <div class="grid-wide" id="indexCategorySlider">
       <CategorySlider
         class="py-8"
         title="Vælg et produkt du ønsker at leje"
         :categories="data.IndexCategories"
-        :size="210"
       >
         <div class="grid flex flex-justify-center">
           <nuxt-link
             to="/alle-produktkategorier"
             class="btn btn-blue text-center mx-auto mt-10 title-sm"
-            style="padding-right: 30px; padding-left: 30px; "
           >
             Alle produkter
           </nuxt-link>
@@ -21,16 +19,15 @@
       </CategorySlider>
     </div>
 
-    <div class="row py-10 bg-gray-light">
-      <div class="col" style="width: 100%; margin: 0 auto;">
+    <div class="row py-10 bg-gray-light" id="indexRentalBenefits">
+      <div class="col">
         <h3
           class="text-blue title-md weight-thin mb-6"
-          style="text-align: center; font-size: 26px;"
         >
           Vi har gjort det nemt at leje IT udstyr
         </h3>
 
-        <div class="info grid-wide" style="margin: 0 auto;">
+        <div class="info grid-wide">
           <div
             class="info-card"
             v-for="(item, index) in data.IndexRentalBennefits"
@@ -40,7 +37,6 @@
             <div class="info-card-body">
               <span
                 class="info-card-title text-blue mb-3"
-                style="font-weight: 700;"
                 >{{ item.Title }}</span
               >
               <span class="info-card-desc">{{ item.Description }}</span>
@@ -58,7 +54,7 @@
             :src="data.IndexLetterboxImageLeft.url | formatImage"
           />
         </div>
-        <div class="home-section-1-2">
+        <div class="home-section-1-2 index-category-text-card-left">
           <TextCard
             v-if="data.IndexLetterboxTextLeft"
             :contentHtml="data.IndexLetterboxTextLeft"
@@ -68,7 +64,7 @@
           />
         </div>
       </div>
-      <div class="col-md-6 px-0">
+      <div class="col-md-6 px-0 index-category-text-card-right">
         {{data.IndexLetterboxImageRight}}
         <TextCard
           style="height: 100%;"
@@ -80,7 +76,7 @@
       </div>
     </div>
 
-    <div class="row service-installation-delivery">
+    <div class="row service-installation-delivery" id="indexServiceDescription">
       <TextCard
         class="text-center"
         v-if="data.IndexServiceDescription"
@@ -89,8 +85,8 @@
       />
     </div>
 
-    <div class="row pb-10" ref="counterRef">
-      <div class="col" style="max-width: 1280px; width: 100%; margin: 0 auto;">
+    <div class="row pb-10" ref="counterRef" id="indexCounters">
+      <div class="col">
         <HomeCategories
           :categories="data.IndexCategoriesCount"
           :counterAnimationLoaded="counterAnimationLoaded"
@@ -102,23 +98,20 @@
       :images="data.IndexReferencesCarousel"
     />
 
-    <div class="row">
-      <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">
+    <div class="row" id="indexContactSection">
+      <div class="col-md-6 px-0">
         <BackgroundImg
           v-if="data.IndexContactLeftImage"
           :src="data.IndexContactLeftImage.url | formatImage"
         />
       </div>
       <div class="col-md-6 px-0">
-        <div style="max-width: 700px; margin: 0 auto;">
+        <div class="contact-us-form">
           <ContactUsForm
             class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
             :title="data.IndexContactRightText"
             formTitle="Bliv ringet op"
-            style="margin: 0 auto;"
-            titleStyle="margin-bottom: 60px;"
-            formStyle="max-width: 700px;"
           >
             <template v-slot:left-col>
               <div class="text-center pr-35">
@@ -211,6 +204,86 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#indexCategorySlider {
+  width: 90%;
+  margin: 0 auto;
+
+  a {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  & > .col {
+    width: 100%;
+
+    h3 {
+      margin-bottom: 60px;
+      max-width: 700px;
+      text-align: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .category-card {
+    width: 210px;
+  }
+
+  .row {
+    .row {
+      justify-content: center;
+    }
+  }
+}
+
+#indexRentalBenefits {
+  & > {
+    .col {
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+  h3 {
+    text-align: center;
+    font-size: 26px;
+  }
+
+  .info {
+    &.grid-wide {
+      margin: 0 auto;
+    }
+
+    .info-card-title {
+      font-weight: 700;
+    }
+  }
+}
+
+#indexCounters {
+  & > {
+    .col {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  }
+}
+
+#indexContactSection {
+  & > {
+    .col {
+      width: 100%;
+      min-height: 500px;
+    }
+  }
+}
+
+#indexContactSection {
+  .contact-us-form {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+
 .info {
   display: flex;
   flex-wrap: wrap;

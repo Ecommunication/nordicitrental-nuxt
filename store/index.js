@@ -191,5 +191,6 @@ export const actions = {
   async nuxtServerInit({ dispatch }) {
     await dispatch("loginAsAdmin");
     await Promise.all([dispatch("getMetaData"), dispatch("getNavigation")]);
+    console.log('test');
   }
 };
