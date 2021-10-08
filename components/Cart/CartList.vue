@@ -24,7 +24,7 @@
                 width="220"
                 height="220"
                 class="product-thumbnail-image"
-                :src="item.product.gallery.main.url"
+                :src="item.product.gallery.main.url | formatImage"
               />
             </nuxt-link>
           </td>
