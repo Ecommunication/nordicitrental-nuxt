@@ -37,9 +37,10 @@
               <div
                 class="flex border-t border-b cursor-pointer group hover:bg-gray-50"
               >
-                <img
+                <nuxt-img
                   class="max-h-14 transform transition-transform duration-300 group-hover:translate-x-3 aspect-square object-contain"
                   :src="product.MainImage.url | formatImage"
+                  :alt="product.Name"
                 />
                 <div
                   class="flex w-full justify-between space-x-5 ml-4 text-base"
@@ -73,7 +74,7 @@
                 <p class="text-mainBlue font-semibold">Kr. 2.995,-</p>
               </div>
               <div class="my-auto">
-                <img src="~/assets/images/employee_mic.png" />
+                <nuxt-img src="~/assets/images/employee_mic.png" />
               </div>
             </div>
           </div>

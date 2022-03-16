@@ -52,7 +52,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/google-analytics'],
+  buildModules: ['@nuxtjs/google-analytics', '@nuxt/image'],
 
   publicRuntimeConfig: {
     googleAnalytics: {
