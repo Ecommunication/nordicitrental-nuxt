@@ -5,15 +5,10 @@ export default {
     host: process.env.SERVERHOST,
   },
   /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
-  mode: "universal",
-  /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: "server",
+  target: 'server',
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -22,17 +17,17 @@ export default {
   head() {
     const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true });
     return {
-      title: "Nordic IT Rental",
+      title: 'Nordic IT Rental',
       htmlAttrs: {
         ...i18nHead.htmlAttrs,
       },
       meta: [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         ...i18nHead.meta,
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         ...i18nHead.link,
       ],
     };
@@ -40,24 +35,24 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "~/node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-    "~/assets/css/main.scss",
-    "~/assets/css/flexboxgrid.min.css",
+    '~/node_modules/@fortawesome/fontawesome-free/css/all.min.css',
+    '~/assets/css/main.scss',
+    '~/assets/css/flexboxgrid.min.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/globals.js",
-    "~/plugins/filters/prices.js",
-    "~/plugins/filters/date.js",
-    "~/plugins/persistedState.client.js",
+    '~/plugins/globals.js',
+    '~/plugins/filters/prices.js',
+    '~/plugins/filters/date.js',
+    '~/plugins/persistedState.client.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/google-analytics"],
+  buildModules: ['@nuxtjs/google-analytics'],
 
   publicRuntimeConfig: {
     googleAnalytics: {
@@ -67,31 +62,31 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    ["@nuxtjs/tailwindcss"],
+    ['@nuxtjs/tailwindcss'],
     [
-      "@nuxtjs/axios",
+      '@nuxtjs/axios',
       {
         baseURL: process.env.API_URL,
       },
     ],
     [
-      "@nuxtjs/recaptcha",
+      '@nuxtjs/recaptcha',
       {
         hideBadge: false,
         siteKey: process.env.RECAPTCHA_SITE_KEY,
         version: 2,
       },
     ],
-    ["@nuxtjs/sitemap"],
+    ['@nuxtjs/sitemap'],
     [
-      "@nuxtjs/i18n",
+      '@nuxtjs/i18n',
       {
         locales: [
-          { code: "en", name: "English", iso: "da-DK" },
-          { code: "da", name: "Dansk", iso: "en-US" },
+          { code: 'en', name: 'English', iso: 'da-DK' },
+          { code: 'da', name: 'Dansk', iso: 'en-US' },
         ],
-        defaultLocale: "da",
-        baseUrl: "https://nordicitrental.dk",
+        defaultLocale: 'da',
+        baseUrl: 'https://nordicitrental.dk',
       },
     ],
   ],
