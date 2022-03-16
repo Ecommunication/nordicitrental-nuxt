@@ -1,7 +1,11 @@
 <template>
   <div class="mobile-navigation">
     <ClientOnly>
-      <select v-if="leafItems" v-model="page" style="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);">
+      <select
+        v-if="leafItems"
+        v-model="page"
+        style="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%)"
+      >
         <option value="">Navigation</option>
         <option
           v-for="(item, index) in leafItems"
@@ -20,26 +24,26 @@
 <script>
 export default {
   props: {
-    items: { type: Array, default: [] }
+    items: { type: Array, default: [] },
   },
   computed: {
     leafItems() {
       const options = [];
-      this.items.forEach(menu => {
+      this.items.forEach((menu) => {
         options.push({ level: 1, label: menu.label, link: menu.link });
-        (menu.items || []).forEach(submenu => {
+        (menu.items || []).forEach((submenu) => {
           options.push({ level: 2, label: submenu.label, link: submenu.link });
-          (submenu.items || []).forEach(thirdLevel => {
+          (submenu.items || []).forEach((thirdLevel) => {
             options.push({
               level: 3,
               label: thirdLevel.label,
-              link: thirdLevel.link
+              link: thirdLevel.link,
             });
           });
         });
       });
       return options;
-    }
+    },
   },
   data() {
     return {
@@ -54,19 +58,19 @@ export default {
               link: "category-link",
               items: [
                 { label: "ipad air", link: "product-link" },
-                { label: "ipad air 2", link: "product-link2" }
-              ]
-            }
-          ]
-        }
-      ]
+                { label: "ipad air 2", link: "product-link2" },
+              ],
+            },
+          ],
+        },
+      ],
     };
   },
   watch: {
     page(val) {
       this.$router.push(val);
-    }
-  }
+    },
+  },
 };
 </script>
 

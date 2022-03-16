@@ -1,12 +1,18 @@
 import Vue from "vue";
 
-const formatPrice = val => {
-  const formattedPrice = new Intl.NumberFormat("da-DK").format(parseInt(val));
-  return "Kr. " + formattedPrice + ",-";
-};
-
-Vue.filter("formatPrice", formatPrice);
-
 export default ({ app }, inject) => {
-  inject("formatPrice", formatPrice);
+  const formatPrice = (val) => {
+    if (app.store.state.currency === "EUR") {
+      const formattedPrice = new Intl.NumberFormat("en-US").format(
+        parseInt(val / 7.5)
+      );
+      return "€ " + formattedPrice;
+    } else {
+      const formattedPrice = new Intl.NumberFormat("da-DK").format(
+        parseInt(val)
+      );
+      return "Kr. " + formattedPrice + ",-";
+    }
+  };
+  Vue.filter("formatPrice", formatPrice);
 };

@@ -4,9 +4,7 @@
 
     <div class="cart-totals-table">
       <div class="cart-row">
-        <div class="cart-col table-key">
-          Fragt og håndtering
-        </div>
+        <div class="cart-col table-key">Fragt og håndtering</div>
         <div class="cart-col table-value">
           <div>
             <div class="mb-2">
@@ -14,7 +12,12 @@
                 class="radio-button"
                 type="radio"
                 :checked="option === 'delivery'"
-                @click="() => {option = 'delivery'; setShipmentMethod('delivery');}"
+                @click="
+                  () => {
+                    option = 'delivery';
+                    setShipmentMethod('delivery');
+                  }
+                "
               />
               <label>Ja tak, jeg ønsker levering og afhentning:: kr. 800</label>
             </div>
@@ -23,7 +26,12 @@
                 class="radio-button"
                 type="radio"
                 :checked="option === 'pick-up'"
-                @click="() => {option = 'pick-up'; setShipmentMethod('pick-up');}"
+                @click="
+                  () => {
+                    option = 'pick-up';
+                    setShipmentMethod('pick-up');
+                  }
+                "
               />
               <label
                 >Jeg ønsker at afhente og returnere hos Nordic IT Rental i
@@ -35,18 +43,14 @@
       </div>
 
       <div class="cart-row">
-        <div class="cart-col table-key">
-          Moms
-        </div>
+        <div class="cart-col table-key">Moms</div>
         <div class="cart-col table-value">
           {{ vat | formatPrice }}
         </div>
       </div>
 
       <div class="cart-row">
-        <div class="cart-col table-key">
-          Total
-        </div>
+        <div class="cart-col table-key">Total</div>
         <div class="cart-col table-value">
           {{ afterTax | formatPrice }}
         </div>
@@ -56,23 +60,23 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from "vuex"
+import { mapActions, mapState, mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapState(['cart']),
-    ...mapGetters(["vat", "afterTax"])
+    ...mapState(["cart"]),
+    ...mapGetters(["vat", "afterTax"]),
   },
   data() {
     return {
-      option: ""
+      option: "",
     };
   },
   methods: {
-    ...mapActions(["setShipmentMethod"])
+    ...mapActions(["setShipmentMethod"]),
   },
-  created(){
-    this.option = this.cart.shipping.method
-  }
+  created() {
+    this.option = this.cart.shipping.method;
+  },
 };
 </script>
 

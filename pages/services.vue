@@ -21,9 +21,7 @@
               </div>
 
               <Modal v-show="isModalVisible" @close="closeModal" :width="600">
-                <template v-slot:header>
-                  Ring mig op
-                </template>
+                <template v-slot:header> Ring mig op </template>
                 <template v-slot:body>
                   <CallMeForm />
                 </template>
@@ -48,7 +46,7 @@
     </div>
 
     <div id="service-rentrange" class="row">
-      <div class="col-md-6 px-0 py-0" style="min-height: 526px; width: 100%;">
+      <div class="col-md-6 px-0 py-0" style="min-height: 526px; width: 100%">
         <BackgroundImg
           v-if="data.LeftImageCol2"
           :src="data.LeftImageCol2.url | formatImage"
@@ -56,7 +54,7 @@
       </div>
       <div class="col-md-6 px-0">
         <TextCard
-          style="height: 100%;"
+          style="height: 100%"
           v-if="data.RightTextCol2"
           :contentHtml="data.RightTextCol2"
           backgroundClass="bg-gray-darkest"
@@ -66,7 +64,7 @@
     </div>
 
     <div id="service-howto" class="row">
-      <div class="col px-0 py-0" style="width: 100%;">
+      <div class="col px-0 py-0" style="width: 100%">
         <TextCard
           v-if="data.MidTextCol3"
           :contentHtml="data.MidTextCol3"
@@ -113,27 +111,25 @@
     </div>
 
     <div class="row grid-small">
-      <div class="col pt-8" style="width: 100%;">
+      <div class="col pt-8" style="width: 100%">
         <ContactUsForm
           :title="data.ContactHeader"
           formTitle="Bliv ringet op"
-          style="margin: 30px auto;"
+          style="margin: 30px auto"
           customCSS="justify-content: center;"
           titleStyle="font-size: 40px; margin-bottom: 24px;"
         >
           <template v-slot:left-col>
             <div class="text-left pr-20">
-              <h3 class="text-blue" style="font-size: 20px;">Kontakt</h3>
+              <h3 class="text-blue" style="font-size: 20px">Kontakt</h3>
               <p class="mt-10">
-                <img
-                  src="~/assets/images/employee_mic.png"
-                  alt="Kontakt"/>
+                <img src="~/assets/images/employee_mic.png" alt="Kontakt" />
               </p>
-              <p style="font-size: 14px;">
+              <p style="font-size: 14px">
                 Michael Vedel<br />
                 Salg – kunder
               </p>
-              <p class="mt-5" style="font-size: 14px;">
+              <p class="mt-5" style="font-size: 14px">
                 Tlf. 71998904<br />
                 <a href="mailto:salg@nordicitrental.dk"
                   >salg@nordicitrental.dk</a
@@ -164,12 +160,12 @@ export default {
     Button,
     ContactUsForm,
     Modal,
-    CallMeForm
+    CallMeForm,
   },
-  computed:{
-    currentRouteHash(){
-      return this.$router.currentRoute.hash.replace("#", "")
-    }
+  computed: {
+    currentRouteHash() {
+      return this.$router.currentRoute.hash.replace("#", "");
+    },
   },
   head() {
     return {
@@ -177,13 +173,13 @@ export default {
       meta: [
         {
           name: "title",
-          content: this.data.MetaTitle || ""
+          content: this.data.MetaTitle || "",
         },
         {
           name: "description",
-          content: this.data.MetaDescription || ""
-        }
-      ]
+          content: this.data.MetaDescription || "",
+        },
+      ],
     };
   },
   data() {
@@ -197,10 +193,10 @@ export default {
           variant: "btn-dark",
           action: {
             type: "link",
-            href: "/produkt-kategori"
-          }
-        }
-      }
+            href: "/produkt-kategori",
+          },
+        },
+      },
     };
   },
   async asyncData({ params, $axios }) {
@@ -213,8 +209,8 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

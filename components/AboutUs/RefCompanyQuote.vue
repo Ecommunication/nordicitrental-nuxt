@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 1em 0; padding: 1em;">
+  <div style="margin: 1em 0; padding: 1em">
     <div v-if="logo && logo.url">
       <img :src="logo.url | formatImage" :alt="logo.alternativeText" />
     </div>
@@ -13,17 +13,17 @@ export default {
   props: {
     logo: {
       type: Object,
-      required: true
+      required: true,
     },
     text: {
       type: String,
-      required: true
+      required: true,
     },
     author: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

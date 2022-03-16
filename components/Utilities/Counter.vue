@@ -9,25 +9,25 @@ export default {
   props: {
     durationMs: {
       type: Number,
-      default: 1000
+      default: 1000,
     },
     end: {},
     start: {
-      default: 0
+      default: 0,
     },
     render: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       number: null,
       startNumber: null,
-      endNumber: null
+      endNumber: null,
     };
   },
-  created(){
+  created() {
     this.startNumber = parseInt(this.start);
     this.endNumber = parseInt(this.end);
     this.number = this.startNumber;
@@ -35,7 +35,8 @@ export default {
   watch: {
     render(val) {
       if (val) {
-        const intervalMs = this.durationMs / (this.endNumber - this.startNumber);
+        const intervalMs =
+          this.durationMs / (this.endNumber - this.startNumber);
         const interval = setInterval(() => {
           this.number += 1;
           if (this.number > this.endNumber) {
@@ -44,8 +45,8 @@ export default {
           }
         }, intervalMs);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

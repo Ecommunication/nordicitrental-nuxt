@@ -18,13 +18,26 @@
         <div class="footer-col">
           <div class="ref-company-logo-bar">
             <span v-for="(image, index) in footer.images" :key="index">
-              <img class="logo" :src="image.Image.url | formatImage" :alt="image.Image.alternativeText" />
+              <img
+                class="logo"
+                :src="image.Image.url | formatImage"
+                :alt="image.Image.alternativeText"
+              />
             </span>
-            <a href="https://www.linkedin.com/company/nordic-it-retnal-aps" target="_blank">
-              <img :src="'/uploads/linked_in_9ba84ec3c3.png' | formatImage" alt="Nordic IT Rental - Linkedin">
+            <a
+              href="https://www.linkedin.com/company/nordic-it-retnal-aps"
+              target="_blank"
+            >
+              <img
+                :src="'/uploads/linked_in_9ba84ec3c3.png' | formatImage"
+                alt="Nordic IT Rental - Linkedin"
+              />
             </a>
             <a href="https://www.facebook.com/nordicitrental" target="_blank">
-              <img :src="'/uploads/FB_icon_29ff5245e9.png' | formatImage" alt="Nordic IT Rental - Facebook">
+              <img
+                :src="'/uploads/FB_icon_29ff5245e9.png' | formatImage"
+                alt="Nordic IT Rental - Facebook"
+              />
             </a>
           </div>
         </div>
@@ -37,9 +50,9 @@ import NewsletterForm from "@/components/Formular/Newsletter";
 
 export default {
   components: {
-    NewsletterForm
+    NewsletterForm,
   },
-  props: ["footer"]
+  props: ["footer"],
 };
 </script>
 

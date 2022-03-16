@@ -6,7 +6,7 @@
           label="Fornavn"
           :input="form.firstName"
           @onChange="
-            val => onChange('firstName', val, formValidations.firstName)
+            (val) => onChange('firstName', val, formValidations.firstName)
           "
           :errors="errors.firstName"
         />
@@ -15,7 +15,9 @@
         <InputField
           label="Efternavn"
           :input="form.lastName"
-          @onChange="val => onChange('lastName', val, formValidations.lastName)"
+          @onChange="
+            (val) => onChange('lastName', val, formValidations.lastName)
+          "
           :errors="errors.lastName"
         />
       </div>
@@ -27,7 +29,7 @@
           label="Firmanavn"
           :input="form.companyName"
           @onChange="
-            val => onChange('companyName', val, formValidations.companyName)
+            (val) => onChange('companyName', val, formValidations.companyName)
           "
           :errors="errors.companyName"
         />
@@ -37,7 +39,7 @@
           label="Gadenavn og nr"
           :input="form.streetNameAndNo"
           @onChange="
-            val =>
+            (val) =>
               onChange('streetNameAndNo', val, formValidations.streetNameAndNo)
           "
           :errors="errors.streetNameAndNo"
@@ -52,14 +54,14 @@
           :options="countryOptions"
           :input="form.country"
           :defaultOption="countryOptions[0]"
-          @onChange="val => onChange('country', val, formValidations.country)"
+          @onChange="(val) => onChange('country', val, formValidations.country)"
         />
       </div>
       <div class="col-xs-12 col-md-4">
         <InputField
           label="By"
           :input="form.town"
-          @onChange="val => onChange('town', val, formValidations.town)"
+          @onChange="(val) => onChange('town', val, formValidations.town)"
           :errors="errors.town"
         />
       </div>
@@ -67,7 +69,7 @@
         <InputField
           label="Postnummer"
           :input="form.zipCode"
-          @onChange="val => onChange('zipCode', val, formValidations.zipCode)"
+          @onChange="(val) => onChange('zipCode', val, formValidations.zipCode)"
           :errors="errors.zipCode"
         />
       </div>
@@ -83,7 +85,7 @@ import validations from "@/components/Formular/validations.js";
 export default {
   components: {
     InputField,
-    Selection
+    Selection,
   },
   props: ["submitTrigger"],
   data() {
@@ -96,7 +98,7 @@ export default {
         streetNameAndNo: "",
         town: "",
         country: "",
-        zipCode: ""
+        zipCode: "",
       },
       errors: {},
       formValidations: {
@@ -106,14 +108,14 @@ export default {
         streetNameAndNo: [validations.isRequired],
         town: [validations.isRequired],
         country: [],
-        zipCode: [validations.isRequired]
+        zipCode: [validations.isRequired],
       },
       countryOptions: [
         { value: "denmark", label: "Danmark" },
         { value: "norway", label: "Norge" },
         { value: "sweden", label: "Sverige" },
-        { value: "germany", label: "Tyskland" }
-      ]
+        { value: "germany", label: "Tyskland" },
+      ],
     };
   },
   watch: {
@@ -121,7 +123,7 @@ export default {
       if (val) {
         this.submit();
       }
-    }
+    },
   },
   methods: {
     onChange(key, val, valid) {
@@ -130,7 +132,7 @@ export default {
     },
     validate(valid, value) {
       const errors = [];
-      valid.forEach(validation => {
+      valid.forEach((validation) => {
         if (!validation.rule(value)) {
           errors.push(validation.msg);
         }
@@ -151,8 +153,8 @@ export default {
       this.pageKey++;
 
       this.$emit("onSubmit", { form: this.form, hasAnyError });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -8,7 +8,7 @@
       <div
         class="slider-item"
         :style="{
-          opacity: selectedIndex === index ? 1 : 0
+          opacity: selectedIndex === index ? 1 : 0,
         }"
       >
         <div class="row" v-if="selectedIndex === index">
@@ -18,15 +18,15 @@
           >
             <BackgroundImg
               :src="slide.BackgroundImage.url | formatImage"
-              style=" display: flex; align-items: center;"
+              style="display: flex; align-items: center"
             >
               <template
                 v-slot:body
                 v-if="slide.TextAreaHeader || slide.TextAreaSubHeader"
               >
-                <div class="grid-small" style="width: 100%;">
+                <div class="grid-small" style="width: 100%">
                   <div
-                    class=" slider-title title-white slider-title-1"
+                    class="slider-title title-white slider-title-1"
                     v-html="slide.TextAreaHeader"
                   ></div>
                   <br />
@@ -49,12 +49,12 @@ import BackgroundImg from "@/components/Utilities/BackgroundImg";
 export default {
   props: ["slides"],
   components: {
-    BackgroundImg
+    BackgroundImg,
   },
   data() {
     return {
       selectedIndex: 0,
-      duration: 8 // sec
+      duration: 8, // sec
     };
   },
   mounted() {
@@ -74,8 +74,8 @@ export default {
         nextIndex = 0;
       }
       return nextIndex;
-    }
-  }
+    },
+  },
 };
 </script>
 

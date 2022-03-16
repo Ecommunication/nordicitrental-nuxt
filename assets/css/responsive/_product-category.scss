@@ -193,7 +193,8 @@
       .price-weekly {
       }
 
-      .price-weekly, .price-daily {
+      .price-weekly,
+      .price-daily {
         font-size: 25px;
         font-weight: bold;
         color: $mainBlue;

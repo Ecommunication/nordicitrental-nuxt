@@ -15,8 +15,8 @@ export default {
     label: { type: String },
     validation: {
       type: Object,
-      required: false
-    }
+      required: false,
+    },
   },
   computed: {
     errorMsg() {
@@ -31,12 +31,12 @@ export default {
       return this.validation && this.validation.rule
         ? this.validation.rule
         : null;
-    }
+    },
   },
   data() {
     return {
       inputLocal: false,
-      showError: false
+      showError: false,
     };
   },
   created() {
@@ -51,8 +51,8 @@ export default {
       if (this.validationRule) {
         this.showError = !this.validationRule(val);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

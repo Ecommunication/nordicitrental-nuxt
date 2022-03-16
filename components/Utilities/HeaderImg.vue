@@ -17,13 +17,13 @@ import BackgroundImg from "@/components/Utilities/BackgroundImg";
 
 export default {
   components: {
-    BackgroundImg
+    BackgroundImg,
   },
   props: {
     height: { type: Number, default: 420 },
     img: { type: String, required: true },
-    text: { type: String, required: false }
-  }
+    text: { type: String, required: false },
+  },
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="employee text-center" v-if="employee">
     <img
-      class="employee-img "
+      class="employee-img"
       v-if="employee.AboutUsEmployeesImage"
       :src="employee.AboutUsEmployeesImage.url | formatImage"
       :alt="employee.AboutUsEmployeesImage.alternativeText"
@@ -14,8 +14,8 @@
 <script>
 export default {
   props: {
-    employee: { type: Object, required: true }
-  }
+    employee: { type: Object, required: true },
+  },
 };
 </script>
 

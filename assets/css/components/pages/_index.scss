@@ -18,19 +18,21 @@
 
   h3 {
     font-size: 2em;
-    margin-bottom: 1.0em;
+    margin-bottom: 1em;
   }
 
-  &.grid-cols-2, .grid-cols-2 {
+  &.grid-cols-2,
+  .grid-cols-2 {
     grid-template-columns: 1fr 1fr;
   }
 
-  &.grid-rows-2, .grid-cols-2 {
+  &.grid-rows-2,
+  .grid-cols-2 {
     grid-template-rows: 1fr 1fr;
   }
 }
 
-.index-contact-box{
+.index-contact-box {
   &__image {
     min-height: 600px;
     background-size: cover;

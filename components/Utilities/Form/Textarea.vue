@@ -21,10 +21,10 @@ export default {
     label: { type: String },
     validation: {
       type: Object,
-      required: false
+      required: false,
     },
-    customStyle: { type: String, required: false},
-    inputStyle: { type: String, required: false}
+    customStyle: { type: String, required: false },
+    inputStyle: { type: String, required: false },
   },
   computed: {
     errorMsg() {
@@ -39,12 +39,12 @@ export default {
       return this.validation && this.validation.rule
         ? this.validation.rule
         : null;
-    }
+    },
   },
   data() {
     return {
       inputLocal: "",
-      showError: false
+      showError: false,
     };
   },
   created() {
@@ -59,8 +59,8 @@ export default {
       if (this.validationRule) {
         this.showError = !this.validationRule(val);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

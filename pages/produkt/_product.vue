@@ -1,39 +1,50 @@
 <template>
   <div class="product-single">
     <HeaderImg
-        v-if="product.cover"
-        :img="product.cover.image"
-        :text="product.cover.text || product.info.name"
-        :height="460"
+      v-if="product.cover"
+      :img="product.cover.image"
+      :text="product.cover.text || product.info.name"
+      :height="460"
     />
     <div class="container py-10">
-      <div class="row" style="justify-content: center; padding: 16px;">
+      <div class="row" style="justify-content: center; padding: 16px">
         <div class="col-md-4">
-            <ProductGallery :gallery="product.gallery" />
+          <ProductGallery :gallery="product.gallery" />
         </div>
         <div class="col-md-8">
           <div class="product-meta">
-            <IconBar class="mb-8" :features="product.features"/>
+            <IconBar class="mb-8" :features="product.features" />
             <div class="product-prices text-blue">
               <div class="price-weekly-container">
-                <span class="price-weekly">{{ product.pricing.weekly | formatPrice }}</span>
-                <span class="price-explanation">(Pris for første uges leje)</span>
+                <span class="price-weekly">{{
+                  product.pricing.weekly | formatPrice
+                }}</span>
+                <span class="price-explanation"
+                  >(Pris for første uges leje)</span
+                >
               </div>
               <div class="price-daily-container">
-                <span class="price-daily">{{ product.pricing.daily | formatPrice }}</span>
-                <span class="price-explanation">(Pris efter første uges leje, pr. dag.)</span>
+                <span class="price-daily">{{
+                  product.pricing.daily | formatPrice
+                }}</span>
+                <span class="price-explanation"
+                  >(Pris efter første uges leje, pr. dag.)</span
+                >
               </div>
             </div>
 
-            <div class="product-description" v-html="product.descriptions.short" />
+            <div
+              class="product-description"
+              v-html="product.descriptions.short"
+            />
 
             <AddToCart
-                :key="addToCartKey"
-                class="mt-8"
-                :product="product"
-                :dailyPrice="product.pricing.daily"
-                :weeklyPrice="product.pricing.weekly"
-                @addedToCart="onAddedToCart"
+              :key="addToCartKey"
+              class="mt-8"
+              :product="product"
+              :dailyPrice="product.pricing.daily"
+              :weeklyPrice="product.pricing.weekly"
+              @addedToCart="onAddedToCart"
             />
           </div>
         </div>
@@ -41,35 +52,33 @@
       <div class="row mt-10">
         <div class="col w-100">
           <Tabs
-              :description="product.descriptions.long"
-              :features="product.features"
+            :description="product.descriptions.long"
+            :features="product.features"
           />
         </div>
       </div>
 
       <div class="row mt-10">
         <div class="col">
-          <Suggestions :products="product.upsell"/>
+          <Suggestions :products="product.upsell" />
         </div>
       </div>
     </div>
 
     <Modal
-        class="cartNotifModal"
-        v-show="isModalVisible && Object.keys(modalData).length"
-        @close="closeDialog"
-        :width="500"
+      class="cartNotifModal"
+      v-show="isModalVisible && Object.keys(modalData).length"
+      @close="closeDialog"
+      :width="500"
     >
-      <template v-slot:header>
-        Produktet er lagt i kurven
-      </template>
+      <template v-slot:header> Produktet er lagt i kurven </template>
       <template v-slot:body>
         <div class="cartNotifModal-body">
           <div class="text-center">
             <i class="cartNotifModal-icon fas fa-cart-arrow-down"></i>
           </div>
           <div class="mt-5">
-            <div class="text-blue" style="font-weight: 600;">
+            <div class="text-blue" style="font-weight: 600">
               {{ modalData.title }}
             </div>
             Lejeperiode fra:
@@ -78,10 +87,10 @@
               {{ modalData.endDate | formatDate }}
             </span>
           </div>
-          <div class="my-5 text-blue" style="font-weight: 600;">
+          <div class="my-5 text-blue" style="font-weight: 600">
             Totalpris: {{ modalData.price | formatPrice }}
           </div>
-          <div style="display: flex; justify-content: space-between;">
+          <div style="display: flex; justify-content: space-between">
             <div class="button btn-primary" @click="goToProduct">
               <span class="text-uppercase">Fortsæt med at leje</span>
             </div>
@@ -94,23 +103,21 @@
     </Modal>
 
     <Modal
-        class="imageModal"
-        v-show="imageModalIsOpen"
-        @close="closeImageModal"
-        :width="700"
+      class="imageModal"
+      v-show="imageModalIsOpen"
+      @close="closeImageModal"
+      :width="700"
     >
       <template v-slot:body>
         <div class="product-modal-main-image">
-          <img
-              :src="imageModal"
-          />
+          <img :src="imageModal" />
         </div>
       </template>
     </Modal>
   </div>
 </template>
 <script>
-import {Product, ProductOption} from "@/utils/dto";
+import { Product, ProductOption } from "@/utils/dto";
 import Modal from "@/components/Utilities/Modal";
 import AddToCart from "@/components/Product/AddToCart";
 import Tabs from "@/components/Product/Tabs";
@@ -118,10 +125,10 @@ import IconBar from "@/components/Product/IconBar";
 import Suggestions from "@/components/Product/Suggestions";
 import HeaderImg from "@/components/Utilities/HeaderImg";
 import BackgroundImg from "@/components/Utilities/BackgroundImg";
-import VueSlickCarousel from 'vue-slick-carousel'
-import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+import VueSlickCarousel from "vue-slick-carousel";
+import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
-import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 
 export default {
   components: {
@@ -145,7 +152,7 @@ export default {
         slidesToShow: 3,
         arrows: true,
         dots: false,
-      }
+      },
     };
   },
   head() {
@@ -154,18 +161,18 @@ export default {
       meta: [
         {
           name: "title",
-          content: this.product?.meta?.title || ""
+          content: this.product?.meta?.title || "",
         },
         {
           name: "description",
-          content: this.product?.meta?.desc || ""
-        }
-      ]
+          content: this.product?.meta?.desc || "",
+        },
+      ],
     };
   },
-  async asyncData({params, $axios, $config}) {
+  async asyncData({ params, $axios, $config }) {
     const productsData =
-        (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
+      (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
     const productData = productsData[0] || {};
     if (!productData) return;
 
@@ -178,10 +185,9 @@ export default {
     //     })
     // );
 
-
     const product = new Product(productData, []);
 
-    return {product};
+    return { product };
   },
   methods: {
     openImageModal(imgSrc) {
@@ -197,7 +203,7 @@ export default {
         endDate: cartData.endDate,
         startDate: cartData.startDate,
         title: cartData?.product?.info?.name,
-        price: cartData.price
+        price: cartData.price,
       };
     },
     closeDialog() {
@@ -207,7 +213,7 @@ export default {
     goToProduct() {
       this.closeDialog();
       this.addToCartKey = new Date().getTime();
-    }
-  }
+    },
+  },
 };
 </script>

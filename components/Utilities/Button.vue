@@ -7,7 +7,7 @@
 <script>
 export default {
   props: {
-    button: { type: Object, required: true }
+    button: { type: Object, required: true },
   },
   computed: {
     variant() {
@@ -29,7 +29,7 @@ export default {
       return this.actionType === "modal" && this.button?.action?.modal
         ? this.button.action.modal
         : "#";
-    }
+    },
   },
   methods: {
     onClick() {
@@ -44,11 +44,9 @@ export default {
         default:
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

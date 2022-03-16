@@ -29,19 +29,19 @@ export default {
   components: { DescriptionTab, FeaturesTab },
   props: {
     description: { type: String, required: true },
-    features: { type: Array, required: true }
+    features: { type: Array, required: true },
   },
   data() {
     return {
       selected: 0,
-      tabs: ["Beskrivelse", "Yderligere information"]
+      tabs: ["Beskrivelse", "Yderligere information"],
     };
   },
   methods: {
     changeTab(index) {
       this.selected = index;
-    }
-  }
+    },
+  },
 };
 </script>
 

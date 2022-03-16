@@ -16,9 +16,9 @@ export default {
       return {
         logo: {
           src: this.$formatImage(this.meta.Logo.url),
-          altText: this.meta.Logo.alternativeText
+          altText: this.meta.Logo.alternativeText,
         },
-        telephone: this.meta.Telephone
+        telephone: this.meta.Telephone,
       };
     },
     footer() {
@@ -26,10 +26,10 @@ export default {
         widget1: this.meta.FooterWidget1,
         widget2: this.meta.FooterWidget2,
         widget3: this.meta.FooterWidget3,
-        images: this.meta.FooterImagesBottom
+        images: this.meta.FooterImagesBottom,
       };
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

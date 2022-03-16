@@ -4,13 +4,14 @@
       <p class="title mb-2">Tilføj tilvalg:</p>
 
       <div v-for="(option, index) in options" :key="index">
-        <CheckboxRounded v-if="option.price"
+        <CheckboxRounded
+          v-if="option.price"
           class="mb-2"
-          :label="
-            `${option.option.Name} - ${$formatPrice(option.price)} eksl. moms`
-          "
+          :label="`${option.option.Name} - ${$formatPrice(
+            option.price
+          )} eksl. moms`"
           :input="option.value"
-          @changed="val => (option.value = val)"
+          @changed="(val) => (option.value = val)"
         />
       </div>
     </div>
@@ -78,16 +79,16 @@ export default {
   components: {
     DatePicker,
     AmountPicker,
-    CheckboxRounded
+    CheckboxRounded,
   },
   props: {
     dailyPrice: { type: Number, required: true },
     weeklyPrice: { type: Number, required: true },
-    product: { type: Object, required: true }
+    product: { type: Object, required: true },
   },
   computed: {
     selectedOptions() {
-      return this.options.filter(o => o.value);
+      return this.options.filter((o) => o.value);
     },
     productPrice() {
       return this.calculatePrice(
@@ -114,7 +115,7 @@ export default {
     price() {
       return this.unitPrice * this.amount;
     },
-    totalPriceWithoutOptions(){
+    totalPriceWithoutOptions() {
       return this.productPrice * this.amount;
     },
     canBePlaced() {
@@ -122,30 +123,43 @@ export default {
     },
     productId() {
       return this.product.info.id;
-    }
+    },
   },
   data() {
     return {
       lang: {
         formatLocale: {
           firstDayOfWeek: 1,
-          monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
-          weekdaysMin: ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'],
+          monthsShort: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Dec",
+          ],
+          weekdaysMin: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"],
         },
       },
       options: [],
       start: new Date(new Date().toDateString()),
       end: this.shiftDateXDays(new Date(), 7),
-      amount: 1
+      amount: 1,
     };
   },
   created() {
     // {value} is changing this is why it is not in computed
-    this.options = this.product.options.map(o => ({
+    this.options = this.product.options.map((o) => ({
       option: o,
       key: o.ProductSlug,
       value: null,
-      price: o.FixedPrice
+      price: o.FixedPrice,
     }));
   },
   methods: {
@@ -198,17 +212,17 @@ export default {
         startDate: this.start,
         endDate: this.end,
         product: this.product,
-        productOptions: this.selectedOptions.map(o => ({
+        productOptions: this.selectedOptions.map((o) => ({
           id: o.option.id,
           name: o.option.Name,
-          price: o.price
-        }))
+          price: o.price,
+        })),
       };
 
       this.addToCart(payload);
       this.$emit("addedToCart", payload);
-    }
-  }
+    },
+  },
 };
 </script>
 

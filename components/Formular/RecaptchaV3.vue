@@ -17,14 +17,12 @@ export default {
         const token = await this.$recaptcha.execute("login");
 
         // send token to server alongside your form data
-      } catch (error) {
-
-      }
-    }
+      } catch (error) {}
+    },
   },
   beforeDestroy() {
     this.$recaptcha.destroy();
-  }
+  },
 };
 </script>
 

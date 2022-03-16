@@ -2,7 +2,7 @@
   <div class="index" id="index">
     <CoverSlider :slides="data.IndexPageSlider" />
 
-    <div class="grid-wide" style="width: 90%; margin: 0 auto;">
+    <div class="grid-wide" style="width: 90%; margin: 0 auto">
       <CategorySlider
         class="py-8"
         title="Vælg et produkt du ønsker at leje"
@@ -13,7 +13,7 @@
           <nuxt-link
             to="/alle-produktkategorier"
             class="btn btn-blue text-center mx-auto mt-10 title-sm"
-            style="padding-right: 30px; padding-left: 30px; "
+            style="padding-right: 30px; padding-left: 30px"
           >
             Alle produkter
           </nuxt-link>
@@ -22,25 +22,29 @@
     </div>
 
     <div class="row py-10 bg-gray-light">
-      <div class="col" style="width: 100%; margin: 0 auto;">
+      <div class="col" style="width: 100%; margin: 0 auto">
         <h3
           class="text-blue title-md weight-thin mb-6"
-          style="text-align: center; font-size: 26px;"
+          style="text-align: center; font-size: 26px"
         >
           Vi har gjort det nemt at leje IT udstyr
         </h3>
 
-        <div class="info grid-wide" style="margin: 0 auto;">
+        <div class="info grid-wide" style="margin: 0 auto">
           <div
             class="info-card"
             v-for="(item, index) in data.IndexRentalBennefits"
             :key="index"
           >
-            <img class="info-card-img" :alt="item.Icon.alternativeText" :src="item.Icon.url | formatImage" />
+            <img
+              class="info-card-img"
+              :alt="item.Icon.alternativeText"
+              :src="item.Icon.url | formatImage"
+            />
             <div class="info-card-body">
               <span
                 class="info-card-title text-blue mb-3"
-                style="font-weight: 700;"
+                style="font-weight: 700"
                 >{{ item.Title }}</span
               >
               <span class="info-card-desc">{{ item.Description }}</span>
@@ -69,9 +73,9 @@
         </div>
       </div>
       <div class="col-md-6 px-0">
-        {{data.IndexLetterboxImageRight}}
+        {{ data.IndexLetterboxImageRight }}
         <TextCard
-          style="height: 100%;"
+          style="height: 100%"
           v-if="data.IndexLetterboxTextRight"
           :contentHtml="data.IndexLetterboxTextRight"
           backgroundClass="bg-gray-dark"
@@ -90,7 +94,7 @@
     </div>
 
     <div class="row pb-10" ref="counterRef">
-      <div class="col" style="max-width: 1280px; width: 100%; margin: 0 auto;">
+      <div class="col" style="max-width: 1280px; width: 100%; margin: 0 auto">
         <HomeCategories
           :categories="data.IndexCategoriesCount"
           :counterAnimationLoaded="counterAnimationLoaded"
@@ -98,40 +102,35 @@
       </div>
     </div>
 
-    <RefSlider
-      :images="data.IndexReferencesCarousel"
-    />
+    <RefSlider :images="data.IndexReferencesCarousel" />
 
     <div class="row">
-      <div class="col-md-6 px-0" style="min-height: 500px; width: 100%;">
+      <div class="col-md-6 px-0" style="min-height: 500px; width: 100%">
         <BackgroundImg
           v-if="data.IndexContactLeftImage"
           :src="data.IndexContactLeftImage.url | formatImage"
         />
       </div>
       <div class="col-md-6 px-0">
-        <div style="max-width: 700px; margin: 0 auto;">
+        <div style="max-width: 700px; margin: 0 auto">
           <ContactUsForm
             class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
             :title="data.IndexContactRightText"
             formTitle="Bliv ringet op"
-            style="margin: 0 auto;"
+            style="margin: 0 auto"
             titleStyle="margin-bottom: 60px;"
             formStyle="max-width: 700px;"
           >
             <template v-slot:left-col>
               <div class="text-center pr-35">
-                <h3 class="text-blue" style="font-size: 20px;">Kontakt</h3>
-                <img
-                  src="~/assets/images/employee_mic.png"
-                  alt="Kontakt"
-                />
-                <p style="font-size: 16px;">
+                <h3 class="text-blue" style="font-size: 20px">Kontakt</h3>
+                <img src="~/assets/images/employee_mic.png" alt="Kontakt" />
+                <p style="font-size: 16px">
                   Michael Vedel<br />
                   Salg – kunder
                 </p>
-                <p class="mt-5" style="font-size: 16px;">
+                <p class="mt-5" style="font-size: 16px">
                   Tlf. 71998904<br />
                   <a href="mailto:salg@nordicitrental.dk"
                     >salg@nordicitrental.dk</a
@@ -156,7 +155,7 @@ export default {
   components: {
     TextCard,
     BackgroundImg,
-    ContactUsForm
+    ContactUsForm,
   },
   head() {
     return {
@@ -164,13 +163,13 @@ export default {
       meta: [
         {
           name: "title",
-          content: this.data.MetaTitle
+          content: this.data.MetaTitle,
         },
         {
           name: "description",
-          content: this.data.MetaDescription
-        }
-      ]
+          content: this.data.MetaDescription,
+        },
+      ],
     };
   },
   async asyncData({ params, $axios }) {
@@ -179,7 +178,7 @@ export default {
   },
   data() {
     return {
-      counterAnimationLoaded: false
+      counterAnimationLoaded: false,
     };
   },
   beforeMount() {
@@ -205,8 +204,8 @@ export default {
         rect.right <=
           (window.innerWidth || document.documentElement.clientWidth)
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

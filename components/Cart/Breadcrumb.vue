@@ -3,13 +3,11 @@
     <ul v-for="(item, index) in items" :key="index">
       <li
         class="breadcrumb-item"
-        :class="
-          `
+        :class="`
         ${path === item.path ? 'selected' : ''}
         ${index === 0 ? 'first-child' : ''}
         ${index === items.length - 1 ? 'last-child' : ''}
-        `
-        "
+        `"
       >
         <div class="selected-icon"></div>
         <i class="interceptor">{{ index + 1 }}.</i> {{ item.label }}
@@ -26,14 +24,14 @@ export default {
       items: [
         { label: "Bookinger", path: "/kurv" },
         { label: "Ordre", path: "/kurv/ordre" },
-        { label: "Kvittering", path: "/kurv/kvittering" }
-      ]
+        { label: "Kvittering", path: "/kurv/kvittering" },
+      ],
     };
   },
   created() {
     const { path } = this.$route;
     this.path = path;
-  }
+  },
 };
 </script>
 

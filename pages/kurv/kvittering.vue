@@ -7,7 +7,7 @@
     />
     <div class="container">
       <div class="row">
-        <div class="col" style="width: 100%;">
+        <div class="col" style="width: 100%">
           <Breadcrumb class="mt-10 mb-10" />
 
           <div class="message">
@@ -71,34 +71,31 @@ export default {
     OrderDetails,
     HeaderImg,
     CustomerInformation,
-    Addresses
+    Addresses,
   },
   computed: {
     ...mapState(["orderReceipt"]),
-    order(){
-      return this.orderReceipt?.order || {}
+    order() {
+      return this.orderReceipt?.order || {};
     },
     orderDetails() {
       return {
-        subtotal: (this.order.Products || []).reduce(
-          (total, item) => {
-            total += item.ProductRentalSum;
-            return total;
-          },
-          0
-        ),
+        subtotal: (this.order.Products || []).reduce((total, item) => {
+          total += item.ProductRentalSum;
+          return total;
+        }, 0),
         shipping: this.order.ShippingHandlingCost,
         vat: this.order.OrderTotalVat - this.order.OrderTotalExVat,
         total: this.order.OrderTotalVat,
         paymentMethod: "", // todo: missing
         remark: this.order.OrderComments,
-        cvr: this.orderReceipt?.customer?.CustomerCompanyCVR
+        cvr: this.orderReceipt?.customer?.CustomerCompanyCVR,
       };
     },
     customerInformation() {
       return {
         email: this.orderReceipt?.customer.CustomerEmail,
-        telephone: this.orderReceipt?.customer.CustomerPhone
+        telephone: this.orderReceipt?.customer.CustomerPhone,
       };
     },
     addresses() {
@@ -112,9 +109,9 @@ export default {
           ${this.orderReceipt?.order?.OrderShippingAddress}
           ${this.orderReceipt?.order?.OrderShippingCity}
           ${this.orderReceipt?.order?.OrderShippingCountry}
-        `
+        `,
       };
-    }
+    },
   },
   head() {
     return {
@@ -122,18 +119,18 @@ export default {
       meta: [
         {
           name: "title",
-          content: this.data.MetaTitle || ""
+          content: this.data.MetaTitle || "",
         },
         {
           name: "description",
-          content: this.data.MetaDescription || ""
-        }
-      ]
+          content: this.data.MetaDescription || "",
+        },
+      ],
     };
   },
   data() {
     return {
-      items: []
+      items: [],
     };
   },
   async asyncData({ params, $axios }) {
@@ -151,32 +148,30 @@ export default {
     ...mapActions(["getProduct"]),
     async getItems() {
       const items = await Promise.all(
-        (this.orderReceipt?.order?.Products || []).map(
-          async item => {
-            const product = await this.getProduct(item.ProductId).catch(
-              e => null
-            );
+        (this.orderReceipt?.order?.Products || []).map(async (item) => {
+          const product = await this.getProduct(item.ProductId).catch(
+            (e) => null
+          );
 
-            return {
-              slug: product?.info?.slug,
-              title: product?.info?.name,
-              amount: item.ProductQty,
-              total: item.ProductRentalSum,
-              options: item.ProductOptions,
-              noOfDays:
-                1 +
-                (new Date(item?.ProductRentalTo).getTime() -
-                  new Date(item?.ProductRentalFrom).getTime()) /
-                  (1000 * 60 * 60 * 24),
-              startDate: item?.ProductRentalFrom,
-              endDate: item?.ProductRentalTo
-            };
-          }
-        )
+          return {
+            slug: product?.info?.slug,
+            title: product?.info?.name,
+            amount: item.ProductQty,
+            total: item.ProductRentalSum,
+            options: item.ProductOptions,
+            noOfDays:
+              1 +
+              (new Date(item?.ProductRentalTo).getTime() -
+                new Date(item?.ProductRentalFrom).getTime()) /
+                (1000 * 60 * 60 * 24),
+            startDate: item?.ProductRentalFrom,
+            endDate: item?.ProductRentalTo,
+          };
+        })
       );
       return items;
-    }
-  }
+    },
+  },
 };
 </script>
 

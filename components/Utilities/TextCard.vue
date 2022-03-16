@@ -18,13 +18,13 @@ export default {
     backgroundClass: { type: String, default: "bg-white" },
     dark: { type: Boolean, default: false },
     largeCSS: { type: String, required: false },
-    containerCSS: { type: String, required: false }
+    containerCSS: { type: String, required: false },
   },
   computed: {
     html() {
       return this.$formatHTML(this.contentHtml);
-    }
-  }
+    },
+  },
 };
 </script>
 

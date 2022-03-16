@@ -7,10 +7,12 @@
           :key="item.id"
           class="item-label text-blue mb-3"
           :class="index === 0 ? 'col-title' : 'col-item'"
-          :to="`/${index === 0 ? 'produkt-kategori' : 'produkt-kategori'}/${item.CustomPermalink || item.Slug}`"
+          :to="`/${index === 0 ? 'produkt-kategori' : 'produkt-kategori'}/${
+            item.CustomPermalink || item.Slug
+          }`"
         >
           <div
-            style="display: flex;"
+            style="display: flex"
             @mouseenter="
               () => (hover = index !== 0 ? cat[0].id + item.id : null)
             "
@@ -35,17 +37,17 @@
 export default {
   props: {
     show: { type: Boolean, default: false },
-    items: { type: Array, default: [] }
+    items: { type: Array, default: [] },
   },
   methods: {
     throwMainMenuEvent(val) {
       this.$emit("onClickMainMenu", val);
-    }
+    },
   },
   data() {
     return {
-      hover: null
+      hover: null,
     };
-  }
+  },
 };
 </script>

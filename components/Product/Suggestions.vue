@@ -1,6 +1,6 @@
 <template>
   <div v-if="products.length" class="mb-10">
-    <h2 class="ml-6 mb-6" style="font-size: 24px;">
+    <h2 class="ml-6 mb-6" style="font-size: 24px">
       Du kunne også være interesseret i...
     </h2>
     <div class="products">
@@ -14,7 +14,11 @@
               :class="hover === product.info.id ? 'active' : ''"
             >
               <div class="product-img-container">
-                <img class="product-img" :src="product.gallery.main.url | formatImage" :alt="product.gallery.main.alternativeText" />
+                <img
+                  class="product-img"
+                  :src="product.gallery.main.url | formatImage"
+                  :alt="product.gallery.main.alternativeText"
+                />
               </div>
               <h3 class="product-title text-blue text-center mt-3">
                 {{ product.info.name }}
@@ -30,13 +34,13 @@
 <script>
 export default {
   props: {
-    products: { type: Array, default: [] }
+    products: { type: Array, default: [] },
   },
   data() {
     return {
-      hover: null
+      hover: null,
     };
-  }
+  },
 };
 </script>
 

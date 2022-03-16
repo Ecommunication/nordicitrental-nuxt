@@ -3,7 +3,7 @@ import { Cart, Order, Customer, SHIPMENT_METHODS, Product } from "../utils/dto";
 // Helpers
 const validate = (validations, value) => {
   const errors = [];
-  validations.forEach(validation => {
+  validations.forEach((validation) => {
     if (!validation.rule(value)) {
       errors.push(validation.msg);
     }
@@ -16,17 +16,19 @@ export const state = () => ({
   meta: {},
   navigation: {},
   cart: new Cart(),
-  orderReceipt: null
+  orderReceipt: null,
+  currency: "DKK",
 });
 
 export const getters = {
-  noOfItems: state => state.cart.items.length,
-  itemsTotal: state =>
+  noOfItems: (state) => state.cart.items.length,
+  itemsTotal: (state) =>
     state.cart.items.reduce((acc, cur) => acc + cur.price, 0),
-  shippingCost: state => (state.cart.shipping && state.cart.shipping.cost) || 0,
+  shippingCost: (state) =>
+    (state.cart.shipping && state.cart.shipping.cost) || 0,
   beforeTax: (state, getters) => getters.itemsTotal + getters.shippingCost,
   vat: (state, getters) => getters.beforeTax * 0.25,
-  afterTax: (state, getters) => getters.vat + getters.beforeTax
+  afterTax: (state, getters) => getters.vat + getters.beforeTax,
 };
 
 export const mutations = {
@@ -61,7 +63,10 @@ export const mutations = {
   },
   SET_JWT(state, jwt) {
     state.jwt = jwt;
-  }
+  },
+  SET_CURRENCY(state, currency) {
+    state.currency = currency;
+  },
 };
 
 export const actions = {
@@ -74,9 +79,16 @@ export const actions = {
     const itemId = new Date().getTime();
     commit("ADD_TO_CART", { ...payload, itemId });
   },
+  changeCurrency({ commit, state }) {
+    let newCurrency = "DKK";
+    if (state.currency === "DKK") {
+      newCurrency = "EUR";
+    }
+    commit("SET_CURRENCY", newCurrency);
+  },
   getCartItem({ commit, state }, { itemId, returnObj = false }) {
     const { items } = state.cart;
-    const cartItemIndex = items.findIndex(item => item.itemId === itemId);
+    const cartItemIndex = items.findIndex((item) => item.itemId === itemId);
     if (cartItemIndex === -1)
       throw new Error("Invalid Product Id / Cart doesn't have this item.");
     const cartItem = items[cartItemIndex];
@@ -85,14 +97,14 @@ export const actions = {
   async deleteItem({ commit, dispatch }, itemId) {
     const cartItemIndex = await dispatch("getCartItem", {
       itemId,
-      returnObj: false
+      returnObj: false,
     });
     commit("DELETE_ITEM", cartItemIndex);
   },
   async updateAmount({ commit, dispatch }, { itemId, amount }) {
     const cartItem = await dispatch("getCartItem", {
       itemId,
-      returnObj: true
+      returnObj: true,
     });
     const price = amount * cartItem.unitPrice;
     commit("UPDATE_AMOUNT", { cartItem, amount, price });
@@ -100,18 +112,18 @@ export const actions = {
   async setShipmentMethod({ commit }, shipmentMethod) {
     const method =
       Object.values(SHIPMENT_METHODS).find(
-        sm => sm.method === shipmentMethod
+        (sm) => sm.method === shipmentMethod
       ) || SHIPMENT_METHODS.DELIVERY;
     commit("SET_SHIPMENT_METHOD", method);
   },
   async sendCart({ commit, state }, userInfoForm) {
-    const httpConfig = { headers: { Authorization: `Bearer ${state.jwt}`}};
+    const httpConfig = { headers: { Authorization: `Bearer ${state.jwt}` } };
 
     const customer = new Customer({
       ...userInfoForm.billingAddress,
       cvrNumber: userInfoForm.cvrNumber,
       email: userInfoForm.email,
-      phone: userInfoForm.phone
+      phone: userInfoForm.phone,
     });
 
     // Upsert Customer
@@ -133,7 +145,11 @@ export const actions = {
         httpConfig
       );
     } else {
-      customerResponse = await this.$axios.$post(`/customers`, customer, httpConfig);
+      customerResponse = await this.$axios.$post(
+        `/customers`,
+        customer,
+        httpConfig
+      );
     }
 
     // Create Order
@@ -158,7 +174,7 @@ export const actions = {
 
     commit("SET_ORDER_RECEIPT", {
       customer: customerResponse,
-      order: orderResponse
+      order: orderResponse,
     });
     commit("RESET_CART");
   },
@@ -171,13 +187,16 @@ export const actions = {
     });
 
     const hasAnyError = Object.values(this.errors).some(
-      error => !!error.length
+      (error) => !!error.length
     );
 
     return { errors, hasAnyError };
   },
   async loginAsAdmin({ commit }) {
-    const { jwt } = await this.$axios.$post("/auth/local", process.env.strapiAdminCredentials);
+    const { jwt } = await this.$axios.$post(
+      "/auth/local",
+      process.env.strapiAdminCredentials
+    );
     commit("SET_JWT", jwt);
   },
   async getMetaData({ commit }) {
@@ -191,5 +210,5 @@ export const actions = {
   async nuxtServerInit({ dispatch }) {
     await dispatch("loginAsAdmin");
     await Promise.all([dispatch("getMetaData"), dispatch("getNavigation")]);
-  }
+  },
 };

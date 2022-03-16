@@ -1,6 +1,6 @@
 .product-single {
-
-  .slick-prev:before, .slick-next:before {
+  .slick-prev:before,
+  .slick-next:before {
     color: $mainBlue;
   }
 
@@ -62,7 +62,7 @@
 
       &-scroller {
         display: flex;
-        transition: all .3s ease-in;
+        transition: all 0.3s ease-in;
 
         &__thumb {
           flex: 0 0 33.33%;
@@ -103,7 +103,7 @@
         img {
           max-width: 90%;
           max-height: 90%;
-          transition: all .3s ease-in;
+          transition: all 0.3s ease-in;
         }
       }
 
@@ -143,7 +143,6 @@
         }
       }
     }
-
   }
 
   .product-modal-thumb-container {

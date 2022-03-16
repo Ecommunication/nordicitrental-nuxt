@@ -9,7 +9,13 @@
     <div class="mb-1">
       <input type="email" placeholder="E-mail" v-model="form.email" />
     </div>
-    <div v-if="!disableSubmit" @click="submit" class="mt-1 button btn-primary submitBtn">Tilmeld</div>
+    <div
+      v-if="!disableSubmit"
+      @click="submit"
+      class="mt-1 button btn-primary submitBtn"
+    >
+      Tilmeld
+    </div>
     <div v-if="message" class="mt-2 message">{{ message }}</div>
   </div>
 </template>
@@ -25,8 +31,8 @@ export default {
       form: {
         firstname: "",
         company: "",
-        email: ""
-      }
+        email: "",
+      },
     };
   },
   methods: {
@@ -34,7 +40,7 @@ export default {
       this.form = {
         firstname: "",
         company: "",
-        email: ""
+        email: "",
       };
     },
     async submit() {
@@ -45,12 +51,13 @@ export default {
             this.form
           );
           this.message = "Du er nu tilmeldt vores nyhedsbrev.";
-          this.disableSubmit = true
+          this.disableSubmit = true;
         } catch (error) {
-          this.message = "Der skete desværre en fejl. Dette kan skyldes at du allerede er tilmeldt.";
+          this.message =
+            "Der skete desværre en fejl. Dette kan skyldes at du allerede er tilmeldt.";
         }
       }
-    }
+    },
   },
 };
 </script>

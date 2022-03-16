@@ -1,46 +1,91 @@
 <template>
   <div>
-    <div class="product-gallery-overlay" v-bind:class="{disabled: !this.showGalleryModal}"
-         @click="showGalleryModal = !showGalleryModal"></div>
+    <div
+      class="product-gallery-overlay"
+      v-bind:class="{ disabled: !this.showGalleryModal }"
+      @click="showGalleryModal = !showGalleryModal"
+    ></div>
     <div class="product-gallery">
       <div class="product-gallery__main-image">
-        <img v-if="gallery.main.url" :src="mainImage | formatImage" :alt="gallery.main.alternativeText"
-             @click="openModal(0)"/>
+        <img
+          v-if="gallery.main.url"
+          :src="mainImage | formatImage"
+          :alt="gallery.main.alternativeText"
+          @click="openModal(0)"
+        />
       </div>
       <div class="product-gallery__thumbnails" v-if="thumbnails.length > 1">
-        <span class="product-gallery__arrows product-gallery__arrow product-gallery__arrows-left"
-              v-bind:class="{disabled: !this.thumbArrowLeft}">
-            <i @click="moveThumbnails('left')" class="fas fa-chevron-circle-left"></i>
+        <span
+          class="product-gallery__arrows product-gallery__arrow product-gallery__arrows-left"
+          v-bind:class="{ disabled: !this.thumbArrowLeft }"
+        >
+          <i
+            @click="moveThumbnails('left')"
+            class="fas fa-chevron-circle-left"
+          ></i>
         </span>
         <div class="product-gallery__thumbs">
-          <div class="product-gallery__thumbs-scroller" v-bind:style="scrollerTranslate">
-            <div class="product-gallery__thumbs-scroller__thumb" v-for="(image, index) in thumbnails" :key="index">
-              <span><img :src="image.url" :alt="image.alternativeText" @click="openModal(index)"/></span>
+          <div
+            class="product-gallery__thumbs-scroller"
+            v-bind:style="scrollerTranslate"
+          >
+            <div
+              class="product-gallery__thumbs-scroller__thumb"
+              v-for="(image, index) in thumbnails"
+              :key="index"
+            >
+              <span
+                ><img
+                  :src="image.url"
+                  :alt="image.alternativeText"
+                  @click="openModal(index)"
+              /></span>
             </div>
           </div>
         </div>
-        <span class="product-gallery__arrows product-gallery__arrow product-gallery__arrows-right"
-              v-bind:class="{disabled: !this.thumbArrowRight}">
-            <i @click="moveThumbnails('right')" class="fas fa-chevron-circle-right"></i>
+        <span
+          class="product-gallery__arrows product-gallery__arrow product-gallery__arrows-right"
+          v-bind:class="{ disabled: !this.thumbArrowRight }"
+        >
+          <i
+            @click="moveThumbnails('right')"
+            class="fas fa-chevron-circle-right"
+          ></i>
         </span>
       </div>
-      <div class="product-gallery__modal" v-bind:class="{active: this.showGalleryModal}">
-        <span class="product-gallery__modal-close" @click="showGalleryModal = !showGalleryModal">
+      <div
+        class="product-gallery__modal"
+        v-bind:class="{ active: this.showGalleryModal }"
+      >
+        <span
+          class="product-gallery__modal-close"
+          @click="showGalleryModal = !showGalleryModal"
+        >
           <i class="fas fa-times"></i>
         </span>
         <div class="product-gallery__modal-inner">
           <span
-              class="product-gallery__modal-inner__arrows product-gallery__modal-inner__arrow product-gallery__modal-inner__arrows-left"
-              v-bind:class="{disabled: this.modalGalleryIndex === 0}">
-            <i @click="moveModalGalleryImages('left')" class="fas fa-chevron-circle-left"></i>
+            class="product-gallery__modal-inner__arrows product-gallery__modal-inner__arrow product-gallery__modal-inner__arrows-left"
+            v-bind:class="{ disabled: this.modalGalleryIndex === 0 }"
+          >
+            <i
+              @click="moveModalGalleryImages('left')"
+              class="fas fa-chevron-circle-left"
+            ></i>
           </span>
           <figure v-for="(image, index) in thumbnails">
-            <img :src="image.url" v-show="modalGalleryIndex === index">
+            <img :src="image.url" v-show="modalGalleryIndex === index" />
           </figure>
           <span
-              class="product-gallery__modal-inner__arrows product-gallery__modal-inner__arrow product-gallery__modal-inner__arrows-right"
-              v-bind:class="{disabled: this.modalGalleryIndex === this.maxThumbnails -1}">
-            <i @click="moveModalGalleryImages('right')" class="fas fa-chevron-circle-right"></i>
+            class="product-gallery__modal-inner__arrows product-gallery__modal-inner__arrow product-gallery__modal-inner__arrows-right"
+            v-bind:class="{
+              disabled: this.modalGalleryIndex === this.maxThumbnails - 1,
+            }"
+          >
+            <i
+              @click="moveModalGalleryImages('right')"
+              class="fas fa-chevron-circle-right"
+            ></i>
           </span>
         </div>
       </div>
@@ -49,7 +94,7 @@
 </template>
 <script>
 export default {
-  props: ['gallery'],
+  props: ["gallery"],
   data() {
     return {
       mainImage: this.gallery.main.url,
@@ -64,7 +109,7 @@ export default {
       showGalleryModal: false,
       thumbArrowLeft: false,
       thumbArrowRight: false,
-    }
+    };
   },
   created() {
     this.modifyThumbnails();
@@ -83,7 +128,7 @@ export default {
   computed: {
     scrollerTranslate: function () {
       return `transform: translate3d(${this.scrollPos}%, 0, 0`;
-    }
+    },
   },
   watch: {
     thumbnailsIndex: function (oldVal, newVal) {
@@ -95,7 +140,7 @@ export default {
         this.thumbArrowLeft = false;
       }
 
-      if (this.thumbnailsIndex > (this.maxThumbnails - 1) - this.thumbsVisible) {
+      if (this.thumbnailsIndex > this.maxThumbnails - 1 - this.thumbsVisible) {
         this.thumbArrowRight = false;
       } else {
         this.thumbArrowRight = true;
@@ -117,9 +162,9 @@ export default {
         const obj = {
           url: imageUrl + item.url,
           alternativeText: item.alternativeText,
-        }
-        thumbnails.push(obj)
-      })
+        };
+        thumbnails.push(obj);
+      });
 
       this.thumbnails = thumbnails;
     },
@@ -130,7 +175,7 @@ export default {
     moveModalGalleryImages: function (pointer) {
       var newIndex = this.modalGalleryIndex;
 
-      if (pointer === 'left') {
+      if (pointer === "left") {
         newIndex--;
       } else {
         newIndex++;
@@ -145,7 +190,7 @@ export default {
     moveThumbnails(pointer) {
       var newIndex = this.thumbnailsIndex;
 
-      if (pointer === 'left') {
+      if (pointer === "left") {
         newIndex--;
       } else {
         newIndex++;
@@ -157,7 +202,7 @@ export default {
 
       this.thumbnailsIndex = newIndex;
       this.scrollPos = -this.gridScroll * this.thumbnailsIndex;
-    }
-  }
-}
+    },
+  },
+};
 </script>

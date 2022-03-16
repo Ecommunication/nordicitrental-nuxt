@@ -8,7 +8,7 @@
       />
       <div class="container">
         <div class="row">
-          <div class="col" style="width: 100%;">
+          <div class="col" style="width: 100%">
             <div v-if="noOfItems">
               <Breadcrumb class="breadcrumb-el" />
 
@@ -17,7 +17,7 @@
               <nuxt-link to="/kurv/ordre">
                 <div
                   class="button btn-block btn-primary mt-2 mb-2"
-                  style="border-radius: 7px;"
+                  style="border-radius: 7px"
                 >
                   Udfør booking
                 </div>
@@ -28,12 +28,17 @@
             <div v-else class="cart-empty text-center py-10">
               <h1 class="text-blue">Kurven er tom for bookinger</h1>
 
-              <p><img class="mt-10 mb-10" src="~/assets/images/icons/empty-cart.svg" width="150px" alt=""></p>
+              <p>
+                <img
+                  class="mt-10 mb-10"
+                  src="~/assets/images/icons/empty-cart.svg"
+                  width="150px"
+                  alt=""
+                />
+              </p>
 
               <nuxt-link to="/alle-produktkategorier">
-                <div class="button btn-primary ">
-                  Gå til produkter
-                </div>
+                <div class="button btn-primary">Gå til produkter</div>
               </nuxt-link>
             </div>
           </div>
@@ -55,11 +60,11 @@ export default {
     CartList,
     Totals,
     HeaderImg,
-    Breadcrumb
+    Breadcrumb,
   },
   computed: {
     ...mapState(["cart"]),
-    ...mapGetters(["noOfItems"])
+    ...mapGetters(["noOfItems"]),
   },
   head() {
     return {
@@ -67,31 +72,31 @@ export default {
       meta: [
         {
           name: "title",
-          content: this.data.MetaTitle || ""
+          content: this.data.MetaTitle || "",
         },
         {
           name: "description",
-          content: this.data.MetaDescription || ""
-        }
-      ]
+          content: this.data.MetaDescription || "",
+        },
+      ],
     };
   },
   data() {
     return {
       cover: {
         text: "Bookinger",
-        img: ""
+        img: "",
       },
-      errorAfterFetch: null
+      errorAfterFetch: null,
     };
   },
   methods: {
-    ...mapActions(["switchPersistanceState"])
+    ...mapActions(["switchPersistanceState"]),
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/kurv");
     return { data };
-  }
+  },
 };
 </script>
 

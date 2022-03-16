@@ -4,18 +4,24 @@
       <input v-model="name" class="mb-4" type="text" placeholder="Navn" />
 
       <input
-          v-model="phone"
-          class="mb-4"
-          type="text"
-          placeholder="Telefon nr."
+        v-model="phone"
+        class="mb-4"
+        type="text"
+        placeholder="Telefon nr."
       />
 
-      <button @click="submit" v-if="!isSubmitted" class="button btn-primary btn-block">Send</button>
+      <button
+        @click="submit"
+        v-if="!isSubmitted"
+        class="button btn-primary btn-block"
+      >
+        Send
+      </button>
     </div>
     <div
-        v-if="result"
-        class="mt-2 result-container"
-        :class="error ? 'msg-error' : 'msg-success'"
+      v-if="result"
+      class="mt-2 result-container"
+      :class="error ? 'msg-error' : 'msg-success'"
     >
       {{ result }}
     </div>
@@ -23,15 +29,14 @@
 </template>
 
 <script>
-
 const messages = {
   success: "Vi vil vende tilbage snarest muligt.",
   error: {
     nameNotEmpty: "Navn skal være udfyldt.",
     phoneNotEmpty: "Telefon nr. skal være udfyldt",
-    phoneNotValid: "Telefon nr. er ikke gyldigt."
-  }
-}
+    phoneNotValid: "Telefon nr. er ikke gyldigt.",
+  },
+};
 
 export default {
   data() {
@@ -48,17 +53,16 @@ export default {
       if (!this.validate()) return;
 
       try {
-        this.$axios.$post(process.env.apiUrl + '/mails-calls', {
-          'Name' : this.name,
-          'Phone' : this.phone,
+        this.$axios.$post(process.env.apiUrl + "/mails-calls", {
+          Name: this.name,
+          Phone: this.phone,
         });
 
         this.$emit("formSubmitted");
         this.isSubmitted = true;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-
 
       this.error = false;
       this.result = messages.success;
@@ -77,10 +81,11 @@ export default {
         return false;
       }
 
-      const phoneValidationRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{2,6}$/im
-      if(!this.phone.match(phoneValidationRegex)){
+      const phoneValidationRegex =
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{2,6}$/im;
+      if (!this.phone.match(phoneValidationRegex)) {
         this.result = messages.error.phoneNotValid;
-        this.error = true
+        this.error = true;
         return false;
       }
 
@@ -89,8 +94,8 @@ export default {
     resetForm() {
       this.name = "";
       this.phone = "";
-    }
-  }
+    },
+  },
 };
 </script>
 

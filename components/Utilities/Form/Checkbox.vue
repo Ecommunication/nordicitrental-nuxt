@@ -1,9 +1,9 @@
 <template>
   <div class="input-checkbox">
     <input type="checkbox" v-model="inputLocal" />
-    <label v-if="label" class="label" @click="inputLocal = !inputLocal"
-      >{{ label }}</label
-    >
+    <label v-if="label" class="label" @click="inputLocal = !inputLocal">{{
+      label
+    }}</label>
     <div class="error-msg" v-if="errorMsg && showError" v-html="errorMsg"></div>
   </div>
 </template>
@@ -15,8 +15,8 @@ export default {
     label: { type: String },
     validation: {
       type: Object,
-      required: false
-    }
+      required: false,
+    },
   },
   computed: {
     errorMsg() {
@@ -31,12 +31,12 @@ export default {
       return this.validation && this.validation.rule
         ? this.validation.rule
         : null;
-    }
+    },
   },
   data() {
     return {
       inputLocal: false,
-      showError: false
+      showError: false,
     };
   },
   created() {
@@ -51,8 +51,8 @@ export default {
       if (this.validationRule) {
         this.showError = !this.validationRule(val);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

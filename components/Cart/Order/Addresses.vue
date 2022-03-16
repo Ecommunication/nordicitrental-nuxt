@@ -1,6 +1,6 @@
 <template>
   <Table>
-    <tr style="background: none;">
+    <tr style="background: none">
       <td class="table-title"><h2>Faktureringsadresse</h2></td>
       <td class="table-title"><h2 class="pl-4">Leveringsadresse</h2></td>
     </tr>
@@ -19,11 +19,11 @@
 import Table from "@/components/Cart/Order/Table";
 export default {
   components: {
-    Table
+    Table,
   },
   props: {
-    addresses: { type: Object, required: true }
-  }
+    addresses: { type: Object, required: true },
+  },
 };
 </script>
 

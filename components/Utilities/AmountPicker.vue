@@ -11,11 +11,11 @@
 <script>
 export default {
   props: {
-    amount: { type: Number, required: true }
+    amount: { type: Number, required: true },
   },
   data() {
     return {
-      amountLocal: this.amount
+      amountLocal: this.amount,
     };
   },
   watch: {
@@ -23,7 +23,7 @@ export default {
       if (this.isPositiveInt(val)) {
         this.$emit("changed", parseInt(val));
       }
-    }
+    },
   },
   methods: {
     isPositiveInt(no) {
@@ -31,8 +31,8 @@ export default {
       if (isNaN(int)) return false;
       if (int < 1) return false;
       return true;
-    }
-  }
+    },
+  },
 };
 </script>
 

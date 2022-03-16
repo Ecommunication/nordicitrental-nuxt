@@ -36,13 +36,13 @@
 export default {
   name: "Modal",
   props: {
-    width: { type: Number, default: 500 }
+    width: { type: Number, default: 500 },
   },
   methods: {
     close() {
       this.$emit("close");
-    }
-  }
+    },
+  },
 };
 </script>
 

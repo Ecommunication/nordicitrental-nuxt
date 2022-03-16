@@ -14,56 +14,56 @@
 <script>
 export default {
   props: {
-    features: { type: Array, default: [] }
+    features: { type: Array, default: [] },
   },
   computed: {
     icons() {
       return this.iconData
-        .map(i => {
+        .map((i) => {
           const feature = this.features.find(
-            f => f.key.toLowerCase() === i.key.toLowerCase()
+            (f) => f.key.toLowerCase() === i.key.toLowerCase()
           );
           return feature && feature.value
             ? {
                 ...i,
-                value: this.shortenText(feature.value)
+                value: this.shortenText(feature.value),
               }
             : null;
         })
-        .filter(i => i);
-    }
+        .filter((i) => i);
+    },
   },
   data() {
     return {
       iconData: [
         {
           key: "Processor",
-          img: require("@/assets/images/icons/product/mini-specifications/cpu.png")
+          img: require("@/assets/images/icons/product/mini-specifications/cpu.png"),
         },
         {
           key: "Ram",
-          img: require("@/assets/images/icons/product/mini-specifications/mem.png")
+          img: require("@/assets/images/icons/product/mini-specifications/mem.png"),
         },
         {
           key: "Harddisk",
-          img: require("@/assets/images/icons/product/mini-specifications/hdd.png")
+          img: require("@/assets/images/icons/product/mini-specifications/hdd.png"),
         },
         {
           key: "Skærm",
-          img: require("@/assets/images/icons/product/mini-specifications/screen-size.png")
+          img: require("@/assets/images/icons/product/mini-specifications/screen-size.png"),
         },
         {
           key: "Opløsning",
-          img: require("@/assets/images/icons/product/mini-specifications/screen-resolution.png")
-        }
-      ]
+          img: require("@/assets/images/icons/product/mini-specifications/screen-resolution.png"),
+        },
+      ],
     };
   },
   methods: {
     shortenText(val) {
       return val.length > 14 ? val.substr(0, 14) + " ..." : val;
-    }
-  }
+    },
+  },
 };
 </script>
 

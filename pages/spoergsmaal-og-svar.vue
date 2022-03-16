@@ -6,7 +6,7 @@
       :text="data.TextCover"
     />
 
-    <div class="my-10" style="max-width: 940px; margin: 0 auto;">
+    <div class="my-10" style="max-width: 940px; margin: 0 auto">
       <div v-for="(faq, index) in data.QuestionsAnswers" :key="index">
         <FAQ :q="faq.Title" :a="faq.Content" />
       </div>
@@ -26,7 +26,7 @@ export default {
     HeaderImg,
     BackgroundImg,
     RefCompanyQuote,
-    Employee
+    Employee,
   },
   head() {
     return {
@@ -34,19 +34,19 @@ export default {
       meta: [
         {
           name: "title",
-          content: this.data.MetaTitle || ""
+          content: this.data.MetaTitle || "",
         },
         {
           name: "description",
-          content: this.data.MetaDescription || ""
-        }
-      ]
+          content: this.data.MetaDescription || "",
+        },
+      ],
     };
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/sporgsmal-og-svar");
     return { data };
-  }
+  },
 };
 </script>
 

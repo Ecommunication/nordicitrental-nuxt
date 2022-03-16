@@ -7,8 +7,8 @@
 <script>
 export default {
   props: {
-    description: String
-  }
+    description: String,
+  },
 };
 </script>
 

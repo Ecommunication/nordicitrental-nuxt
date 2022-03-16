@@ -1,23 +1,23 @@
-import {formatImage} from "../plugins/globals";
+import { formatImage } from "../plugins/globals";
 
 export const SHIPMENT_METHODS = {
   PICK_UP: {
     cost: 0,
-    method: "pick-up"
+    method: "pick-up",
   },
   DELIVERY: {
     cost: 800,
-    method: "delivery"
-  }
+    method: "delivery",
+  },
 };
 
 var sort = function (prop, arr) {
-  prop = prop.split('.');
+  prop = prop.split(".");
   var len = prop.length;
 
   arr.sort(function (a, b) {
     var i = 0;
-    while( i < len ) {
+    while (i < len) {
       a = a[prop[i]];
       b = b[prop[i]];
       i++;
@@ -41,53 +41,55 @@ export class Product {
     this.info = {
       id: data.id,
       slug: data.ProductSlug,
-      name: data.Name
+      name: data.Name,
     };
     this.cover = {
       image: formatImage(data?.ImageCover?.url || ""),
-      text: data.TextCover
+      text: data.TextCover,
     };
     this.meta = {
       title: data.MetaTitle,
-      desc: data.MetaDescription
+      desc: data.MetaDescription,
     };
     this.gallery = {
       main: {
         url: data?.MainImage?.url,
-        alternativeText: data?.MainImage?.alternativeText || 'Nordic IT Rental udlejning - ' + data?.Name,
+        alternativeText:
+          data?.MainImage?.alternativeText ||
+          "Nordic IT Rental udlejning - " + data?.Name,
       },
       thumbnails: data.ProductGallery,
     };
     this.pricing = {
       daily: parseFloat(data.DailyPriceAfterWeek),
-      weekly: parseFloat(data.DailyPrice * 8)
+      weekly: parseFloat(data.DailyPrice * 8),
     };
     this.descriptions = {
       short: data.DescriptionShort,
-      long: data.DescriptionLong
+      long: data.DescriptionLong,
     };
-    this.features = (data.ProductAttributes || []).map(attr => ({
+    this.features = (data.ProductAttributes || []).map((attr) => ({
       key: attr.AttributeKey,
-      value: attr.AttributeValue
+      value: attr.AttributeValue,
     }));
     this.categories = categories;
     this.options = this.getProductOptions(data.ProductOptionsP, categories);
-    this.upsell = (data?.ProductsUpsell || []).map(p => new Product(p));
+    this.upsell = (data?.ProductsUpsell || []).map((p) => new Product(p));
   }
 
   getProductOptions(optsFromProduct = [], categories = []) {
     const productOptionsFromCategory = [];
 
     categories
-      .map(cat => cat.ProductOptionsP)
-      .forEach(opts => {
+      .map((cat) => cat.ProductOptionsP)
+      .forEach((opts) => {
         productOptionsFromCategory.push(...opts);
       });
 
     const options = [...optsFromProduct, ...productOptionsFromCategory];
-    const uniqueOptionIds = [...new Set(options.map(o => o.id))];
+    const uniqueOptionIds = [...new Set(options.map((o) => o.id))];
 
-    return uniqueOptionIds.map(id => options.find(o => o.id === id));
+    return uniqueOptionIds.map((id) => options.find((o) => o.id === id));
   }
 }
 
@@ -98,30 +100,32 @@ export class Category {
     this.info = {
       id: data.id,
       name: data.Name,
-      slug: data.Slug
-    }
+      slug: data.Slug,
+    };
 
-    this.img = formatImage((data?.UpsellIcon || {}).url || "")
+    this.img = formatImage((data?.UpsellIcon || {}).url || "");
 
     this.cover = {
       text: data.TextCover,
-      image: formatImage(data?.ImageCover?.url || "")
+      image: formatImage(data?.ImageCover?.url || ""),
     };
     this.meta = {
       title: data.MetaTitle,
-      desc: data.MetaDescription
+      desc: data.MetaDescription,
     };
     this.description = data.Description;
 
-    const unsortedProducts = (data.products || []).map(product => new Product(product))
+    const unsortedProducts = (data.products || []).map(
+      (product) => new Product(product)
+    );
 
-    this.products = sort('pricing.weekly', unsortedProducts);
+    this.products = sort("pricing.weekly", unsortedProducts);
 
-    this.upsell = (data?.CategoryUpsell || []).map(cat => ({
+    this.upsell = (data?.CategoryUpsell || []).map((cat) => ({
       Image: cat.UpsellIcon,
       Title: cat.Name,
-      Slug: cat.Slug
-    }))
+      Slug: cat.Slug,
+    }));
   }
 }
 
@@ -133,7 +137,16 @@ export class Cart {
 }
 
 export class Order {
-  constructor(email, cvrNumber, phone, customerId, items, shipping, shippingAdd, comments) {
+  constructor(
+    email,
+    cvrNumber,
+    phone,
+    customerId,
+    items,
+    shipping,
+    shippingAdd,
+    comments
+  ) {
     this.Products = this.processItems(items);
     this.CustomerId = customerId;
     this.OrderComments = comments || "";
@@ -150,11 +163,11 @@ export class Order {
     this.ShippingHandlingName = shipping.method || "";
     this.ShippingHandlingCost = shipping.cost || 0;
     this.OrderTotalExVat = this.getOrderTotal(items, shipping.cost);
-    this.OrderTotalVat = 1.25 * this.OrderTotalExVat
+    this.OrderTotalVat = 1.25 * this.OrderTotalExVat;
   }
 
   processItems(items) {
-    return items.map(item => {
+    return items.map((item) => {
       return {
         ProductId: item.productId,
         ProductName: item.product?.info?.name || "",
@@ -163,12 +176,12 @@ export class Order {
         ProductRentalSum: item.price,
         ProductQty: item.amount,
         ProductRentalSubTotal: item.totalPriceWithoutOptions,
-        ProductOptions: item.productOptions.map(po => ({
+        ProductOptions: item.productOptions.map((po) => ({
           ProductName: po.name,
           ProductPrice: po.price,
           ProductId: po.id,
-          ProductQty: 1
-        }))
+          ProductQty: 1,
+        })),
       };
     });
   }

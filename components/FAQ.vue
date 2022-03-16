@@ -9,13 +9,13 @@
 export default {
   props: {
     q: { type: String, required: true },
-    a: { type: String, required: true }
+    a: { type: String, required: true },
   },
   data() {
     return {
-      hover: false
+      hover: false,
     };
-  }
+  },
 };
 </script>
 

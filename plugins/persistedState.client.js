@@ -1,8 +1,8 @@
-import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from "vuex-persistedstate";
 
-export default ({store}) => {
+export default ({ store }) => {
   createPersistedState({
-    key: 'cart',
-    paths: ['cart']
-  })(store)
-}
+    key: "cart",
+    paths: ["cart"],
+  })(store);
+};

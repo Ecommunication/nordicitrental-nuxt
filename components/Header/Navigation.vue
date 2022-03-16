@@ -26,7 +26,7 @@
               :key="index"
             >
               <div
-                style="display: flex; justify-content: space-between;"
+                style="display: flex; justify-content: space-between"
                 @mouseenter="() => (hover = index)"
                 @mouseleave="() => (hover = null)"
               >
@@ -51,20 +51,20 @@ export default {
   props: {
     showDropdown: {
       type: Number | Boolean | String,
-      required: true
+      required: true,
     },
     navigation: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      hover: null
+      hover: null,
     };
   },
   mounted() {
-    document.addEventListener("click", e => {
+    document.addEventListener("click", (e) => {
       e.stopPropagation();
       const isItemLabel = e.target.className.includes("item-label");
       if (!isItemLabel) {
@@ -87,8 +87,8 @@ export default {
     },
     throwMainMenuEvent(val) {
       this.$emit("onClickMainMenu", val);
-    }
-  }
+    },
+  },
 };
 </script>
 

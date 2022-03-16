@@ -21,7 +21,7 @@
           <HeaderNavigation
             :navigation="navList"
             :showDropdown="showDropdown"
-            @onClickMainMenu="val => (showDropdown = val)"
+            @onClickMainMenu="(val) => (showDropdown = val)"
           />
           <HeaderMobileNavigation :items="mobileMenu" />
         </div>
@@ -36,7 +36,7 @@
         </nuxt-link>
         <div class="minified-navigation">
           <HeaderNavigation
-            style="font-size: 16.5px;"
+            style="font-size: 16.5px"
             :navigation="navList"
             :showDropdown="showDropdown"
             @onClickMainMenu="onClickMainMenu"
@@ -52,17 +52,18 @@
     <HeaderFullMenu
       :show="showDropdown === 'product'"
       :items="categories"
-      @onClickMainMenu="val => (showDropdown = val)"
+      @onClickMainMenu="(val) => (showDropdown = val)"
     />
+    <HeaderSearch />
   </div>
 </template>
 
 <script>
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 
 export default {
   props: {
-    header: { type: Object, required: true }
+    header: { type: Object, required: true },
   },
   computed: {
     ...mapState(["navigation"]),
@@ -73,19 +74,19 @@ export default {
           : {};
       const categories = arr.Products || [];
 
-      return categories.map(category => category.product_categories);
+      return categories.map((category) => category.product_categories);
     },
     navList() {
-      return this.navigation.NavSingle.map(nav => {
-        const items = nav.NavSingleR.map(e => ({
+      return this.navigation.NavSingle.map((nav) => {
+        const items = nav.NavSingleR.map((e) => ({
           label: e.Title,
-          link: nav.Rooturl + (e.Url || '')
+          link: nav.Rooturl + (e.Url || ""),
         }));
 
         return {
           label: nav.RootTitle,
           link: nav.Rooturl,
-          items
+          items,
         };
       });
     },
@@ -95,37 +96,41 @@ export default {
       const products = {
         label: "Produkter",
         link: "#",
-        items: this.categories.map(category => {
+        items: this.categories.map((category) => {
           const copiedCategory = JSON.parse(JSON.stringify(category));
           const categoryProduct = copiedCategory.shift() || {};
 
           return {
             label: categoryProduct.Name || "",
-            link: `/produkt-kategori/${categoryProduct.CustomPermalink || categoryProduct.Slug}`,
-            items: copiedCategory.map(product => {
+            link: `/produkt-kategori/${
+              categoryProduct.CustomPermalink || categoryProduct.Slug
+            }`,
+            items: copiedCategory.map((product) => {
               return {
                 label: product.Name || "",
-                link: `/produkt-kategori/${product.CustomPermalink || product.Slug}`
+                link: `/produkt-kategori/${
+                  product.CustomPermalink || product.Slug
+                }`,
               };
-            })
+            }),
           };
-        })
+        }),
       };
 
       menus.push(products);
 
-      this.navList.forEach(nav => {
+      this.navList.forEach((nav) => {
         menus.push(nav);
       });
 
       return menus;
-    }
+    },
   },
   data() {
     return {
       showDropdown: false,
       headerHeight: 0,
-      minifiedHeader: false
+      minifiedHeader: false,
     };
   },
   beforeMount() {
@@ -151,8 +156,8 @@ export default {
         this.scrollTop();
       }
       this.showDropdown = val;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -161,9 +166,9 @@ export default {
   display: none;
 }
 
-  .telephone-container {
-    margin: 10px 0px;
-  }
+.telephone-container {
+  margin: 10px 0px;
+}
 
 .main-header {
   display: flex;

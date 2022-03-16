@@ -1,13 +1,19 @@
 <template>
   <div>
-    <h2 v-if="title" id="contactUsFormHeader" class="text-center" :style="titleStyle" v-html="title" />
+    <h2
+      v-if="title"
+      id="contactUsFormHeader"
+      class="text-center"
+      :style="titleStyle"
+      v-html="title"
+    />
     <div class="form-row" :style="customCSS">
       <div id="contactUsLeftCol" class="left-col" :style="leftColStyle">
         <slot name="left-col"></slot>
       </div>
       <div class="right-col" :style="rightColStyle">
         <div class="form" :style="formStyle">
-          <h3 v-if="formTitle" class="text-blue" style="font-size: 20px;">
+          <h3 v-if="formTitle" class="text-blue" style="font-size: 20px">
             {{ formTitle }}
           </h3>
 
@@ -15,7 +21,7 @@
             <InputField
               label="Navn"
               :input="form.name"
-              @onChange="val => onChange('name', val, formValidations.name)"
+              @onChange="(val) => onChange('name', val, formValidations.name)"
               :errors="errors.name"
               customStyle="padding-bottom: 12px;"
               inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
@@ -24,7 +30,7 @@
             <InputField
               label="E-mail"
               :input="form.email"
-              @onChange="val => onChange('email', val, formValidations.email)"
+              @onChange="(val) => onChange('email', val, formValidations.email)"
               :errors="errors.email"
               customStyle="padding-bottom: 12px;"
               inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
@@ -34,7 +40,8 @@
               label="Firmanavn"
               :input="form.companyName"
               @onChange="
-                val => onChange('companyName', val, formValidations.companyName)
+                (val) =>
+                  onChange('companyName', val, formValidations.companyName)
               "
               :errors="errors.companyName"
               customStyle="padding-bottom: 12px;"
@@ -44,7 +51,7 @@
             <InputField
               label="Telefon"
               :input="form.phone"
-              @onChange="val => onChange('phone', val, formValidations.phone)"
+              @onChange="(val) => onChange('phone', val, formValidations.phone)"
               :errors="errors.phone"
               customStyle="padding-bottom: 12px;"
               inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
@@ -54,7 +61,7 @@
               label="Besked"
               :input="form.message"
               :rows="8"
-              @changed="val => (form.message = val)"
+              @changed="(val) => (form.message = val)"
               customStyle="padding-bottom: 12px;"
               inputStyle="box-shadow: 1px 0px 5px rgb(0 0 0 / 10%);"
             />
@@ -62,14 +69,12 @@
             <Recaptcha
               :form="form"
               :formValidations="formValidations"
-              @changeErrors="val => (errors = val)"
+              @changeErrors="(val) => (errors = val)"
               @formSubmitted="isModalVisible = true"
             />
           </form>
           <Modal v-show="isModalVisible" @close="closeModal" :width="600">
-            <template v-slot:header>
-              Kontakt
-            </template>
+            <template v-slot:header> Kontakt </template>
             <template v-slot:body>
               <div>Tak for din henvendelse.</div>
               <div>Vi vil vende tilbage så snart som muligt.</div>
@@ -97,7 +102,7 @@ export default {
     titleStyle: { type: String, required: false },
     formStyle: { type: String, required: false },
     leftColStyle: { type: String, required: false },
-    rightColStyle: { type: String, required: false }
+    rightColStyle: { type: String, required: false },
   },
   data() {
     return {
@@ -108,15 +113,15 @@ export default {
         email: "",
         companyName: "",
         phone: "",
-        message: ""
+        message: "",
       },
       formValidations: {
         name: [validations.isRequired],
         email: [validations.isRequired, validations.isEmail],
         companyName: [validations.isRequired],
-        phone: [validations.isRequired, validations.isPhone]
+        phone: [validations.isRequired, validations.isPhone],
       },
-      errors: {}
+      errors: {},
     };
   },
   methods: {
@@ -126,7 +131,7 @@ export default {
     },
     validate(valid, value) {
       const errors = [];
-      valid.forEach(validation => {
+      valid.forEach((validation) => {
         if (!validation.rule(value)) {
           errors.push(validation.msg);
         }
@@ -139,15 +144,15 @@ export default {
         email: "",
         companyName: "",
         phone: "",
-        message: ""
+        message: "",
       };
       this.formKey = new Date().getTime();
     },
     closeModal() {
       this.isModalVisible = false;
       this.resetForm();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -163,28 +168,28 @@ export default {
     }
   }
 }
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .left-col {
+    padding: 0 20px;
+    margin-bottom: 25px;
+  }
+
+  .right-col {
+    padding: 0 20px;
+    .form {
+      max-width: 330px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
   .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    .left-col {
-      padding: 0 20px;
-      margin-bottom: 25px;
-    }
-
-    .right-col {
-      padding: 0 20px;
-      .form {
-        max-width: 330px;
-      }
-    }
+    justify-content: space-around !important;
+    padding: 0 20px !important;
   }
-
-  @media screen and (max-width: 767px) {
-    .form-row {
-      justify-content: space-around !important;
-      padding: 0 20px !important;
-    }
-  }
+}
 </style>

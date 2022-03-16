@@ -1,13 +1,13 @@
 <template>
   <div>
     <HeaderImg
-        v-if="data.ImageCover"
-        :img="data.ImageCover.url | formatImage"
-        :text="data.TextCover"
+      v-if="data.ImageCover"
+      :img="data.ImageCover.url | formatImage"
+      :text="data.TextCover"
     />
     <div class="container">
       <div class="row">
-        <div class="col" style="width: 100%;">
+        <div class="col" style="width: 100%">
           <Breadcrumb class="breadcrumb-el" />
           <CustomerInformationForm />
         </div>
@@ -26,7 +26,7 @@ export default {
   components: {
     Breadcrumb,
     HeaderImg,
-    CustomerInformationForm
+    CustomerInformationForm,
   },
   head() {
     return {
@@ -34,13 +34,13 @@ export default {
       meta: [
         {
           name: "title",
-          content: this.data.MetaTitle || ""
+          content: this.data.MetaTitle || "",
         },
         {
           name: "description",
-          content: this.data.MetaDescription || ""
-        }
-      ]
+          content: this.data.MetaDescription || "",
+        },
+      ],
     };
   },
   data() {

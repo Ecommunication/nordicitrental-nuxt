@@ -23,10 +23,10 @@
 import Table from "@/components/Cart/Order/Table";
 export default {
   components: {
-    Table
+    Table,
   },
   props: {
-    information: { type: Object, required: true }
-  }
+    information: { type: Object, required: true },
+  },
 };
 </script>

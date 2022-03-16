@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="ml-5 mb-2">
-      <recaptcha style="margin-left: -20px;" />
+      <recaptcha style="margin-left: -20px" />
       <div
         v-if="captchaError"
         class="text-left"
-        style="font-size: 14px; color: brown;"
+        style="font-size: 14px; color: brown"
       >
         Please verify that you are not a robot.
       </div>
@@ -24,12 +24,12 @@
 export default {
   props: {
     form: { type: Object, required: true },
-    formValidations: { type: Object, required: true }
+    formValidations: { type: Object, required: true },
   },
   data() {
     return {
       captchaError: null,
-      formErrors: {}
+      formErrors: {},
     };
   },
   methods: {
@@ -50,22 +50,22 @@ export default {
 
         try {
           await this.$axios.$post(`/mails`, {
-            'Name' : this.form.name,
-            'Email' : this.form.email,
-            'Company' : this.form.companyName,
-            'Phone' : this.form.phone,
-            'Message' : this.form.message,
+            Name: this.form.name,
+            Email: this.form.email,
+            Company: this.form.companyName,
+            Phone: this.form.phone,
+            Message: this.form.message,
           });
 
           this.$emit("formSubmitted");
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }
     },
     validate(valid, value) {
       const errors = [];
-      valid.forEach(validation => {
+      valid.forEach((validation) => {
         if (!validation.rule(value)) {
           errors.push(validation.msg);
         }
@@ -87,8 +87,8 @@ export default {
 
       this.$emit("changeErrors", this.formErrors);
       return !hasAnyError;
-    }
-  }
+    },
+  },
 };
 </script>
 

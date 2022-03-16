@@ -10,28 +10,27 @@ export default {
   props: {
     mapConfig: Object,
     coords: Object,
-    title: String
+    title: String,
   },
   data() {
     return {
       google: null,
-      map: null
+      map: null,
     };
   },
   async mounted() {
-
     const mapContainer = this.$refs.googleMap;
     const loader = new GoogleMapsApiLoader({
       apiKey: "AIzaSyCCYODvHoqobemnujFdw47_HewYV3JTYtg",
       version: "weekly",
-      libraries: ["places"]
+      libraries: ["places"],
     });
 
     await loader.load();
     this.google = google;
     this.map = new google.maps.Map(mapContainer, this.mapConfig);
 
-     this.setMarker(this.setCoords(this.coords), this.title);
+    this.setMarker(this.setCoords(this.coords), this.title);
   },
   methods: {
     setCoords({ lat, lng }) {
@@ -40,11 +39,11 @@ export default {
     setMarker(coords, title) {
       const marker = new this.google.maps.Marker({
         position: coords,
-        title
+        title,
       });
       marker.setMap(this.map);
-    }
-  }
+    },
+  },
 };
 </script>
 

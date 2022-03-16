@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-x: auto;">
+  <div style="overflow-x: auto">
     <table>
       <slot></slot>
     </table>

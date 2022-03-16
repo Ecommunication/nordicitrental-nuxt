@@ -18,11 +18,11 @@ export default {
     label: { type: String },
     validation: {
       type: Object,
-      required: false
+      required: false,
     },
     errors: { type: Array, required: false },
     customStyle: { type: String, required: false },
-    inputStyle: { type: String, required: false }
+    inputStyle: { type: String, required: false },
   },
   computed: {
     firstErrorMsg() {
@@ -32,11 +32,11 @@ export default {
             `<span style="font-weight: 600;">${this.label}</span>`
           )
         : null;
-    }
+    },
   },
   data() {
     return {
-      inputLocal: ""
+      inputLocal: "",
     };
   },
   created() {
@@ -47,8 +47,8 @@ export default {
   watch: {
     inputLocal(val) {
       this.$emit("onChange", val);
-    }
-  }
+    },
+  },
 };
 </script>
 

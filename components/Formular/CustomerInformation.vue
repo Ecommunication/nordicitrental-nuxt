@@ -6,7 +6,7 @@
       <AddressForm
         :submitTrigger="billingAddressSubmitTrigger"
         @onSubmit="
-          data => {
+          (data) => {
             form.billingAddress = data.form;
             hasBillingErrors = data.hasAnyError;
           }
@@ -19,7 +19,7 @@
           <InputField
             label="Telefon"
             :input="form.phone"
-            @onChange="val => onChange('phone', val, formValidations.phone)"
+            @onChange="(val) => onChange('phone', val, formValidations.phone)"
             :errors="errors.phone"
           />
         </div>
@@ -27,7 +27,7 @@
           <InputField
             label="E-mail"
             :input="form.email"
-            @onChange="val => onChange('email', val, formValidations.email)"
+            @onChange="(val) => onChange('email', val, formValidations.email)"
             :errors="errors.email"
           />
         </div>
@@ -36,7 +36,7 @@
             label="CVR nummer"
             :input="form.cvrNumber"
             @onChange="
-              val => onChange('cvrNumber', val, formValidations.cvrNumber)
+              (val) => onChange('cvrNumber', val, formValidations.cvrNumber)
             "
             :errors="errors.cvrNumber"
           />
@@ -48,7 +48,7 @@
           <Checkbox
             label="Send varerne til en anden adresse?"
             :input="form.useDifferentShippingAddress"
-            @changed="val => (form.useDifferentShippingAddress = val)"
+            @changed="(val) => (form.useDifferentShippingAddress = val)"
           />
         </div>
       </div>
@@ -64,7 +64,7 @@
           class="form-body"
           :submitTrigger="shippingAddressSubmitTrigger"
           @onSubmit="
-            data => {
+            (data) => {
               form.shippingAddress = data.form;
               hasShippingErrors = data.hasAnyError;
             }
@@ -78,7 +78,7 @@
             label="Bemærkninger til ordren (valgfri)"
             :input="form.comments"
             :rows="8"
-            @changed="val => (form.comments = val)"
+            @changed="(val) => (form.comments = val)"
           />
         </div>
       </div>
@@ -110,7 +110,7 @@ class Address {
     streetNameAndNo = "",
     town = "",
     country = "",
-    zipCode = ""
+    zipCode = "",
   }) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -127,12 +127,12 @@ export default {
     AddressForm,
     InputField,
     Textarea,
-    Checkbox
+    Checkbox,
   },
   computed: {
     useDifferentShippingAddress() {
       return this.form.useDifferentShippingAddress;
-    }
+    },
   },
   data() {
     return {
@@ -147,14 +147,14 @@ export default {
         phone: "",
         email: "",
         cvrNumber: "",
-        comments: ""
+        comments: "",
       },
       errors: {},
       formValidations: {
         phone: [validations.isRequired, validations.isPhone],
         email: [validations.isRequired, validations.isEmail],
-        cvrNumber: [validations.isRequired]
-      }
+        cvrNumber: [validations.isRequired],
+      },
     };
   },
   watch: {
@@ -162,7 +162,7 @@ export default {
       this.form.shippingAddress = val
         ? new Address({})
         : JSON.parse(JSON.stringify(this.form.billingAddress));
-    }
+    },
   },
   methods: {
     ...mapActions(["sendCart", "validateForm"]),
@@ -172,7 +172,7 @@ export default {
     },
     validate(valid, value) {
       const errors = [];
-      valid.forEach(validation => {
+      valid.forEach((validation) => {
         if (!validation.rule(value)) {
           errors.push(validation.msg);
         }
@@ -193,7 +193,7 @@ export default {
       });
 
       const hasAnyError = Object.values(this.errors).some(
-        error => !!error.length
+        (error) => !!error.length
       );
 
       setTimeout(async () => {
@@ -206,14 +206,13 @@ export default {
           );
         }
 
-        if(canBeSubmitted){
+        if (canBeSubmitted) {
           await this.sendCart(this.form);
-          this.$router.push("/kurv/kvittering")
+          this.$router.push("/kurv/kvittering");
         }
-
       }, 100);
-    }
-  }
+    },
+  },
 };
 </script>
 

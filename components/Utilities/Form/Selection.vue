@@ -7,8 +7,9 @@
           v-for="option in options"
           :key="option.value"
           :value="option.value"
-          >{{ option.label }}</option
         >
+          {{ option.label }}
+        </option>
       </select>
     </div>
 
@@ -25,9 +26,9 @@ export default {
     defaultOption: { type: Object, required: false },
     validation: {
       type: Object,
-      required: false
+      required: false,
     },
-    errors: { type: Array, required: false }
+    errors: { type: Array, required: false },
   },
   computed: {
     firstErrorMsg() {
@@ -37,27 +38,27 @@ export default {
             `<span style="font-weight: 600;">${this.label}</span>`
           )
         : null;
-    }
+    },
   },
   data() {
     return {
-      inputLocal: ""
+      inputLocal: "",
     };
   },
   created() {
     if (this.input) {
       this.inputLocal = this.input;
     } else {
-      if(this.defaultOption){
-        this.inputLocal = this.defaultOption.value
+      if (this.defaultOption) {
+        this.inputLocal = this.defaultOption.value;
       }
     }
   },
   watch: {
     inputLocal(val) {
       this.$emit("onChange", val);
-    }
-  }
+    },
+  },
 };
 </script>
 

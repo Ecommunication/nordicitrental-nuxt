@@ -6,20 +6,24 @@
       text="Alle produkter"
     />
 
-
-    <div
-      class="categories mt-16 mb-5"
-      style="max-width: 940px; margin: 0 auto;"
-    >
+    <div class="categories mt-16 mb-5" style="max-width: 940px; margin: 0 auto">
       <nuxt-link
         :to="`/produkt-kategori/${category.info.slug}`"
         v-for="(category, index) in categories"
         :key="index"
       >
-        <div class="category-card-container" v-if="category.products.length > 0">
+        <div
+          class="category-card-container"
+          v-if="category.products.length > 0"
+        >
           <div class="category-img-container text-center">
             <img :src="category.img" v-if="category.img" />
-            <img src="~/assets/images/icons/no-photos.svg" alt="" style="max-width: 70px;" v-else>
+            <img
+              src="~/assets/images/icons/no-photos.svg"
+              alt=""
+              style="max-width: 70px"
+              v-else
+            />
           </div>
           <div class="category-title text-center">
             {{ category.info.name }} ({{ category.products.length }})
@@ -35,16 +39,16 @@ import { Category } from "@/utils/dto";
 import HeaderImg from "@/components/Utilities/HeaderImg";
 export default {
   components: {
-    HeaderImg
+    HeaderImg,
   },
   async asyncData({ params, $axios }) {
     const data = await $axios.$get("/om-os");
 
     const categoriesData = await $axios.$get(`/product-categories`);
-    const categories = categoriesData.map(cat => new Category(cat));
+    const categories = categoriesData.map((cat) => new Category(cat));
 
     return { categories, data };
-  }
+  },
 };
 </script>
 

@@ -1,5 +1,8 @@
 <template>
-  <div class="background-image" :style="`background-image: url(${imageSource})`">
+  <div
+    class="background-image"
+    :style="`background-image: url(${imageSource})`"
+  >
     <slot name="body"></slot>
   </div>
 </template>
@@ -11,24 +14,24 @@ export default {
       type: String,
       required: true,
     },
-    minHeight: { type: Number, required: false }
+    minHeight: { type: Number, required: false },
   },
   data() {
     return {
-      defaultCoverImage: require('~/assets/images/covers/default-cover.jpeg'),
-    }
+      defaultCoverImage: require("~/assets/images/covers/default-cover.jpeg"),
+    };
   },
   computed: {
     minHeightProcessed() {
       return this.minHeight ? `${this.minHeight}px` : "100%";
     },
     imageSource() {
-      if(this.src.match(/\.(jpeg|jpg|gif|png)$/)) {
+      if (this.src.match(/\.(jpeg|jpg|gif|png)$/)) {
         return this.src;
       }
       return this.defaultCoverImage;
-    }
-  }
+    },
+  },
 };
 </script>
 

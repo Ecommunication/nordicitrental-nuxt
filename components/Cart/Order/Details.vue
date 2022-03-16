@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Table style="font-size: 0.8em;">
+    <Table style="font-size: 0.8em">
       <tr>
         <td class="td-left">Subtotal:</td>
         <td class="td-right">{{ details.subtotal | formatPrice }}</td>
@@ -37,10 +37,10 @@
 import Table from "@/components/Cart/Order/Table";
 export default {
   components: {
-    Table
+    Table,
   },
   props: {
-    details: { type: Object, required: true }
-  }
+    details: { type: Object, required: true },
+  },
 };
 </script>
