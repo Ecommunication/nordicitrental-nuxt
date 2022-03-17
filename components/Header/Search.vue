@@ -71,7 +71,9 @@
                   <li class="list-item">Model: Envy 13-ah00001no</li>
                   <li class="list-item">Model: Envy 13-ah00001no</li>
                 </ul>
-                <p class="text-mainBlue font-semibold">Kr. 2.995,-</p>
+                <p class="text-mainBlue font-semibold">
+                  {{ product.DailyPrice | formatPrice }}
+                </p>
               </div>
               <div class="my-auto">
                 <nuxt-img src="~/assets/images/employee_mic.png" />
@@ -84,13 +86,31 @@
   </div>
 </template>
 <script>
-import { getAllProductsOverview } from '/lib/api.js';
+import gql from 'graphql-tag';
 export default {
+  apollo: {
+    products: gql`
+      query getAllProductsOverview {
+        products(limit: 4000) {
+          Name
+          id
+          ProductSlug
+          DailyPrice
+          product_categories {
+            Name
+          }
+          MainImage {
+            url
+            alternativeText
+          }
+        }
+      }
+    `,
+  },
   data() {
     return {
       inputSearch: '',
       searchResult: [],
-      allProducts: null,
     };
   },
   computed: {},
@@ -99,14 +119,9 @@ export default {
       this.$emit('onChange', this.searchProducts(val));
     },
   },
-  async mounted() {
-    getAllProductsOverview().then(
-      ({ data }) => (this.allProducts = data.products)
-    );
-  },
   methods: {
     searchProducts(val) {
-      this.searchResult = this.allProducts.filter(({ Name }) =>
+      this.searchResult = this.products.filter(({ Name }) =>
         Name.toLowerCase().includes(val.toLowerCase())
       );
     },

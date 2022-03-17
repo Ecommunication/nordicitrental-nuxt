@@ -20,6 +20,7 @@
             <img :src="category.img" v-if="category.img" />
             <img
               src="~/assets/images/icons/no-photos.svg"
+              class="mx-auto"
               alt=""
               style="max-width: 70px"
               v-else
@@ -35,14 +36,14 @@
 </template>
 
 <script>
-import { Category } from "@/utils/dto";
-import HeaderImg from "@/components/Utilities/HeaderImg";
+import { Category } from '@/utils/dto';
+import HeaderImg from '@/components/Utilities/HeaderImg';
 export default {
   components: {
     HeaderImg,
   },
   async asyncData({ params, $axios }) {
-    const data = await $axios.$get("/om-os");
+    const data = await $axios.$get('/om-os');
 
     const categoriesData = await $axios.$get(`/product-categories`);
     const categories = categoriesData.map((cat) => new Category(cat));

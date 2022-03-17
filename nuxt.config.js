@@ -63,6 +63,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     ['@nuxtjs/tailwindcss'],
+    ['@nuxtjs/apollo'],
     [
       '@nuxtjs/axios',
       {
@@ -93,6 +94,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: process.env.GRAPHQL_URL,
+      },
+    },
+  },
 
   env: {
     apiUrl: process.env.API_URL,
