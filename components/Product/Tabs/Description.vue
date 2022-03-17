@@ -7,7 +7,7 @@
 <script>
 export default {
   props: {
-    description: String,
+    description: '',
   },
 };
 </script>

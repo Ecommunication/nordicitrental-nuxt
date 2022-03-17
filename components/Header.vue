@@ -54,19 +54,19 @@
       :items="categories"
       @onClickMainMenu="(val) => (showDropdown = val)"
     />
-    <HeaderSearch />
+    <HeaderSearch :categories="categories" />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
   props: {
     header: { type: Object, required: true },
   },
   computed: {
-    ...mapState(["navigation"]),
+    ...mapState(['navigation']),
     categories() {
       const arr =
         this.navigation?.Products && this.navigation.Products.length
@@ -80,7 +80,7 @@ export default {
       return this.navigation.NavSingle.map((nav) => {
         const items = nav.NavSingleR.map((e) => ({
           label: e.Title,
-          link: nav.Rooturl + (e.Url || ""),
+          link: nav.Rooturl + (e.Url || ''),
         }));
 
         return {
@@ -94,20 +94,20 @@ export default {
       const menus = [];
 
       const products = {
-        label: "Produkter",
-        link: "#",
+        label: 'Produkter',
+        link: '#',
         items: this.categories.map((category) => {
           const copiedCategory = JSON.parse(JSON.stringify(category));
           const categoryProduct = copiedCategory.shift() || {};
 
           return {
-            label: categoryProduct.Name || "",
+            label: categoryProduct.Name || '',
             link: `/produkt-kategori/${
               categoryProduct.CustomPermalink || categoryProduct.Slug
             }`,
             items: copiedCategory.map((product) => {
               return {
-                label: product.Name || "",
+                label: product.Name || '',
                 link: `/produkt-kategori/${
                   product.CustomPermalink || product.Slug
                 }`,
@@ -134,14 +134,14 @@ export default {
     };
   },
   beforeMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
   },
   mounted() {
     const { header: headerEl } = this.$refs;
     this.headerHeight = headerEl.clientHeight;
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
     handleScroll(event) {
@@ -152,7 +152,7 @@ export default {
       window.scrollTo(0, 0);
     },
     onClickMainMenu(val) {
-      if (val === "product") {
+      if (val === 'product') {
         this.scrollTop();
       }
       this.showDropdown = val;

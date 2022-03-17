@@ -33,7 +33,11 @@
             <div>
               <p class="text-base font-medium text-mainBlue">Bærbar</p>
             </div>
-            <div v-for="product in searchResult" :key="product.id">
+            <div
+              v-for="product in searchResult"
+              :key="product.id"
+              @mouseover="hoverProduct(product)"
+            >
               <div
                 class="flex border-t border-b cursor-pointer group hover:bg-gray-50"
               >
@@ -58,27 +62,35 @@
             </div>
           </div>
           <div class="invisible md:visible">
-            <p class="text-base font-medium text-mainBlue">
-              HP Envy 13-ah1006no
+            <template v-if="productPreview">
+              <p class="text-base font-medium text-mainBlue">
+                {{ productPreview.Name }}
+              </p>
+              <div class="grid grid-cols-2 border-t">
+                <div
+                  class="product-description"
+                  v-html="productPreview.DescriptionShort"
+                >
+                  <!-- <ul class="text-sm list-disc list-inside mt-2 space-y-2">
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                  </ul> -->
+                  <p class="text-mainBlue font-semibold">
+                    {{ productPreview.DailyPrice }}
+                  </p>
+                </div>
+                <div class="my-auto">
+                  <nuxt-img :src="productPreview.MainImage.url | formatImage" />
+                </div>
+              </div>
+            </template>
+            <p v-else class="text-base font-medium text-mainBlue">
+              Peg over et produkt for at se detaljer
             </p>
-            <div class="grid grid-cols-2 border-t">
-              <div>
-                <ul class="text-sm list-disc list-inside mt-2 space-y-2">
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                </ul>
-                <p class="text-mainBlue font-semibold">
-                  {{ product.DailyPrice | formatPrice }}
-                </p>
-              </div>
-              <div class="my-auto">
-                <nuxt-img src="~/assets/images/employee_mic.png" />
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -107,10 +119,12 @@ export default {
       }
     `,
   },
+  props: { categories: [] },
   data() {
     return {
       inputSearch: '',
       searchResult: [],
+      productPreview: null,
     };
   },
   computed: {},
@@ -125,6 +139,9 @@ export default {
         Name.toLowerCase().includes(val.toLowerCase())
       );
     },
+    hoverProduct(product) {
+      this.productPreview = product;
+    },
   },
 };
 </script>
@@ -132,5 +149,15 @@ export default {
 <style lang="scss" scoped>
 .aspect-square {
   aspect-ratio: 4/3;
+}
+.product-description {
+  ul {
+    list-style-type: disc !important;
+    list-style-position: inside !important;
+    color: aqua !important;
+    li {
+      display: list-item !important;
+    }
+  }
 }
 </style>
