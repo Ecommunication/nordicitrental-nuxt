@@ -22,7 +22,7 @@ export default {
     errorMsg() {
       return this.validation && this.validation.msg
         ? this.validation.msg.replace(
-            "%s",
+            '%s',
             `<span style="font-weight: 600;">${this.label}</span>`
           )
         : null;
@@ -46,7 +46,7 @@ export default {
   },
   watch: {
     inputLocal(val) {
-      this.$emit("changed", val);
+      this.$emit('changed', val);
 
       if (this.validationRule) {
         this.showError = !this.validationRule(val);
@@ -83,7 +83,7 @@ export default {
   border: 3px solid #092d4f;
   border-top: none;
   border-right: none;
-  content: "";
+  content: '';
   height: 5px;
   left: 6px;
   opacity: 0;
@@ -93,16 +93,16 @@ export default {
   width: 12px;
 }
 
-.round input[type="checkbox"] {
+.round input[type='checkbox'] {
   visibility: hidden;
 }
 
-.round input[type="checkbox"]:checked + label {
+.round input[type='checkbox']:checked + label {
   background-color: #fff;
   border-color: #092d4f;
 }
 
-.round input[type="checkbox"]:checked + label:after {
+.round input[type='checkbox']:checked + label:after {
   opacity: 1;
 }
 </style>

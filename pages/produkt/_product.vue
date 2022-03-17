@@ -117,18 +117,18 @@
   </div>
 </template>
 <script>
-import { Product, ProductOption } from "@/utils/dto";
-import Modal from "@/components/Utilities/Modal";
-import AddToCart from "@/components/Product/AddToCart";
-import Tabs from "@/components/Product/Tabs";
-import IconBar from "@/components/Product/IconBar";
-import Suggestions from "@/components/Product/Suggestions";
-import HeaderImg from "@/components/Utilities/HeaderImg";
-import BackgroundImg from "@/components/Utilities/BackgroundImg";
-import VueSlickCarousel from "vue-slick-carousel";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
+import { Product, ProductOption } from '@/utils/dto';
+import Modal from '@/components/Utilities/Modal';
+import AddToCart from '@/components/Product/AddToCart';
+import Tabs from '@/components/Product/Tabs';
+import IconBar from '@/components/Product/IconBar';
+import Suggestions from '@/components/Product/Suggestions';
+import HeaderImg from '@/components/Utilities/HeaderImg';
+import BackgroundImg from '@/components/Utilities/BackgroundImg';
+import VueSlickCarousel from 'vue-slick-carousel';
+import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 // optional style for arrows & dots
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 
 export default {
   components: {
@@ -157,15 +157,15 @@ export default {
   },
   head() {
     return {
-      title: this.product?.meta?.title || "",
+      title: this.product?.meta?.title || '',
       meta: [
         {
-          name: "title",
-          content: this.product?.meta?.title || "",
+          name: 'title',
+          content: this.product?.meta?.title || '',
         },
         {
-          name: "description",
-          content: this.product?.meta?.desc || "",
+          name: 'description',
+          content: this.product?.meta?.desc || '',
         },
       ],
     };

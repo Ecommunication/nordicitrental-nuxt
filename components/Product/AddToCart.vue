@@ -70,11 +70,11 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import DatePicker from "vue2-datepicker";
-import AmountPicker from "@/components/Utilities/AmountPicker";
-import CheckboxRounded from "@/components/Utilities/Form/CheckboxRounded";
-import "vue2-datepicker/index.css";
+import { mapActions } from 'vuex';
+import DatePicker from 'vue2-datepicker';
+import AmountPicker from '@/components/Utilities/AmountPicker';
+import CheckboxRounded from '@/components/Utilities/Form/CheckboxRounded';
+import 'vue2-datepicker/index.css';
 export default {
   components: {
     DatePicker,
@@ -131,20 +131,20 @@ export default {
         formatLocale: {
           firstDayOfWeek: 1,
           monthsShort: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Okt",
-            "Nov",
-            "Dec",
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Okt',
+            'Nov',
+            'Dec',
           ],
-          weekdaysMin: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"],
+          weekdaysMin: ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'],
         },
       },
       options: [],
@@ -163,7 +163,7 @@ export default {
     }));
   },
   methods: {
-    ...mapActions(["addToCart"]),
+    ...mapActions(['addToCart']),
     onAmountPickerChange(amount) {
       this.amount = parseInt(amount);
     },
@@ -220,7 +220,7 @@ export default {
       };
 
       this.addToCart(payload);
-      this.$emit("addedToCart", payload);
+      this.$emit('addedToCart', payload);
     },
   },
 };
@@ -258,7 +258,7 @@ export default {
 
 .actions {
   display: flex;
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-inner-spin-button {
     opacity: 1;
   }
   .amount-picker {

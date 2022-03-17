@@ -17,14 +17,31 @@
       class="absolute bg-gray-500 bg-opacity-50 w-full min-h-screen z-10 p-4"
     >
       <div
-        class="relative container max-h-screen overflow-y-scroll bg-white shadow-md z-20 rounded-md p-4"
+        class="
+          relative
+          container
+          max-h-screen
+          overflow-y-scroll
+          bg-white
+          shadow-md
+          z-20
+          rounded-md
+          p-4
+        "
       >
         <div class="flex flex-row justify-between">
           <p class="text-2xl text-mainBlue font-medium">
             Der blev fundet {{ searchResult.length }} resultater
           </p>
           <span
-            class="cursor-pointer transform transition-transform hover:scale-110 origin-center text-mainBlue"
+            class="
+              cursor-pointer
+              transform
+              transition-transform
+              hover:scale-110
+              origin-center
+              text-mainBlue
+            "
             ><i class="fas fa-times fa-lg"
           /></span>
         </div>
@@ -33,12 +50,30 @@
             <div>
               <p class="text-base font-medium text-mainBlue">Bærbar</p>
             </div>
-            <div v-for="product in searchResult" :key="product.id">
+            <div
+              v-for="product in searchResult"
+              :key="product.id"
+              @mouseover="hoverProduct(product)"
+            >
               <div
-                class="flex border-t border-b cursor-pointer group hover:bg-gray-50"
+                class="
+                  flex
+                  border-t border-b
+                  cursor-pointer
+                  group
+                  hover:bg-gray-50
+                "
               >
                 <nuxt-img
-                  class="max-h-14 transform transition-transform duration-300 group-hover:translate-x-3 aspect-square object-contain"
+                  class="
+                    max-h-14
+                    transform
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-3
+                    aspect-square
+                    object-contain
+                  "
                   :src="product.MainImage.url | formatImage"
                   :alt="product.Name"
                 />
@@ -46,7 +81,13 @@
                   class="flex w-full justify-between space-x-5 ml-4 text-base"
                 >
                   <div
-                    class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
+                    class="
+                      my-auto
+                      transform
+                      transition-transform
+                      duration-300
+                      group-hover:translate-x-3
+                    "
                   >
                     <p class="">{{ product.Name }}</p>
                   </div>
@@ -58,25 +99,35 @@
             </div>
           </div>
           <div class="invisible md:visible">
-            <p class="text-base font-medium text-mainBlue">
-              HP Envy 13-ah1006no
+            <template v-if="productPreview">
+              <p class="text-base font-medium text-mainBlue">
+                {{ productPreview.Name }}
+              </p>
+              <div class="grid grid-cols-2 border-t">
+                <div
+                  class="product-description"
+                  v-html="productPreview.DescriptionShort"
+                >
+                  <!-- <ul class="text-sm list-disc list-inside mt-2 space-y-2">
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                    <li class="list-item">Model: Envy 13-ah00001no</li>
+                  </ul> -->
+                  <p class="text-mainBlue font-semibold">
+                    {{ productPreview.DailyPrice }}
+                  </p>
+                </div>
+                <div class="my-auto">
+                  <nuxt-img :src="productPreview.MainImage.url | formatImage" />
+                </div>
+              </div>
+            </template>
+            <p v-else class="text-base font-medium text-mainBlue">
+              Peg over et produkt for at se detaljer
             </p>
-            <div class="grid grid-cols-2 border-t">
-              <div>
-                <ul class="text-sm list-disc list-inside mt-2 space-y-2">
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                  <li class="list-item">Model: Envy 13-ah00001no</li>
-                </ul>
-                <p class="text-mainBlue font-semibold">Kr. 2.995,-</p>
-              </div>
-              <div class="my-auto">
-                <nuxt-img src="~/assets/images/employee_mic.png" />
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -86,11 +137,13 @@
 <script>
 import { getAllProductsOverview } from '/lib/api.js';
 export default {
+  props: { categories: [] },
   data() {
     return {
       inputSearch: '',
       searchResult: [],
       allProducts: null,
+      productPreview: null,
     };
   },
   computed: {},
@@ -100,6 +153,7 @@ export default {
     },
   },
   async mounted() {
+    console.log('Props: ', this.categories);
     getAllProductsOverview().then(
       ({ data }) => (this.allProducts = data.products)
     );
@@ -110,6 +164,9 @@ export default {
         Name.toLowerCase().includes(val.toLowerCase())
       );
     },
+    hoverProduct(product) {
+      this.productPreview = product;
+    },
   },
 };
 </script>
@@ -117,5 +174,15 @@ export default {
 <style lang="scss" scoped>
 .aspect-square {
   aspect-ratio: 4/3;
+}
+.product-description {
+  ul {
+    list-style-type: disc !important;
+    list-style-position: inside !important;
+    color: aqua !important;
+    li {
+      display: list-item !important;
+    }
+  }
 }
 </style>
