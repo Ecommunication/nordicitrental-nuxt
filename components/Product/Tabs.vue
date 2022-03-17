@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import DescriptionTab from "@/components/Product/Tabs/Description";
-import FeaturesTab from "@/components/Product/Tabs/Features";
+import DescriptionTab from '@/components/Product/Tabs/Description';
+import FeaturesTab from '@/components/Product/Tabs/Features';
 export default {
   components: { DescriptionTab, FeaturesTab },
   props: {
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       selected: 0,
-      tabs: ["Beskrivelse", "Yderligere information"],
+      tabs: ['Beskrivelse', 'Yderligere information'],
     };
   },
   methods: {
@@ -66,10 +66,10 @@ export default {
   background: #fff;
 }
 .tabs .tab.active:before {
-  content: "";
+  content: '';
   position: absolute;
-  top: -3px;
-  right: -4px;
+  top: 0px;
+  right: 0px;
   z-index: 19;
   background: 0 0;
   padding: 0;

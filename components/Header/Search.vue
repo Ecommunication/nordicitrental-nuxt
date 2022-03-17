@@ -15,6 +15,7 @@
     <div
       v-if="inputSearch.length > 0"
       class="absolute bg-gray-500 bg-opacity-50 w-full min-h-screen z-10 p-4"
+      @click="closeSearch"
     >
       <div
         class="relative container max-h-screen overflow-y-scroll bg-white shadow-md z-20 rounded-md p-4"
@@ -25,10 +26,11 @@
           </p>
           <span
             class="cursor-pointer transform transition-transform hover:scale-110 origin-center text-mainBlue"
+            @click="closeSearch"
             ><i class="fas fa-times fa-lg"
           /></span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <div>
               <p class="text-base font-medium text-mainBlue">Bærbar</p>
@@ -38,27 +40,29 @@
               :key="product.id"
               @mouseover="hoverProduct(product)"
             >
-              <div
-                class="flex border-t border-b cursor-pointer group hover:bg-gray-50"
-              >
-                <nuxt-img
-                  class="max-h-14 transform transition-transform duration-300 group-hover:translate-x-3 aspect-square object-contain"
-                  :src="product.MainImage.url | formatImage"
-                  :alt="product.Name"
-                />
+              <nuxt-link :to="`/produkt/${product.ProductSlug}`">
                 <div
-                  class="flex w-full justify-between space-x-5 ml-4 text-base"
+                  class="flex border-t border-b cursor-pointer group hover:bg-gray-50"
                 >
+                  <nuxt-img
+                    class="max-h-14 transform transition-transform duration-300 group-hover:translate-x-3 aspect-square object-contain"
+                    :src="product.MainImage.url | formatImage"
+                    :alt="product.Name"
+                  />
                   <div
-                    class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
+                    class="flex w-full justify-between space-x-5 ml-4 text-base"
                   >
-                    <p class="">{{ product.Name }}</p>
-                  </div>
-                  <div class="my-auto whitespace-nowrap">
-                    <p>{{ product.DailyPrice | formatPrice }}</p>
+                    <div
+                      class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
+                    >
+                      <p class="">{{ product.Name }}</p>
+                    </div>
+                    <div class="my-auto whitespace-nowrap">
+                      <p>{{ product.DailyPrice | formatPrice }}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </nuxt-link>
             </div>
           </div>
           <div class="invisible md:visible">
@@ -67,20 +71,19 @@
                 {{ productPreview.Name }}
               </p>
               <div class="grid grid-cols-2 border-t">
-                <div
-                  class="product-description"
-                  v-html="productPreview.DescriptionShort"
-                >
-                  <!-- <ul class="text-sm list-disc list-inside mt-2 space-y-2">
-                    <li class="list-item">Model: Envy 13-ah00001no</li>
-                    <li class="list-item">Model: Envy 13-ah00001no</li>
-                    <li class="list-item">Model: Envy 13-ah00001no</li>
-                    <li class="list-item">Model: Envy 13-ah00001no</li>
-                    <li class="list-item">Model: Envy 13-ah00001no</li>
-                    <li class="list-item">Model: Envy 13-ah00001no</li>
-                  </ul> -->
+                <div>
+                  <ul
+                    v-for="attribute in productPreview.ProductAttributes"
+                    :key="attribute.id"
+                    class="list-disc list-inside text-sm"
+                  >
+                    <li class="list-item">
+                      {{ attribute.AttributeKey }}:
+                      {{ attribute.AttributeValue }}
+                    </li>
+                  </ul>
                   <p class="text-mainBlue font-semibold">
-                    {{ productPreview.DailyPrice }}
+                    {{ productPreview.DailyPrice | formatPrice }}
                   </p>
                 </div>
                 <div class="my-auto">
@@ -108,6 +111,11 @@ export default {
           id
           ProductSlug
           DailyPrice
+          ProductAttributes {
+            id
+            AttributeKey
+            AttributeValue
+          }
           product_categories {
             Name
           }
@@ -141,6 +149,9 @@ export default {
     },
     hoverProduct(product) {
       this.productPreview = product;
+    },
+    closeSearch() {
+      this.inputSearch = '';
     },
   },
 };

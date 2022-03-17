@@ -8,16 +8,17 @@
         :slidesToShow="4"
       >
         <div
+          :key="index"
           class="frontpage-references__images-image flex flex-justify-center"
           v-for="(image, index) in images"
         >
           <div>
-            <img
+            <nuxt-img
               v-if="image.Reference"
               :src="image.Reference[0].url | formatImage"
               :alt="image.Reference[0].alternativeText"
             />
-            <img v-else :src="image" />
+            <nuxt-img v-else :src="image" />
           </div>
         </div>
       </VueSlickCarousel>
@@ -25,12 +26,12 @@
   </div>
 </template>
 <script>
-import VueSlickCarousel from "vue-slick-carousel";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+import VueSlickCarousel from 'vue-slick-carousel';
+import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 
 export default {
-  props: ["images"],
+  props: ['images'],
   components: {
     VueSlickCarousel,
   },

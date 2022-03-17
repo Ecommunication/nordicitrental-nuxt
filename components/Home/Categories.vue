@@ -4,8 +4,8 @@
       <h3>{{ item.Title }}</h3>
       <div class="img-wrapper">
         <img
-          class="info-card-img"
-          :alt="'Service, installation & levering - ' + item.Title"
+          class="info-card-img mx-auto"
+          :alt="item.Title"
           :src="item.Icon.url | formatImage"
         />
       </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Counter from "@/components/Utilities/Counter";
+import Counter from '@/components/Utilities/Counter';
 
 export default {
   components: {

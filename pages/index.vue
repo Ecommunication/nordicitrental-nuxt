@@ -15,7 +15,7 @@
             class="btn btn-blue text-center mx-auto mt-10 title-sm"
             style="padding-right: 30px; padding-left: 30px"
           >
-            Alle produkter
+            {{ data.indexAllProductsButton }}
           </nuxt-link>
         </div>
       </CategorySlider>
@@ -27,7 +27,7 @@
           class="text-blue title-md weight-thin mb-6"
           style="text-align: center; font-size: 26px"
         >
-          Vi har gjort det nemt at leje IT udstyr
+          {{ data.IndexBenefitsTitle }}
         </h3>
 
         <div class="info grid-wide" style="margin: 0 auto">
@@ -124,18 +124,18 @@
           >
             <template v-slot:left-col>
               <div class="text-center pr-35">
-                <h3 class="text-blue" style="font-size: 20px">Kontakt</h3>
-                <img src="~/assets/images/employee_mic.png" alt="Kontakt" />
-                <p style="font-size: 16px">
-                  Michael Vedel<br />
-                  Salg – kunder
-                </p>
-                <p class="mt-5" style="font-size: 16px">
-                  Tlf. 71998904<br />
-                  <a href="mailto:salg@nordicitrental.dk"
-                    >salg@nordicitrental.dk</a
-                  >
-                </p>
+                <h3 class="text-blue" style="font-size: 20px">
+                  {{ data.IndexBeforeContactInfo }}
+                </h3>
+                <img
+                  src="~/assets/images/employee_mic.png"
+                  alt="Kontakt"
+                  class="mx-auto"
+                />
+                <div
+                  class="text-base"
+                  v-html="data.IndexContactRightInfo"
+                ></div>
               </div>
             </template>
           </ContactUsForm>
@@ -146,10 +146,10 @@
 </template>
 
 <script>
-import CategorySlider from "@/components/Category/Slider";
-import TextCard from "@/components/Utilities/TextCard";
-import BackgroundImg from "@/components/Utilities/BackgroundImg";
-import ContactUsForm from "@/components/Formular/Contact";
+import CategorySlider from '@/components/Category/Slider';
+import TextCard from '@/components/Utilities/TextCard';
+import BackgroundImg from '@/components/Utilities/BackgroundImg';
+import ContactUsForm from '@/components/Formular/Contact';
 
 export default {
   components: {
@@ -162,18 +162,18 @@ export default {
       title: this.data.PageTitle,
       meta: [
         {
-          name: "title",
+          name: 'title',
           content: this.data.MetaTitle,
         },
         {
-          name: "description",
+          name: 'description',
           content: this.data.MetaDescription,
         },
       ],
     };
   },
   async asyncData({ params, $axios }) {
-    const data = await $axios.$get("/forside");
+    const data = await $axios.$get('/forside');
     return { data };
   },
   data() {
@@ -182,10 +182,10 @@ export default {
     };
   },
   beforeMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
     handleScroll(event) {

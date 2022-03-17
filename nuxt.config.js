@@ -64,6 +64,7 @@ export default {
   modules: [
     ['@nuxtjs/tailwindcss'],
     ['@nuxtjs/apollo'],
+    ['@nuxt/image'],
     [
       '@nuxtjs/axios',
       {
@@ -101,6 +102,13 @@ export default {
         httpEndpoint: process.env.GRAPHQL_URL,
       },
     },
+  },
+
+  image: {
+    strapi: {
+      baseURL: `${process.env.API_URL}/uploads/`,
+    },
+    domains: [process.env.API_URL, process.env.GRAPHQL_URL],
   },
 
   env: {

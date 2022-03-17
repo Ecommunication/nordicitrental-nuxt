@@ -46,13 +46,16 @@
   </footer>
 </template>
 <script>
-import NewsletterForm from "@/components/Formular/Newsletter";
+import NewsletterForm from '@/components/Formular/Newsletter';
 
 export default {
   components: {
     NewsletterForm,
   },
-  props: ["footer"],
+  props: ['footer'],
+  mounted() {
+    console.log(this.footer);
+  },
 };
 </script>
 

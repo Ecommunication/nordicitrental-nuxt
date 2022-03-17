@@ -5,7 +5,7 @@
         <HeaderCart />
       </div>
       <nuxt-link to="/" class="logo">
-        <img class="" :src="header.logo.src" :alt="header.logo.altText" />
+        <nuxt-img :src="header.logo.src" :alt="header.logo.altText" />
       </nuxt-link>
 
       <div class="right-col">

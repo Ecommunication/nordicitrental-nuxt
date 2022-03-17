@@ -1,6 +1,6 @@
 <template>
   <div class="employee text-center" v-if="employee">
-    <img
+    <nuxt-img
       class="employee-img"
       v-if="employee.AboutUsEmployeesImage"
       :src="employee.AboutUsEmployeesImage.url | formatImage"
