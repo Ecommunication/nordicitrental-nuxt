@@ -19,17 +19,17 @@
                 <span class="price-weekly">{{
                   product.pricing.weekly | formatPrice
                 }}</span>
-                <span class="price-explanation"
-                  >(Pris for første uges leje)</span
-                >
+                <span class="price-explanation">{{
+                  produktside.FirstWeekPriceText
+                }}</span>
               </div>
               <div class="price-daily-container">
                 <span class="price-daily">{{
                   product.pricing.daily | formatPrice
                 }}</span>
-                <span class="price-explanation"
-                  >(Pris efter første uges leje, pr. dag.)</span
-                >
+                <span class="price-explanation">{{
+                  produktside.DailyPriceText
+                }}</span>
               </div>
             </div>
 
@@ -44,6 +44,7 @@
               :product="product"
               :dailyPrice="product.pricing.daily"
               :weeklyPrice="product.pricing.weekly"
+              :produktside="produktside"
               @addedToCart="onAddedToCart"
             />
           </div>
@@ -60,7 +61,7 @@
 
       <div class="row mt-10">
         <div class="col">
-          <Suggestions :products="product.upsell" />
+          <Suggestions :products="product.upsell" :produktside="produktside" />
         </div>
       </div>
     </div>
@@ -71,7 +72,7 @@
       @close="closeDialog"
       :width="500"
     >
-      <template v-slot:header> Produktet er lagt i kurven </template>
+      <template v-slot:header>{{ produktside.AddedToCartText }}</template>
       <template v-slot:body>
         <div class="cartNotifModal-body">
           <div class="text-center">
@@ -81,21 +82,23 @@
             <div class="text-blue" style="font-weight: 600">
               {{ modalData.title }}
             </div>
-            Lejeperiode fra:
+            {{ produktside.CartRentalPeriodText }}
             <span class="ml-1">
               {{ modalData.startDate | formatDate }} -
               {{ modalData.endDate | formatDate }}
             </span>
           </div>
           <div class="my-5 text-blue" style="font-weight: 600">
-            Totalpris: {{ modalData.price | formatPrice }}
+            {{ produktside.TotalPriceText }} {{ modalData.price | formatPrice }}
           </div>
           <div style="display: flex; justify-content: space-between">
             <div class="button btn-primary" @click="goToProduct">
-              <span class="text-uppercase">Fortsæt med at leje</span>
+              <span class="text-uppercase">{{
+                produktside.ContinueBrowsingText
+              }}</span>
             </div>
             <nuxt-link class="button btn-primary" to="/kurv">
-              <span class="text-uppercase">Bestil</span>
+              <span class="text-uppercase">{{ produktside.OrderText }}</span>
             </nuxt-link>
           </div>
         </div>
@@ -129,7 +132,7 @@ import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
-
+import { GET_PRODUCTPAGE_TEXTS } from '@/lib/api';
 export default {
   components: {
     HeaderImg,
@@ -140,6 +143,31 @@ export default {
     IconBar,
     Suggestions,
     VueSlickCarousel,
+  },
+  async asyncData({ i18n, app, params, $axios, $config }) {
+    const client = app.apolloProvider.defaultClient;
+    const res = await client.query({
+      query: GET_PRODUCTPAGE_TEXTS,
+      variables: { locale: i18n.locale },
+    });
+    const { produktside } = res.data;
+    const productsData =
+      (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
+    const productData = productsData[0] || {};
+    if (!productData) return;
+
+    // const categories = await Promise.all(
+    //     productData.product_categories.map(async cat => {
+    //       const categoryData = await $axios.$get(
+    //           `/product-categories?Slug=${cat.Slug}`
+    //       );
+    //       return categoryData && categoryData[0] ? categoryData[0] : [];
+    //     })
+    // );
+
+    const product = new Product(productData, []);
+
+    return { product, produktside };
   },
   data() {
     return {
@@ -169,25 +197,6 @@ export default {
         },
       ],
     };
-  },
-  async asyncData({ params, $axios, $config }) {
-    const productsData =
-      (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
-    const productData = productsData[0] || {};
-    if (!productData) return;
-
-    // const categories = await Promise.all(
-    //     productData.product_categories.map(async cat => {
-    //       const categoryData = await $axios.$get(
-    //           `/product-categories?Slug=${cat.Slug}`
-    //       );
-    //       return categoryData && categoryData[0] ? categoryData[0] : [];
-    //     })
-    // );
-
-    const product = new Product(productData, []);
-
-    return { product };
   },
   methods: {
     openImageModal(imgSrc) {

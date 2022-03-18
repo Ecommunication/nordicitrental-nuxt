@@ -1,7 +1,7 @@
 <template>
   <div class="employee text-center" v-if="employee">
     <nuxt-img
-      class="employee-img"
+      class="employee-img mx-auto"
       v-if="employee.AboutUsEmployeesImage"
       :src="employee.AboutUsEmployeesImage.url | formatImage"
       :alt="employee.AboutUsEmployeesImage.alternativeText"

@@ -1,17 +1,16 @@
 <template>
-  <div id="coverSlider">
+  <div id="coverSlider" class="relative">
     <div
-      class="custom-slider-container"
+      :class="`custom-slider-container transform duration-300 transition-opacity ${
+        selectedIndex === index
+          ? 'block opacity-100 static'
+          : ' opacity-0 absolute inset-0'
+      }`"
       v-for="(slide, index) in slides"
       :key="index"
     >
-      <div
-        class="slider-item"
-        :style="{
-          opacity: selectedIndex === index ? 1 : 0,
-        }"
-      >
-        <div class="row" v-if="selectedIndex === index">
+      <div class="slider-item">
+        <div :class="`row `">
           <div
             class="slider-item-container col px-0 py-0"
             :style="`width: 100%;`"
@@ -44,10 +43,10 @@
   </div>
 </template>
 <script>
-import BackgroundImg from "@/components/Utilities/BackgroundImg";
+import BackgroundImg from '@/components/Utilities/BackgroundImg';
 
 export default {
-  props: ["slides"],
+  props: ['slides'],
   components: {
     BackgroundImg,
   },
@@ -82,7 +81,6 @@ export default {
 <style lang="scss" scoped>
 .custom-slider-container {
   .slider-item {
-    //transition: 2s ease;
     .slider-item-container {
       min-height: 500px;
       .slider-title {
@@ -90,23 +88,5 @@ export default {
       }
     }
   }
-}
-
-@media screen and (max-width: 767px) {
-  //.custom-slider-container {
-  //  .slider-item {
-  //    .slider-item-container {
-  //      min-height: 151px !important;
-  //      max-height: 151px !important;
-  //      height: 151px;
-  //      h3 {
-  //        font-size: 16px !important;
-  //      }
-  //      h4 {
-  //        font-size: 12px !important;
-  //      }
-  //    }
-  //  }
-  //}
 }
 </style>

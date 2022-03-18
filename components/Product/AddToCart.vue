@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="options.length" class="mb-5">
-      <p class="title mb-2">Tilføj tilvalg:</p>
+      <p class="title mb-2">{{ produktside.AddOptionsText }}</p>
 
       <div v-for="(option, index) in options" :key="index">
         <CheckboxRounded
@@ -14,11 +14,11 @@
       </div>
     </div>
 
-    <p class="title">Vælg lejeperiode:</p>
+    <p class="title">{{ produktside.RentalPeriodText }}</p>
     <client-only>
       <div class="date-picker-container">
         <div>
-          <div class="date-picker-label">Start</div>
+          <div class="date-picker-label">{{ produktside.Start }}</div>
           <date-picker
             class="date-picker"
             v-model="start"
@@ -30,7 +30,7 @@
         </div>
 
         <div>
-          <div class="date-picker-label">Slut</div>
+          <div class="date-picker-label">{{ produktside.End }}</div>
           <date-picker
             class="date-picker"
             v-model="end"
@@ -47,9 +47,12 @@
       {{ price | formatPrice }}
     </div>
 
-    <div class="days">Total lejeperiode: {{ noOfDays }} dage</div>
+    <div class="days">
+      {{ produktside.TotalPeriodText }} {{ noOfDays }}
+      {{ produktside.DaysText }}
+    </div>
     <div class="alert" v-show="!canBePlaced">
-      Lejeperioden skal bestå af min. 8 dage
+      {{ produktside.RentalPeriodErrorText }}
     </div>
 
     <div class="actions mt-8">
@@ -59,7 +62,7 @@
         :class="canBePlaced ? '' : 'btn-disabled'"
         @click="submit"
       >
-        TILFØJ TIL KURV
+        {{ produktside.AddToCartText }}
       </div>
     </div>
 
@@ -83,6 +86,7 @@ export default {
     dailyPrice: { type: Number, required: true },
     weeklyPrice: { type: Number, required: true },
     product: { type: Object, required: true },
+    produktside: { type: Object, required: true },
   },
   computed: {
     selectedOptions() {
@@ -195,7 +199,8 @@ export default {
       const d2 = new Date(date2).getTime();
       const diffInMs = d2 - d1;
       const diffInDays = diffInMs / ONE_DAY_IN_MS;
-      return diffInDays;
+      console.log(diffInDays);
+      return Math.ceil(diffInDays);
     },
     submit() {
       if (!this.canBePlaced) return;

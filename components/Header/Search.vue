@@ -18,14 +18,31 @@
       @click="closeSearch"
     >
       <div
-        class="relative container max-h-screen overflow-y-scroll bg-white shadow-md z-20 rounded-md p-4"
+        class="
+          relative
+          container
+          max-h-screen
+          overflow-y-scroll
+          bg-white
+          shadow-md
+          z-20
+          rounded-md
+          p-4
+        "
       >
         <div class="flex flex-row justify-between">
           <p class="text-2xl text-mainBlue font-medium">
             Der blev fundet {{ searchResult.length }} resultater
           </p>
           <span
-            class="cursor-pointer transform transition-transform hover:scale-110 origin-center text-mainBlue"
+            class="
+              cursor-pointer
+              transform
+              transition-transform
+              hover:scale-110
+              origin-center
+              text-mainBlue
+            "
             @click="closeSearch"
             ><i class="fas fa-times fa-lg"
           /></span>
@@ -42,10 +59,24 @@
             >
               <nuxt-link :to="`/produkt/${product.ProductSlug}`">
                 <div
-                  class="flex border-t border-b cursor-pointer group hover:bg-gray-50"
+                  class="
+                    flex
+                    border-t border-b
+                    cursor-pointer
+                    group
+                    hover:bg-gray-50
+                  "
                 >
                   <nuxt-img
-                    class="max-h-14 transform transition-transform duration-300 group-hover:translate-x-3 aspect-square object-contain"
+                    class="
+                      max-h-14
+                      transform
+                      transition-transform
+                      duration-300
+                      group-hover:translate-x-3
+                      aspect-square
+                      object-contain
+                    "
                     :src="product.MainImage.url | formatImage"
                     :alt="product.Name"
                   />
@@ -53,7 +84,13 @@
                     class="flex w-full justify-between space-x-5 ml-4 text-base"
                   >
                     <div
-                      class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
+                      class="
+                        my-auto
+                        transform
+                        transition-transform
+                        duration-300
+                        group-hover:translate-x-3
+                      "
                     >
                       <p class="">{{ product.Name }}</p>
                     </div>
@@ -101,32 +138,9 @@
   </div>
 </template>
 <script>
-import gql from 'graphql-tag';
+import { GET_ALL_PRODUCTS } from '@/lib/api';
+
 export default {
-  apollo: {
-    products: gql`
-      query getAllProductsOverview {
-        products(limit: 4000) {
-          Name
-          id
-          ProductSlug
-          DailyPrice
-          ProductAttributes {
-            id
-            AttributeKey
-            AttributeValue
-          }
-          product_categories {
-            Name
-          }
-          MainImage {
-            url
-            alternativeText
-          }
-        }
-      }
-    `,
-  },
   props: { categories: [] },
   data() {
     return {
@@ -134,6 +148,14 @@ export default {
       searchResult: [],
       productPreview: null,
     };
+  },
+  async fetch() {
+    const res = await this.$apollo.query({
+      query: GET_ALL_PRODUCTS,
+      variables: { locale: this.$i18n.locale },
+    });
+    const { products } = res.data;
+    return { products };
   },
   computed: {},
   watch: {

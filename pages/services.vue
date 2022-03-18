@@ -17,11 +17,11 @@
           <template v-slot:actions>
             <div>
               <div class="button btn-primary" @click="showModal">
-                Ring Mig Op
+                {{ data.CallMe }}
               </div>
 
               <Modal v-show="isModalVisible" @close="closeModal" :width="600">
-                <template v-slot:header> Ring mig op </template>
+                <template v-slot:header>{{ data.CallMe }} </template>
                 <template v-slot:body>
                   <CallMeForm />
                 </template>
@@ -73,9 +73,9 @@
           containerCSS="max-width: 1600px; margin: 0 auto;"
         >
           <template v-slot:actions>
-            <nuxt-link class="kontakt-os-btn" to="/kontakt"
-              >Kontakt Os</nuxt-link
-            >
+            <nuxt-link class="kontakt-os-btn" to="/kontakt">{{
+              data.ContactUs
+            }}</nuxt-link>
           </template>
         </TextCard>
       </div>
@@ -120,22 +120,15 @@
           titleStyle="font-size: 40px; margin-bottom: 24px;"
         >
           <template v-slot:left-col>
-            <div class="text-left pr-20">
-              <h3 class="text-blue" style="font-size: 20px">Kontakt</h3>
-              <p class="mt-10">
-                <img src="~/assets/images/employee_mic.png" alt="Kontakt" />
-              </p>
-              <p style="font-size: 14px">
-                Michael Vedel<br />
-                Salg – kunder
-              </p>
-              <p class="mt-5" style="font-size: 14px">
-                Tlf. 71998904<br />
-                <a href="mailto:salg@nordicitrental.dk"
-                  >salg@nordicitrental.dk</a
-                >
-              </p>
-            </div>
+            <img
+              src="~/assets/images/employee_mic.png"
+              alt="Kontakt"
+              class=""
+            />
+            <div
+              class="text-left pr-20 text-base"
+              v-html="forsideData.IndexContactRightInfo"
+            ></div>
           </template>
         </ContactUsForm>
       </div>
@@ -144,13 +137,13 @@
 </template>
 
 <script>
-import TextCard from "@/components/Utilities/TextCard";
-import HeaderImg from "@/components/Utilities/HeaderImg";
-import BackgroundImg from "@/components/Utilities/BackgroundImg";
-import Button from "@/components/Utilities/Button";
-import ContactUsForm from "@/components/Formular/Contact";
-import Modal from "@/components/Utilities/Modal";
-import CallMeForm from "@/components/Utilities/CallMeForm";
+import TextCard from '@/components/Utilities/TextCard';
+import HeaderImg from '@/components/Utilities/HeaderImg';
+import BackgroundImg from '@/components/Utilities/BackgroundImg';
+import Button from '@/components/Utilities/Button';
+import ContactUsForm from '@/components/Formular/Contact';
+import Modal from '@/components/Utilities/Modal';
+import CallMeForm from '@/components/Utilities/CallMeForm';
 
 export default {
   components: {
@@ -164,7 +157,7 @@ export default {
   },
   computed: {
     currentRouteHash() {
-      return this.$router.currentRoute.hash.replace("#", "");
+      return this.$router.currentRoute.hash.replace('#', '');
     },
   },
   head() {
@@ -172,12 +165,12 @@ export default {
       title: this.data.PageTitle,
       meta: [
         {
-          name: "title",
-          content: this.data.MetaTitle || "",
+          name: 'title',
+          content: this.data.MetaTitle || '',
         },
         {
-          name: "description",
-          content: this.data.MetaDescription || "",
+          name: 'description',
+          content: this.data.MetaDescription || '',
         },
       ],
     };
@@ -189,19 +182,20 @@ export default {
       errorAfterFetch: null,
       buttons: {
         goToProduct: {
-          label: "Se Produkter",
-          variant: "btn-dark",
+          label: 'Se Produkter',
+          variant: 'btn-dark',
           action: {
-            type: "link",
-            href: "/produkt-kategori",
+            type: 'link',
+            href: '/produkt-kategori',
           },
         },
       },
     };
   },
   async asyncData({ params, $axios }) {
-    const data = await $axios.$get("/services");
-    return { data };
+    const data = await $axios.$get('/services');
+    const forsideData = await $axios.$get('/forside');
+    return { data, forsideData };
   },
   methods: {
     showModal() {
