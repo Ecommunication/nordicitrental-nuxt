@@ -2,12 +2,12 @@
   <div>
     <HeaderImg img="" :text="`Blog`" />
     <div
-      class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 my-10 px-10"
+      class="container my-10 grid grid-cols-1 gap-10 px-10 md:grid-cols-2 xl:grid-cols-3"
     >
       <div
         v-for="blog in [1, 2, 3, 4]"
         :key="blog"
-        class="flex flex-col transform transition-transform duration-300 hover:scale-110 cursor-pointer"
+        class="flex transform cursor-pointer flex-col transition-transform duration-300 hover:scale-110"
       >
         <nuxt-link to="/">
           <div class="flex justify-between">
@@ -19,7 +19,7 @@
             </p>
           </div>
           <div
-            class="bg-mainBlue shadow-md p-4 rounded-md aspect-square flex flex-col"
+            class="aspect-square flex flex-col rounded-md bg-mainBlue p-4 shadow-md"
           >
             <img src="~/assets/images/icons/no-photos.svg" />
           </div>

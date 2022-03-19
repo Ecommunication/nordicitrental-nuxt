@@ -3,7 +3,12 @@
     <div v-for="icon in icons" :key="icon.key">
       <div class="icon text-center">
         <div class="img-container flex">
-          <img v-if="icon.img" :src="icon.img" class="m-auto" />
+          <img
+            v-if="icon.img"
+            :src="icon.img"
+            class="m-auto"
+            :alt="icon.value"
+          />
         </div>
         <div class="desc">{{ icon.value }}</div>
       </div>

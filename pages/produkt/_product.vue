@@ -68,6 +68,7 @@
 
     <Modal
       class="cartNotifModal"
+      :title="`modal-added-to-cart`"
       v-show="isModalVisible && Object.keys(modalData).length"
       @close="closeDialog"
       :width="500"
@@ -88,7 +89,7 @@
               {{ modalData.endDate | formatDate }}
             </span>
           </div>
-          <div class="my-5 text-blue" style="font-weight: 600">
+          <div class="text-blue my-5" style="font-weight: 600">
             {{ produktside.TotalPriceText }} {{ modalData.price | formatPrice }}
           </div>
           <div style="display: flex; justify-content: space-between">
@@ -107,6 +108,7 @@
 
     <Modal
       class="imageModal"
+      :title="`modal-image-lightbox`"
       v-show="imageModalIsOpen"
       @close="closeImageModal"
       :width="700"

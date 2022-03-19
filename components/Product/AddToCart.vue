@@ -26,6 +26,7 @@
             format="DD/M/YYYY"
             :lang="lang"
             :disabled-date="disableBeforeToday"
+            aria-label="date-from"
           ></date-picker>
         </div>
 
@@ -38,6 +39,7 @@
             format="DD/M/YYYY"
             :lang="lang"
             :disabled-date="disableBeforeStartDatePlusAWeek"
+            aria-label="date-to"
           ></date-picker>
         </div>
       </div>
@@ -58,7 +60,7 @@
     <div class="actions mt-8">
       <AmountPicker :amount="amount" @changed="onAmountPickerChange" />
       <div
-        class="add-to-cart ml-3 button btn-primary"
+        class="add-to-cart button btn-primary ml-3"
         :class="canBePlaced ? '' : 'btn-disabled'"
         @click="submit"
       >

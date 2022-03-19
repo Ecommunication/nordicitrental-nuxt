@@ -87,11 +87,11 @@
 </template>
 
 <script>
-import Modal from "@/components/Utilities/Modal";
-import InputField from "@/components/Utilities/Form/InputField";
-import Textarea from "@/components/Utilities/Form/Textarea";
-import Recaptcha from "@/components/Formular/RecaptchaV2";
-import validations from "@/components/Formular/validations.js";
+import Modal from '@/components/Utilities/Modal';
+import InputField from '@/components/Utilities/Form/InputField';
+import Textarea from '@/components/Utilities/Form/Textarea';
+import Recaptcha from '@/components/Formular/RecaptchaV2';
+import validations from '@/components/Formular/validations.js';
 
 export default {
   components: { Modal, InputField, Textarea, Recaptcha },
@@ -109,11 +109,11 @@ export default {
       formKey: new Date().getTime(),
       isModalVisible: false,
       form: {
-        name: "",
-        email: "",
-        companyName: "",
-        phone: "",
-        message: "",
+        name: '',
+        email: '',
+        companyName: '',
+        phone: '',
+        message: '',
       },
       formValidations: {
         name: [validations.isRequired],
@@ -140,11 +140,11 @@ export default {
     },
     resetForm() {
       this.form = {
-        name: "",
-        email: "",
-        companyName: "",
-        phone: "",
-        message: "",
+        name: '',
+        email: '',
+        companyName: '',
+        phone: '',
+        message: '',
       };
       this.formKey = new Date().getTime();
     },

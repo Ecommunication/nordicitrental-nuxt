@@ -5,6 +5,7 @@
     step="1"
     min="1"
     v-model="amountLocal"
+    aria-label="quantity"
   />
 </template>
 
@@ -21,7 +22,7 @@ export default {
   watch: {
     amountLocal(val) {
       if (this.isPositiveInt(val)) {
-        this.$emit("changed", parseInt(val));
+        this.$emit('changed', parseInt(val));
       }
     },
   },

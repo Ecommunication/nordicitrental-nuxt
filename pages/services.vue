@@ -20,7 +20,12 @@
                 {{ data.CallMe }}
               </div>
 
-              <Modal v-show="isModalVisible" @close="closeModal" :width="600">
+              <Modal
+                :title="`modal-call-me-form`"
+                v-show="isModalVisible"
+                @close="closeModal"
+                :width="600"
+              >
                 <template v-slot:header>{{ data.CallMe }} </template>
                 <template v-slot:body>
                   <CallMeForm />
@@ -99,7 +104,7 @@
     </div>
 
     <div id="service-handle" class="row service-lad-os-overtage">
-      <div class="col px-0 w-100">
+      <div class="col w-100 px-0">
         <TextCard
           v-if="data.MidTextCol5"
           :contentHtml="data.MidTextCol5"
@@ -126,7 +131,7 @@
               class=""
             />
             <div
-              class="text-left pr-20 text-base"
+              class="pr-20 text-left text-base"
               v-html="forsideData.IndexContactRightInfo"
             ></div>
           </template>

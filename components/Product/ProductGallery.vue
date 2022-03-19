@@ -37,7 +37,7 @@
               <span
                 ><img
                   :src="image.url"
-                  :alt="image.alternativeText"
+                  :alt="image.alternativeText || gallery.main.alternativeText"
                   @click="openModal(index)"
               /></span>
             </div>
@@ -74,7 +74,11 @@
             ></i>
           </span>
           <figure v-for="(image, index) in thumbnails">
-            <img :src="image.url" v-show="modalGalleryIndex === index" />
+            <img
+              v-show="modalGalleryIndex === index"
+              :src="image.url"
+              :alt="image.alternativeText || gallery.main.alternativeText"
+            />
           </figure>
           <span
             class="product-gallery__modal-inner__arrows product-gallery__modal-inner__arrow product-gallery__modal-inner__arrows-right"
@@ -94,7 +98,7 @@
 </template>
 <script>
 export default {
-  props: ["gallery"],
+  props: ['gallery'],
   data() {
     return {
       mainImage: this.gallery.main.url,
@@ -150,8 +154,8 @@ export default {
   methods: {
     modifyThumbnails() {
       const thumbnails = [];
-      const imageUrl = "https://nordic.nordicitrental.dk";
-      const defaultAltText = "";
+      const imageUrl = 'https://nordic.nordicitrental.dk';
+      const defaultAltText = '';
 
       thumbnails.push({
         url: imageUrl + this.gallery.main.url,
@@ -175,7 +179,7 @@ export default {
     moveModalGalleryImages: function (pointer) {
       var newIndex = this.modalGalleryIndex;
 
-      if (pointer === "left") {
+      if (pointer === 'left') {
         newIndex--;
       } else {
         newIndex++;
@@ -190,7 +194,7 @@ export default {
     moveThumbnails(pointer) {
       var newIndex = this.thumbnailsIndex;
 
-      if (pointer === "left") {
+      if (pointer === 'left') {
         newIndex--;
       } else {
         newIndex++;
