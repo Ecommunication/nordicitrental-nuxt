@@ -19,6 +19,8 @@
     "@nuxtjs/recaptcha": "^1.0.4",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
+    "aws-amplify": "^4.3.16",
+    "aws-amplify-vue": "^2.1.5",
     "core-js": "^3.8.3",
     "graphql-tag": "^2.12.6",
     "jquery": "^3.6.0",

@@ -34,8 +34,8 @@
 
 <script>
 export default {
-  name: 'Modal',
   props: {
+    name: 'Modal',
     width: { type: Number, default: 500 },
   },
   methods: {
