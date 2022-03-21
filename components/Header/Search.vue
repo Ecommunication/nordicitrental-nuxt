@@ -112,9 +112,6 @@ export default {
       productPreview: null,
     };
   },
-  async fetch() {
-    console.log('Locale ', this.$i18n.locale);
-  },
   computed: {},
   watch: {
     inputSearch(val) {

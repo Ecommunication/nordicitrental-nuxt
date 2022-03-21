@@ -201,7 +201,6 @@ export default {
       const d2 = new Date(date2).getTime();
       const diffInMs = d2 - d1;
       const diffInDays = diffInMs / ONE_DAY_IN_MS;
-      console.log(diffInDays);
       return Math.ceil(diffInDays);
     },
     submit() {

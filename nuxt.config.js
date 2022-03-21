@@ -90,6 +90,17 @@ export default {
         ],
         defaultLocale: 'da',
         baseUrl: 'https://nordicitrental.dk',
+        parsePages: false,
+        pages: {
+          'om-nordicit-rental': {
+            en: '/about',
+            da: '/om-nordicit-rental',
+          },
+          'produkt/_product': {
+            en: '/product/:product',
+            da: '/produkt/:product',
+          },
+        },
       },
     ],
   ],

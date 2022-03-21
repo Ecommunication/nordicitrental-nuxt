@@ -53,9 +53,7 @@ export default {
     NewsletterForm,
   },
   props: ['footer'],
-  mounted() {
-    console.log(this.footer);
-  },
+  mounted() {},
 };
 </script>
 

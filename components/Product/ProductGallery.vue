@@ -116,10 +116,10 @@ export default {
     };
   },
   created() {
-    this.modifyThumbnails();
+    // this.modifyThumbnails();
 
-    this.maxThumbnails = this.thumbnails.length;
-    this.modalGallery = this.thumbnails;
+    this.maxThumbnails = this.gallery.length;
+    this.modalGallery = this.gallery;
 
     if (this.thumbnailsIndex === 0) {
       this.thumbArrowLeft = false;
@@ -152,61 +152,57 @@ export default {
     },
   },
   methods: {
-    modifyThumbnails() {
-      const thumbnails = [];
-      const imageUrl = 'https://nordic.nordicitrental.dk';
-      const defaultAltText = '';
+    // modifyThumbnails() {
+    //   const thumbnails = [];
+    //   const imageUrl = 'https://nordic.nordicitrental.dk';
+    //   const defaultAltText = '';
+    //   thumbnails.push({
+    //     url: imageUrl + this.gallery.main.url,
+    //     alternativeText: this.gallery.main.url.alternativeText,
+    //   });
+    //   this.gallery.thumbnails.forEach(function (item) {
+    //     const obj = {
+    //       url: imageUrl + item.url,
+    //       alternativeText: item.alternativeText,
+    //     };
+    //     thumbnails.push(obj);
+    //   });
+    //   this.thumbnails = thumbnails;
+  },
+  openModal(index) {
+    this.modalGalleryIndex = index;
+    this.showGalleryModal = true;
+  },
+  moveModalGalleryImages: function (pointer) {
+    var newIndex = this.modalGalleryIndex;
 
-      thumbnails.push({
-        url: imageUrl + this.gallery.main.url,
-        alternativeText: this.gallery.main.url.alternativeText,
-      });
+    if (pointer === 'left') {
+      newIndex--;
+    } else {
+      newIndex++;
+    }
 
-      this.gallery.thumbnails.forEach(function (item) {
-        const obj = {
-          url: imageUrl + item.url,
-          alternativeText: item.alternativeText,
-        };
-        thumbnails.push(obj);
-      });
+    if (newIndex < 0 || newIndex > this.maxThumbnails - 1) {
+      return;
+    }
 
-      this.thumbnails = thumbnails;
-    },
-    openModal(index) {
-      this.modalGalleryIndex = index;
-      this.showGalleryModal = true;
-    },
-    moveModalGalleryImages: function (pointer) {
-      var newIndex = this.modalGalleryIndex;
+    this.modalGalleryIndex = newIndex;
+  },
+  moveThumbnails(pointer) {
+    var newIndex = this.thumbnailsIndex;
 
-      if (pointer === 'left') {
-        newIndex--;
-      } else {
-        newIndex++;
-      }
+    if (pointer === 'left') {
+      newIndex--;
+    } else {
+      newIndex++;
+    }
 
-      if (newIndex < 0 || newIndex > this.maxThumbnails - 1) {
-        return;
-      }
+    if (newIndex < 0 || newIndex > this.maxThumbnails - this.thumbsVisible) {
+      return;
+    }
 
-      this.modalGalleryIndex = newIndex;
-    },
-    moveThumbnails(pointer) {
-      var newIndex = this.thumbnailsIndex;
-
-      if (pointer === 'left') {
-        newIndex--;
-      } else {
-        newIndex++;
-      }
-
-      if (newIndex < 0 || newIndex > this.maxThumbnails - this.thumbsVisible) {
-        return;
-      }
-
-      this.thumbnailsIndex = newIndex;
-      this.scrollPos = -this.gridScroll * this.thumbnailsIndex;
-    },
+    this.thumbnailsIndex = newIndex;
+    this.scrollPos = -this.gridScroll * this.thumbnailsIndex;
   },
 };
 </script>

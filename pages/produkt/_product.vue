@@ -9,7 +9,10 @@
     <div class="container py-10">
       <div class="row" style="justify-content: center; padding: 16px">
         <div class="col-md-4">
-          <ProductGallery :gallery="product.gallery" />
+          <ProductGallery
+            :gallery="product.gallery"
+            :productName="product.Name"
+          />
         </div>
         <div class="col-md-8">
           <div class="product-meta">
@@ -72,6 +75,7 @@
       v-show="isModalVisible && Object.keys(modalData).length"
       @close="closeDialog"
       :width="500"
+      modalName="cartModal"
     >
       <template v-slot:header>{{ produktside.AddedToCartText }}</template>
       <template v-slot:body>
@@ -112,6 +116,7 @@
       v-show="imageModalIsOpen"
       @close="closeImageModal"
       :width="700"
+      name="imageModal"
     >
       <template v-slot:body>
         <div class="product-modal-main-image">
@@ -134,7 +139,7 @@ import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
-import { GET_PRODUCTPAGE_TEXTS } from '@/lib/api';
+import { GET_PRODUCTPAGE_TEXTS, GET_ONE_PRODUCTS } from '@/lib/api';
 export default {
   components: {
     HeaderImg,
@@ -153,8 +158,26 @@ export default {
       variables: { locale: i18n.locale },
     });
     const { produktside } = res.data;
+
+    const productgql = await client.query({
+      query: GET_ONE_PRODUCTS,
+      variables: { locale: i18n.locale, slug: params.product },
+    });
+    const { products } = productgql.data;
+
+    // Create object for dynamic routing i18n route params
+    const i18nObj = {};
+    products[0]?.localizations.forEach((item) => {
+      Object.assign(i18nObj, { [item.locale]: { product: item.ProductSlug } });
+    });
+
+    // Set i18n route params for localized routes
+    await app.store.dispatch('i18n/setRouteParams', i18nObj);
+
     const productsData =
-      (await $axios.$get(`/products?ProductSlug=${params.product}`)) || [];
+      (await $axios.$get(
+        `/products?ProductSlug=${params.product}&_locale=${i18n.locale}`
+      )) || [];
     const productData = productsData[0] || {};
     if (!productData) return;
 

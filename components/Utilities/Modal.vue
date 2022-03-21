@@ -1,6 +1,6 @@
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop" :id="name">
+    <div class="modal-backdrop" :id="this.modalName">
       <div
         class="modal"
         role="dialog"
@@ -34,9 +34,9 @@
 
 <script>
 export default {
-  name: 'Modal',
   props: {
     width: { type: Number, default: 500 },
+    modalName: { type: String, default: 'modal' },
   },
   methods: {
     close() {
