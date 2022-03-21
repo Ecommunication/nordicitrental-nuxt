@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full flex flex-row justify-center mb-4">
+    <div class="mb-4 flex w-full flex-row justify-center">
       <span class="relative w-1/3">
         <input
           class="rounded-md"
@@ -8,46 +8,29 @@
           placeholder="iPhone X"
         />
         <i
-          class="fas fa-search fa-lg absolute right-0 top-1/3 opacity-50 mx-2"
+          class="fas fa-search fa-lg absolute right-0 top-1/3 mx-2 opacity-50"
         />
       </span>
     </div>
     <div
       v-if="inputSearch.length > 0"
-      class="absolute bg-gray-500 bg-opacity-50 w-full min-h-screen z-10 p-4"
+      class="absolute z-10 min-h-screen w-full bg-gray-500 bg-opacity-50 p-4"
       @click="closeSearch"
     >
       <div
-        class="
-          relative
-          container
-          max-h-screen
-          overflow-y-scroll
-          bg-white
-          shadow-md
-          z-20
-          rounded-md
-          p-4
-        "
+        class="container relative z-20 max-h-screen overflow-y-scroll rounded-md bg-white p-4 shadow-md"
       >
         <div class="flex flex-row justify-between">
-          <p class="text-2xl text-mainBlue font-medium">
+          <p class="text-2xl font-medium text-mainBlue">
             Der blev fundet {{ searchResult.length }} resultater
           </p>
           <span
-            class="
-              cursor-pointer
-              transform
-              transition-transform
-              hover:scale-110
-              origin-center
-              text-mainBlue
-            "
+            class="origin-center transform cursor-pointer text-mainBlue transition-transform hover:scale-110"
             @click="closeSearch"
             ><i class="fas fa-times fa-lg"
           /></span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
           <div>
             <div>
               <p class="text-base font-medium text-mainBlue">Bærbar</p>
@@ -59,38 +42,18 @@
             >
               <nuxt-link :to="`/produkt/${product.ProductSlug}`">
                 <div
-                  class="
-                    flex
-                    border-t border-b
-                    cursor-pointer
-                    group
-                    hover:bg-gray-50
-                  "
+                  class="group flex cursor-pointer border-t border-b hover:bg-gray-50"
                 >
                   <nuxt-img
-                    class="
-                      max-h-14
-                      transform
-                      transition-transform
-                      duration-300
-                      group-hover:translate-x-3
-                      aspect-square
-                      object-contain
-                    "
+                    class="aspect-square max-h-14 transform object-contain transition-transform duration-300 group-hover:translate-x-3"
                     :src="product.MainImage.url | formatImage"
                     :alt="product.Name"
                   />
                   <div
-                    class="flex w-full justify-between space-x-5 ml-4 text-base"
+                    class="ml-4 flex w-full justify-between space-x-5 text-base"
                   >
                     <div
-                      class="
-                        my-auto
-                        transform
-                        transition-transform
-                        duration-300
-                        group-hover:translate-x-3
-                      "
+                      class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
                     >
                       <p class="">{{ product.Name }}</p>
                     </div>
@@ -112,14 +75,14 @@
                   <ul
                     v-for="attribute in productPreview.ProductAttributes"
                     :key="attribute.id"
-                    class="list-disc list-inside text-sm"
+                    class="list-inside list-disc text-sm"
                   >
                     <li class="list-item">
                       {{ attribute.AttributeKey }}:
                       {{ attribute.AttributeValue }}
                     </li>
                   </ul>
-                  <p class="text-mainBlue font-semibold">
+                  <p class="font-semibold text-mainBlue">
                     {{ productPreview.DailyPrice | formatPrice }}
                   </p>
                 </div>
@@ -147,15 +110,16 @@ export default {
       inputSearch: '',
       searchResult: [],
       productPreview: null,
+      allProducts: null,
     };
   },
   async fetch() {
+    console.log('Locale ', this.$i18n.locale);
     const res = await this.$apollo.query({
       query: GET_ALL_PRODUCTS,
       variables: { locale: this.$i18n.locale },
     });
-    const { products } = res.data;
-    return { products };
+    this.allProducts = res.data.products;
   },
   computed: {},
   watch: {
@@ -165,7 +129,7 @@ export default {
   },
   methods: {
     searchProducts(val) {
-      this.searchResult = this.products.filter(({ Name }) =>
+      this.searchResult = this.allProducts.filter(({ Name }) =>
         Name.toLowerCase().includes(val.toLowerCase())
       );
     },
@@ -174,6 +138,9 @@ export default {
     },
     closeSearch() {
       this.inputSearch = '';
+    },
+    refreshProducts() {
+      this.$fetch();
     },
   },
 };
