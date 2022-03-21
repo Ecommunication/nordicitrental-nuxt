@@ -9,19 +9,19 @@
         :categories="data.IndexCategories"
         :size="210"
       >
-        <div class="grid flex flex-justify-center">
+        <div class="flex-justify-center flex grid">
           <nuxt-link
             to="/alle-produktkategorier"
-            class="btn btn-blue text-center mx-auto mt-10 title-sm"
+            class="btn btn-blue title-sm mx-auto mt-10 text-center"
             style="padding-right: 30px; padding-left: 30px"
           >
-            {{ data.indexAllProductsButton }}
+            {{ data.IndexAllProductsButton }}
           </nuxt-link>
         </div>
       </CategorySlider>
     </div>
 
-    <div class="row py-10 bg-gray-light">
+    <div class="row bg-gray-light py-10">
       <div class="col" style="width: 100%; margin: 0 auto">
         <h3
           class="text-blue title-md weight-thin mb-6"
@@ -123,7 +123,7 @@
             formStyle="max-width: 700px;"
           >
             <template v-slot:left-col>
-              <div class="text-center pr-35">
+              <div class="pr-35 text-center">
                 <h3 class="text-blue" style="font-size: 20px">
                   {{ data.IndexBeforeContactInfo }}
                 </h3>
@@ -157,6 +157,15 @@ export default {
     BackgroundImg,
     ContactUsForm,
   },
+  async asyncData({ params, $axios, i18n }) {
+    const data = await $axios.$get(`/forside?_locale=${i18n.locale}`);
+    return { data };
+  },
+  data() {
+    return {
+      counterAnimationLoaded: false,
+    };
+  },
   head() {
     return {
       title: this.data.PageTitle,
@@ -170,15 +179,6 @@ export default {
           content: this.data.MetaDescription,
         },
       ],
-    };
-  },
-  async asyncData({ params, $axios }) {
-    const data = await $axios.$get('/forside');
-    return { data };
-  },
-  data() {
-    return {
-      counterAnimationLoaded: false,
     };
   },
   beforeMount() {

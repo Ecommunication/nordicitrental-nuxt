@@ -1,35 +1,35 @@
 <template>
-  <div class="w-full flex justify-between">
+  <div class="flex w-full justify-between">
     <span class="cta">
       <i class="fas fa-phone mr-2"></i>
       {{ cta }}
     </span>
     <div class="space-x-2">
       <nuxt-link
-        class="font-bold text-sm"
+        class="text-sm font-bold"
         v-for="locale in availableLocales"
         :key="locale.code"
         :to="switchLocalePath(locale.code)"
         >{{ locale.name }}</nuxt-link
       >
-      <button @click="currencyClick" class="font-bold text-sm">
+      <button @click="currencyClick" class="text-sm font-bold">
         {{ this.currency }}
       </button>
     </div>
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
 export default {
-  props: ["cta"],
+  props: ['cta'],
   computed: {
-    ...mapState(["currency"]),
+    ...mapState(['currency']),
     availableLocales() {
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale);
     },
   },
   methods: {
-    ...mapActions(["changeCurrency"]),
+    ...mapActions(['changeCurrency']),
     currencyClick() {
       this.changeCurrency();
     },

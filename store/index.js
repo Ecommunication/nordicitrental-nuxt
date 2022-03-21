@@ -1,4 +1,4 @@
-import { Cart, Order, Customer, SHIPMENT_METHODS, Product } from "../utils/dto";
+import { Cart, Order, Customer, SHIPMENT_METHODS, Product } from '../utils/dto';
 
 // Helpers
 const validate = (validations, value) => {
@@ -17,7 +17,7 @@ export const state = () => ({
   navigation: {},
   cart: new Cart(),
   orderReceipt: null,
-  currency: "DKK",
+  currency: 'DKK',
 });
 
 export const getters = {
@@ -77,14 +77,14 @@ export const actions = {
   },
   addToCart({ commit }, payload) {
     const itemId = new Date().getTime();
-    commit("ADD_TO_CART", { ...payload, itemId });
+    commit('ADD_TO_CART', { ...payload, itemId });
   },
   changeCurrency({ commit, state }) {
-    let newCurrency = "DKK";
-    if (state.currency === "DKK") {
-      newCurrency = "EUR";
+    let newCurrency = 'DKK';
+    if (state.currency === 'DKK') {
+      newCurrency = 'EUR';
     }
-    commit("SET_CURRENCY", newCurrency);
+    commit('SET_CURRENCY', newCurrency);
   },
   getCartItem({ commit, state }, { itemId, returnObj = false }) {
     const { items } = state.cart;
@@ -95,26 +95,26 @@ export const actions = {
     return returnObj ? cartItem : cartItemIndex;
   },
   async deleteItem({ commit, dispatch }, itemId) {
-    const cartItemIndex = await dispatch("getCartItem", {
+    const cartItemIndex = await dispatch('getCartItem', {
       itemId,
       returnObj: false,
     });
-    commit("DELETE_ITEM", cartItemIndex);
+    commit('DELETE_ITEM', cartItemIndex);
   },
   async updateAmount({ commit, dispatch }, { itemId, amount }) {
-    const cartItem = await dispatch("getCartItem", {
+    const cartItem = await dispatch('getCartItem', {
       itemId,
       returnObj: true,
     });
     const price = amount * cartItem.unitPrice;
-    commit("UPDATE_AMOUNT", { cartItem, amount, price });
+    commit('UPDATE_AMOUNT', { cartItem, amount, price });
   },
   async setShipmentMethod({ commit }, shipmentMethod) {
     const method =
       Object.values(SHIPMENT_METHODS).find(
         (sm) => sm.method === shipmentMethod
       ) || SHIPMENT_METHODS.DELIVERY;
-    commit("SET_SHIPMENT_METHOD", method);
+    commit('SET_SHIPMENT_METHOD', method);
   },
   async sendCart({ commit, state }, userInfoForm) {
     const httpConfig = { headers: { Authorization: `Bearer ${state.jwt}` } };
@@ -170,13 +170,13 @@ export const actions = {
       userInfoForm.comments
     );
 
-    const orderResponse = await this.$axios.$post("/orders", order, httpConfig);
+    const orderResponse = await this.$axios.$post('/orders', order, httpConfig);
 
-    commit("SET_ORDER_RECEIPT", {
+    commit('SET_ORDER_RECEIPT', {
       customer: customerResponse,
       order: orderResponse,
     });
-    commit("RESET_CART");
+    commit('RESET_CART');
   },
   validateForm({}, { validations, form }) {
     const errors = {};
@@ -194,21 +194,25 @@ export const actions = {
   },
   async loginAsAdmin({ commit }) {
     const { jwt } = await this.$axios.$post(
-      "/auth/local",
+      '/auth/local',
       process.env.strapiAdminCredentials
     );
-    commit("SET_JWT", jwt);
+    commit('SET_JWT', jwt);
   },
   async getMetaData({ commit }) {
-    const data = await this.$axios.$get("/general-meta");
-    commit("SET_META_DATA", data);
+    const data = await this.$axios.$get(
+      `/general-meta?_locale=${this.$i18n.locale}`
+    );
+    commit('SET_META_DATA', data);
   },
   async getNavigation({ commit }) {
-    const data = await this.$axios.$get("/navigation");
-    commit("SET_NAVIGATION", data);
+    const data = await this.$axios.$get(
+      `/navigation?_locale=${this.$i18n.locale}`
+    );
+    commit('SET_NAVIGATION', data);
   },
   async nuxtServerInit({ dispatch }) {
-    await dispatch("loginAsAdmin");
-    await Promise.all([dispatch("getMetaData"), dispatch("getNavigation")]);
+    await dispatch('loginAsAdmin');
+    await Promise.all([dispatch('getMetaData'), dispatch('getNavigation')]);
   },
 };

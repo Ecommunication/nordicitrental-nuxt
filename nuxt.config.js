@@ -46,6 +46,7 @@ export default {
     '~/plugins/filters/prices.js',
     '~/plugins/filters/date.js',
     '~/plugins/persistedState.client.js',
+    '~/plugins/i18n.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

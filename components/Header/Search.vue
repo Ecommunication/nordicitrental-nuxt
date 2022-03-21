@@ -132,7 +132,8 @@ export default {
     hoverProduct(product) {
       this.productPreview = product;
     },
-    closeSearch() {
+    closeSearch(event) {
+      event.stopPropagation();
       this.inputSearch = '';
     },
   },
