@@ -117,6 +117,7 @@ export default {
   },
 
   image: {
+    provider: 'strapi',
     strapi: {
       baseURL: `${process.env.API_URL}/uploads/`,
     },

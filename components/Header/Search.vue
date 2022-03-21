@@ -32,9 +32,6 @@
         </div>
         <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
           <div>
-            <div>
-              <p class="text-base font-medium text-mainBlue">Bærbar</p>
-            </div>
             <div
               v-for="product in searchResult"
               :key="product.id"
