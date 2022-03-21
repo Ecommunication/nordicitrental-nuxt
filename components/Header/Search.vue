@@ -110,16 +110,10 @@ export default {
       inputSearch: '',
       searchResult: [],
       productPreview: null,
-      allProducts: null,
     };
   },
   async fetch() {
     console.log('Locale ', this.$i18n.locale);
-    const res = await this.$apollo.query({
-      query: GET_ALL_PRODUCTS,
-      variables: { locale: this.$i18n.locale },
-    });
-    this.allProducts = res.data.products;
   },
   computed: {},
   watch: {
@@ -128,19 +122,18 @@ export default {
     },
   },
   methods: {
-    searchProducts(val) {
-      this.searchResult = this.allProducts.filter(({ Name }) =>
-        Name.toLowerCase().includes(val.toLowerCase())
-      );
+    async searchProducts(val) {
+      const res = await this.$apollo.query({
+        query: GET_ALL_PRODUCTS,
+        variables: { locale: this.$i18n.locale, search: val },
+      });
+      this.searchResult = res.data.products;
     },
     hoverProduct(product) {
       this.productPreview = product;
     },
     closeSearch() {
       this.inputSearch = '';
-    },
-    refreshProducts() {
-      this.$fetch();
     },
   },
 };
