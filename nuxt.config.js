@@ -9,6 +9,9 @@ export default {
    ** See https://nuxtjs.org/api/configuration-target
    */
   target: 'server',
+  serverMiddleware: {
+    '/_ipx': '~/server/middleware/ipx.js',
+  },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -53,7 +56,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/google-analytics', '@nuxt/image'],
+  buildModules: ['@nuxtjs/google-analytics'],
 
   publicRuntimeConfig: {
     googleAnalytics: {
@@ -116,13 +119,13 @@ export default {
     },
   },
 
-  image: {
-    provider: 'strapi',
-    strapi: {
-      baseURL: `${process.env.API_URL}/uploads/`,
-    },
-    domains: [process.env.API_URL, process.env.GRAPHQL_URL],
-  },
+  // image: {
+  //   provider: 'ipx',
+  //   // strapi: {
+  //   //   baseURL: `${process.env.API_URL}/uploads/`,
+  //   // },
+  //   domains: [process.env.API_URL, process.env.GRAPHQL_URL],
+  // },
 
   env: {
     apiUrl: process.env.API_URL,
