@@ -1,7 +1,11 @@
 <template>
-  <div class="container">
-    <h1 class="font-semibold text-mainBlue">{{ blog.Headline }}</h1>
-    <h2 class="">{{ blog.Subline }}</h2>
+  <div class="container relative space-y-4 p-5">
+    <span class="absolute right-5">{{ blog.published_at | formatDate }}</span>
+    <h1 class="text-3xl font-semibold text-mainBlue md:text-5xl">
+      {{ blog.Headline }}
+    </h1>
+    <div class="text-base" v-html="blog.Subline"></div>
+    <div v-html="blog.Content"></div>
   </div>
 </template>
 

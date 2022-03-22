@@ -12,7 +12,7 @@
         :to="switchLocalePath(locale.code)"
         >{{ locale.name }}</nuxt-link
       >
-      <button @click="currencyClick" class="text-sm font-bold">
+      <button @click="currencyClick" class="text-sm font-bold text-mainBlue">
         {{ this.currency }}
       </button>
     </div>

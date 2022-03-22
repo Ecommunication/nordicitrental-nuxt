@@ -9,7 +9,7 @@
     >
       <div
         v-for="blog in blogs"
-        :key="blog"
+        :key="blog.id"
         class="flex transform cursor-pointer flex-col transition-transform duration-300 hover:scale-110"
       >
         <nuxt-link :to="`/blogs/${blog.slug}`">
