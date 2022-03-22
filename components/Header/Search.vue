@@ -14,83 +14,91 @@
     </div>
     <div
       v-if="inputSearch.length > 0"
-      class="absolute z-10 min-h-screen w-full bg-gray-500 bg-opacity-50 p-4"
+      class="absolute z-10 h-full w-full bg-gray-500 bg-opacity-50 p-4"
       @click="closeSearch"
     >
       <div
-        class="container relative z-20 max-h-screen overflow-y-scroll rounded-md bg-white p-4 shadow-md"
+        class="modal-height container relative z-20 overflow-y-scroll rounded-md bg-white shadow-md"
       >
-        <div class="flex flex-row justify-between">
-          <p class="text-2xl font-medium text-mainBlue">
-            Der blev fundet {{ searchResult.length }} resultater
-          </p>
-          <span
-            class="origin-center transform cursor-pointer text-mainBlue transition-transform hover:scale-110"
-            @click="closeSearch"
-            ><i class="fas fa-times fa-lg"
-          /></span>
-        </div>
-        <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
-          <div>
-            <div
-              v-for="product in searchResult"
-              :key="product.id"
-              @mouseover="hoverProduct(product)"
-            >
-              <nuxt-link :to="`/produkt/${product.ProductSlug}`">
-                <div
-                  class="group flex cursor-pointer border-t border-b hover:bg-gray-50"
-                >
-                  <nuxt-img
-                    class="aspect-square max-h-14 transform object-contain transition-transform duration-300 group-hover:translate-x-3"
-                    :src="product.MainImage.url | formatImage"
-                    :alt="product.Name"
-                  />
+        <div class="p-4">
+          <div
+            class="sticky top-0 z-10 flex w-full flex-row justify-between bg-white"
+          >
+            <p class="text-2xl font-medium text-mainBlue">
+              Der blev fundet {{ searchResult.length }} resultater
+            </p>
+            <span
+              class="my-auto origin-center transform cursor-pointer text-mainBlue transition-transform hover:scale-110"
+              @click="closeSearch"
+              ><i class="fas fa-times fa-lg"
+            /></span>
+          </div>
+          <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+            <div>
+              <div
+                v-for="product in searchResult"
+                :key="product.id"
+                @mouseover="hoverProduct(product)"
+              >
+                <nuxt-link :to="`/produkt/${product.ProductSlug}`">
                   <div
-                    class="ml-4 flex w-full justify-between space-x-5 text-base"
+                    class="group flex cursor-pointer border-t border-b hover:bg-gray-50"
                   >
+                    <nuxt-img
+                      class="aspect-square max-h-14 transform object-contain transition-transform duration-300 group-hover:translate-x-3"
+                      :src="product.MainImage.url | formatImage"
+                      :alt="product.Name"
+                    />
                     <div
-                      class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
+                      class="ml-4 flex w-full justify-between space-x-5 text-base"
                     >
-                      <p class="">{{ product.Name }}</p>
+                      <div
+                        class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
+                      >
+                        <p class="">{{ product.Name }}</p>
+                      </div>
+                      <div class="my-auto whitespace-nowrap">
+                        <p>{{ product.DailyPrice | formatPrice }}</p>
+                      </div>
                     </div>
-                    <div class="my-auto whitespace-nowrap">
-                      <p>{{ product.DailyPrice | formatPrice }}</p>
+                  </div>
+                </nuxt-link>
+              </div>
+            </div>
+            <div class="invisible md:visible">
+              <template v-if="productPreview">
+                <div class="sticky top-16">
+                  <p class="text-base font-medium text-mainBlue">
+                    {{ productPreview.Name }}
+                  </p>
+                  <div class="grid grid-cols-2 border-t">
+                    <div>
+                      <ul
+                        v-for="attribute in productPreview.ProductAttributes"
+                        :key="attribute.id"
+                        class="list-inside list-disc text-sm"
+                      >
+                        <li class="list-item">
+                          {{ attribute.AttributeKey }}:
+                          {{ attribute.AttributeValue }}
+                        </li>
+                      </ul>
+                      <p class="font-semibold text-mainBlue">
+                        {{ productPreview.DailyPrice | formatPrice }}
+                      </p>
+                    </div>
+                    <div class="my-auto">
+                      <nuxt-img
+                        :src="productPreview.MainImage.url | formatImage"
+                      />
                     </div>
                   </div>
                 </div>
-              </nuxt-link>
-            </div>
-          </div>
-          <div class="invisible md:visible">
-            <template v-if="productPreview">
-              <p class="text-base font-medium text-mainBlue">
-                {{ productPreview.Name }}
+              </template>
+              <p v-else class="text-base font-medium text-mainBlue">
+                Peg over et produkt for at se detaljer
               </p>
-              <div class="grid grid-cols-2 border-t">
-                <div>
-                  <ul
-                    v-for="attribute in productPreview.ProductAttributes"
-                    :key="attribute.id"
-                    class="list-inside list-disc text-sm"
-                  >
-                    <li class="list-item">
-                      {{ attribute.AttributeKey }}:
-                      {{ attribute.AttributeValue }}
-                    </li>
-                  </ul>
-                  <p class="font-semibold text-mainBlue">
-                    {{ productPreview.DailyPrice | formatPrice }}
-                  </p>
-                </div>
-                <div class="my-auto">
-                  <nuxt-img :src="productPreview.MainImage.url | formatImage" />
-                </div>
-              </div>
-            </template>
-            <p v-else class="text-base font-medium text-mainBlue">
-              Peg over et produkt for at se detaljer
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -113,6 +121,11 @@ export default {
   watch: {
     inputSearch(val) {
       this.$emit('onChange', this.searchProducts(val));
+      if (val.length > 0) {
+        document.querySelector('body').style.overflow = 'hidden';
+      } else {
+        document.querySelector('body').style.overflow = 'scroll';
+      }
     },
   },
   methods: {
@@ -126,8 +139,7 @@ export default {
     hoverProduct(product) {
       this.productPreview = product;
     },
-    closeSearch(event) {
-      event.stopPropagation();
+    closeSearch() {
       this.inputSearch = '';
     },
   },
@@ -147,5 +159,8 @@ export default {
       display: list-item !important;
     }
   }
+}
+.modal-height {
+  height: calc(100% - 12rem);
 }
 </style>

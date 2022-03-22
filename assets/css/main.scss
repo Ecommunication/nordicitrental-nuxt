@@ -3,30 +3,30 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "fonts";
-@import "components/variables";
-@import "components/grid";
-@import "components/flex";
+@import 'fonts';
+@import 'components/variables';
+@import 'components/grid';
+@import 'components/flex';
 
 /* Helpers */
-@import "components/helpers/inputs";
-@import "components/helpers/flex";
-@import "components/helpers/general";
-@import "components/helpers/margins";
-@import "components/helpers/typo";
-@import "components/helpers/widths";
-@import "components/helpers/button";
+@import 'components/helpers/inputs';
+@import 'components/helpers/flex';
+@import 'components/helpers/general';
+@import 'components/helpers/margins';
+@import 'components/helpers/typo';
+@import 'components/helpers/widths';
+@import 'components/helpers/button';
 
 /* Pages */
-@import "components/pages/index";
-@import "components/shop/category";
-@import "components/shop/product";
-@import "components/shop/cart";
+@import 'components/pages/index';
+@import 'components/shop/category';
+@import 'components/shop/product';
+@import 'components/shop/cart';
 
 /* Responsive */
-@import "responsive/general";
-@import "responsive/product";
-@import "responsive/product-category";
+@import 'responsive/general';
+@import 'responsive/product';
+@import 'responsive/product-category';
 
 * {
   margin: 0;
@@ -41,7 +41,7 @@ body {
 
 body {
   color: $textMain;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
@@ -54,7 +54,7 @@ h3,
 h4,
 p,
 span {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #main-content {
@@ -118,14 +118,7 @@ footer {
 }
 
 .slider-title {
-  font-family: "Ubuntu", sans-serif;
-}
-
-.error-404 {
-  .illustration-404 {
-    max-width: 310px;
-    margin: 40px 0;
-  }
+  font-family: 'Ubuntu', sans-serif;
 }
 
 input,
@@ -137,7 +130,7 @@ select {
   width: 100%;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: auto;
 }
 
@@ -152,7 +145,7 @@ select {
 
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 3px;
 }
 
@@ -172,7 +165,7 @@ select {
 
 .custom-slider-container {
   h3 {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 
@@ -322,38 +315,38 @@ select {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "fonts";
-@import "components/variables";
-@import "components/grid";
-@import "components/flex"; /* Tailwind CSS */
+@import 'fonts';
+@import 'components/variables';
+@import 'components/grid';
+@import 'components/flex'; /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "fonts";
-@import "components/variables";
-@import "components/grid";
-@import "components/flex";
+@import 'fonts';
+@import 'components/variables';
+@import 'components/grid';
+@import 'components/flex';
 
 /* Helpers */
-@import "components/helpers/inputs";
-@import "components/helpers/flex";
-@import "components/helpers/general";
-@import "components/helpers/margins";
-@import "components/helpers/typo";
-@import "components/helpers/widths";
-@import "components/helpers/button";
+@import 'components/helpers/inputs';
+@import 'components/helpers/flex';
+@import 'components/helpers/general';
+@import 'components/helpers/margins';
+@import 'components/helpers/typo';
+@import 'components/helpers/widths';
+@import 'components/helpers/button';
 
 /* Pages */
-@import "components/pages/index";
-@import "components/shop/category";
-@import "components/shop/product";
-@import "components/shop/cart";
+@import 'components/pages/index';
+@import 'components/shop/category';
+@import 'components/shop/product';
+@import 'components/shop/cart';
 
 /* Responsive */
-@import "responsive/general";
-@import "responsive/product";
-@import "responsive/product-category";
+@import 'responsive/general';
+@import 'responsive/product';
+@import 'responsive/product-category';
 
 * {
   margin: 0;
@@ -368,7 +361,7 @@ body {
 
 body {
   color: $textMain;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
@@ -381,7 +374,7 @@ h3,
 h4,
 p,
 span {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #main-content {
@@ -445,14 +438,7 @@ footer {
 }
 
 .slider-title {
-  font-family: "Ubuntu", sans-serif;
-}
-
-.error-404 {
-  .illustration-404 {
-    max-width: 310px;
-    margin: 40px 0;
-  }
+  font-family: 'Ubuntu', sans-serif;
 }
 
 input,
@@ -464,7 +450,7 @@ select {
   width: 100%;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: auto;
 }
 
@@ -479,7 +465,7 @@ select {
 
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 3px;
 }
 
@@ -499,7 +485,7 @@ select {
 
 .custom-slider-container {
   h3 {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 
@@ -646,41 +632,41 @@ select {
   }
 }
 
-@import "components/helpers/inputs";
-@import "components/helpers/flex";
-@import "components/helpers/general";
-@import "components/helpers/margins";
-@import "components/helpers/typo";
-@import "components/helpers/widths";
-@import "components/helpers/button"; /* Tailwind CSS */
+@import 'components/helpers/inputs';
+@import 'components/helpers/flex';
+@import 'components/helpers/general';
+@import 'components/helpers/margins';
+@import 'components/helpers/typo';
+@import 'components/helpers/widths';
+@import 'components/helpers/button'; /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "fonts";
-@import "components/variables";
-@import "components/grid";
-@import "components/flex";
+@import 'fonts';
+@import 'components/variables';
+@import 'components/grid';
+@import 'components/flex';
 
 /* Helpers */
-@import "components/helpers/inputs";
-@import "components/helpers/flex";
-@import "components/helpers/general";
-@import "components/helpers/margins";
-@import "components/helpers/typo";
-@import "components/helpers/widths";
-@import "components/helpers/button";
+@import 'components/helpers/inputs';
+@import 'components/helpers/flex';
+@import 'components/helpers/general';
+@import 'components/helpers/margins';
+@import 'components/helpers/typo';
+@import 'components/helpers/widths';
+@import 'components/helpers/button';
 
 /* Pages */
-@import "components/pages/index";
-@import "components/shop/category";
-@import "components/shop/product";
-@import "components/shop/cart";
+@import 'components/pages/index';
+@import 'components/shop/category';
+@import 'components/shop/product';
+@import 'components/shop/cart';
 
 /* Responsive */
-@import "responsive/general";
-@import "responsive/product";
-@import "responsive/product-category";
+@import 'responsive/general';
+@import 'responsive/product';
+@import 'responsive/product-category';
 
 * {
   margin: 0;
@@ -695,7 +681,7 @@ body {
 
 body {
   color: $textMain;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
@@ -708,7 +694,7 @@ h3,
 h4,
 p,
 span {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #main-content {
@@ -772,14 +758,7 @@ footer {
 }
 
 .slider-title {
-  font-family: "Ubuntu", sans-serif;
-}
-
-.error-404 {
-  .illustration-404 {
-    max-width: 310px;
-    margin: 40px 0;
-  }
+  font-family: 'Ubuntu', sans-serif;
 }
 
 input,
@@ -791,7 +770,7 @@ select {
   width: 100%;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: auto;
 }
 
@@ -806,7 +785,7 @@ select {
 
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 3px;
 }
 
@@ -826,7 +805,7 @@ select {
 
 .custom-slider-container {
   h3 {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 
@@ -973,38 +952,38 @@ select {
   }
 }
 
-@import "components/pages/index";
-@import "components/shop/category";
-@import "components/shop/product";
-@import "components/shop/cart"; /* Tailwind CSS */
+@import 'components/pages/index';
+@import 'components/shop/category';
+@import 'components/shop/product';
+@import 'components/shop/cart'; /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "fonts";
-@import "components/variables";
-@import "components/grid";
-@import "components/flex";
+@import 'fonts';
+@import 'components/variables';
+@import 'components/grid';
+@import 'components/flex';
 
 /* Helpers */
-@import "components/helpers/inputs";
-@import "components/helpers/flex";
-@import "components/helpers/general";
-@import "components/helpers/margins";
-@import "components/helpers/typo";
-@import "components/helpers/widths";
-@import "components/helpers/button";
+@import 'components/helpers/inputs';
+@import 'components/helpers/flex';
+@import 'components/helpers/general';
+@import 'components/helpers/margins';
+@import 'components/helpers/typo';
+@import 'components/helpers/widths';
+@import 'components/helpers/button';
 
 /* Pages */
-@import "components/pages/index";
-@import "components/shop/category";
-@import "components/shop/product";
-@import "components/shop/cart";
+@import 'components/pages/index';
+@import 'components/shop/category';
+@import 'components/shop/product';
+@import 'components/shop/cart';
 
 /* Responsive */
-@import "responsive/general";
-@import "responsive/product";
-@import "responsive/product-category";
+@import 'responsive/general';
+@import 'responsive/product';
+@import 'responsive/product-category';
 
 * {
   margin: 0;
@@ -1019,7 +998,7 @@ body {
 
 body {
   color: $textMain;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
@@ -1032,7 +1011,7 @@ h3,
 h4,
 p,
 span {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #main-content {
@@ -1096,14 +1075,7 @@ footer {
 }
 
 .slider-title {
-  font-family: "Ubuntu", sans-serif;
-}
-
-.error-404 {
-  .illustration-404 {
-    max-width: 310px;
-    margin: 40px 0;
-  }
+  font-family: 'Ubuntu', sans-serif;
 }
 
 input,
@@ -1115,7 +1087,7 @@ select {
   width: 100%;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: auto;
 }
 
@@ -1130,7 +1102,7 @@ select {
 
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 3px;
 }
 
@@ -1150,7 +1122,7 @@ select {
 
 .custom-slider-container {
   h3 {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 
@@ -1297,9 +1269,9 @@ select {
   }
 }
 
-@import "responsive/general";
-@import "responsive/product";
-@import "responsive/product-category";
+@import 'responsive/general';
+@import 'responsive/product';
+@import 'responsive/product-category';
 * {
   margin: 0;
   padding: 0;
@@ -1311,7 +1283,7 @@ body {
 }
 body {
   color: $textMain;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
@@ -1323,7 +1295,7 @@ h3,
 h4,
 p,
 span {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 #main-content {
   flex: 1 0 auto;
@@ -1375,14 +1347,9 @@ footer {
   border-radius: 3px;
 }
 .slider-title {
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
-.error-404 {
-  .illustration-404 {
-    max-width: 310px;
-    margin: 40px 0;
-  }
-}
+
 input,
 textarea,
 select {
@@ -1391,7 +1358,7 @@ select {
   padding: 10px;
   width: 100%;
 }
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: auto;
 }
 select {
@@ -1403,7 +1370,7 @@ select {
 }
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 3px;
 }
 .special {
@@ -1418,30 +1385,30 @@ select {
 @tailwind components;
 @tailwind utilities;
 
-@import "fonts";
-@import "components/variables";
-@import "components/grid";
-@import "components/flex";
+@import 'fonts';
+@import 'components/variables';
+@import 'components/grid';
+@import 'components/flex';
 
 /* Helpers */
-@import "components/helpers/inputs";
-@import "components/helpers/flex";
-@import "components/helpers/general";
-@import "components/helpers/margins";
-@import "components/helpers/typo";
-@import "components/helpers/widths";
-@import "components/helpers/button";
+@import 'components/helpers/inputs';
+@import 'components/helpers/flex';
+@import 'components/helpers/general';
+@import 'components/helpers/margins';
+@import 'components/helpers/typo';
+@import 'components/helpers/widths';
+@import 'components/helpers/button';
 
 /* Pages */
-@import "components/pages/index";
-@import "components/shop/category";
-@import "components/shop/product";
-@import "components/shop/cart";
+@import 'components/pages/index';
+@import 'components/shop/category';
+@import 'components/shop/product';
+@import 'components/shop/cart';
 
 /* Responsive */
-@import "responsive/general";
-@import "responsive/product";
-@import "responsive/product-category";
+@import 'responsive/general';
+@import 'responsive/product';
+@import 'responsive/product-category';
 
 * {
   margin: 0;
@@ -1456,7 +1423,7 @@ body {
 
 body {
   color: $textMain;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
@@ -1469,7 +1436,7 @@ h3,
 h4,
 p,
 span {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #main-content {
@@ -1533,14 +1500,7 @@ footer {
 }
 
 .slider-title {
-  font-family: "Ubuntu", sans-serif;
-}
-
-.error-404 {
-  .illustration-404 {
-    max-width: 310px;
-    margin: 40px 0;
-  }
+  font-family: 'Ubuntu', sans-serif;
 }
 
 input,
@@ -1552,7 +1512,7 @@ select {
   width: 100%;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: auto;
 }
 
@@ -1567,7 +1527,7 @@ select {
 
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 3px;
 }
 
@@ -1587,7 +1547,7 @@ select {
 
 .custom-slider-container {
   h3 {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 
@@ -1736,7 +1696,7 @@ select {
 
 .custom-slider-container {
   h3 {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 #index {
@@ -1796,30 +1756,30 @@ select {
 @tailwind components;
 @tailwind utilities;
 
-@import "fonts";
-@import "components/variables";
-@import "components/grid";
-@import "components/flex";
+@import 'fonts';
+@import 'components/variables';
+@import 'components/grid';
+@import 'components/flex';
 
 /* Helpers */
-@import "components/helpers/inputs";
-@import "components/helpers/flex";
-@import "components/helpers/general";
-@import "components/helpers/margins";
-@import "components/helpers/typo";
-@import "components/helpers/widths";
-@import "components/helpers/button";
+@import 'components/helpers/inputs';
+@import 'components/helpers/flex';
+@import 'components/helpers/general';
+@import 'components/helpers/margins';
+@import 'components/helpers/typo';
+@import 'components/helpers/widths';
+@import 'components/helpers/button';
 
 /* Pages */
-@import "components/pages/index";
-@import "components/shop/category";
-@import "components/shop/product";
-@import "components/shop/cart";
+@import 'components/pages/index';
+@import 'components/shop/category';
+@import 'components/shop/product';
+@import 'components/shop/cart';
 
 /* Responsive */
-@import "responsive/general";
-@import "responsive/product";
-@import "responsive/product-category";
+@import 'responsive/general';
+@import 'responsive/product';
+@import 'responsive/product-category';
 
 * {
   margin: 0;
@@ -1834,7 +1794,7 @@ body {
 
 body {
   color: $textMain;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   line-height: normal;
   display: flex;
@@ -1847,7 +1807,7 @@ h3,
 h4,
 p,
 span {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #main-content {
@@ -1911,14 +1871,7 @@ footer {
 }
 
 .slider-title {
-  font-family: "Ubuntu", sans-serif;
-}
-
-.error-404 {
-  .illustration-404 {
-    max-width: 310px;
-    margin: 40px 0;
-  }
+  font-family: 'Ubuntu', sans-serif;
 }
 
 input,
@@ -1930,7 +1883,7 @@ select {
   width: 100%;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: auto;
 }
 
@@ -1945,7 +1898,7 @@ select {
 
 .label {
   font-size: 0.8em;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 3px;
 }
 
@@ -1965,7 +1918,7 @@ select {
 
 .custom-slider-container {
   h3 {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ml-5 mb-2">
-      <recaptcha style="margin-left: -20px" />
+      <!-- <recaptcha style="margin-left: -20px" /> -->
       <div
         v-if="captchaError"
         class="text-left"
@@ -36,14 +36,15 @@ export default {
     async submit() {
       if (this.isFormValid()) {
         try {
-          const token = await this.$recaptcha.getResponse();
+          // const token = await this.$recaptcha.getResponse();
 
           // send token to server alongside your form data
 
           // at the end you need to reset recaptcha
-          await this.$recaptcha.reset();
+          // await this.$recaptcha.reset();
           this.captchaError = null;
         } catch (error) {
+          console.log('Error', error);
           this.captchaError = error;
           return;
         }
@@ -57,7 +58,7 @@ export default {
             Message: this.form.message,
           });
 
-          this.$emit("formSubmitted");
+          this.$emit('formSubmitted');
         } catch (error) {
           console.log(error);
         }
@@ -85,7 +86,7 @@ export default {
         }
       );
 
-      this.$emit("changeErrors", this.formErrors);
+      this.$emit('changeErrors', this.formErrors);
       return !hasAnyError;
     },
   },

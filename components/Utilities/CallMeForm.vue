@@ -20,7 +20,7 @@
     </div>
     <div
       v-if="result"
-      class="mt-2 result-container"
+      class="result-container mt-2"
       :class="error ? 'msg-error' : 'msg-success'"
     >
       {{ result }}
@@ -30,21 +30,21 @@
 
 <script>
 const messages = {
-  success: "Vi vil vende tilbage snarest muligt.",
+  success: 'Vi vil vende tilbage snarest muligt.',
   error: {
-    nameNotEmpty: "Navn skal være udfyldt.",
-    phoneNotEmpty: "Telefon nr. skal være udfyldt",
-    phoneNotValid: "Telefon nr. er ikke gyldigt.",
+    nameNotEmpty: 'Navn skal være udfyldt.',
+    phoneNotEmpty: 'Telefon nr. skal være udfyldt',
+    phoneNotValid: 'Telefon nr. er ikke gyldigt.',
   },
 };
 
 export default {
   data() {
     return {
-      name: "",
-      phone: "",
+      name: '',
+      phone: '',
       error: false,
-      result: "",
+      result: '',
       isSubmitted: false,
     };
   },
@@ -53,12 +53,12 @@ export default {
       if (!this.validate()) return;
 
       try {
-        this.$axios.$post(process.env.apiUrl + "/mails-calls", {
+        this.$axios.$post(process.env.API_URL + '/mails-calls', {
           Name: this.name,
           Phone: this.phone,
         });
 
-        this.$emit("formSubmitted");
+        this.$emit('formSubmitted');
         this.isSubmitted = true;
       } catch (error) {
         console.log(error);
@@ -92,8 +92,8 @@ export default {
       return true;
     },
     resetForm() {
-      this.name = "";
-      this.phone = "";
+      this.name = '';
+      this.phone = '';
     },
   },
 };
