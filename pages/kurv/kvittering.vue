@@ -10,26 +10,7 @@
         <div class="col" style="width: 100%">
           <Breadcrumb class="mt-10 mb-10" />
 
-          <div class="message" v-html="data.Receipt">
-            <!-- <p>Kære kunde.</p>
-            <p>Tak for din bestilling</p>
-            <p>
-              Du vil modtage en lejeaftale/tilbud pr. e-mail inden for få timer.
-              Lejeaftalen/tilbuddet skal accepteres ved at besvare e-mailen med
-              et ”godkendt”. Aftalen er gældende, når vi har modtaget den
-              accepterede lejeaftale/tilbud.
-            </p>
-            <p>
-              Når vi har modtaget den godkendte lejeaftale/tilbud, vil du kort
-              efter modtage en faktura til betaling. Betalingsbetingelserne
-              fremgår af fakturaen. Betaling kan ske via kontooverførsel. Vilkår
-              og betingelser er angivet i lejeaftale/tilbud samt på fakturaen.
-            </p>
-            <p>Med venlig hilsen</p>
-            <p>Nordic IT Rental</p>
-            <p>Industriparken 22A</p>
-            <p>2750 Ballerup</p> -->
-          </div>
+          <div class="message" v-html="data.Receipt"></div>
 
           <ClientOnly>
             <div class="py-10">

@@ -120,6 +120,7 @@
         <ContactUsForm
           :title="data.ContactHeader"
           formTitle="Bliv ringet op"
+          :formTexts="contactForm"
           style="margin: 30px auto"
           customCSS="justify-content: center;"
           titleStyle="font-size: 40px; margin-bottom: 24px;"
@@ -149,6 +150,7 @@ import Button from '@/components/Utilities/Button';
 import ContactUsForm from '@/components/Formular/Contact';
 import Modal from '@/components/Utilities/Modal';
 import CallMeForm from '@/components/Utilities/CallMeForm';
+import { GET_CONTACT_FORM_TEXTS } from '~/lib/api';
 
 export default {
   components: {
@@ -197,10 +199,18 @@ export default {
       },
     };
   },
-  async asyncData({ params, $axios, i18n }) {
+  async asyncData({ params, $axios, i18n, app }) {
     const data = await $axios.$get(`/services?_locale=${i18n.locale}`);
     const forsideData = await $axios.$get(`/forside?_locale=${i18n.locale}`);
-    return { data, forsideData };
+
+    const client = app.apolloProvider.defaultClient;
+    const res = await client.query({
+      query: GET_CONTACT_FORM_TEXTS,
+      variables: { locale: i18n.locale },
+    });
+    const { contactForm } = res.data;
+
+    return { data, forsideData, contactForm };
   },
   methods: {
     showModal() {

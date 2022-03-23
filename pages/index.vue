@@ -122,7 +122,6 @@
             titleStyle="margin-bottom: 60px;"
             formStyle="max-width: 700px;"
             :formTexts="contactForm"
-            ,
           >
             <template v-slot:left-col>
               <div class="pr-35 text-center">
