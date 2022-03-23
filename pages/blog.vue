@@ -22,14 +22,9 @@
             </p>
           </div>
           <div
-            class="aspect-square flex flex-col rounded-md bg-mainBlue p-4 shadow-md"
+            class="aspect-square relative flex flex-col rounded-md bg-mainBlue p-4 shadow-md"
           >
-            <nuxt-img
-              :src="blog.FeatureImage.url"
-              fit="cover"
-              format="webp"
-              quality="90"
-            />
+            <nuxt-img :src="blog.FeatureImage.url" format="webp" fit="cover" />
           </div>
         </nuxt-link>
       </div>
@@ -49,8 +44,6 @@ export default {
       variables: { locale: i18n.locale },
     });
     const { blogpage, blogs } = res.data;
-
-    console.log(blogpage);
 
     return { blogpage, blogs };
   },

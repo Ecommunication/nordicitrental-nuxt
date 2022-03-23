@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-4 flex w-full flex-row justify-center">
-      <span class="relative w-1/3">
+      <span class="relative mx-14 w-full md:w-1/3">
         <input
           class="rounded-md"
           v-model="inputSearch"

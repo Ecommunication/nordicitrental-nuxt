@@ -1,9 +1,21 @@
 <template>
-  <div></div>
+  <div>
+    <div
+      @click="submit"
+      class="button btn-primary"
+      style="float: none; width: 100%"
+    >
+      Send
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
+  props: {
+    form: { type: Object, required: true },
+    formValidations: { type: Object, required: true },
+  },
   async mounted() {
     try {
       await this.$recaptcha.init();
@@ -11,17 +23,18 @@ export default {
       console.error(e);
     }
   },
+
   methods: {
-    async onSubmit() {
+    async submit() {
       try {
-        const token = await this.$recaptcha.execute("login");
+        const token = await this.$recaptcha.execute('login');
+        console.log(token);
 
         // send token to server alongside your form data
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     },
-  },
-  beforeDestroy() {
-    this.$recaptcha.destroy();
   },
 };
 </script>

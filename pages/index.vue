@@ -117,10 +117,12 @@
             class="mt-7 mb-10"
             customCSS="padding: 0 10px; justify-content: center;"
             :title="data.IndexContactRightText"
-            formTitle="Bliv ringet op"
+            :formTitle="contactForm.title"
             style="margin: 0 auto"
             titleStyle="margin-bottom: 60px;"
             formStyle="max-width: 700px;"
+            :formTexts="contactForm"
+            ,
           >
             <template v-slot:left-col>
               <div class="pr-35 text-center">
@@ -151,15 +153,24 @@ import TextCard from '@/components/Utilities/TextCard';
 import BackgroundImg from '@/components/Utilities/BackgroundImg';
 import ContactUsForm from '@/components/Formular/Contact';
 
+import { GET_CONTACT_FORM_TEXTS } from '~/lib/api';
 export default {
   components: {
     TextCard,
     BackgroundImg,
     ContactUsForm,
   },
-  async asyncData({ params, $axios, i18n }) {
+  async asyncData({ params, $axios, i18n, app }) {
     const data = await $axios.$get(`/forside?_locale=${i18n.locale}`);
-    return { data };
+
+    const client = app.apolloProvider.defaultClient;
+    const res = await client.query({
+      query: GET_CONTACT_FORM_TEXTS,
+      variables: { locale: i18n.locale },
+    });
+    const { contactForm } = res.data;
+
+    return { data, contactForm };
   },
   data() {
     return {

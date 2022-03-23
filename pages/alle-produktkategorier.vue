@@ -42,10 +42,12 @@ export default {
   components: {
     HeaderImg,
   },
-  async asyncData({ params, $axios }) {
-    const data = await $axios.$get('/om-os');
+  async asyncData({ params, $axios, i18n }) {
+    const data = await $axios.$get(`/om-os?_locale=${i18n.locale}`);
 
-    const categoriesData = await $axios.$get(`/product-categories`);
+    const categoriesData = await $axios.$get(
+      `/product-categories?_locale=${i18n.locale}`
+    );
     const categories = categoriesData.map((cat) => new Category(cat));
 
     return { categories, data };

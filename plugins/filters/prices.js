@@ -1,18 +1,18 @@
-import Vue from "vue";
+import Vue from 'vue';
 
 export default ({ app }, inject) => {
   const formatPrice = (val) => {
-    if (app.store.state.currency === "EUR") {
-      const formattedPrice = new Intl.NumberFormat("en-US").format(
-        parseInt(val / 7.5)
+    if (app.store.state.currency === 'EUR') {
+      const formattedPrice = new Intl.NumberFormat('en-US').format(
+        parseFloat(val / 7.5).toFixed(2)
       );
-      return "€ " + formattedPrice;
+      return '€ ' + formattedPrice;
     } else {
-      const formattedPrice = new Intl.NumberFormat("da-DK").format(
+      const formattedPrice = new Intl.NumberFormat('da-DK').format(
         parseInt(val)
       );
-      return "Kr. " + formattedPrice + ",-";
+      return 'Kr. ' + formattedPrice + ',-';
     }
   };
-  Vue.filter("formatPrice", formatPrice);
+  Vue.filter('formatPrice', formatPrice);
 };

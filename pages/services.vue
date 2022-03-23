@@ -197,9 +197,9 @@ export default {
       },
     };
   },
-  async asyncData({ params, $axios }) {
-    const data = await $axios.$get('/services');
-    const forsideData = await $axios.$get('/forside');
+  async asyncData({ params, $axios, i18n }) {
+    const data = await $axios.$get(`/services?_locale=${i18n.locale}`);
+    const forsideData = await $axios.$get(`/forside?_locale=${i18n.locale}`);
     return { data, forsideData };
   },
   methods: {

@@ -19,7 +19,7 @@
 
           <form class="mt-5" :key="formKey">
             <InputField
-              label="Navn"
+              :label="formTexts.name"
               :input="form.name"
               @onChange="(val) => onChange('name', val, formValidations.name)"
               :errors="errors.name"
@@ -28,7 +28,7 @@
             />
 
             <InputField
-              label="E-mail"
+              :label="formTexts.email"
               :input="form.email"
               @onChange="(val) => onChange('email', val, formValidations.email)"
               :errors="errors.email"
@@ -37,7 +37,7 @@
             />
 
             <InputField
-              label="Firmanavn"
+              :label="formTexts.company"
               :input="form.companyName"
               @onChange="
                 (val) =>
@@ -49,7 +49,7 @@
             />
 
             <InputField
-              label="Telefon"
+              :label="formTexts.phone"
               :input="form.phone"
               @onChange="(val) => onChange('phone', val, formValidations.phone)"
               :errors="errors.phone"
@@ -58,7 +58,7 @@
             />
 
             <Textarea
-              label="Besked"
+              :label="formTexts.message"
               :input="form.message"
               :rows="8"
               @changed="(val) => (form.message = val)"
@@ -103,6 +103,13 @@ export default {
     formStyle: { type: String, required: false },
     leftColStyle: { type: String, required: false },
     rightColStyle: { type: String, required: false },
+    formTexts: {
+      name: '',
+      email: '',
+      company: '',
+      phone: '',
+      message: '',
+    },
   },
   data() {
     return {

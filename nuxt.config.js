@@ -9,9 +9,6 @@ export default {
    ** See https://nuxtjs.org/api/configuration-target
    */
   target: 'server',
-  serverMiddleware: {
-    '/_ipx': '~/server/middleware/ipx.js',
-  },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -62,6 +59,9 @@ export default {
     googleAnalytics: {
       id: process.env.GOOGLE_ANALYTICS_ID,
     },
+    recaptcha: {
+      siteKey: process.env.RECAPTCHA_SITE_KEY,
+    },
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -80,7 +80,7 @@ export default {
       {
         hideBadge: false,
         siteKey: process.env.RECAPTCHA_SITE_KEY,
-        version: 2,
+        version: 3,
       },
     ],
     ['@nuxtjs/sitemap'],
@@ -119,13 +119,13 @@ export default {
     },
   },
 
-  // image: {
-  //   provider: 'ipx',
-  //   // strapi: {
-  //   //   baseURL: `${process.env.API_URL}/uploads/`,
-  //   // },
-  //   domains: [process.env.API_URL, process.env.GRAPHQL_URL],
-  // },
+  image: {
+    provider: 'strapi',
+    strapi: {
+      baseURL: `${process.env.API_URL}`,
+    },
+    domains: [process.env.API_URL, process.env.GRAPHQL_URL],
+  },
 
   env: {
     apiUrl: process.env.API_URL,

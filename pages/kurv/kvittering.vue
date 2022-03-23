@@ -10,8 +10,8 @@
         <div class="col" style="width: 100%">
           <Breadcrumb class="mt-10 mb-10" />
 
-          <div class="message">
-            <p>Kære kunde.</p>
+          <div class="message" v-html="data.Receipt">
+            <!-- <p>Kære kunde.</p>
             <p>Tak for din bestilling</p>
             <p>
               Du vil modtage en lejeaftale/tilbud pr. e-mail inden for få timer.
@@ -28,19 +28,19 @@
             <p>Med venlig hilsen</p>
             <p>Nordic IT Rental</p>
             <p>Industriparken 22A</p>
-            <p>2750 Ballerup</p>
+            <p>2750 Ballerup</p> -->
           </div>
 
           <ClientOnly>
             <div class="py-10">
               <div>
-                <h2>Ordredetaljer</h2>
+                <h2>{{ data.OrderDetails }}</h2>
                 <ItemDetails :items="items" />
                 <OrderDetails :details="orderDetails" />
               </div>
 
               <div class="mt-10">
-                <h2>Kundeoplysninger</h2>
+                <h2>{{ data.CustomerInfo }}</h2>
                 <CustomerInformation :information="customerInformation" />
               </div>
 
@@ -56,13 +56,13 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-import Breadcrumb from "@/components/Cart/Breadcrumb";
-import ItemDetails from "@/components/Cart/Order/ItemDetails";
-import OrderDetails from "@/components/Cart/Order/Details";
-import CustomerInformation from "@/components/Cart/Order/CustomerInformation";
-import Addresses from "@/components/Cart/Order/Addresses";
-import HeaderImg from "@/components/Utilities/HeaderImg";
+import { mapActions, mapState } from 'vuex';
+import Breadcrumb from '@/components/Cart/Breadcrumb';
+import ItemDetails from '@/components/Cart/Order/ItemDetails';
+import OrderDetails from '@/components/Cart/Order/Details';
+import CustomerInformation from '@/components/Cart/Order/CustomerInformation';
+import Addresses from '@/components/Cart/Order/Addresses';
+import HeaderImg from '@/components/Utilities/HeaderImg';
 
 export default {
   components: {
@@ -74,7 +74,7 @@ export default {
     Addresses,
   },
   computed: {
-    ...mapState(["orderReceipt"]),
+    ...mapState(['orderReceipt']),
     order() {
       return this.orderReceipt?.order || {};
     },
@@ -87,7 +87,7 @@ export default {
         shipping: this.order.ShippingHandlingCost,
         vat: this.order.OrderTotalVat - this.order.OrderTotalExVat,
         total: this.order.OrderTotalVat,
-        paymentMethod: "", // todo: missing
+        paymentMethod: '', // todo: missing
         remark: this.order.OrderComments,
         cvr: this.orderReceipt?.customer?.CustomerCompanyCVR,
       };
@@ -115,15 +115,15 @@ export default {
   },
   head() {
     return {
-      title: "Nordic IT Rental" + this.data.PageTitle,
+      title: 'Nordic IT Rental' + this.data.PageTitle,
       meta: [
         {
-          name: "title",
-          content: this.data.MetaTitle || "",
+          name: 'title',
+          content: this.data.MetaTitle || '',
         },
         {
-          name: "description",
-          content: this.data.MetaDescription || "",
+          name: 'description',
+          content: this.data.MetaDescription || '',
         },
       ],
     };
@@ -133,19 +133,19 @@ export default {
       items: [],
     };
   },
-  async asyncData({ params, $axios }) {
-    const data = await $axios.$get("/checkud-ordre");
+  async asyncData({ params, $axios, i18n }) {
+    const data = await $axios.$get(`/checkud-ordre?_locale=${i18n.locale}`);
     return { data };
   },
   async created() {
     if (!this.orderReceipt) {
-      this.$router.push("/");
+      this.$router.push('/');
     } else {
       this.items = await this.getItems();
     }
   },
   methods: {
-    ...mapActions(["getProduct"]),
+    ...mapActions(['getProduct']),
     async getItems() {
       const items = await Promise.all(
         (this.orderReceipt?.order?.Products || []).map(async (item) => {

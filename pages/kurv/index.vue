@@ -19,26 +19,24 @@
                   class="button btn-block btn-primary mt-2 mb-2"
                   style="border-radius: 7px"
                 >
-                  Udfør booking
+                  {{ data.CompleteBooking }}
                 </div>
               </nuxt-link>
               <Totals :cart="cart" />
             </div>
 
-            <div v-else class="cart-empty text-center py-10">
-              <h1 class="text-blue">Kurven er tom for bookinger</h1>
+            <div v-else class="cart-empty py-10 text-center">
+              <h1 class="text-blue">{{ data.EmptyCart }}</h1>
 
-              <p>
-                <img
-                  class="mt-10 mb-10"
-                  src="~/assets/images/icons/empty-cart.svg"
-                  width="150px"
-                  alt=""
-                />
-              </p>
+              <img
+                class="mx-auto mt-10 mb-10"
+                src="~/assets/images/icons/empty-cart.svg"
+                width="150px"
+                alt=""
+              />
 
               <nuxt-link to="/alle-produktkategorier">
-                <div class="button btn-primary">Gå til produkter</div>
+                <div class="button btn-primary">{{ data.GoToProducts }}</div>
               </nuxt-link>
             </div>
           </div>
@@ -49,11 +47,11 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
-import CartList from "@/components/Cart/CartList";
-import Breadcrumb from "@/components/Cart/Breadcrumb";
-import Totals from "@/components/Cart/Totals";
-import HeaderImg from "@/components/Utilities/HeaderImg";
+import { mapState, mapGetters, mapActions } from 'vuex';
+import CartList from '@/components/Cart/CartList';
+import Breadcrumb from '@/components/Cart/Breadcrumb';
+import Totals from '@/components/Cart/Totals';
+import HeaderImg from '@/components/Utilities/HeaderImg';
 
 export default {
   components: {
@@ -63,20 +61,20 @@ export default {
     Breadcrumb,
   },
   computed: {
-    ...mapState(["cart"]),
-    ...mapGetters(["noOfItems"]),
+    ...mapState(['cart']),
+    ...mapGetters(['noOfItems']),
   },
   head() {
     return {
-      title: "Nordic IT Rental",
+      title: 'Nordic IT Rental',
       meta: [
         {
-          name: "title",
-          content: this.data.MetaTitle || "",
+          name: 'title',
+          content: this.data.MetaTitle || '',
         },
         {
-          name: "description",
-          content: this.data.MetaDescription || "",
+          name: 'description',
+          content: this.data.MetaDescription || '',
         },
       ],
     };
@@ -84,17 +82,17 @@ export default {
   data() {
     return {
       cover: {
-        text: "Bookinger",
-        img: "",
+        text: 'Bookinger',
+        img: '',
       },
       errorAfterFetch: null,
     };
   },
   methods: {
-    ...mapActions(["switchPersistanceState"]),
+    ...mapActions(['switchPersistanceState']),
   },
   async asyncData({ params, $axios }) {
-    const data = await $axios.$get("/kurv");
+    const data = await $axios.$get('/kurv');
     return { data };
   },
 };

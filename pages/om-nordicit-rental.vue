@@ -83,11 +83,11 @@
 </template>
 
 <script>
-import TextCard from "@/components/Utilities/TextCard";
-import HeaderImg from "@/components/Utilities/HeaderImg";
-import BackgroundImg from "@/components/Utilities/BackgroundImg";
-import RefCompanyQuote from "@/components/AboutUs/RefCompanyQuote";
-import Employee from "@/components/AboutUs/Employee";
+import TextCard from '@/components/Utilities/TextCard';
+import HeaderImg from '@/components/Utilities/HeaderImg';
+import BackgroundImg from '@/components/Utilities/BackgroundImg';
+import RefCompanyQuote from '@/components/AboutUs/RefCompanyQuote';
+import Employee from '@/components/AboutUs/Employee';
 export default {
   components: {
     TextCard,
@@ -101,18 +101,18 @@ export default {
       title: this.data.PageTitle,
       meta: [
         {
-          name: "title",
-          content: this.data.MetaTitle || "",
+          name: 'title',
+          content: this.data.MetaTitle || '',
         },
         {
-          name: "description",
-          content: this.data.MetaDescription || "",
+          name: 'description',
+          content: this.data.MetaDescription || '',
         },
       ],
     };
   },
-  async asyncData({ params, $axios }) {
-    const data = await $axios.$get("/om-os");
+  async asyncData({ params, $axios, i18n }) {
+    const data = await $axios.$get(`/om-os?_locale=${i18n.locale}`);
     return { data };
   },
 };

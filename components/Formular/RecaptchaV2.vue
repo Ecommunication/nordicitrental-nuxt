@@ -36,15 +36,15 @@ export default {
     async submit() {
       if (this.isFormValid()) {
         try {
-          // const token = await this.$recaptcha.getResponse();
+          const token = await this.$recaptcha.getResponse();
+          console.log(token);
 
           // send token to server alongside your form data
 
           // at the end you need to reset recaptcha
-          // await this.$recaptcha.reset();
+          await this.$recaptcha.reset();
           this.captchaError = null;
         } catch (error) {
-          console.log('Error', error);
           this.captchaError = error;
           return;
         }
