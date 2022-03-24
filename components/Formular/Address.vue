@@ -1,9 +1,32 @@
+<i18n>
+{
+  "en": {
+    "firstName":"First name",
+    "lastName":"Last name",
+    "companyName":"Company name",
+    "streetName": "Street name and number",
+    "country": "Choose a country",
+    "city":"City",
+    "postalCode": "Postal code"
+  },
+  "da": {
+    "firstName":"Fornavn",
+    "lastName":"Efternavn",
+    "companyName":"Virksomhedsnavn",
+    "streetName": "Gadenavn og nr.",
+    "country": "Vælg et lang",
+    "city":"By",
+    "postalCode": "Postnummer"
+  }
+}
+</i18n>
+
 <template>
   <div :key="pageKey">
     <div class="row">
       <div class="col-xs-12 col-md-6">
         <InputField
-          label="Fornavn"
+          :label="$t('firstName')"
           :input="form.firstName"
           @onChange="
             (val) => onChange('firstName', val, formValidations.firstName)
@@ -13,7 +36,7 @@
       </div>
       <div class="col-xs-12 col-md-6">
         <InputField
-          label="Efternavn"
+          :label="$t('lastName')"
           :input="form.lastName"
           @onChange="
             (val) => onChange('lastName', val, formValidations.lastName)
@@ -26,7 +49,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-6">
         <InputField
-          label="Firmanavn"
+          :label="$t('companyName')"
           :input="form.companyName"
           @onChange="
             (val) => onChange('companyName', val, formValidations.companyName)
@@ -36,7 +59,7 @@
       </div>
       <div class="col-xs-12 col-md-6">
         <InputField
-          label="Gadenavn og nr"
+          :label="$t('streetName')"
           :input="form.streetNameAndNo"
           @onChange="
             (val) =>
@@ -50,7 +73,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-4">
         <Selection
-          label="Vælg et land"
+          :label="$t('country')"
           :options="countryOptions"
           :input="form.country"
           :defaultOption="countryOptions[0]"
@@ -59,7 +82,7 @@
       </div>
       <div class="col-xs-12 col-md-4">
         <InputField
-          label="By"
+          :label="$t('city')"
           :input="form.town"
           @onChange="(val) => onChange('town', val, formValidations.town)"
           :errors="errors.town"
@@ -67,7 +90,7 @@
       </div>
       <div class="col-xs-12 col-md-4">
         <InputField
-          label="Postnummer"
+          :label="$t('postalCode')"
           :input="form.zipCode"
           @onChange="(val) => onChange('zipCode', val, formValidations.zipCode)"
           :errors="errors.zipCode"
@@ -78,27 +101,27 @@
 </template>
 
 <script>
-import Vue from "vue";
-import InputField from "@/components/Utilities/Form/InputField";
-import Selection from "@/components/Utilities/Form/Selection";
-import validations from "@/components/Formular/validations.js";
+import Vue from 'vue';
+import InputField from '@/components/Utilities/Form/InputField';
+import Selection from '@/components/Utilities/Form/Selection';
+import validations from '@/components/Formular/validations.js';
 export default {
   components: {
     InputField,
     Selection,
   },
-  props: ["submitTrigger"],
+  props: ['submitTrigger'],
   data() {
     return {
       pageKey: 0,
       form: {
-        firstName: "",
-        lastName: "",
-        companyName: "",
-        streetNameAndNo: "",
-        town: "",
-        country: "",
-        zipCode: "",
+        firstName: '',
+        lastName: '',
+        companyName: '',
+        streetNameAndNo: '',
+        town: '',
+        country: '',
+        zipCode: '',
       },
       errors: {},
       formValidations: {
@@ -111,10 +134,10 @@ export default {
         zipCode: [validations.isRequired],
       },
       countryOptions: [
-        { value: "denmark", label: "Danmark" },
-        { value: "norway", label: "Norge" },
-        { value: "sweden", label: "Sverige" },
-        { value: "germany", label: "Tyskland" },
+        { value: 'denmark', label: 'Danmark' },
+        { value: 'norway', label: 'Norge' },
+        { value: 'sweden', label: 'Sverige' },
+        { value: 'germany', label: 'Tyskland' },
       ],
     };
   },
@@ -152,7 +175,7 @@ export default {
 
       this.pageKey++;
 
-      this.$emit("onSubmit", { form: this.form, hasAnyError });
+      this.$emit('onSubmit', { form: this.form, hasAnyError });
     },
   },
 };

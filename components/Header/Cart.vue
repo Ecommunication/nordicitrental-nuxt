@@ -1,3 +1,14 @@
+<i18n>
+{
+  "en": {
+    "products":"Products"
+  },
+  "da":{
+    "products":"Produkter"
+  }
+}
+</i18n>
+
 <template>
   <div>
     <ClientOnly>
@@ -6,7 +17,7 @@
         <nuxt-link to="/kurv">
           <span class="pr-2">
             <i class="fas fa-shopping-cart mr-11"></i>
-            Produkter ({{ noOfItems }})
+            {{ $t('products') }} ({{ noOfItems }})
           </span>
         </nuxt-link>
       </div>
@@ -15,10 +26,10 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
   computed: {
-    ...mapGetters(["noOfItems"]),
+    ...mapGetters(['noOfItems']),
   },
 };
 </script>

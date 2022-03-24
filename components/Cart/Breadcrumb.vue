@@ -1,3 +1,18 @@
+<i18n>
+{
+  "en": {
+"bookings":"Bookings",
+"order":"Order",
+"receipt":"Receipt"
+  },
+  "da":{
+"bookings":"Bookinger",
+"order":"Ordre",
+"receipt":"Kvittering"
+  }
+}
+</i18n>
+
 <template>
   <div class="breadcrumb">
     <ul v-for="(item, index) in items" :key="index">
@@ -10,7 +25,8 @@
         `"
       >
         <div class="selected-icon"></div>
-        <i class="interceptor">{{ index + 1 }}.</i> {{ item.label }}
+        <i class="interceptor">{{ index + 1 }}.</i>
+        {{ $t(item.label) }}
       </li>
     </ul>
   </div>
@@ -20,11 +36,11 @@
 export default {
   data() {
     return {
-      path: "",
+      path: '',
       items: [
-        { label: "Bookinger", path: "/kurv" },
-        { label: "Ordre", path: "/kurv/ordre" },
-        { label: "Kvittering", path: "/kurv/kvittering" },
+        { label: 'bookings', path: '/kurv' },
+        { label: 'order', path: '/kurv/ordre' },
+        { label: 'receipt', path: '/kurv/kvittering' },
       ],
     };
   },
@@ -61,7 +77,7 @@ export default {
         position: relative;
       }
       .selected-icon {
-        background: url("~/assets/images/icons/breadcrumb/tick.png") no-repeat;
+        background: url('~/assets/images/icons/breadcrumb/tick.png') no-repeat;
         width: 30px;
         height: 30px;
         display: block;

@@ -14,7 +14,7 @@
       <div class="right-col" :style="rightColStyle">
         <div class="form" :style="formStyle">
           <h3 v-if="formTitle" class="text-blue" style="font-size: 20px">
-            {{ formTitle }}
+            {{ formTitle || formTexts.title }}
           </h3>
 
           <form class="mt-5" :key="formKey">
@@ -74,10 +74,9 @@
             />
           </form>
           <Modal v-show="isModalVisible" @close="closeModal" :width="600">
-            <template v-slot:header> Kontakt </template>
+            <template v-slot:header>{{ formTexts.title }}</template>
             <template v-slot:body>
-              <div>Tak for din henvendelse.</div>
-              <div>Vi vil vende tilbage så snart som muligt.</div>
+              <div v-html="formTexts.confirmation"></div>
             </template>
           </Modal>
         </div>
@@ -109,6 +108,8 @@ export default {
       company: '',
       phone: '',
       message: '',
+      title: '',
+      confirmation: '',
     },
   },
   data() {

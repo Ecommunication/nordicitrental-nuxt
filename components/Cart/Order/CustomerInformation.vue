@@ -1,3 +1,14 @@
+<i18n>
+{
+  "en": {
+"phone":"Phone number:"
+  },
+  "da": {
+"phone":"Telefon nr.:"
+  }
+}
+</i18n>
+
 <template>
   <div>
     <Table>
@@ -8,7 +19,9 @@
         </td>
       </tr>
       <tr>
-        <td class="td-left"><div>Telefon nr.:</div></td>
+        <td class="td-left">
+          <div>{{ $t('phone') }}</div>
+        </td>
         <td class="td-right">
           <div>
             {{ information.telephone }}
@@ -20,7 +33,7 @@
 </template>
 
 <script>
-import Table from "@/components/Cart/Order/Table";
+import Table from '@/components/Cart/Order/Table';
 export default {
   components: {
     Table,

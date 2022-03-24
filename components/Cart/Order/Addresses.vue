@@ -1,8 +1,25 @@
+<i18n>
+{
+  "en": {
+"billingaddress": "Billing address",
+"shippingaddress":"Shipping address"
+  },
+  "da": {
+"billingaddress": "Faktureringsadresse",
+"shippingaddress":"Leveringsadresse"
+  }
+}
+</i18n>
+
 <template>
   <Table>
     <tr style="background: none">
-      <td class="table-title"><h2>Faktureringsadresse</h2></td>
-      <td class="table-title"><h2 class="pl-4">Leveringsadresse</h2></td>
+      <td class="table-title">
+        <h2>{{ $t('billingaddress') }}</h2>
+      </td>
+      <td class="table-title">
+        <h2 class="pl-4">{{ $t('shippingaddress') }}</h2>
+      </td>
     </tr>
     <tr>
       <td class="td-left">
@@ -16,7 +33,7 @@
 </template>
 
 <script>
-import Table from "@/components/Cart/Order/Table";
+import Table from '@/components/Cart/Order/Table';
 export default {
   components: {
     Table,

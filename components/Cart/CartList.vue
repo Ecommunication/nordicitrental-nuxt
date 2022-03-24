@@ -1,13 +1,42 @@
+<i18n>
+{
+  "en": {
+  "product":"Product:",
+  "price":"Price",
+  "quantity":"Quantity",
+  "total":"Total",
+  "bookingdetails":"Booking details",
+  "totalperiod":"Total renting period: ",
+  "daysFrom": " days. From: ",
+  "to":" to ",
+  "options":"Options",
+  "vat":"excl vat"
+  },
+  "da":{
+  "product":"Vare",
+  "price": "Pris",
+  "quantity":"Antal",
+  "total":"Total",
+  "bookingdetails":"Booking detailjer",
+  "totalperiod": "Total lejeperiode: ",
+  "daysFrom": " dage. Fra: ",
+  "to":" til ",
+  "options":"Tilvalg",
+  "vat":"eksl moms"
+  }
+}
+</i18n>
+
 <template>
   <table class="cart-list">
     <thead>
       <tr>
         <th></th>
         <th></th>
-        <th class="table-header-cell col3">Vare</th>
-        <th class="table-header-cell">Pris</th>
-        <th class="table-header-cell">Antal</th>
-        <th class="table-header-cell">Total</th>
+        <th class="table-header-cell col3">{{ $t('product') }}</th>
+        <th class="table-header-cell">{{ $t('price') }}</th>
+        <th class="table-header-cell">{{ $t('quantity') }}</th>
+        <th class="table-header-cell">{{ $t('total') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -36,9 +65,11 @@
           >
           <div class="booking-date">
             <span class="text-muted">
-              Total lejeperiode:
-              <span>{{ item.noOfDays }}</span> dage. Fra:
-              <span>{{ item.startDate | formatDate }}</span> til
+              {{ $t('totalperiod') }}
+              <span>{{ item.noOfDays }}</span
+              >{{ $t('daysFrom') }}
+              <span>{{ item.startDate | formatDate }}</span
+              >{{ $t('to') }}
               <span>{{ item.endDate | formatDate }}</span>
             </span>
             <div class="product-options">
@@ -46,12 +77,13 @@
                 v-if="item.productOptions && item.productOptions.length > 0"
               >
                 <span class="text-blue">
-                  <u>Tilvalg</u>
+                  <u>{{ $t('options') }}</u>
                 </span>
                 <span v-for="(opts, index) in item.productOptions" :key="index">
                   <span>
                     <br />
-                    {{ opts.name }} - {{ opts.price | formatPrice }} ekskl. moms
+                    {{ opts.name }} - {{ opts.price | formatPrice }}
+                    {{ $t('vat') }}
                   </span>
                 </span>
               </span>
@@ -76,15 +108,15 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import AmountPicker from "@/components/Utilities/AmountPicker";
+import { mapActions } from 'vuex';
+import AmountPicker from '@/components/Utilities/AmountPicker';
 export default {
   components: { AmountPicker },
   props: {
     cart: { type: Array, required: true },
   },
   methods: {
-    ...mapActions(["updateAmount", "deleteItem"]),
+    ...mapActions(['updateAmount', 'deleteItem']),
     async onAmountPickerChange(itemId, amount) {
       await this.updateAmount({ itemId, amount });
     },

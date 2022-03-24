@@ -17,10 +17,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import Breadcrumb from "@/components/Cart/Breadcrumb";
-import CustomerInformationForm from "@/components/Formular/CustomerInformation";
-import HeaderImg from "@/components/Utilities/HeaderImg";
+import Breadcrumb from '@/components/Cart/Breadcrumb';
+import CustomerInformationForm from '@/components/Formular/CustomerInformation';
+import HeaderImg from '@/components/Utilities/HeaderImg';
 
 export default {
   components: {
@@ -33,12 +32,12 @@ export default {
       title: this.data.PageTitle,
       meta: [
         {
-          name: "title",
-          content: this.data.MetaTitle || "",
+          name: 'title',
+          content: this.data.MetaTitle || '',
         },
         {
-          name: "description",
-          content: this.data.MetaDescription || "",
+          name: 'description',
+          content: this.data.MetaDescription || '',
         },
       ],
     };
@@ -47,7 +46,7 @@ export default {
     return {};
   },
   async asyncData({ params, $axios }) {
-    const data = await $axios.$get("/checkud-ordre");
+    const data = await $axios.$get('/checkud-ordre');
     return { data };
   },
 };

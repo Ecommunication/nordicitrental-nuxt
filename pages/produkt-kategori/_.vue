@@ -82,21 +82,24 @@
   </div>
 </template>
 <script>
-import HeaderImg from "@/components/Utilities/HeaderImg";
-import CategorySlider from "@/components/Category/Slider";
-import { Category } from "@/utils/dto";
+import HeaderImg from '@/components/Utilities/HeaderImg';
+import CategorySlider from '@/components/Category/Slider';
+import { Category } from '@/utils/dto';
 
 export default {
   components: {
     HeaderImg,
     CategorySlider,
   },
-  async asyncData({ params, $axios, $config, route, store }) {
+  async asyncData({ params, $axios, $config, route, store, i18n, app }) {
     try {
-      const slug = params.pathMatch.toLowerCase().replace(/\/+$/, "");
-      const order = "";
+      const slug = params.productcategory.toLowerCase().replace(/\/+$/, '');
+      console.log(slug);
+      // const slug = params.pathMatch.toLowerCase().replace(/\/+$/, '');
+      const order = '';
       var categoriesData = await $axios.$get(
-        `/product-categories?CustomPermalink=${slug}` + order
+        `/product-categories?_locale=${i18n.locale}&CustomPermalink=${slug}` +
+          order
       );
 
       if (
@@ -105,7 +108,7 @@ export default {
         !categoriesData.length
       ) {
         categoriesData = await $axios.$get(
-          `/product-categories?Slug=${slug}` + order
+          `/product-categories?_locale=${i18n.locale}&Slug=${slug}` + order
         );
 
         if (
@@ -113,7 +116,7 @@ export default {
           Array.isArray(categoriesData) &&
           !categoriesData.length
         ) {
-          return store.dispatch("throwError404", { slug });
+          return store.dispatch('throwError404', { slug });
         }
       }
 
@@ -121,6 +124,18 @@ export default {
       if (!categoryData) return;
 
       const category = new Category(categoryData);
+
+      // Create object for dynamic routing i18n route params
+      const i18nObj = {};
+      categoriesData[0]?.localizations.forEach((item) => {
+        Object.assign(i18nObj, {
+          [item.locale]: { productcategory: item.Slug },
+        });
+      });
+      console.log('obj', i18nObj);
+
+      // Set i18n route params for localized routes
+      await app.store.dispatch('i18n/setRouteParams', i18nObj);
 
       return { category };
     } catch (e) {
@@ -132,11 +147,11 @@ export default {
       title: this.category?.meta?.title,
       meta: [
         {
-          name: "title",
+          name: 'title',
           content: this.category?.meta?.title,
         },
         {
-          name: "description",
+          name: 'description',
           content: this.category?.meta?.desc,
         },
       ],
@@ -144,11 +159,11 @@ export default {
   },
   methods: {
     getParsedDescription(desc) {
-      const plainText = desc.replace(/(<([^>]+)>)/gi, "");
-      const words = plainText.split(" ");
+      const plainText = desc.replace(/(<([^>]+)>)/gi, '');
+      const words = plainText.split(' ');
       const first34Words = words.slice(0, 34);
       const description =
-        first34Words.join(" ") + (words.length > 34 ? " ..." : "");
+        first34Words.join(' ') + (words.length > 34 ? ' ...' : '');
       return description;
     },
   },

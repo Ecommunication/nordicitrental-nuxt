@@ -1,3 +1,18 @@
+<i18n>
+{
+  "en": {
+    "found": "There was found ",
+    "results": "results",
+    "hoverOver": "Hover over a product to read more"
+  },
+  "da":{
+    "found":"Der blev fundet ",
+    "results": "resultater",
+    "hoverOver": "Peg over et produkt for at læse mere"
+  }
+}
+</i18n>
+
 <template>
   <div>
     <div class="mb-4 flex w-full flex-row justify-center">
@@ -25,7 +40,7 @@
             class="sticky top-0 z-10 flex w-full flex-row justify-between bg-white"
           >
             <p class="text-2xl font-medium text-mainBlue">
-              Der blev fundet {{ searchResult.length }} resultater
+              {{ $t('found') }} {{ searchResult.length }} {{ $t('results') }}
             </p>
             <span
               class="my-auto origin-center transform cursor-pointer text-mainBlue transition-transform hover:scale-110"
@@ -96,7 +111,7 @@
                 </div>
               </template>
               <p v-else class="text-base font-medium text-mainBlue">
-                Peg over et produkt for at se detaljer
+                {{ $t('hoverOver') }}
               </p>
             </div>
           </div>
@@ -141,6 +156,7 @@ export default {
     },
     closeSearch() {
       this.inputSearch = '';
+      this.productPreview = null;
     },
   },
 };

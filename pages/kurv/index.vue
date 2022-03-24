@@ -91,8 +91,8 @@ export default {
   methods: {
     ...mapActions(['switchPersistanceState']),
   },
-  async asyncData({ params, $axios }) {
-    const data = await $axios.$get('/kurv');
+  async asyncData({ params, $axios, i18n }) {
+    const data = await $axios.$get(`/kurv?_locale=${i18n.locale}`);
     return { data };
   },
 };

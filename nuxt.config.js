@@ -92,6 +92,7 @@ export default {
           { code: 'da', name: 'Dansk', iso: 'en-US' },
         ],
         defaultLocale: 'da',
+        vueI18nLoader: true,
         baseUrl: 'https://nordicitrental.dk',
         parsePages: false,
         pages: {
@@ -102,6 +103,34 @@ export default {
           'produkt/_product': {
             en: '/product/:product',
             da: '/produkt/:product',
+          },
+          'produkt-kategori/_': {
+            en: '/product-category/:productcategory',
+            da: '/produkt-kategori/:productcategory',
+          },
+          'alle-produktkategorier': {
+            en: '/all-product-categories',
+            da: '/alle-produktkategorier',
+          },
+          'kurv/index': {
+            en: '/cart',
+            da: '/kurv',
+          },
+          'kurv/ordre': {
+            en: '/cart/order',
+            da: '/kurv/ordre',
+          },
+          'kurv/kvittering': {
+            en: '/cart/receipt',
+            da: '/kurv/kvittering',
+          },
+          kontakt: {
+            en: '/contact',
+            da: '/kontakt',
+          },
+          'spoergsmaal-og-svar': {
+            en: '/faq',
+            da: '/spoergsmaal-og-svar',
           },
         },
       },

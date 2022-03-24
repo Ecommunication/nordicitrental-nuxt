@@ -1,3 +1,15 @@
+<i18n>
+{
+  "en": {
+    "products": "Products"
+  },
+  "da":{
+    "products": "Produkter"
+
+  }
+}
+</i18n>
+
 <template>
   <nav class="navigation">
     <div class="desktop-navigation">
@@ -6,7 +18,7 @@
           class="item-label text-blue"
           @click="throwMainMenuEvent('product')"
         >
-          Produkter
+          {{ $t('products') }}
         </div>
       </div>
 
@@ -64,9 +76,9 @@ export default {
     };
   },
   mounted() {
-    document.addEventListener("click", (e) => {
+    document.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isItemLabel = e.target.className.includes("item-label");
+      const isItemLabel = e.target.className.includes('item-label');
       if (!isItemLabel) {
         // close menu
         this.throwMainMenuEvent(false);
@@ -86,7 +98,7 @@ export default {
       this.$router.push(path);
     },
     throwMainMenuEvent(val) {
-      this.$emit("onClickMainMenu", val);
+      this.$emit('onClickMainMenu', val);
     },
   },
 };
