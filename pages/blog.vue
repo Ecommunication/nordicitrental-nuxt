@@ -4,7 +4,7 @@
       :img="blogpage.ImageCover.url | formatImage"
       :text="blogpage.TextCover"
     />
-    <div class="container my-10 flex flex-col px-5">
+    <div class="container my-10 flex flex-col px-5 space-y-5">
       <div
         v-for="blog in blogs"
         :key="blog.id"
