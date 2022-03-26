@@ -1,5 +1,7 @@
 import Vue from "vue";
 
+// This env does not exits. Changing it to an existing correct URL smashes the app..
+// No clue what this is supposed to do.
 const baseURL = process.env.apiUrl;
 export const formatImage = (val) => (val ? baseURL + val : "");
 const formatHTML = (val) => {

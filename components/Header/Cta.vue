@@ -1,21 +1,38 @@
+<i18n>
+{
+  "en": {
+    "language":"Language: ",
+    "currency":"Currency: "
+  },
+  "da": {
+    "language":"Sprog: ",
+    "currency":"Valuta: "
+  }
+}
+</i18n>
+
 <template>
-  <div class="flex w-full justify-between">
+  <div class="flex w-full justify-between cta-header">
+    <div class="space-x-2 flex">
+      <p class="text-sm font-medium text-mainBlue">
+        {{ $t('language') }}
+        <nuxt-link
+          class="font-bold"
+          v-for="locale in availableLocales"
+          :key="locale.code"
+          :to="switchLocalePath(locale.code)"
+          >{{ locale.name }}</nuxt-link
+        >
+      </p>
+      <button @click="currencyClick" class="text-sm font-bold text-mainBlue">
+        <span class="font-medium">{{ $t('currency') }}</span
+        ><span>{{ this.currency }}</span>
+      </button>
+    </div>
     <span class="cta">
       <i class="fas fa-phone mr-2"></i>
       {{ cta }}
     </span>
-    <div class="space-x-2">
-      <nuxt-link
-        class="text-sm font-bold"
-        v-for="locale in availableLocales"
-        :key="locale.code"
-        :to="switchLocalePath(locale.code)"
-        >{{ locale.name }}</nuxt-link
-      >
-      <button @click="currencyClick" class="text-sm font-bold text-mainBlue">
-        {{ this.currency }}
-      </button>
-    </div>
   </div>
 </template>
 <script>
@@ -40,7 +57,11 @@ export default {
 <style lang="scss">
 .cta {
   color: #212121;
-  font-size: 0.95em;
+  font-size: 1rem;
   font-weight: 100;
+}
+
+.cta-header {
+  margin-left: 14px;
 }
 </style>

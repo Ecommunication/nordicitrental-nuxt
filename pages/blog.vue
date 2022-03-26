@@ -4,27 +4,50 @@
       :img="blogpage.ImageCover.url | formatImage"
       :text="blogpage.TextCover"
     />
-    <div
-      class="container my-10 grid grid-cols-1 gap-10 px-10 md:grid-cols-2 xl:grid-cols-3"
-    >
+    <div class="container my-10 flex flex-col px-5">
       <div
         v-for="blog in blogs"
         :key="blog.id"
-        class="flex transform cursor-pointer flex-col transition-transform duration-300 hover:scale-110"
+        class="
+          flex
+          transform
+          cursor-pointer
+          transition-transform
+          duration-300
+          hover:scale-110
+          mx-auto
+        "
       >
-        <nuxt-link :to="`/blogs/${blog.slug}`">
-          <div class="flex justify-between">
+        <nuxt-link
+          :to="`/blogs/${blog.slug}`"
+          class="flex flex-col md:flex-row gap-10 md:gap-20"
+        >
+          <div class="relative flex flex-col md:w-1/2">
+            <nuxt-img
+              :src="blog.FeatureImage.url"
+              format="webp"
+              fit="cover"
+              :alt="blog.Headline"
+            />
+          </div>
+          <div class="flex flex-col justify-between md:w-1/2 my-auto">
+            <p class="text-sm font-thin text-black">
+              <i class="far fa-clock" /> {{ blog.published_at | formatDate }}
+            </p>
             <h3 class="text-lg font-semibold text-mainBlue">
               {{ blog.Headline }}
             </h3>
-            <p class="text-right text-sm font-thin text-black">
-              {{ blog.published_at | formatDate }}
-            </p>
-          </div>
-          <div
-            class="aspect-square relative flex flex-col rounded-md bg-mainBlue p-4 shadow-md"
-          >
-            <nuxt-img :src="blog.FeatureImage.url" format="webp" fit="cover" />
+            <div v-html="blog.Subline" class="text-base font-normal"></div>
+            <span
+              class="
+                border-b-2
+                w-10
+                text-base
+                whitespace-nowrap
+                border-mainBlue
+              "
+              >LÆS MERE</span
+            >
           </div>
         </nuxt-link>
       </div>

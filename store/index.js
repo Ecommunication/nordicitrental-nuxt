@@ -82,7 +82,7 @@ export const actions = {
   changeCurrency({ commit, state }) {
     let newCurrency = 'DKK';
     if (state.currency === 'DKK') {
-      newCurrency = 'EUR';
+      newCurrency = 'EUR €';
     }
     commit('SET_CURRENCY', newCurrency);
   },

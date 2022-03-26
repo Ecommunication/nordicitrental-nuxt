@@ -17,7 +17,7 @@
           <HeaderCart />
         </div>
 
-        <div class="telephone-container">
+        <div>
           <HeaderCta :cta="header.telephone" />
         </div>
 
@@ -168,10 +168,6 @@ export default {
 <style lang="scss" scoped>
 .cart-in-mobile {
   display: none;
-}
-
-.telephone-container {
-  margin: 10px 0px;
 }
 
 .main-header {
