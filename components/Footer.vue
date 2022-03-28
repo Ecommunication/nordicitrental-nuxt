@@ -1,3 +1,15 @@
+<i18n>
+{
+  "en": {
+    "newsletter":"Newsletter"
+  },
+  "da": {
+    "newsletter":"Nyhedsbrev"
+
+  }
+}
+</i18n>
+
 <template>
   <footer class="bg-blue pt-5 pb-1" id="main-footer">
     <div class="footer-container">
@@ -7,7 +19,9 @@
         <div class="footer-col" v-html="footer.widget3" />
         <div class="footer-col">
           <div>
-            <p><strong>Nyhedsbrev</strong></p>
+            <p>
+              <strong>{{ $t('newsletter') }}</strong>
+            </p>
             <div>
               <NewsletterForm />
             </div>

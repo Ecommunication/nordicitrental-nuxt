@@ -12,8 +12,8 @@
 </i18n>
 
 <template>
-  <div class="flex w-full justify-between cta-header">
-    <div class="space-x-2 flex">
+  <div class="flex w-full justify-between cta-header mb-2">
+    <div class="space-x-2 flex flex-col md:flex-row">
       <p class="text-sm font-medium text-mainBlue">
         {{ $t('language') }}
         <nuxt-link
@@ -29,7 +29,7 @@
         ><span>{{ this.currency }}</span>
       </button>
     </div>
-    <span class="cta">
+    <span class="cta my-auto">
       <i class="fas fa-phone mr-2"></i>
       {{ cta }}
     </span>
