@@ -4,23 +4,15 @@
       :img="blogpage.ImageCover.url | formatImage"
       :text="blogpage.TextCover"
     />
-    <div class="container my-10 flex flex-col px-5 space-y-5">
+    <div class="container my-10 flex flex-col space-y-5 px-5">
       <div
         v-for="blog in blogs"
         :key="blog.id"
-        class="
-          flex
-          transform
-          cursor-pointer
-          transition-transform
-          duration-300
-          hover:scale-110
-          mx-auto
-        "
+        class="mx-auto flex transform cursor-pointer transition-transform duration-300 hover:scale-105"
       >
         <nuxt-link
           :to="`/blogs/${blog.slug}`"
-          class="flex flex-col md:flex-row gap-10 md:gap-20"
+          class="flex flex-col gap-10 md:flex-row md:gap-20"
         >
           <div class="relative flex flex-col md:w-1/2">
             <nuxt-img
@@ -30,7 +22,7 @@
               :alt="blog.Headline"
             />
           </div>
-          <div class="flex flex-col justify-between md:w-1/2 my-auto">
+          <div class="my-auto flex flex-col justify-between md:w-1/2">
             <p class="text-sm font-thin text-black">
               <i class="far fa-clock" /> {{ blog.published_at | formatDate }}
             </p>
@@ -39,13 +31,7 @@
             </h3>
             <div v-html="blog.Subline" class="text-base font-normal"></div>
             <span
-              class="
-                border-b-2
-                w-10
-                text-base
-                whitespace-nowrap
-                border-mainBlue
-              "
+              class="w-10 whitespace-nowrap border-b-2 border-mainBlue text-base"
               >LÆS MERE</span
             >
           </div>

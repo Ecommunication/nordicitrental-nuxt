@@ -16,8 +16,8 @@
 </i18n>
 
 <template>
-  <div class="grid-small">
-    <div class="mb-4 flex w-full flex-row justify-center">
+  <div class="">
+    <div class="grid-small mb-4 flex w-full flex-row justify-center">
       <span class="relative mx-14 w-full">
         <input
           class="rounded-md"
@@ -35,43 +35,17 @@
       @click="closeSearch"
     >
       <div
-        class="
-          modal-height
-          container
-          relative
-          z-20
-          overflow-y-scroll
-          rounded-md
-          bg-white
-          shadow-md
-        "
+        class="modal-height container relative z-20 overflow-y-scroll rounded-md bg-white shadow-md"
       >
         <div class="p-4">
           <div
-            class="
-              sticky
-              top-0
-              z-10
-              flex
-              w-full
-              flex-row
-              justify-between
-              bg-white
-            "
+            class="sticky top-0 z-10 flex w-full flex-row justify-between bg-white"
           >
             <p class="text-2xl font-medium text-mainBlue">
               {{ $t('found') }} {{ searchResult.length }} {{ $t('results') }}
             </p>
             <span
-              class="
-                my-auto
-                origin-center
-                transform
-                cursor-pointer
-                text-mainBlue
-                transition-transform
-                hover:scale-110
-              "
+              class="my-auto origin-center transform cursor-pointer text-mainBlue transition-transform hover:scale-110"
               @click="closeSearch"
               ><i class="fas fa-times fa-lg"
             /></span>
@@ -85,45 +59,18 @@
               >
                 <nuxt-link :to="`/produkt/${product.ProductSlug}`">
                   <div
-                    class="
-                      group
-                      flex
-                      cursor-pointer
-                      border-t border-b
-                      hover:bg-gray-50
-                    "
+                    class="group flex cursor-pointer border-t border-b hover:bg-gray-50"
                   >
                     <nuxt-img
-                      class="
-                        aspect-square
-                        max-h-14
-                        transform
-                        object-contain
-                        transition-transform
-                        duration-300
-                        group-hover:translate-x-3
-                      "
+                      class="aspect-square max-h-14 transform object-contain transition-transform duration-300 group-hover:translate-x-3"
                       :src="product.MainImage.url | formatImage"
                       :alt="product.Name"
                     />
                     <div
-                      class="
-                        ml-4
-                        flex
-                        w-full
-                        justify-between
-                        space-x-5
-                        text-base
-                      "
+                      class="ml-4 flex w-full justify-between space-x-5 text-base"
                     >
                       <div
-                        class="
-                          my-auto
-                          transform
-                          transition-transform
-                          duration-300
-                          group-hover:translate-x-3
-                        "
+                        class="my-auto transform transition-transform duration-300 group-hover:translate-x-3"
                       >
                         <p class="">{{ product.Name }}</p>
                       </div>
@@ -232,6 +179,6 @@ export default {
   }
 }
 .modal-height {
-  height: calc(100% - 12rem);
+  height: calc(100% - 20rem);
 }
 </style>

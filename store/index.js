@@ -80,9 +80,9 @@ export const actions = {
     commit('ADD_TO_CART', { ...payload, itemId });
   },
   changeCurrency({ commit, state }) {
-    let newCurrency = 'DKK';
-    if (state.currency === 'DKK') {
-      newCurrency = 'EUR €';
+    let newCurrency = 'KRONER';
+    if (state.currency === 'KRONER') {
+      newCurrency = 'EURO';
     }
     commit('SET_CURRENCY', newCurrency);
   },

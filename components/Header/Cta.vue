@@ -1,19 +1,19 @@
 <i18n>
 {
   "en": {
-    "language":"Language: ",
-    "currency":"Currency: "
+    "language":"Choose language: ",
+    "currency":"Choose currency: "
   },
   "da": {
-    "language":"Sprog: ",
-    "currency":"Valuta: "
+    "language":"Vælg sprog: ",
+    "currency":"Vælg valuta: "
   }
 }
 </i18n>
 
 <template>
-  <div class="flex w-full justify-between cta-header mb-2">
-    <div class="space-x-2 flex flex-col md:flex-row">
+  <div class="cta-header mb-2 flex w-full justify-between">
+    <div class="flex flex-col space-x-6 md:flex-row">
       <p class="text-sm font-medium text-mainBlue">
         {{ $t('language') }}
         <nuxt-link
