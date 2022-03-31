@@ -17,7 +17,7 @@
       <i class="fas fa-phone mr-2"></i>
       {{ cta }}
     </span>
-    <div class="relative flex flex-col space-x-6 md:flex-row">
+    <div class="relative flex space-x-6">
       <div
         class="group my-auto flex cursor-pointer space-x-2 text-mainBlue"
         @click="langClick"
@@ -48,7 +48,7 @@
         @click="currencyClick"
       >
         <div
-          class="flex h-8 w-8 justify-center rounded-full border-2 border-mainBlue"
+          class="flex justify-center rounded-full border-2 border-mainBlue p-1 md:h-7 md:w-7"
         >
           <i class="fas fa-euro-sign fa-sm my-auto mr-1"></i>
         </div>
