@@ -129,9 +129,9 @@
                   {{ data.IndexBeforeContactInfo }}
                 </h3>
                 <img
-                  src="~/assets/images/employee_mic.png"
+                  src="~/assets/images/employee_mic_new.jpg"
                   alt="Kontakt"
-                  class="mx-auto"
+                  class="mx-auto max-h-36"
                 />
                 <div
                   class="text-base"

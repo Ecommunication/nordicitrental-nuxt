@@ -14,7 +14,6 @@
 <template>
   <div class="cta-header mb-2 flex w-full space-x-8">
     <span class="cta my-auto">
-      <i class="fas fa-phone mr-2"></i>
       {{ cta }}
     </span>
     <div class="relative flex space-x-6">
@@ -22,9 +21,14 @@
         class="group my-auto flex cursor-pointer space-x-2 text-mainBlue"
         @click="langClick"
       >
-        <i class="fas fa-globe-europe fa-lg text-center"></i>
+        <img
+          width="24px"
+          :src="
+            availableLocales.find((locale) => locale.code === $i18n.locale).img
+          "
+        />
         <i
-          :class="`fas fa-chevron-down transform transition-transform duration-300 ${
+          :class="`fas fa-chevron-down my-auto transform transition-transform duration-300 ${
             langOpen && 'rotate-180'
           } group-hover:text-opacity-50`"
         ></i>
@@ -32,14 +36,20 @@
           v-if="langOpen"
           class="absolute top-8 z-20 rounded-sm bg-white p-2 shadow-md"
         >
-          <div class="flex flex-col">
-            <nuxt-link
-              class="text-base font-medium"
+          <div class="flex flex-col space-y-3">
+            <div
               v-for="locale in availableLocales"
-              :key="locale.code"
-              :to="switchLocalePath(locale.code)"
-              >{{ locale.name }}</nuxt-link
+              key="asdasd"
+              class="flex space-x-2"
             >
+              <img width="24px" :src="locale.img" />
+              <nuxt-link
+                :key="locale.code"
+                class="text-base font-medium"
+                :to="switchLocalePath(locale.code)"
+                >{{ locale.name }}</nuxt-link
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -73,15 +83,34 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import * as EUicon from '~/assets/images/icons/languages/EU-Icon.png';
+import * as DKicon from '~/assets/images/icons/languages/DK-Icon.png';
+import * as UKicon from '~/assets/images/icons/languages/UK-Icon.png';
 export default {
   props: ['cta'],
   data() {
-    return { langOpen: false, currencyOpen: false };
+    return {
+      langOpen: false,
+      currencyOpen: false,
+    };
   },
   computed: {
     ...mapState(['currency']),
     availableLocales() {
-      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale);
+      return this.$i18n.locales.map((locale) => {
+        switch (locale.code) {
+          case 'da':
+            return {
+              ...locale,
+              img: DKicon,
+            };
+          case 'en':
+            return {
+              ...locale,
+              img: UKicon,
+            };
+        }
+      });
     },
   },
   methods: {
