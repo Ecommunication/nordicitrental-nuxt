@@ -105,8 +105,8 @@ export default {
             da: '/produkt/:product',
           },
           'produkt-kategori/_': {
-            en: '/product-category/:productcategory',
-            da: '/produkt-kategori/:productcategory',
+            en: '/product-category/:route?/:productcategory',
+            da: '/produkt-kategori/:route?/:productcategory',
           },
           'alle-produktkategorier': {
             en: '/all-product-categories',

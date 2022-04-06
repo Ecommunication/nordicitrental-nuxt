@@ -10,7 +10,7 @@
 </i18n>
 
 <template>
-  <div>
+  <div class=" inline-block ">
     <ClientOnly>
       <div v-if="!noOfItems" class="cart-placeholder"></div>
       <div v-if="!!noOfItems" class="cart2">

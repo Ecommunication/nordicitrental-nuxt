@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 export default ({ app }, inject) => {
   const formatPrice = (val) => {
-    if (app.store.state.currency === 'EURO') {
+    if (app.store.state.currencies.find((c) => c.active).currency === 'EURO') {
       const formattedPrice = new Intl.NumberFormat('en-US').format(
         parseFloat(val / 7.5).toFixed(2)
       );

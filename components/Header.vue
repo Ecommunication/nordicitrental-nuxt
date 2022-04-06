@@ -1,8 +1,9 @@
 <template>
   <div>
     <header ref="header" class="main-header grid-small">
-      <div class="cart-in-mobile">
+      <div class="cart-in-mobile space-y-4">
         <HeaderCart />
+        <HeaderCta :cta="header.telephone" class="float-left" />
       </div>
       <nuxt-link to="/" class="logo">
         <nuxt-img
@@ -13,13 +14,12 @@
       </nuxt-link>
 
       <div class="right-col">
-        <div class="cart-in-desktop mb-2">
+        <div class="cart-in-desktop mb-2 flex justify-between">
+          <HeaderCta :cta="header.telephone" />
           <HeaderCart />
         </div>
 
-        <div>
-          <HeaderCta :cta="header.telephone" />
-        </div>
+     
 
         <div class="mb-2">
           <HeaderNavigation

@@ -17,7 +17,7 @@ export const state = () => ({
   navigation: {},
   cart: new Cart(),
   orderReceipt: null,
-  currency: 'DKK',
+  currencies: [{currency: 'EURO', active: false}, {currency: 'DKK', active: true}],
 });
 
 export const getters = {
@@ -64,9 +64,9 @@ export const mutations = {
   SET_JWT(state, jwt) {
     state.jwt = jwt;
   },
-  SET_CURRENCY(state, currency) {
-    state.currency = currency;
-  },
+  SET_CURRENCY(state, currencies) {
+    state.currencies = currencies
+  }
 };
 
 export const actions = {
@@ -79,12 +79,11 @@ export const actions = {
     const itemId = new Date().getTime();
     commit('ADD_TO_CART', { ...payload, itemId });
   },
-  changeCurrency({ commit, state }) {
-    let newCurrency = 'KRONER';
-    if (state.currency === 'KRONER') {
-      newCurrency = 'EURO';
-    }
-    commit('SET_CURRENCY', newCurrency);
+  changeCurrency({ commit, state }, {currency}) {
+    const currencies = state.currencies.map((c) => {
+      return (c.currency === currency ? {...c, active: true} : {...c, active: false})
+    });
+    commit('SET_CURRENCY', currencies);
   },
   getCartItem({ commit, state }, { itemId, returnObj = false }) {
     const { items } = state.cart;

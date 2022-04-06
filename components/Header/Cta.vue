@@ -12,7 +12,7 @@
 </i18n>
 
 <template>
-  <div class="cta-header mb-2 flex w-full space-x-8">
+  <div class="cta-header mb-2 inline-flex space-x-8">
     <span class="cta my-auto">
       {{ cta }}
     </span>
@@ -39,7 +39,7 @@
           <div class="flex flex-col space-y-3">
             <div
               v-for="locale in availableLocales"
-              key="asdasd"
+              :key="locale.code"
               class="flex space-x-2"
             >
               <img width="24px" :src="locale.img" />
@@ -71,9 +71,9 @@
           v-if="currencyOpen"
           class="absolute top-8 z-20 bg-white p-2 shadow-md"
         >
-          <div class="flex flex-col">
-            <button class="text-base font-medium" @click="changeCurrency">
-              {{ this.currency }}
+          <div class="flex flex-col" v-for="currency in currencies" :key="currency.currency">
+            <button class="text-base font-medium text-left" @click="changeCurrency(currency)">
+              {{ currency.currency }}
             </button>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['currency']),
+    ...mapState(['currencies']),
     availableLocales() {
       return this.$i18n.locales.map((locale) => {
         switch (locale.code) {
@@ -123,7 +123,9 @@ export default {
       this.langOpen = !this.langOpen;
     },
   },
+
 };
+
 </script>
 
 <style lang="scss">
