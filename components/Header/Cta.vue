@@ -16,10 +16,9 @@
     <span class="cta my-auto">
       {{ cta }}
     </span>
-    <div class="relative flex space-x-6">
+    <div class="relative flex space-x-6" >
       <div
-        class="group my-auto flex cursor-pointer space-x-2 text-mainBlue"
-        @click="langClick"
+        class="group my-auto flex cursor-pointer space-x-2 text-mainBlue" @click="langClick"
       >
         <img
           width="24px"
@@ -40,14 +39,16 @@
             <div
               v-for="locale in availableLocales"
               :key="locale.code"
-              class="flex space-x-2"
+              class=""
             >
-              <img width="24px" :src="locale.img" />
               <nuxt-link
                 :key="locale.code"
-                class="text-base font-medium"
+                class="text-base font-medium flex space-x-2"
                 :to="switchLocalePath(locale.code)"
-                >{{ locale.name }}</nuxt-link
+                >
+              <img width="24px" height="24px" :src="locale.img" />
+              <span>{{ locale.name }}</span>
+            </nuxt-link
               >
             </div>
           </div>
@@ -118,9 +119,11 @@ export default {
     currencyClick() {
       // this.changeCurrency();
       this.currencyOpen = !this.currencyOpen;
+      this.langOpen = false
     },
     langClick() {
       this.langOpen = !this.langOpen;
+      this.currencyOpen = false;
     },
   },
 
