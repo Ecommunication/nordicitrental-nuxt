@@ -53,7 +53,7 @@
           <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
             <div>
               <div
-                v-for="product in searchResult"
+                v-for="product in searchResult.slice(0, 10)"
                 :key="product.id"
                 @mouseover="hoverProduct(product)"
               >

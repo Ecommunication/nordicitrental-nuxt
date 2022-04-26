@@ -12,7 +12,7 @@
 </i18n>
 
 <template>
-  <div class="cta-header mb-2 inline-flex space-x-8">
+  <div class="cta-header my-2 inline-flex space-x-8">
     <span class="cta my-auto">
       {{ cta }}
     </span>
