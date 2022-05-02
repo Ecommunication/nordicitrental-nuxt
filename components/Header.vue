@@ -21,7 +21,7 @@
 
      
 
-        <div class="mb-2">
+        <div class="mb-2 mt-auto">
           <HeaderNavigation
             :navigation="navList"
             :showDropdown="showDropdown"
@@ -189,6 +189,9 @@ export default {
 
   .right-col {
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 
