@@ -17,7 +17,7 @@
 
 <template>
   <div class="">
-    <div class="grid-small mb-4 flex w-full flex-row justify-center">
+    <div class="grid-small mb-8 flex w-full flex-row justify-center">
       <span class="relative mx-14 w-full">
         <input
           class="rounded-md"
