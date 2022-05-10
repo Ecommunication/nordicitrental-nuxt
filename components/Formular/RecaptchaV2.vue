@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ml-5 mb-2">
-      <!-- <recaptcha style="margin-left: -20px" /> -->
+      <recaptcha style="margin-left: -20px" />
       <div
         v-if="captchaError"
         class="text-left"

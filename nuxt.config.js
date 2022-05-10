@@ -80,7 +80,7 @@ export default {
       {
         hideBadge: false,
         siteKey: process.env.RECAPTCHA_SITE_KEY,
-        version: 3,
+        version: 2,
       },
     ],
     ['@nuxtjs/sitemap'],
