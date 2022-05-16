@@ -151,6 +151,7 @@ import CategorySlider from '@/components/Category/Slider';
 import TextCard from '@/components/Utilities/TextCard';
 import BackgroundImg from '@/components/Utilities/BackgroundImg';
 import ContactUsForm from '@/components/Formular/Contact';
+import createSitemapRoutes from '../utils/createSitemapRoutes';
 
 import { GET_CONTACT_FORM_TEXTS } from '~/lib/api';
 export default {

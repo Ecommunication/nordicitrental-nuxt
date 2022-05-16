@@ -1,3 +1,5 @@
+import createSitemapRoutes from './utils/createSitemapRoutes';
+
 export default {
   debug: process.env.DEBUG ? process.env.DEBUG : false,
   server: {
@@ -53,7 +55,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/google-analytics'],
+  buildModules: ['@nuxtjs/google-analytics', '@/modules/sitemapRouteGenerator'],
 
   publicRuntimeConfig: {
     googleAnalytics: {
@@ -83,7 +85,15 @@ export default {
         version: 2,
       },
     ],
-    ['@nuxtjs/sitemap'],
+    [
+      '@nuxtjs/sitemap',
+      {
+        hostname: 'https://nordicitrental.dk',
+        trailingSlash: true,
+        gzip: true,
+        routes: createSitemapRoutes,
+      },
+    ],
     [
       '@nuxtjs/i18n',
       {

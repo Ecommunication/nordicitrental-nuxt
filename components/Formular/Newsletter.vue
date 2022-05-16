@@ -1,12 +1,12 @@
 <template>
   <div class="newsletter-form">
-    <div class="mb-1">
+    <div class="mb-1 text-black">
       <input type="text" placeholder="Navn" v-model="form.firstname" />
     </div>
-    <div class="mb-1">
+    <div class="mb-1 text-black">
       <input type="text" placeholder="Firma" v-model="form.company" />
     </div>
-    <div class="mb-1">
+    <div class="mb-1 text-black">
       <input type="email" placeholder="E-mail" v-model="form.email" />
     </div>
     <div
