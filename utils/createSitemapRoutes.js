@@ -7,7 +7,7 @@ const createSitemapRoutes = async () => {
 
   for (const product of data) {
     routes.push({
-      url: `https://nordicitrental.dk/produkt/${product.ProductSlug}`,
+      url: `produkt/${product.ProductSlug}`,
       changefreq: 'monthly',
       lastmod: new Date(product.updated_at),
     });

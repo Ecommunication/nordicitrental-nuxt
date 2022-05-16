@@ -55,7 +55,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/google-analytics', '@/modules/sitemapRouteGenerator'],
+  buildModules: ['@nuxtjs/google-analytics'],
 
   publicRuntimeConfig: {
     googleAnalytics: {
