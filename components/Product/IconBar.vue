@@ -61,6 +61,18 @@ export default {
           key: 'Opløsning',
           img: require('@/assets/images/icons/product/mini-specifications/screen-resolution.png'),
         },
+        {
+          key: 'Hard drive',
+          img: require('@/assets/images/icons/product/mini-specifications/hdd.png'),
+        },
+        {
+          key: 'Screen',
+          img: require('@/assets/images/icons/product/mini-specifications/screen-size.png'),
+        },
+        {
+          key: 'Resolution',
+          img: require('@/assets/images/icons/product/mini-specifications/screen-resolution.png'),
+        },
       ],
     };
   },
