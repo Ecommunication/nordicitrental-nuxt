@@ -93,9 +93,8 @@ export default {
   },
   async asyncData({ params, $axios, $config, route, store, i18n, app }) {
     try {
-      const slug = params.productcategory.toLowerCase().replace(/\/+$/, '');
-      console.log(slug);
-      // const slug = params.pathMatch.toLowerCase().replace(/\/+$/, '');
+      // const slug = params.productcategory.toLowerCase().replace(/\/+$/, '');
+      const slug = params.pathMatch.toLowerCase().replace(/\/+$/, '');
       const order = '';
       var categoriesData = await $axios.$get(
         `/product-categories?_locale=${i18n.locale}&CustomPermalink=${slug}` +
