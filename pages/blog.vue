@@ -24,7 +24,7 @@
           </div>
           <div class="my-auto flex flex-col justify-between md:w-1/2">
             <p class="text-sm font-thin text-black">
-              <i class="far fa-clock" /> {{ blog.published_at | formatDate }}
+              <i class="far fa-clock" /> {{ blog.PublishDate | formatDate }}
             </p>
             <h3 class="text-lg font-semibold text-mainBlue">
               {{ blog.Headline }}
