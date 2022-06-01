@@ -12,7 +12,7 @@
       </h1>
       <div class="text-base" v-html="blog.Subline"></div>
       <span class="text-sm"
-        ><i class="far fa-clock" /> {{ blog.published_at | formatDate }}</span
+        ><i class="far fa-clock" /> {{ blog.PublishDate | formatDate }}</span
       >
       <div v-html="blog.Content"></div>
       <div class="space-x-10 border-t-2 pt-4">
@@ -61,7 +61,6 @@ export default {
             previous = res.data.previous[0];
           });
       });
-    console.log(next, previous, blog);
     // const { next, previous } = nextPrevBlogs.data;
 
     return { next, previous, blog };
