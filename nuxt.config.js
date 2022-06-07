@@ -98,60 +98,55 @@ export default {
       '@nuxtjs/i18n',
       {
         detectBrowserLanguage: {
-          useCookie: false,
+          useCookie: true,
         },
-        locales: [{ code: 'da', name: 'Dansk', iso: 'da-DK' }],
+        locales: [
+          { code: 'en', name: 'English', iso: 'en-US' },
+          { code: 'da', name: 'Dansk', iso: 'da-DK' },
+        ],
         defaultLocale: 'da',
         vueI18nLoader: true,
+        baseUrl: 'https://nordicitrental.dk',
+        parsePages: false,
+        pages: {
+          'om-nordicit-rental': {
+            en: '/about',
+            da: '/om-nordicit-rental',
+          },
+          'produkt/_product': {
+            en: '/product/:product',
+            da: '/produkt/:product',
+          },
+          'produkt-kategori/_': {
+            en: '/product-category/:route?/:productcategory',
+            da: '/produkt-kategori/:route?/:productcategory',
+          },
+          'alle-produktkategorier': {
+            en: '/all-product-categories',
+            da: '/alle-produktkategorier',
+          },
+          'kurv/index': {
+            en: '/cart',
+            da: '/kurv',
+          },
+          'kurv/ordre': {
+            en: '/cart/order',
+            da: '/kurv/ordre',
+          },
+          'kurv/kvittering': {
+            en: '/cart/receipt',
+            da: '/kurv/kvittering',
+          },
+          kontakt: {
+            en: '/contact',
+            da: '/kontakt',
+          },
+          'spoergsmaal-og-svar': {
+            en: '/faq',
+            da: '/spoergsmaal-og-svar',
+          },
+        },
       },
-      // {
-      //   locales: [
-      //     { code: 'en', name: 'English', iso: 'en-US' },
-      //     { code: 'da', name: 'Dansk', iso: 'da-DK' },
-      //   ],
-      //   defaultLocale: 'da',
-      //   vueI18nLoader: true,
-      //   baseUrl: 'https://nordicitrental.dk',
-      //   parsePages: false,
-      //   pages: {
-      //     'om-nordicit-rental': {
-      //       en: '/about',
-      //       da: '/om-nordicit-rental',
-      //     },
-      //     'produkt/_product': {
-      //       en: '/product/:product',
-      //       da: '/produkt/:product',
-      //     },
-      //     'produkt-kategori/_': {
-      //       en: '/product-category/:route?/:productcategory',
-      //       da: '/produkt-kategori/:route?/:productcategory',
-      //     },
-      //     'alle-produktkategorier': {
-      //       en: '/all-product-categories',
-      //       da: '/alle-produktkategorier',
-      //     },
-      //     'kurv/index': {
-      //       en: '/cart',
-      //       da: '/kurv',
-      //     },
-      //     'kurv/ordre': {
-      //       en: '/cart/order',
-      //       da: '/kurv/ordre',
-      //     },
-      //     'kurv/kvittering': {
-      //       en: '/cart/receipt',
-      //       da: '/kurv/kvittering',
-      //     },
-      //     kontakt: {
-      //       en: '/contact',
-      //       da: '/kontakt',
-      //     },
-      //     'spoergsmaal-og-svar': {
-      //       en: '/faq',
-      //       da: '/spoergsmaal-og-svar',
-      //     },
-      //   },
-      // },
     ],
   ],
 

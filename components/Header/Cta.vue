@@ -17,7 +17,7 @@
       {{ cta }}
     </span>
     <div class="relative flex space-x-6" >
-      <!-- <div
+      <div
         class="group my-auto flex cursor-pointer space-x-2 text-mainBlue" @click="langClick"
       >
         <img
@@ -53,7 +53,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <div
         class="group my-auto flex cursor-pointer space-x-2 text-mainBlue"
         @click="currencyClick"
