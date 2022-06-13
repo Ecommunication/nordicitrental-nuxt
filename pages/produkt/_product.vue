@@ -102,7 +102,7 @@
                 produktside.ContinueBrowsingText
               }}</span>
             </div>
-            <nuxt-link class="button btn-primary" to="/kurv">
+            <nuxt-link class="button btn-primary" :to="localePath('/kurv')">
               <span class="text-uppercase">{{ produktside.OrderText }}</span>
             </nuxt-link>
           </div>

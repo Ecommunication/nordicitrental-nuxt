@@ -45,7 +45,7 @@
           <div @click="onDeleteItem(item.itemId)" class="product-remove">x</div>
         </td>
         <td class="product-thumbnail">
-          <nuxt-link :to="`/produkt/${item.product.info.slug}`">
+          <nuxt-link :to="localePath(`/produkt/${item.product.info.slug}`)">
             <img
               v-if="item.product.gallery.main"
               width="220"
@@ -56,7 +56,7 @@
           </nuxt-link>
         </td>
         <td>
-          <nuxt-link :to="`/produkt/${item.product.info.slug}`"
+          <nuxt-link :to="localePath(`/produkt/${item.product.info.slug}`)"
             ><div class="product-name">
               <p>
                 <strong>{{ item.product.info.name }}</strong>

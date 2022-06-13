@@ -6,7 +6,7 @@
     <div class="products">
       <div class="row">
         <div class="col" v-for="product in products" :key="product.info.id">
-          <nuxt-link :to="`/produkt/${product.info.slug}`">
+          <nuxt-link :to="localePath(`/produkt/${product.info.slug}`)">
             <div
               @mouseenter="hover = product.info.id"
               @mouseleave="hover = null"

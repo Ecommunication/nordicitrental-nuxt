@@ -57,7 +57,7 @@
                 :key="product.id"
                 @mouseover="hoverProduct(product)"
               >
-                <nuxt-link :to="`/produkt/${product.ProductSlug}`">
+                <nuxt-link :to="localePath(`/produkt/${product.ProductSlug}`)">
                   <div
                     class="group flex cursor-pointer border-t border-b hover:bg-gray-50"
                   >

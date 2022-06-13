@@ -9,7 +9,7 @@
       </h3>
       <div class="row" :style="`justify-content: ${justifyContent};`">
         <div class="col mx-2" v-for="(cat, index) in categories" :key="index">
-          <nuxt-link :to="`/produkt-kategori/${cat.Slug}`">
+          <nuxt-link :to="localePath(`/produkt-kategori/${cat.Slug}`)">
             <div
               class="category-card"
               :style="`width: ${size}px; height: ${size}px;`"

@@ -78,7 +78,7 @@
           containerCSS="max-width: 1600px; margin: 0 auto;"
         >
           <template v-slot:actions>
-            <nuxt-link class="kontakt-os-btn" to="/kontakt">{{
+            <nuxt-link class="kontakt-os-btn" :to="localePath('/kontakt')">{{
               data.ContactUs
             }}</nuxt-link>
           </template>

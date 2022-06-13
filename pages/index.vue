@@ -11,7 +11,7 @@
       >
         <div class="flex-justify-center flex grid">
           <nuxt-link
-            to="/alle-produktkategorier"
+            :to="localePath('/alle-produktkategorier')"
             class="btn btn-blue title-sm mx-auto mt-10 text-center"
             style="padding-right: 30px; padding-left: 30px"
           >

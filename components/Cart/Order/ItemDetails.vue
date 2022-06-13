@@ -31,7 +31,7 @@
       <td class="td-left">
         <div>
           <div>
-            <nuxt-link :to="`/produkt/${item.slug}`">
+            <nuxt-link :to="localPath(`/produkt/${item.slug}`)">
               <span>{{ item.amount }}x</span> {{ item.title }}
             </nuxt-link>
           </div>

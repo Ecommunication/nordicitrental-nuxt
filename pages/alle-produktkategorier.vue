@@ -8,7 +8,7 @@
 
     <div class="categories mt-16 mb-5" style="max-width: 940px; margin: 0 auto">
       <nuxt-link
-        :to="`/produkt-kategori/${category.info.slug}`"
+        :to="localePath(`/produkt-kategori/${category.info.slug}`)"
         v-for="(category, index) in categories"
         :key="index"
       >

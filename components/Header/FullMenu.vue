@@ -7,9 +7,10 @@
           :key="item.id"
           class="item-label text-blue mb-3"
           :class="index === 0 ? 'col-title' : 'col-item'"
-          :to="`/${index === 0 ? 'produkt-kategori' : 'produkt-kategori'}/${
+          
+          :to="localePath(`/${index === 0 ? 'produkt-kategori' : 'produkt-kategori'}/${
             item.CustomPermalink || item.Slug
-          }`"
+          }`)"
         >
           <div
             style="display: flex"

@@ -11,7 +11,7 @@
         class="mx-auto flex transform cursor-pointer transition-transform duration-300 hover:scale-105"
       >
         <nuxt-link
-          :to="`/blogs/${blog.slug}`"
+          :to="localePath(`/blogs/${blog.slug}`)"
           class="flex flex-col gap-10 md:flex-row md:gap-20"
         >
           <div class="relative flex flex-col md:w-1/2">

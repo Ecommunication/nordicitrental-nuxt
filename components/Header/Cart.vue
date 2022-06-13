@@ -14,7 +14,7 @@
     <ClientOnly>
       <div v-if="!noOfItems" class="cart-placeholder"></div>
       <div v-if="!!noOfItems" class="cart2">
-        <nuxt-link to="/kurv">
+        <nuxt-link :to="localePath('/kurv')">
           <span class="pr-2">
             <i class="fas fa-shopping-cart mr-11"></i>
             {{ $t('products') }} ({{ noOfItems }})

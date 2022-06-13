@@ -1,3 +1,19 @@
+<i18n>
+{
+  "en": {
+    "chooseProduct": "Choose Product",
+    "priceFirstWeek": "Price for the first week",
+    "priceAfterFirstWeek": "Price after first week of rental, per day"
+  },
+  "da":{
+    "chooseProduct": "Vælg Produkt",
+    "priceFirstWeek": "Pris for første uges leje",
+    "priceAfterFirstWeek": "Pris efter første uges leje, pr. dag."
+
+  }
+}
+</i18n>
+
 <template>
   <div class="product-category" v-if="category">
     <HeaderImg
@@ -11,7 +27,7 @@
         <div class="row">
           <div class="col">
             <nuxt-link
-              :to="'/produkt/' + product.info.slug"
+              :to="localePath('/produkt/' + product.info.slug)"
               class="product"
               v-for="product in category.products"
               :key="product.info.id"
@@ -36,7 +52,7 @@
                         {{ product.pricing.weekly | formatPrice }}
                       </div>
                       <div class="explanation price-explanation">
-                        Pris for første uges leje
+                        {{  $t('priceFirstWeek') }}
                       </div>
                     </div>
                     <div class="mt-1">
@@ -44,14 +60,14 @@
                         product.pricing.daily | formatPrice
                       }}</span>
                       <span class="explanation price-explanation"
-                        >Pris efter første uges leje, pr. dag.</span
+                        >{{$t('priceAfterFirstWeek')}}</span
                       >
                     </div>
                   </div>
                   <nuxt-link
-                    :to="'/produkt/' + product.info.slug"
+                    :to="localePath('/produkt/' + product.info.slug)"
                     class="btn btn-shop btn-blue product-button"
-                    >Vælg produkt</nuxt-link
+                    >{{$t('chooseProduct')}}</nuxt-link
                   >
                 </div>
               </div>

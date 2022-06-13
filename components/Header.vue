@@ -5,7 +5,7 @@
         <HeaderCart />
         <HeaderCta :cta="header.telephone" class="float-left" />
       </div>
-      <nuxt-link to="/" class="logo">
+      <nuxt-link :to="localePath('/')" class="logo">
         <nuxt-img
           format="webp"
           :src="header.logo.src"
@@ -35,7 +35,7 @@
     <!-- Minified -->
     <div class="minified-header" v-show="minifiedHeader">
       <div class="minified-wrapper">
-        <nuxt-link to="/" class="minified-logo">
+        <nuxt-link :to="localePath('/')" class="minified-logo">
           <img class="" :src="header.logo.src" :alt="header.logo.altText" />
         </nuxt-link>
         <div class="minified-navigation">

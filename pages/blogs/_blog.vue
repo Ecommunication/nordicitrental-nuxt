@@ -16,17 +16,17 @@
       >
       <div v-html="blog.Content"></div>
       <div class="space-x-10 border-t-2 pt-4">
-        <nuxt-link v-if="previous" :to="previous.slug" class="text-base">
+        <nuxt-link v-if="previous" :to="localePath(previous.slug)" class="text-base">
           <span
             ><i class="fas fa-chevron-left" /> Forrige nyhed</span
           ></nuxt-link
         >
-        <nuxt-link v-if="next" :to="next.slug" class="text-base"
+        <nuxt-link v-if="next" :to="localePath(next.slug)" class="text-base"
           ><span>Næste nyhed <i class="fas fa-chevron-right" /></span
         ></nuxt-link>
       </div>
       <div class="border-b-2 pb-4 text-base">
-        <nuxt-link to="/blog">Til oversigten</nuxt-link>
+        <nuxt-link :to="localePath('/blog')">Til oversigten</nuxt-link>
       </div>
     </div>
   </div>

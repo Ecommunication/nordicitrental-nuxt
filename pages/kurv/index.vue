@@ -14,7 +14,7 @@
 
               <CartList :cart="cart.items" />
 
-              <nuxt-link to="/kurv/ordre">
+              <nuxt-link :to="localePath('/kurv/ordre')">
                 <div
                   class="button btn-block btn-primary mt-2 mb-2"
                   style="border-radius: 7px"
@@ -35,7 +35,7 @@
                 alt=""
               />
 
-              <nuxt-link to="/alle-produktkategorier">
+              <nuxt-link :to="localePath('/alle-produktkategorier')">
                 <div class="button btn-primary">{{ data.GoToProducts }}</div>
               </nuxt-link>
             </div>

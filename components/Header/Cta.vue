@@ -95,6 +95,7 @@ export default {
       currencyOpen: false,
     };
   },
+
   computed: {
     ...mapState(['currencies']),
     availableLocales() {
@@ -114,6 +115,12 @@ export default {
       });
     },
   },
+  //   mounted() {
+  //     // On initial load, if the locale is EN set the default currency to EUR
+  //   if(this.$i18n.locale === 'en') {
+  //     this.changeCurrency({currency: 'EURO'});
+  //   }
+  // },
   methods: {
     ...mapActions(['changeCurrency']),
     currencyClick() {
