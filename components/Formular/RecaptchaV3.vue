@@ -28,7 +28,6 @@ export default {
     async submit() {
       try {
         const token = await this.$recaptcha.execute('login');
-        console.log(token);
 
         // send token to server alongside your form data
       } catch (error) {

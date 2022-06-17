@@ -101,6 +101,7 @@
 import HeaderImg from '@/components/Utilities/HeaderImg';
 import CategorySlider from '@/components/Category/Slider';
 import { Category } from '@/utils/dto';
+import {GET_PRODUCT_CATEGORIES} from '@/lib/api';
 
 export default {
   components: {
@@ -109,32 +110,28 @@ export default {
   },
   async asyncData({ params, $axios, $config, route, store, i18n, app }) {
     try {
+      const client = app.apolloProvider.defaultClient;
       const slug = params.productcategory.toLowerCase().replace(/\/+$/, '');
-      // const slug = params.pathMatch.toLowerCase().replace(/\/+$/, '');
-      const order = '';
-      var categoriesData = await $axios.$get(
-        `/product-categories?_locale=${i18n.locale}&CustomPermalink=${slug}` +
-          order
-      );
-
-      if (
-        categoriesData &&
-        Array.isArray(categoriesData) &&
-        !categoriesData.length
-      ) {
-        categoriesData = await $axios.$get(
-          `/product-categories?_locale=${i18n.locale}&Slug=${slug}` + order
-        );
-
-        if (
-          categoriesData &&
-          Array.isArray(categoriesData) &&
-          !categoriesData.length
-        ) {
-          return store.dispatch('throwError404', { slug });
+      const variables = () => {
+        // If contains a slash, then it must be a permalink
+        if(slug.includes('/')) {
+          return {
+            permalink: slug,
+            locale: i18n.locale
+          }
         }
-      }
-
+        return {
+          slug: slug,
+          locale: i18n.locale,
+        };
+      };
+      
+      const res = await client.query({
+        query: GET_PRODUCT_CATEGORIES,
+        variables: variables(),
+      });
+      const { productCategories  } = res.data;
+      const categoriesData = productCategories
       const categoryData = categoriesData[0] || {};
       if (!categoryData) return;
 
@@ -147,7 +144,6 @@ export default {
           [item.locale]: { productcategory: item.Slug },
         });
       });
-      console.log('obj', i18nObj);
 
       // Set i18n route params for localized routes
       await app.store.dispatch('i18n/setRouteParams', i18nObj);

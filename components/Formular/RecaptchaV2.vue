@@ -37,7 +37,6 @@ export default {
       if (this.isFormValid()) {
         try {
           const token = await this.$recaptcha.getResponse();
-          console.log(token);
 
           // send token to server alongside your form data
 

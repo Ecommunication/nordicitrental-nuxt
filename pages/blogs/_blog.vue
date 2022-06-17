@@ -46,7 +46,6 @@ export default {
       .then((res) => {
         console.log(res);
         blog = res.data.blogs[0];
-        console.log('requesting with: ', res.data.blogs[0].id);
         return client
           .query({
             query: GET_NEXT_AND_RREV_BLOGS,
@@ -56,7 +55,6 @@ export default {
             },
           })
           .then((res) => {
-            console.log('resukt', res);
             next = res.data.next[0];
             previous = res.data.previous[0];
           });
