@@ -43,7 +43,7 @@
                   {{ product.info.name }}
                 </div>
                 <div class="product-description">
-                  {{ getParsedDescription(product.descriptions.short) }}
+                  {{ getParsedDescription(product.descriptions.short ? product.descriptions.short : '') }}
                 </div>
                 <div class="product-body">
                   <div class="mb-3">
