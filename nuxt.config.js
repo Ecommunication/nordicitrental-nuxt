@@ -44,7 +44,8 @@ export default {
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-WD8JHKG');`,
         }
-      ]
+      ],
+      __dangerouslyDisableSanitizers: ['script']
     };
   },
 
