@@ -69,8 +69,8 @@ export class Product {
       long: data.DescriptionLong,
     };
     this.features = (data.ProductAttributes || []).map((attr) => ({
-      key: attr.AttributeKey,
-      value: attr.AttributeValue,
+      key: attr.AttributeKey ?? '',
+      value: attr.AttributeValue ?? '',
     }));
     this.categories = categories;
     this.options = this.getProductOptions(data.ProductOptionsP, categories);
