@@ -2,6 +2,11 @@
   <div class="input-checkbox round">
     <input type="checkbox" v-model="inputLocal" />
     <label @click="inputLocal = !inputLocal"></label>
+    <div class="label ml-6">
+      {{optionVal.Name}},
+      <span v-if="optionVal.FixedPrice">{{optionVal.FixedPrice | formatPrice}}</span>
+      Eksl. moms
+    </div>
     <div v-if="label" class="label ml-6" @click="inputLocal = !inputLocal">
       {{ label }}
     </div>
@@ -13,6 +18,7 @@ export default {
   props: {
     input: { type: Boolean, required: false },
     label: { type: String },
+    optionVal: {type: Object, required: true},
     validation: {
       type: Object,
       required: false,
