@@ -70,7 +70,7 @@
               :form="form"
               :formValidations="formValidations"
               @changeErrors="(val) => (errors = val)"
-              @formSubmitted="isModalVisible = true"
+              @formSubmitted="loadConfirmationPage"
             />
           </form>
           <Modal v-show="isModalVisible" @close="closeModal" :width="600">
@@ -133,6 +133,9 @@ export default {
     };
   },
   methods: {
+    loadConfirmationPage() {
+      this.$router.push('/kontakt-modtaget');
+    },
     onChange(key, val, valid) {
       this.form[key] = val;
       this.errors[key] = this.validate(valid, val);
