@@ -2,7 +2,6 @@
   <div>
     <div v-if="options.length" class="mb-5">
       <p class="title mb-2">{{ produktside.AddOptionsText }}</p>
-      <!--          :label="`${option.option.Name} ${option.option.FixedPrice} -  eksl. moms`"-->
       <div v-for="(option, index) in options" :key="index">
         <CheckboxRounded
           v-if="option.price"
