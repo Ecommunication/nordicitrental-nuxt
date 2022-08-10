@@ -5,7 +5,7 @@
     <div class="label ml-6">
       {{optionVal.Name}},
       <span v-if="optionVal.FixedPrice">{{optionVal.FixedPrice | formatPrice}}</span>
-      Eksl. moms
+      eksl. moms
     </div>
     <div v-if="label" class="label ml-6" @click="inputLocal = !inputLocal">
       {{ label }}
