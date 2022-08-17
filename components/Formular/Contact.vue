@@ -134,7 +134,6 @@ export default {
   },
   methods: {
     loadConfirmationPage() {
-      dataLayer.push({event: 'contact-confirmation-redirect', info: 'trigger from contact confirmation'})
       this.$router.push('/kontakt-modtaget');
     },
     onChange(key, val, valid) {
