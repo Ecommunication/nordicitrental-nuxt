@@ -20,6 +20,9 @@ export default {
       headerTitle: "Tak for din henvendelse",
       headerCover: "https://nordic.nordicitrental.dk/uploads/contact_13ef9c8beb.jpeg"
     }
+  },
+  mounted() {
+    dataLayer.push({event: 'contact-confirmation-page', info: 'trigger from contact confirmation'})
   }
 }
 </script>
