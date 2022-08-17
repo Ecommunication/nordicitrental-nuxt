@@ -125,6 +125,9 @@ export default {
       this.items = await this.getItems();
     }
   },
+  mounted() {
+    dataLayer.push({event: 'checkout-completed', info: 'Booking completed'})
+  },
   methods: {
     ...mapActions(['getProduct']),
     async getItems() {
