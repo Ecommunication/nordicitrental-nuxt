@@ -127,7 +127,7 @@ export default {
       formValidations: {
         firstName: [validations.isRequired],
         lastName: [validations.isRequired],
-        companyName: [validations.isRequired],
+        companyName: [],
         streetNameAndNo: [validations.isRequired],
         town: [validations.isRequired],
         country: [],

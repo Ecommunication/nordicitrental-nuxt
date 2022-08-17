@@ -178,7 +178,7 @@ export default {
       formValidations: {
         phone: [validations.isRequired, validations.isPhone],
         email: [validations.isRequired, validations.isEmail],
-        cvrNumber: [validations.isRequired],
+        cvrNumber: [],
       },
     };
   },
