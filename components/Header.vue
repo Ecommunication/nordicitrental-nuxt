@@ -139,7 +139,7 @@ export default {
       showDropdown: false,
       headerHeight: 0,
       minifiedHeader: false,
-      showSearch: false,
+      showSearch: true,
     };
   },
   beforeMount() {
