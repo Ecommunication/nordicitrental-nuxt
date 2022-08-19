@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header ref="header" class="main-header grid-small">
+    <header ref="header" class="main-header grid-small" style="max-width: 1024px;">
       <div class="cart-in-mobile space-y-4">
         <HeaderCart />
         <HeaderCta :cta="header.telephone" class="float-left" />
@@ -14,12 +14,16 @@
       </nuxt-link>
 
       <div class="right-col">
-        <div class="cart-in-desktop mb-2 flex justify-between">
+        <div class="cart-in-desktop flex mt-5">
           <HeaderCta :cta="header.telephone" />
+          <div class="ml-1">
+            <i class="fa fa-search cursor-pointer" @click="showSearch = !showSearch"></i>
+          </div>
+          <div class="cta-phone">
+            <a href="tel: +45 71998904">Tlf.: +45 71998904</a>
+          </div>
           <HeaderCart />
         </div>
-
-     
 
         <div class="mb-2 mt-auto">
           <HeaderNavigation
@@ -58,7 +62,7 @@
       :items="categories"
       @onClickMainMenu="(val) => (showDropdown = val)"
     />
-    <HeaderSearch :categories="categories" />
+    <HeaderSearch :categories="categories" class="search-bar-top" v-show="showSearch" />
   </div>
 </template>
 
@@ -135,6 +139,7 @@ export default {
       showDropdown: false,
       headerHeight: 0,
       minifiedHeader: false,
+      showSearch: false,
     };
   },
   beforeMount() {
@@ -170,16 +175,31 @@ export default {
   display: none;
 }
 
+.cta-phone {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  a {
+    color: #253646;
+    display: block;
+    background-color: #092d4f1f;
+    padding: 10px 15px;
+    border-radius: 5px;
+    &:hover {
+      background-color: #092d4f;
+      color: #fff;
+    }
+  }
+}
+
 .main-header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-bottom: 10px;
+  padding: 20px 0 30px 0;
 
   .logo {
-    margin-top: 15px;
-    width: 290px;
-    height: auto;
     img {
       width: 100%;
       height: 100%;
