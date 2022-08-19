@@ -12,11 +12,8 @@
 </i18n>
 
 <template>
-  <div class="cta-header my-2 inline-flex space-x-8">
-    <span class="cta my-auto">
-      {{ cta }}
-    </span>
-    <div class="relative flex space-x-6" >
+  <div class="cta-header">
+    <div class="relative flex space-x-2">
       <div
         class="group my-auto flex cursor-pointer space-x-2 text-mainBlue" @click="langClick"
       >
@@ -26,14 +23,9 @@
             availableLocales.find((locale) => locale.code === $i18n.locale).img
           "
         />
-        <i
-          :class="`fas fa-chevron-down my-auto transform transition-transform duration-300 ${
-            langOpen && 'rotate-180'
-          } group-hover:text-opacity-50`"
-        ></i>
         <div
           v-if="langOpen"
-          class="absolute top-8 z-20 rounded-sm bg-white p-2 shadow-md"
+          class="rounded-sm bg-white p-2 shadow-md absolute mt-9 z-10" style="width:130px;left:0;"
         >
           <div class="flex flex-col space-y-3">
             <div
@@ -48,8 +40,7 @@
                 >
               <img width="24px" height="24px" :src="locale.img" />
               <span>{{ locale.name }}</span>
-            </nuxt-link
-              >
+            </nuxt-link>
             </div>
           </div>
         </div>
@@ -59,18 +50,13 @@
         @click="currencyClick"
       >
         <div
-          class="flex justify-center rounded-full border-2 border-mainBlue p-1 md:h-7 md:w-7"
+          class="flex justify-center rounded-full md:h-7 md:w-7"
         >
           <i class="fas fa-euro-sign fa-sm my-auto mr-1"></i>
         </div>
-        <i
-          :class="`fas fa-chevron-down my-auto transform transition-transform duration-300 ${
-            currencyOpen && 'rotate-180'
-          } group-hover:text-opacity-50`"
-        ></i>
         <div
           v-if="currencyOpen"
-          class="absolute top-8 z-20 bg-white p-2 shadow-md"
+          class="z-20 bg-white p-2 shadow-md absolute mt-8 ml-0" style="width: 130px;left:0;"
         >
           <div class="flex flex-col" v-for="currency in currencies" :key="currency.currency">
             <button class="text-base font-medium text-left" @click="changeCurrency(currency)">
@@ -147,5 +133,18 @@ export default {
 
 .cta-header {
   margin-left: 14px;
+}
+
+.fa-euro-sign {
+  background-color: #092d4f;
+  border-radius: 100%;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  font-size: 0.6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
 }
 </style>

@@ -10,14 +10,14 @@
 </i18n>
 
 <template>
-  <div class=" inline-block ">
+  <div class="ml-auto">
     <ClientOnly>
       <div v-if="!noOfItems" class="cart-placeholder"></div>
       <div v-if="!!noOfItems" class="cart2">
         <nuxt-link :to="localePath('/kurv')">
           <span class="pr-2">
-            <i class="fas fa-shopping-cart mr-11"></i>
-            {{ $t('products') }} ({{ noOfItems }})
+            <i class="fas fa-shopping-cart"></i>
+            ({{ noOfItems }})
           </span>
         </nuxt-link>
       </div>
@@ -36,13 +36,15 @@ export default {
 
 <style lang="scss" scoped>
 .cart2 {
-  position: relative;
-  display: inline-block;
-  background: #092d4f;
-  padding: 8px 36px 8px 14px;
-  font-size: 0.8em;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  //position: relative;
+  //display: inline-block;
+  //background: #092d4f;
+  //font-size: 0.8em;
+  //border-radius: 50%;
+  //padding: 0.5em;
+  * {
+    color: #092d4f;
+  }
 }
 
 .cart-placeholder {
