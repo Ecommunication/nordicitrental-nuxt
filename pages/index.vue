@@ -2,6 +2,7 @@
   <div class="index" id="index">
     <CoverSlider :slides="data.IndexPageSlider" />
 
+
     <div class="grid-wide" style="width: 90%; margin: 0 auto">
       <CategorySlider
         class="py-8"
