@@ -37,9 +37,9 @@
             :key="index"
           >
             <img
-              class="info-card-img lazyload"
+              class="info-card-img"
               :alt="item.Icon.alternativeText"
-              :data-src="item.Icon.url | formatImage"
+              :src="item.Icon.url | formatImage"
             />
             <div class="info-card-body">
               <span
@@ -129,9 +129,9 @@
                   {{ data.IndexBeforeContactInfo }}
                 </h3>
                 <img
-                  data-src="~/assets/images/employee_mic_new.jpg"
+                  src="~/assets/images/employee_mic_new.jpg"
                   alt="Kontakt"
-                  class="mx-auto max-h-36 lazyload"
+                  class="mx-auto max-h-36"
                 />
                 <div
                   class="text-base"
