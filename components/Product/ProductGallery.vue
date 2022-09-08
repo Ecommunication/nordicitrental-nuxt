@@ -114,7 +114,7 @@ export default {
       thumbArrowLeft: false,
       thumbArrowRight: false,
     };
-  },
+  } ,
   created() {
     // this.modifyThumbnails();
 

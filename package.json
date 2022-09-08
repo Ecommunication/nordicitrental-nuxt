@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@nuxt/image": "^0.6.2",
+    "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/tailwindcss": "^4.0.3",
     "@tailwindcss/postcss7-compat": "^2.1.0",
@@ -40,6 +41,7 @@
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^8.5.0",
+    "nuxt-lazysizes": "^1.4.2",
     "postcss": "^7.0.35",
     "prettier": "^2.6.0",
     "prettier-plugin-tailwindcss": "^0.1.8",
