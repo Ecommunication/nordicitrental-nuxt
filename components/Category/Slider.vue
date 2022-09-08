@@ -21,7 +21,8 @@
                     : 'Nordic IT Rental udlejning - ' + cat.Title
                 "
                 v-if="cat.Image"
-                :src="cat.Image.url | formatImage"
+                :data-src="cat.Image.url | formatImage"
+                class="lazyload"
               />
               <img
                 :alt="'Nordic IT Rental udlejning - ' + cat.Title"
