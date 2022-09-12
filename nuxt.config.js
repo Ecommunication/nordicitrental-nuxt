@@ -17,25 +17,25 @@ export default {
    */
   // Global page headers: https://go.nuxtjs.dev/config-head
   head() {
-    const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true });
+    const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
     return {
       title: 'Nordic IT Rental',
       htmlAttrs: {
         ...i18nHead.htmlAttrs,
       },
       meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {charset: 'utf-8'},
+        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
         ...i18nHead.meta,
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
         ...i18nHead.link,
       ],
       script: [
         {
           src: '',
-          type:'text/javascript',
+          type: 'text/javascript',
           innerHTML: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -44,7 +44,7 @@ export default {
         },
         {
           src: '',
-          type:'text/javascript',
+          type: 'text/javascript',
           innerHTML: `(function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[])
           .push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0];
           function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })
@@ -57,7 +57,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/css/main.scss',
+    '~/assets/css/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -66,7 +66,7 @@ export default {
     '~/plugins/filters/prices.js',
     '~/plugins/filters/date.js',
     '~/plugins/persistedState.client.js',
-    '~/plugins/i18n.js',
+    '~/plugins/i18n.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -74,7 +74,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/google-analytics',
+    '@nuxtjs/google-analytics'
   ],
 
   publicRuntimeConfig: {
@@ -120,8 +120,8 @@ export default {
           useCookie: true,
         },
         locales: [
-          { code: 'en', name: 'English', iso: 'en-US' },
-          { code: 'da', name: 'Dansk', iso: 'da-DK' },
+          {code: 'en', name: 'English', iso: 'en-US'},
+          {code: 'da', name: 'Dansk', iso: 'da-DK'},
         ],
         defaultLocale: 'da',
         vueI18nLoader: true,
@@ -173,6 +173,16 @@ export default {
   build: {
     extractCSS: {
       allChunks: true //split all css into one file, to prevent large dom
+    },
+  },
+
+  optimization: {
+    minimize: true,
+    splitChunks: {
+      chunks: 'all',
+      automaticNameDelimiter: '.',
+      name: true,
+      maxSize: 244000
     }
   },
 
