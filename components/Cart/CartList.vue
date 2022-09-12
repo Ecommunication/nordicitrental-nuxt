@@ -126,7 +126,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-/* Again too much styles in scoped, should be used sparingly in my opinion */
-</style>

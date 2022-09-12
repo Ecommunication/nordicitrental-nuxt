@@ -25,3 +25,115 @@
     }
   }
 }
+
+.input-textarea {
+  padding-bottom: 25px;
+
+  textarea {
+    resize: none;
+  }
+
+  input.withError {
+    border: 1px solid red;
+  }
+
+  .error-msg {
+    margin-top: 4px;
+    margin-left: 4px;
+    font-size: 15px;
+    color: red;
+  }
+}
+
+.input-checkbox {
+  input.withError {
+    border: 1px solid red;
+  }
+
+  .error-msg {
+    margin-top: 4px;
+    margin-left: 4px;
+    font-size: 15px;
+    color: red;
+  }
+}
+
+.input-checkbox {
+  display: flex;
+}
+.label:hover {
+  cursor: pointer;
+}
+.round {
+  position: relative;
+}
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+
+.round label:after {
+  border: 3px solid #092d4f;
+  border-top: none;
+  border-right: none;
+  content: '';
+  height: 5px;
+  left: 6px;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.round input[type='checkbox'] {
+  visibility: hidden;
+}
+
+.round input[type='checkbox']:checked + label {
+  background-color: #fff;
+  border-color: #092d4f;
+}
+
+.round input[type='checkbox']:checked + label:after {
+  opacity: 1;
+}
+
+.cart-totals {
+  padding: 20px 0 30px 0;
+  font-size: 0.8em;
+
+  .cart-totals-title {
+    margin-bottom: 8px;
+    margin-left: 16px;
+  }
+
+  .cart-totals-table {
+    border-top: 2px solid #f5f5f5;
+    .cart-row {
+      display: flex;
+      .cart-col {
+        padding: 10px 16px;
+      }
+
+      .table-key {
+        width: 30%;
+      }
+      .table-value {
+        width: 70%;
+      }
+    }
+  }
+}
+
+.radio-button {
+  width: initial;
+}

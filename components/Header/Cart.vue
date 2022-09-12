@@ -34,25 +34,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.cart2 {
-  //position: relative;
-  //display: inline-block;
-  //background: #092d4f;
-  //font-size: 0.8em;
-  //border-radius: 50%;
-  //padding: 0.5em;
-  * {
-    color: #092d4f;
-  }
-}
-
-.cart-placeholder {
-  height: 38px;
-  width: 100%;
-}
-
-a {
-  color: white;
-}
-</style>

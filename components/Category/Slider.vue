@@ -52,31 +52,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.category-card:hover {
-  background: rgba(63, 47, 121, 0.05);
-}
-.category-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  border: 1px solid rgba(228, 228, 228, 0.35);
-  img {
-    max-width: 110px;
-    max-height: 68px;
-  }
-  .category-title {
-    font-size: 24px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .category-card {
-    width: 170px !important;
-    height: 170px !important;
-  }
-}
-</style>

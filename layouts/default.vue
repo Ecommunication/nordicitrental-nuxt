@@ -32,6 +32,3 @@ export default {
   },
 };
 </script>
-<style>
-/* I have removed all styles from here into scss, because that much styles should be separated */
-</style>

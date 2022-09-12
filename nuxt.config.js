@@ -57,9 +57,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/node_modules/@fortawesome/fontawesome-free/css/all.min.css',
     '~/assets/css/main.scss',
-    '~/assets/css/flexboxgrid.min.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -75,7 +73,9 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/google-analytics'],
+  buildModules: [
+    '@nuxtjs/google-analytics',
+  ],
 
   publicRuntimeConfig: {
     googleAnalytics: {
@@ -88,7 +88,6 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    ['@nuxtjs/tailwindcss'],
     ['@nuxtjs/apollo'],
     ['@nuxt/image'],
     [
@@ -171,7 +170,11 @@ export default {
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extractCSS: {
+      allChunks: true //split all css into one file, to prevent large dom
+    }
+  },
 
   apollo: {
     clientConfigs: {

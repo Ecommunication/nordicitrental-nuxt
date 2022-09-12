@@ -63,24 +63,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.input-textarea {
-  padding-bottom: 25px;
-
-  textarea {
-    resize: none;
-  }
-
-  input.withError {
-    border: 1px solid red;
-  }
-
-  .error-msg {
-    margin-top: 4px;
-    margin-left: 4px;
-    font-size: 15px;
-    color: red;
-  }
-}
-</style>

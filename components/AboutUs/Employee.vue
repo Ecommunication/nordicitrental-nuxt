@@ -18,21 +18,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.employee {
-  width: 250px;
-  margin: 50px;
-
-  .employee-img {
-    height: 247px;
-    width: 244px;
-    background-position: center center;
-    background-size: cover;
-  }
-
-  .employee-title {
-    font-weight: 700;
-  }
-}
-</style>

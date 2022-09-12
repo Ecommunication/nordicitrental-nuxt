@@ -27,8 +27,6 @@
 </template>
 <script>
 import VueSlickCarousel from 'vue-slick-carousel';
-import 'vue-slick-carousel/dist/vue-slick-carousel.css';
-import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 
 export default {
   props: ['images'],
@@ -38,22 +36,3 @@ export default {
   mounted() {},
 };
 </script>
-<style lang="scss">
-.frontpage-references {
-  .slick-track {
-    display: flex !important;
-    align-items: center !important;
-  }
-  &__images {
-    max-width: 1200px;
-    margin: auto;
-    &-image {
-      & > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-}
-</style>

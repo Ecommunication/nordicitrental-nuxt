@@ -240,27 +240,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.customer-contact-form {
-  padding: 20px 0;
-}
-#shipping-address-container {
-  border-radius: 15px;
-  border: 2px solid #092d4f;
-
-  .form-title {
-    text-align: right;
-    padding: 10px 30px;
-    background: #092d4f;
-    color: white;
-    font-size: 0.8em;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  .form-body {
-    padding: 15px 20px;
-    border-radius: 10px;
-  }
-}
-</style>
