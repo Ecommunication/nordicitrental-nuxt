@@ -116,7 +116,7 @@ export default {
     };
   } ,
   created() {
-    // this.modifyThumbnails();
+    this.modifyThumbnails();
 
     this.maxThumbnails = this.gallery.length;
     this.modalGallery = this.gallery;
@@ -152,26 +152,27 @@ export default {
     },
   },
   methods: {
-    // modifyThumbnails() {
-    //   const thumbnails = [];
-    //   const imageUrl = 'https://nordic.nordicitrental.dk';
-    //   const defaultAltText = '';
-    //   thumbnails.push({
-    //     url: imageUrl + this.gallery.main.url,
-    //     alternativeText: this.gallery.main.url.alternativeText,
-    //   });
-    //   this.gallery.thumbnails.forEach(function (item) {
-    //     const obj = {
-    //       url: imageUrl + item.url,
-    //       alternativeText: item.alternativeText,
-    //     };
-    //     thumbnails.push(obj);
-    //   });
-    //   this.thumbnails = thumbnails;
-  },
+    modifyThumbnails() {
+      const thumbnails = [];
+      const imageUrl = 'https://nordic.nordicitrental.dk';
+      const defaultAltText = '';
+      thumbnails.push({
+        url: imageUrl + this.gallery.main.url,
+        alternativeText: this.gallery.main.url.alternativeText,
+      });
+      this.gallery.thumbnails.forEach(function (item) {
+        const obj = {
+          url: imageUrl + item.url,
+          alternativeText: item.alternativeText,
+        };
+        thumbnails.push(obj);
+      });
+      this.thumbnails = thumbnails;
+    },
   openModal(index) {
     this.modalGalleryIndex = index;
     this.showGalleryModal = true;
+  },
   },
   moveModalGalleryImages: function (pointer) {
     var newIndex = this.modalGalleryIndex;
