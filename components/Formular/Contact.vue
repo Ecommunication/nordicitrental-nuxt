@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="contact-formular">
     <h2
       v-if="title"
       id="contactUsFormHeader"
@@ -166,41 +166,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@media screen and (min-width: 767px) {
-  .index {
-    #contactUsFormHeader {
-      font-size: 1.6em;
-    }
-
-    #contactUsLeftCol {
-      padding-right: 90px;
-    }
-  }
-}
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  .left-col {
-    padding: 0 20px;
-    margin-bottom: 25px;
-  }
-
-  .right-col {
-    padding: 0 20px;
-    .form {
-      max-width: 330px;
-    }
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .form-row {
-    justify-content: space-around !important;
-    padding: 0 20px !important;
-  }
-}
-</style>

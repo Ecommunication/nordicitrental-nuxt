@@ -47,9 +47,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-#map {
-  height: 500px;
-  overflow: initial;
-}
-</style>

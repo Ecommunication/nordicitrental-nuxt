@@ -123,28 +123,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss">
-.cta {
-  color: #212121;
-  font-size: 1rem;
-  font-weight: 100;
-}
-
-.cta-header {
-  margin-left: 14px;
-}
-
-.fa-euro-sign {
-  background-color: #092d4f;
-  border-radius: 100%;
-  color: #fff;
-  width: 24px;
-  height: 24px;
-  font-size: 0.6em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
-}
-</style>

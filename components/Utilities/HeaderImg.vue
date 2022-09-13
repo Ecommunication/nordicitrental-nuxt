@@ -26,14 +26,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.body-wrapper {
-  width: 100%;
-  display: inline-flex;
-}
-.bg-img {
-  display: flex;
-  align-items: center;
-}
-</style>

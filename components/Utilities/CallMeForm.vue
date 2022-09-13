@@ -98,19 +98,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.result-container {
-  padding: 10px 20px;
-  border: 1px solid #e6e6e6;
-  font-size: 0.9em;
-}
-.msg-success {
-  color: #092d4f;
-  border-color: #092d4f;
-}
-.msg-error {
-  color: red;
-  border-color: red;
-}
-</style>

@@ -34,12 +34,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.background-image {
-  background-position: center center;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-}
-</style>

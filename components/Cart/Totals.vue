@@ -95,35 +95,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.cart-totals {
-  padding: 20px 0 30px 0;
-  font-size: 0.8em;
-
-  .cart-totals-title {
-    margin-bottom: 8px;
-    margin-left: 16px;
-  }
-
-  .cart-totals-table {
-    border-top: 2px solid #f5f5f5;
-    .cart-row {
-      display: flex;
-      .cart-col {
-        padding: 10px 16px;
-      }
-
-      .table-key {
-        width: 30%;
-      }
-      .table-value {
-        width: 70%;
-      }
-    }
-  }
-}
-.radio-button {
-  width: initial;
-}
-</style>

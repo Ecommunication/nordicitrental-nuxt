@@ -12,7 +12,7 @@
 </i18n>
 
 <template>
-  <Table>
+  <Table class="addresses-table">
     <tr style="background: none">
       <td class="table-title">
         <h2>{{ $t('billingaddress') }}</h2>
@@ -43,13 +43,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.table-title {
-  margin: 0 !important;
-  padding: 0;
-  h2 {
-    margin: 0 0 10px 0;
-  }
-}
-</style>

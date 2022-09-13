@@ -77,16 +77,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.custom-slider-container {
-  .slider-item {
-    .slider-item-container {
-      min-height: 500px;
-      .slider-title {
-        display: inline-block;
-      }
-    }
-  }
-}
-</style>

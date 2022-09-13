@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-services">
     <HeaderImg
       v-if="data.ImageCover"
       :img="data.ImageCover.url | formatImage"
@@ -222,30 +222,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.section {
-  padding: 42px 230px;
-}
-.employee-table {
-  h3 {
-    margin: 40px 0;
-    font-size: 40px;
-    color: #092d4f;
-  }
-}
-
-.kontakt-os-btn {
-  width: 250px;
-  background: transparent;
-  border: 1px solid #fff;
-  padding: 5px 10px;
-  margin-top: 10px;
-  display: block;
-  font-size: 18px;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 50px;
-  color: #fff;
-}
-</style>

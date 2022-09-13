@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="all-categories">
     <HeaderImg
       v-if="data.ImageCover"
       :img="data.ImageCover.url | formatImage"
@@ -54,37 +54,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  .category-card-container {
-    width: 215px;
-    border: 1px solid #0000001a;
-    padding: 15px;
-    margin: 6px;
-    .category-img-container {
-      height: 100px;
-      width: 100%;
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
-    }
-    .category-title {
-      font-size: 23px;
-      font-weight: 700;
-      margin: 37px 0 12px;
-      color: #092d4f;
-      overflow-wrap: break-word;
-
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
-}
-</style>

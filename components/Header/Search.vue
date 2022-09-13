@@ -163,22 +163,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.aspect-square {
-  aspect-ratio: 4/3;
-}
-.product-description {
-  ul {
-    list-style-type: disc !important;
-    list-style-position: inside !important;
-    color: aqua !important;
-    li {
-      display: list-item !important;
-    }
-  }
-}
-.modal-height {
-  height: calc(100% - 20rem);
-}
-</style>

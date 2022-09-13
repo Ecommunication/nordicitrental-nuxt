@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
+    "@fullhuman/postcss-purgecss": "^4.1.3",
     "@googlemaps/js-api-loader": "^1.11.4",
     "@nuxtjs/apollo": "^4.0.1-rc.5",
     "@nuxtjs/axios": "^5.13.5",
@@ -26,6 +27,7 @@
     "ipx": "^0.9.4",
     "jquery": "^3.6.0",
     "nuxt": "^2.14.12",
+    "nuxt-ssr-cache": "^1.5.2",
     "slick-slider": "^1.8.2",
     "vue-slick-carousel": "^1.0.6",
     "vue2-datepicker": "^3.9.0",

@@ -61,22 +61,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.newsletter-form {
-  display: block;
-  max-width: 250px;
-  .message {
-    width: 100%;
-    font-size: 0.9em;
-  }
-  .submitBtn {
-    background: #1561ad;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 5px;
-    width: 100%;
-    text-align: center;
-  }
-}
-</style>

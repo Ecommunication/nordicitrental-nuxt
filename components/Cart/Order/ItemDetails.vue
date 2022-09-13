@@ -22,7 +22,7 @@
 </i18n>
 
 <template>
-  <table>
+  <table class="item-details">
     <tr>
       <td class="td-left" style="font-weight: 600">{{ $t('product') }}</td>
       <td class="td-right" style="font-weight: 600">{{ $t('total') }}</td>
@@ -63,37 +63,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-a:hover {
-  font-weight: bold;
-}
-table {
-  width: 100%;
-  font-size: 0.8em;
-}
-tr {
-  color: #091d4f;
-}
-
-td {
-  padding: 10px 20px;
-  text-align: left;
-}
-td.td-left {
-  width: 61%;
-}
-td.td-right {
-  width: 39%;
-}
-.booking-details {
-  font-size: 0.8em;
-  padding: 10px 20px;
-}
-
-@media only screen and (max-width: 767px) {
-  table {
-    font-size: 1em;
-  }
-}
-</style>

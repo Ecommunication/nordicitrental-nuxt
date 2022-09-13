@@ -36,11 +36,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.amount-picker {
-  padding: 10px 5px 10px 10px;
-  font-size: 1em;
-  width: 65px;
-}
-</style>

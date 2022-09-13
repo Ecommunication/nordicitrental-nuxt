@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="addToCart">
     <div v-if="options.length" class="mb-5">
       <p class="title mb-2">{{ produktside.AddOptionsText }}</p>
       <div v-for="(option, index) in options" :key="index">
@@ -228,53 +228,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.title {
-  font-weight: 600;
-  font-size: 0.8em;
-  margin-bottom: 16px;
-}
-.date-picker-container {
-  display: flex;
-  .date-picker-label {
-    font-size: 0.8em;
-  }
-  .date-picker {
-    width: 75%;
-  }
-}
-.price {
-  margin-top: 23px;
-  color: #092d4f;
-  font-size: 1.5em;
-  font-weight: bold;
-}
-.days {
-  font-size: 16px;
-}
-
-.alert {
-  font-size: 16px;
-  color: red;
-}
-
-.actions {
-  display: flex;
-  input[type='number']::-webkit-inner-spin-button {
-    opacity: 1;
-  }
-  .amount-picker {
-    padding: 10px 5px 10px 10px;
-    font-size: 1em;
-    width: 65px;
-  }
-
-  .add-to-cart {
-    padding: 15px 25px;
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 5px;
-  }
-}
-</style>

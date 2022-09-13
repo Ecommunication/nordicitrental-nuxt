@@ -1,12 +1,29 @@
-/* Tailwind CSS */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import 'fonts';
 @import 'components/variables';
+
+@import '@tailwindcss/postcss7-compat/dist/base.min.css';
+@import '@tailwindcss/postcss7-compat/dist/components.min.css';
+@import '@tailwindcss/postcss7-compat/dist/utilities.css';
+
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+//@tailwind base;
+//@tailwind components;
+//@tailwind utilities;
+
+@import 'flexboxgrid';
+@import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+@import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
+
 @import 'components/grid';
 @import 'components/flex';
+@import 'components/header';
+@import 'components/logo';
+@import 'components/newsletter';
+@import 'components/modal';
+@import 'components/slider';
+@import 'components/search';
+@import 'components/helpers/breadcrumb';
 
 /* Helpers */
 @import 'components/helpers/inputs';
@@ -18,15 +35,22 @@
 @import 'components/helpers/button';
 
 /* Pages */
+@import 'components/shop/general';
 @import 'components/pages/index';
 @import 'components/shop/category';
 @import 'components/shop/product';
 @import 'components/shop/cart';
+@import 'components/pages/faq';
+@import 'components/pages/index';
+@import 'components/pages/services';
 
 /* Responsive */
 @import 'responsive/general';
 @import 'responsive/product';
 @import 'responsive/product-category';
+
+@import 'mobile';
+@import 'utilities';
 
 * {
   margin: 0;
@@ -82,6 +106,29 @@ span {
 }
 
 footer {
+  font-weight: 300;
+  font-size: 0.9em;
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .footer-col {
+      padding: 16px 40px;
+    }
+
+    .footer-1 {
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 24px;
+      justify-content: space-between;
+    }
+
+    .footer-2 {
+      border-top: 1px solid #395a79;
+    }
+  }
+
   &#main-footer {
     @media screen and (min-width: 767px) {
       margin-top: auto;
@@ -109,6 +156,24 @@ footer {
       }
     }
   }
+
+
+  .ref-company-logo-bar {
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .logo {
+      margin: 2em 3em;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
 }
 
 .title-white {
@@ -2068,6 +2133,7 @@ select {
     }
   }
 }
+
 
 .full-width-menus {
   font-size: 0.8em;

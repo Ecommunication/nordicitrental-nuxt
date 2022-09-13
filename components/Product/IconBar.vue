@@ -83,25 +83,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.icon-bar {
-  display: flex;
-}
-.icon {
-  margin: 0 5px;
-  width: 100px;
-  .img-container {
-    width: 45px;
-    height: 45px;
-    line-height: 54px;
-    margin: 0 auto;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-  }
-  .desc {
-    font-size: 0.75em;
-    margin-top: 2px;
-  }
-}
-</style>
