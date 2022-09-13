@@ -71,6 +71,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxt/postcss8',
     '@nuxtjs/google-analytics'
   ],
 
@@ -170,6 +171,12 @@ export default {
   build: {
     extractCSS: {
       allChunks: true //split all css into one file, to prevent large dom
+    },
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
     },
   },
 
