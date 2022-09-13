@@ -177,16 +177,39 @@ export default {
         tailwindcss: {},
         autoprefixer: {}
       }
-    }
-  },
-
-  optimization: {
-    minimize: true,
-    splitChunks: {
-      chunks: 'all',
-      automaticNameDelimiter: '.',
-      name: true,
-      maxSize: 244000
+    },
+    html:{
+      minify:{
+        collapseBooleanAttributes: true,
+        decodeEntities: true,
+        minifyCSS: true,
+        minifyJS: true,
+        processConditionalComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+        minifyURLs: true,
+        removeComments: true,
+        removeEmptyElements: true
+      },
+      optimization: {
+        minimize: true,
+        splitChunks: {
+          cacheGroups: {
+            styles: {
+              name: 'styles',
+              test: /\.(css|vue)$/,
+              chunks: 'all',
+              enforce: true
+            }
+          },
+          chunks: 'all',
+          automaticNameDelimiter: '.',
+          name: true,
+          maxSize: 244000
+        }
+      },
     }
   },
 
