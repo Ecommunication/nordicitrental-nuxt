@@ -41,13 +41,14 @@
             <a
               href="https://www.linkedin.com/company/nordic-it-retnal-aps"
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 :src="'/uploads/linked_in_9ba84ec3c3.png' | formatImage"
                 alt="Nordic IT Rental - Linkedin"
               />
             </a>
-            <a href="https://www.facebook.com/nordicitrental" target="_blank">
+            <a href="https://www.facebook.com/nordicitrental" target="_blank" rel="noreferrer">
               <img
                 :src="'/uploads/FB_icon_29ff5245e9.png' | formatImage"
                 alt="Nordic IT Rental - Facebook"
