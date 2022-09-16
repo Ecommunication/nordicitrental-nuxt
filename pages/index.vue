@@ -180,15 +180,29 @@ export default {
   head() {
     return {
       title: this.data.PageTitle,
+      script: [
+        {
+          json: {
+            '@context': 'https://schema.org',
+            '@type': 'Store',
+            'name': 'Nordic IT Rental',
+            'openingHours': 'Mo,Tu,We,Th,Fr 08:30-16:30',
+          },
+          type: 'application/ld+json'
+        }
+      ],
       meta: [
-        {
-          name: 'title',
-          content: this.data.MetaTitle,
-        },
-        {
-          name: 'description',
-          content: this.data.MetaDescription,
-        },
+        { name: 'title', content: this.data.MetaTitle},
+        { name: 'description', content: this.data.MetaDescription},
+        { name: 'twitter:title', content: this.data.MetaTitle},
+        { name: 'twitter:description', content: this.data.MetaDescription},
+        { name: 'twitter:image', content: ''},
+        { name: 'twitter:card', content: ''},
+        { property: 'og:site_name', content: ''},
+        { property: 'og:title', content: this.data.MetaTitle},
+        { property: 'og:type', content: ''},
+        { property: 'og:url', content: ''},
+        { property: 'og:image', content: ''},
       ],
     };
   },
