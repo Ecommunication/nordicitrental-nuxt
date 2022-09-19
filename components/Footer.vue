@@ -14,7 +14,7 @@
   <footer class="bg-blue pt-5 pb-1" id="main-footer">
     <div class="footer-container">
       <div class="footer-1">
-        <div class="footer-col" v-html="footer.widget1" />
+        <div class="footer-col footer-col-1" v-html="footer.widget1" />
         <div class="footer-col" v-html="footer.widget2" />
         <div class="footer-col" v-html="footer.widget3" />
         <div class="footer-col">
@@ -68,6 +68,7 @@ export default {
     NewsletterForm,
   },
   props: ['footer'],
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
