@@ -22,6 +22,7 @@
           :src="
             availableLocales.find((locale) => locale.code === $i18n.locale).img
           "
+          alt="Vælg sprog"
         />
         <div
           v-if="langOpen"
@@ -38,7 +39,7 @@
                 class="text-base font-medium flex space-x-2"
                 :to="switchLocalePath(locale.code)"
                 >
-              <img width="24px" height="24px" :src="locale.img" alt="Sprog: Dansk" />
+              <img width="24px" height="24px" :src="locale.img" alt="Vælg sprog" />
               <span>{{ locale.name }}</span>
             </nuxt-link>
             </div>
