@@ -12,7 +12,8 @@
   }
 
   #contactUsLeftCol {
-    img {
+    & > img {
+      width: 144px;
       display: inline !important;
     }
   }

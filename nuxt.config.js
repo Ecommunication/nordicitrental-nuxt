@@ -179,37 +179,32 @@ export default {
         autoprefixer: {}
       }
     },
+    optimization: {
+      splitChunks: {
+        chunks: 'async'
+      }
+    },
+    splitChunks: {
+      pages: false,
+      vendor: false,
+      commons: false,
+      runtime: false,
+      layouts: false
+    },
     html:{
-      minify:{
-        collapseBooleanAttributes: true,
-        decodeEntities: true,
-        minifyCSS: true,
-        minifyJS: true,
-        processConditionalComments: true,
-        removeEmptyAttributes: true,
-        removeRedundantAttributes: true,
-        trimCustomFragments: true,
-        useShortDoctype: true,
-        preserveLineBreaks: false,
-        collapseWhitespace: true
-      },
-      optimization: {
-        minimize: true,
-        splitChunks: {
-          cacheGroups: {
-            styles: {
-              name: 'styles',
-              test: /\.(css|vue)$/,
-              chunks: 'all',
-              enforce: true
-            }
-          },
-          chunks: 'all',
-          automaticNameDelimiter: '.',
-          name: true,
-          maxSize: 244000
-        }
-      },
+      // minify:{
+      //   collapseBooleanAttributes: true,
+      //   decodeEntities: true,
+      //   minifyCSS: true,
+      //   minifyJS: true,
+      //   processConditionalComments: true,
+      //   removeEmptyAttributes: true,
+      //   removeRedundantAttributes: true,
+      //   trimCustomFragments: true,
+      //   useShortDoctype: true,
+      //   preserveLineBreaks: false,
+      //   collapseWhitespace: true
+      // },
     }
   },
 

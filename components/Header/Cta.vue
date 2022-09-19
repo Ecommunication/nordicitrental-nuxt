@@ -15,10 +15,9 @@
   <div class="cta-header">
     <div class="relative flex space-x-2">
       <div
-        class="group my-auto flex cursor-pointer space-x-2 text-mainBlue" @click="langClick"
+        class="group my-auto flex cursor-pointer space-x-2 text-mainBlue language-chooser" @click="langClick"
       >
         <img
-          width="24px"
           :src="
             availableLocales.find((locale) => locale.code === $i18n.locale).img
           "
@@ -39,7 +38,7 @@
                 class="text-base font-medium flex space-x-2"
                 :to="switchLocalePath(locale.code)"
                 >
-              <img width="24px" height="24px" :src="locale.img" alt="Vælg sprog" />
+              <img :src="locale.img" alt="Vælg sprog" />
               <span>{{ locale.name }}</span>
             </nuxt-link>
             </div>
