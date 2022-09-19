@@ -38,7 +38,7 @@
                 class="text-base font-medium flex space-x-2"
                 :to="switchLocalePath(locale.code)"
                 >
-              <img width="24px" height="24px" :src="locale.img" />
+              <img width="24px" height="24px" :src="locale.img" alt="Sprog: Dansk" />
               <span>{{ locale.name }}</span>
             </nuxt-link>
             </div>
